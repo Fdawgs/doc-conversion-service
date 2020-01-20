@@ -12,4 +12,13 @@ GP surgeries were recieving these documents through MESH and were unable to read
 The web service was then extended to allow for the conversion of files to Binary and DocumentReference STU3 (3.0.1) HL7 FHIR resources adhering to the NHS INTEROPen CareConnect profiles.
 
 # Prerequisites
+-   [Node.js](https://nodejs.org/en/)
+-   [Yarn](https://yarnpkg.com)
 
+# Contributing
+
+Please see [CONTRIBUTING.md](https://github.com/Fdawgs/doc-conversion-service/blob/master/CONTRIBUTING.md) for more details regarding contributing to this project.
+
+# License
+
+`doc-conversion-service` is licensed under the [MIT](https://github.com/Fdawgs/doc-conversion-service/blob/master/LICENSE) license.
