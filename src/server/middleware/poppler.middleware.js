@@ -1,0 +1,63 @@
+const fs = require('fs');
+const uuidv4 = require('uuid/v4');
+const path = require('path');
+const { Poppler } = require('node-poppler');
+
+/**
+ * @author Frazer Smith
+ * @description Uses Poppler to convert PDF to HTML and places both files in a temporary directory.
+ * @param {Object} config - Poppler conversion configuration values.
+ * @param {String=} config.tempDirectory - directory for temporarily storing
+ * files during conversion.
+ * Defaults to "src/server/temp".
+ * @param {String=} config.encoding - Sets the encoding to use for text output.
+ * Defaults to "UTF-8".
+ * @param {String=} config.binPath - Path of poppler-utils binaries.
+ * @param {Object=} config.pdftoHtmlOptions - Refer to
+ * https://github.com/Fdawgs/node-poppler/blob/master/API.md#popplerpdftohtmloptions-file--promise
+ * for options.
+ * @return {Function} express middleware.
+ */
+module.exports = function popplerMiddleware(config) {
+	return async (req, res, next) => {
+		// Define any default settings the middleware should have to get up and running
+		const defaultConfig = {
+			binPath: undefined,
+			encoding: 'UTF-8',
+			pdftoHtmlOptions: {
+				complexOutput: true,
+				singlePage: true,
+				outputEncoding: 'UTF-8'
+			},
+			tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
+		};
+		this.config = Object.assign(defaultConfig, config);
+
+		if (!fs.existsSync(this.config.tempDirectory)) {
+			fs.mkdirSync(this.config.tempDirectory);
+		}
+
+		// Build temporary files for Poppler and following middleware to read from
+		const id = uuidv4();
+		const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
+		const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
+		fs.writeFileSync(tempPdfFile, req.body);
+
+		const poppler = new Poppler(this.config.binPath);
+
+		await poppler
+			.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile)
+			.then(() => {
+				req.body = fs.readFileSync(tempHtmlFile, {
+					encoding: this.config.encoding
+				});
+				req.doclocation = {
+					directory: this.config.tempDirectory,
+					html: tempHtmlFile,
+					id,
+					pdf: tempPdfFile
+				};
+				next();
+			});
+	};
+};
