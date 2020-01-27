@@ -52,10 +52,9 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 
 					// Increase size of fonts to increase readability
 					if (styleRule.style['font-size']) {
-						const docFontSize = styleRule.style['font-size'].substring(
-							0,
-							styleRule.style['font-size'].length - 2
-						);
+						const docFontSize = styleRule.style[
+							'font-size'
+						].substring(0, styleRule.style['font-size'].length - 2);
 
 						if (Number(docFontSize) < newFontSize) {
 							styleRule.style.setProperty(
