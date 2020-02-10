@@ -1,3 +1,8 @@
+## <small>1.2.1 (2020-02-10)</small>
+
+-   fix(routes): add passport middleware to routes ([4c2fa95](https://github.com/Fdawgs/doc-conversion-service/commit/4c2fa95))
+-   fix(server): correct middleware name ([7eaaee0](https://github.com/Fdawgs/doc-conversion-service/commit/7eaaee0))
+
 ## 1.2.0 (2020-02-10)
 
 -   chore: tidy files ([f598f9a](https://github.com/Fdawgs/doc-conversion-service/commit/f598f9a))
