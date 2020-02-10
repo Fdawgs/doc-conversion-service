@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const passport = require('passport');
 
 // Import middleware
 const multer = require('multer');
@@ -19,6 +20,7 @@ module.exports = function fhirRoute(config) {
 	// Binary FHIR resource generation
 	router.post(
 		'/fhir/binary',
+		passport.authenticate('bearer', { session: false }),
 		upload.single('document'),
 		fhirBinary(),
 		(req, res, next) => {

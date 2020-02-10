@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const glob = require('glob');
 const fs = require('fs');
+const passport = require('passport');
 
 // Import middleware
 const bodyParser = require('body-parser');
@@ -19,6 +20,7 @@ const router = new Router();
 module.exports = function htmlRoute(config) {
 	router.put(
 		'/html',
+		passport.authenticate('bearer', { session: false }),
 		bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 		poppler(config.poppler),
 		htmltidy(config.htmltidy),
