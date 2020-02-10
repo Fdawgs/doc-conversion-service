@@ -3,7 +3,6 @@
  */
 const serverConfig = {
 	https: false,
-	name: 'ydh-doc-conversion-service',
 	port: 8204,
 	ssl: {
 		cert: './ssl_certs/ydhclientcert.cer',
