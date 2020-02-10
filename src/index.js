@@ -1,5 +1,4 @@
 const {
-	authConfig,
 	helmetConfig,
 	serverConfig,
 	winstonRotateConfig
@@ -9,7 +8,7 @@ const Server = require('./server/server');
 new Server(serverConfig)
 	.configureHelmet(helmetConfig)
 	.configureWinston(winstonRotateConfig)
-	.configureAuthorization(authConfig)
+	.configurePassport()
 	.configureMiddleware()
 	.configureRoutes()
 	.listen();
