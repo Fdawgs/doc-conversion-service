@@ -84,8 +84,21 @@ const helmetConfig = {
 	noCache: true
 };
 
+// Refer to option documention here: https://github.com/winstonjs/winston-daily-rotate-file/blob/master/README.md#options
+const winstonRotateConfig = {
+	auditFile: 'logs/logging-audit.json',
+	datePattern: 'YYYY-MM-DD',
+	dirname: 'logs',
+	extension: '.json',
+	filename: 'doc-service-log-%DATE%',
+	maxFiles: '14d',
+	maxSize: '20m',
+	zippedArchive: true
+};
+
 module.exports = {
 	authConfig,
 	helmetConfig,
-	serverConfig
+	serverConfig,
+	winstonRotateConfig
 };

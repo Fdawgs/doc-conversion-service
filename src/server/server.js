@@ -3,8 +3,11 @@ const compression = require('compression');
 const express = require('express');
 const fs = require('fs');
 const helmet = require('helmet');
-const https = require('https');
 const http = require('http');
+const https = require('https');
+const expressWinston = require('express-winston');
+const winston = require('winston');
+const WinstonRotate = require('winston-daily-rotate-file');
 
 // Import middleware
 const authHeader = require('./middleware/auth-header.middleware');
@@ -77,6 +80,41 @@ class Server {
 		this.app.use('/api/converter', fhirRoute(this.config.required_params));
 
 		// return self for chaining
+		return this;
+	}
+
+	/**
+	 * @author Frazer Smith
+	 * @description Sets Winston Daily Rotate options for server.
+	 * Useful as the Mirth logs will only show the requests coming from
+	 * localhost.
+	 * @param {Object} winstonRotateConfig - Winston Daily Rotate configuration values.
+	 * @returns {this} self
+	 */
+	configureWinston(winstonRotateConfig) {
+		const transport = new WinstonRotate(winstonRotateConfig);
+
+		this.app.use(
+			expressWinston.logger({
+				format: winston.format.combine(
+					winston.format.colorize(),
+					winston.format.json()
+				),
+				requestWhitelist: [
+					'url',
+					'headers',
+					'method',
+					'httpVersion',
+					'originalUrl',
+					'query',
+					'ip',
+					'_startTime'
+				],
+				transports: [transport]
+			})
+		);
+
+		// Return self for chaining
 		return this;
 	}
 
