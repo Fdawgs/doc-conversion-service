@@ -75,7 +75,7 @@ class Server {
 	 * @author Frazer Smith
 	 * @description Enable routes for server.
 	 */
-	enableRoutes() {
+	configureRoutes() {
 		this.app.use('/api/converter', htmlRoute(this.config.html_parsing));
 		this.app.use('/api/converter', fhirRoute(this.config.required_params));
 
