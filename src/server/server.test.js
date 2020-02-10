@@ -11,8 +11,8 @@ describe('Server deployment', () => {
 	});
 
 	test('Should assign default values if none provided', async () => {
-        const server = new Server()
-            .configurePassport()
+		const server = new Server()
+			.configurePassport()
 			.configureHelmet(helmetConfig)
 			.configureWinston(winstonRotateConfig)
 			.configureMiddleware()
@@ -27,8 +27,8 @@ describe('Server deployment', () => {
 		httpsServerConfig.https = true;
 
 		try {
-            const server = new Server(httpsServerConfig)
-                .configurePassport()
+			const server = new Server(httpsServerConfig)
+				.configurePassport()
 				.configureHelmet(helmetConfig)
 				.configureWinston(winstonRotateConfig)
 				.configureMiddleware()
