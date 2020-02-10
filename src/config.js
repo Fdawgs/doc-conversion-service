@@ -77,6 +77,9 @@ const helmetConfig = {
 			styleSrc: ["'self'", "'unsafe-inline'"]
 		}
 	},
+	frameguard: {
+		action: 'deny'
+	},
 	hidePoweredBy: true,
 	noCache: true
 };
