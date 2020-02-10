@@ -11,5 +11,5 @@ new Server(serverConfig)
 	.configureWinston(winstonRotateConfig)
 	.configureAuthorization(authConfig)
 	.configureMiddleware()
-	.enableRoutes()
+	.configureRoutes()
 	.listen();
