@@ -1,5 +1,4 @@
 const {
-    authConfig,
 	helmetConfig,
 	serverConfig,
 	winstonRotateConfig
@@ -13,7 +12,7 @@ describe('Server deployment', () => {
 
 	test('Should assign default values if none provided', async () => {
         const server = new Server()
-            .configureAuthorization(authConfig)
+            .configurePassport()
 			.configureHelmet(helmetConfig)
 			.configureWinston(winstonRotateConfig)
 			.configureMiddleware()
@@ -29,7 +28,7 @@ describe('Server deployment', () => {
 
 		try {
             const server = new Server(httpsServerConfig)
-                .configureAuthorization(authConfig)
+                .configurePassport()
 				.configureHelmet(helmetConfig)
 				.configureWinston(winstonRotateConfig)
 				.configureMiddleware()

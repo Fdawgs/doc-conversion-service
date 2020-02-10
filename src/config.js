@@ -4,6 +4,18 @@
 const serverConfig = {
 	https: false,
 	port: 8204,
+	auth: {
+		apiKeys: [
+			{
+				service: 'Discharge Summaries',
+				value: 'Jimmini'
+			},
+			{
+				service: 'Bone Density',
+				value: 'Cricket'
+			}
+		]
+	},
 	ssl: {
 		cert: './ssl_certs/ydhclientcert.cer',
 		key: './ssl_certs/ydhclientcert.key',
@@ -48,16 +60,6 @@ const serverConfig = {
 	}
 };
 
-// Array of API bearer key values and the service they relate to
-const authConfig = {
-	api_keys: [
-		{
-			service: 'Discharge Summaries',
-			value: 'Jimmini'
-		}
-	]
-};
-
 /**
  * The following headers are turned on by default:
  * - dnsPrefetchControl (Control browser DNS prefetching). https://helmetjs.github.io/docs/dns-prefetch-control
@@ -96,7 +98,6 @@ const winstonRotateConfig = {
 };
 
 module.exports = {
-	authConfig,
 	helmetConfig,
 	serverConfig,
 	winstonRotateConfig

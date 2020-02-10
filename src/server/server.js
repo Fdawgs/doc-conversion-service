@@ -1,4 +1,3 @@
-const bearerToken = require('express-bearer-token');
 const compression = require('compression');
 const express = require('express');
 const fs = require('fs');
@@ -8,9 +7,10 @@ const https = require('https');
 const expressWinston = require('express-winston');
 const winston = require('winston');
 const WinstonRotate = require('winston-daily-rotate-file');
+const passport = require('passport');
+const { Strategy } = require('passport-http-bearer');
 
-// Import middleware
-const authHeader = require('./middleware/auth-header.middleware');
+const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
 
 // Import routes
 const htmlRoute = require('./routes/html.route');
@@ -44,16 +44,16 @@ class Server {
 
 	/**
 	 * @author Frazer Smith
-	 * @description Sets up bearer and auth middleware.
-	 * @param {Object} authConfig - Authentication configuration values.
+	 * @description Sets up Passport authentication middleware for server.
 	 * @returns {this} self
 	 */
-	configureAuthorization(authConfig) {
-		// Retrieve and then check for matching bearer token
-		this.app.use(bearerToken());
-		this.app.use(authHeader(authConfig.api_keys));
+	configurePassport() {
+		passport.use(
+			new Strategy((token, callback) => {
+				bearerTokenAuth(token, callback, this.config.auth.apiKeys);
+			})
+		);
 
-		// return self for chaining
 		return this;
 	}
 
