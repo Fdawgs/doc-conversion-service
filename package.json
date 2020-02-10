@@ -10,7 +10,7 @@
 		"dupe-check": "yarn jsinspect ./src",
 		"lint": "eslint src/**/*.js",
 		"nodemon": "cross-env NODE_ENV=development nodemon src/index.js",
-		"prettier": "prettier src/**/*.js --write",
+		"prettier": "prettier ** --write",
 		"start": "cross-env NODE_ENV=production node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-coverage",
 		"test-coverage": "cross-env NODE_ENV=test jest --coverage --verbose",
