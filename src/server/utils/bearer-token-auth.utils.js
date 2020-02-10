@@ -4,7 +4,7 @@
  * @param {String} token - Bearer token.
  * @param {Function} callback - PassportJS strategy callback.
  * @param {Array.<{value: String}>} keyArray - Array of API key objects.
- * @return {String} sanitized query string.
+ * @return {Function} callback.
  */
 module.exports = function bearerTokenAuthentication(
 	token,
