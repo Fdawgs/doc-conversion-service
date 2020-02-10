@@ -3,7 +3,6 @@
  */
 const serverConfig = {
 	https: false,
-	name: 'ydh-doc-conversion-service',
 	port: 8204,
 	ssl: {
 		cert: './ssl_certs/ydhclientcert.cer',
@@ -77,12 +76,28 @@ const helmetConfig = {
 			styleSrc: ["'self'", "'unsafe-inline'"]
 		}
 	},
+	frameguard: {
+		action: 'deny'
+	},
 	hidePoweredBy: true,
 	noCache: true
+};
+
+// Refer to option documention here: https://github.com/winstonjs/winston-daily-rotate-file/blob/master/README.md#options
+const winstonRotateConfig = {
+	auditFile: 'logs/logging-audit.json',
+	datePattern: 'YYYY-MM-DD',
+	dirname: 'logs',
+	extension: '.json',
+	filename: 'doc-service-log-%DATE%',
+	maxFiles: '14d',
+	maxSize: '20m',
+	zippedArchive: true
 };
 
 module.exports = {
 	authConfig,
 	helmetConfig,
-	serverConfig
+	serverConfig,
+	winstonRotateConfig
 };

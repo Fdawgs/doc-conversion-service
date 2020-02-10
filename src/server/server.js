@@ -3,8 +3,11 @@ const compression = require('compression');
 const express = require('express');
 const fs = require('fs');
 const helmet = require('helmet');
-const https = require('https');
 const http = require('http');
+const https = require('https');
+const expressWinston = require('express-winston');
+const winston = require('winston');
+const WinstonRotate = require('winston-daily-rotate-file');
 
 // Import middleware
 const authHeader = require('./middleware/auth-header.middleware');
@@ -82,12 +85,47 @@ class Server {
 
 	/**
 	 * @author Frazer Smith
-	 * @description Start the server.
-	 * @param {Number} port - Port for server to listen on.
+	 * @description Sets Winston Daily Rotate options for server.
+	 * Useful as the Mirth logs will only show the requests coming from
+	 * localhost.
+	 * @param {Object} winstonRotateConfig - Winston Daily Rotate configuration values.
 	 * @returns {this} self
 	 */
-	listen(port) {
+	configureWinston(winstonRotateConfig) {
+		const transport = new WinstonRotate(winstonRotateConfig);
+
+		this.app.use(
+			expressWinston.logger({
+				format: winston.format.combine(
+					winston.format.colorize(),
+					winston.format.json()
+				),
+				requestWhitelist: [
+					'url',
+					'headers',
+					'method',
+					'httpVersion',
+					'originalUrl',
+					'query',
+					'ip',
+					'_startTime'
+				],
+				transports: [transport]
+			})
+		);
+
+		// Return self for chaining
+		return this;
+	}
+
+	/**
+	 * @author Frazer Smith
+	 * @description Start the server.
+	 * @returns {this} self
+	 */
+	listen() {
 		const server = this.config;
+		const port = process.env.PORT;
 		// Update the express app to be an instance of createServer
 		if (server.https === true) {
 			const options = {};
@@ -108,12 +146,14 @@ class Server {
 		}
 
 		// Start the app
-		this.app.listen(port);
+		this.app.listen(port || server.port);
 		console.log(
-			`${server.name} listening for requests at ${this.config.protocol}://127.0.0.1:${port}`
+			`${process.env.npm_package_name} listening for requests at ${
+				this.config.protocol
+			}://127.0.0.1:${port || server.port}`
 		);
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 

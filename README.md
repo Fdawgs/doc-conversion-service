@@ -9,11 +9,47 @@ This RESTful API web service for converting clinical documents/files was created
 
 GP surgeries were recieving these documents through MESH and were unable to read a number of them, leading to them requesting a copy of the original document to be faxed over.
 
-The web service was then extended to allow for the conversion of files to Binary and DocumentReference STU3 (3.0.1) HL7 FHIR resources adhering to the NHS INTEROPen CareConnect profiles.
+The web service was then extended to allow for the conversion of files to [Binary](https://www.hl7.org/fhir/STU3/binary.html) and [DocumentReference](https://www.hl7.org/fhir/STU3/documentreference.html) STU3 (3.0.1) HL7® FHIR® resources adhering to the [NHS INTEROPen CareConnect profiles](https://nhsconnect.github.io/CareConnectAPI/).
 
 # Prerequisites
 -   [Node.js](https://nodejs.org/en/)
 -   [Yarn](https://yarnpkg.com)
+
+# Deployment
+
+## Standard deployment
+
+1. Navigate to the repo
+2. Run `yarn install` to install dependencies
+3. Configure the application in `src/config.js`
+4. Run `yarn start`
+
+The Express server should now be up and running on the port set in the config. You should see the following output:
+
+```
+doc-conversion-service listening for requests at http://127.0.0.1:8204
+```
+
+## Setting up as a Windows Service
+
+Yeovil District Hospital is heavily invested in Microsoft's ecosystem.
+As such, this implementation uses the [winser](https://github.com/jfromaniello/winser) package to allow the Node.js application to be deployed as a Windows Service.
+
+### To install as a service:
+
+1. Navigate to the repo
+2. Run `yarn install` to install dependencies
+3. Configure the application in `src/config.js`
+4. Run `yarn install-windows-service` as administrator
+5. The service should now be visible in Services
+
+**Note:** When you change any settings in the configuration file, you will need to restart the service for the changes to take effect.
+
+### To uninstall the service:
+
+1. Navigate to the repo
+2. Run `yarn uninstall-windows-service` as administrator
+3. The service will be uninstalled silently
 
 # Contributing
 
