@@ -6,4 +6,4 @@ new Server(serverConfig)
 	.configureAuthorization(authConfig)
 	.configureMiddleware()
 	.enableRoutes()
-	.listen(serverConfig.port);
+	.listen();

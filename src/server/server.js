@@ -83,11 +83,11 @@ class Server {
 	/**
 	 * @author Frazer Smith
 	 * @description Start the server.
-	 * @param {Number} port - Port for server to listen on.
 	 * @returns {this} self
 	 */
-	listen(port) {
+	listen() {
 		const server = this.config;
+		const port = process.env.PORT;
 		// Update the express app to be an instance of createServer
 		if (server.https === true) {
 			const options = {};
@@ -108,12 +108,14 @@ class Server {
 		}
 
 		// Start the app
-		this.app.listen(port);
+		this.app.listen(port || server.port);
 		console.log(
-			`${server.name} listening for requests at ${this.config.protocol}://127.0.0.1:${port}`
+			`${server.name} listening for requests at ${
+				this.config.protocol
+			}://127.0.0.1:${port || server.port}`
 		);
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 
