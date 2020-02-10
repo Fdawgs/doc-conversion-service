@@ -1,4 +1,9 @@
-const { authConfig, helmetConfig, serverConfig, winstonRotateConfig } = require('./config');
+const {
+	authConfig,
+	helmetConfig,
+	serverConfig,
+	winstonRotateConfig
+} = require('./config');
 const Server = require('./server/server');
 
 new Server(serverConfig)
