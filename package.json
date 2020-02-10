@@ -7,6 +7,7 @@
 	"author": "Frazer Smith",
 	"license": "MIT",
 	"scripts": {
+		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md",
 		"dupe-check": "yarn jsinspect ./src",
 		"lint": "eslint src/**/*.js",
 		"nodemon": "cross-env NODE_ENV=development nodemon src/index.js",
