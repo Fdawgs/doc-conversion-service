@@ -10,6 +10,10 @@ const WinstonRotate = require('winston-daily-rotate-file');
 const passport = require('passport');
 const { Strategy } = require('passport-http-bearer');
 
+// Import middleware
+const sanitize = require('./middleware/sanitize.middleware');
+
+// Import utils
 const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
 
 // Import routes
@@ -37,6 +41,9 @@ class Server {
 	configureMiddleware() {
 		// Add compression
 		this.app.use(compression({ level: 9 }));
+
+		// Validate and clean input
+		this.app.use(sanitize());
 
 		// return self for chaining
 		return this;
