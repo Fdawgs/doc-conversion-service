@@ -3,7 +3,7 @@
  * @description Checks 'authorization' request header value against array of API key objects.
  * @param {String} token - Bearer token.
  * @param {Function} callback - PassportJS strategy callback.
- * @param {Array.<{value: String}>} keyArray - Array of API key objects.
+ * @param {Array.<{value: String}>} authArray - Array of API key objects.
  * @return {Function} callback.
  */
 module.exports = function bearerTokenAuthentication(
