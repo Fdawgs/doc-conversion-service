@@ -7,6 +7,7 @@ const args = {
 	argObject: { test1: 1, test2: 2 },
 	argBoolean: 'true',
 	argJson: '{ "test1": 1, "test2": 2 }',
+	argDefault: 'default',
 	argInvalid: "i'm not valid"
 };
 
@@ -14,8 +15,9 @@ const requiredArgs = {
 	argString: 'string',
 	argNumber: 'number',
 	argObject: 'object',
-    argBoolean: 'boolean',
-    argJson: 'json'
+	argBoolean: 'boolean',
+	argJson: 'json',
+	argDefault: 'default'
 };
 
 describe('Sanitization and validation middleware', () => {
@@ -52,8 +54,57 @@ describe('Sanitization and validation middleware', () => {
 		expect(typeof req.query.argNumber).toBe('string');
 		expect(typeof req.query.argObject).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
-    });
-    
+	});
+
+	test('Should return 400 client error if invalid GET query values are provided', () => {
+		const middleware = sanitizeMiddleware(requiredArgs);
+
+		const query = {};
+		const req = {
+			method: 'GET',
+			query: Object.assign(query, args)
+		};
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+
+		middleware(req, res, next);
+		expect(res.statusCode).toBe(400);
+	});
+
+	test('Should parse params values if all arguments are valid', () => {
+		const middleware = sanitizeMiddleware();
+
+		const query = {};
+		const req = {
+			method: 'GET',
+			params: Object.assign(query, args)
+		};
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+		delete req.params.argInvalid;
+
+		middleware(req, res, next);
+		expect(typeof req.params.argString).toBe('string');
+		expect(typeof req.params.argNumber).toBe('string');
+		expect(typeof req.params.argObject).toBe('object');
+		expect(next).toHaveBeenCalledTimes(1);
+	});
+
+	test('Should return 400 client error if invalid param values are provided', () => {
+		const middleware = sanitizeMiddleware(requiredArgs);
+
+		const query = {};
+		const req = {
+			method: 'GET',
+			params: Object.assign(query, args)
+		};
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+
+		middleware(req, res, next);
+		expect(res.statusCode).toBe(400);
+	});
+
 	test('Should parse PUT body values if all arguments are valid', () => {
 		const middleware = sanitizeMiddleware();
 
@@ -62,6 +113,7 @@ describe('Sanitization and validation middleware', () => {
 			method: 'PUT',
 			body: Object.assign(query, args)
 		};
+		console.log(req);
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 		delete req.body.argInvalid;
@@ -73,14 +125,13 @@ describe('Sanitization and validation middleware', () => {
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
-
-	test('Should return 400 client error if an invalid argument is provided', () => {
+	test('Should return 400 client error if invalid PUT body values are provided', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
 		const req = {
-			method: 'GET',
-			query: Object.assign(query, args)
+			method: 'PUT',
+			body: Object.assign(query, args)
 		};
 		const res = httpMocks.createResponse();
 		const next = jest.fn();

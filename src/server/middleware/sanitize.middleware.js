@@ -82,14 +82,12 @@ module.exports = function sanitizeMiddleware(config) {
 				if (req.body instanceof Error) {
 					res.status(400).send(req.body.message);
 				}
-				console.log(req.body);
 			}
 			if (req.params && Object.keys(req.params).length) {
 				req.params = parseValues(req.params, config);
 				if (req.params instanceof Error) {
 					res.status(400).send(req.params.message);
 				}
-				console.log(req.params);
 			}
 		}
 		next();
