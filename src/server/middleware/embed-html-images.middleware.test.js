@@ -1,4 +1,5 @@
 const fs = require('fs');
+const httpMocks = require('node-mocks-http');
 const embedHtmlImagesMiddleware = require('./embed-html-images.middleware');
 
 describe('Embed HTML Images middleware', () => {
@@ -16,7 +17,7 @@ describe('Embed HTML Images middleware', () => {
 			),
 			results: {}
 		};
-		const res = {};
+		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -33,7 +34,7 @@ describe('Embed HTML Images middleware', () => {
 			),
 			results: {}
 		};
-		const res = {};
+		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -49,7 +50,7 @@ describe('Embed HTML Images middleware', () => {
 				{ encoding: 'UTF-8' }
 			)
 		};
-		const res = {};
+		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		await middleware(req, res, next);

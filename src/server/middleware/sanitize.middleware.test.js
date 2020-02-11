@@ -113,7 +113,6 @@ describe('Sanitization and validation middleware', () => {
 			method: 'PUT',
 			body: Object.assign(query, args)
 		};
-		console.log(req);
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 		delete req.body.argInvalid;
