@@ -38,7 +38,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse GET query values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware();
+		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
 		const req = {
@@ -51,7 +51,7 @@ describe('Sanitization and validation middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof req.query.argString).toBe('string');
-		expect(typeof req.query.argNumber).toBe('string');
+		expect(typeof req.query.argNumber).toBe('number');
 		expect(typeof req.query.argObject).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
 	});
@@ -72,7 +72,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse params values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware();
+		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
 		const req = {
@@ -85,7 +85,7 @@ describe('Sanitization and validation middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof req.params.argString).toBe('string');
-		expect(typeof req.params.argNumber).toBe('string');
+		expect(typeof req.params.argNumber).toBe('number');
 		expect(typeof req.params.argObject).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
 	});
@@ -106,7 +106,7 @@ describe('Sanitization and validation middleware', () => {
 	});
 
 	test('Should parse PUT body values if all arguments are valid', () => {
-		const middleware = sanitizeMiddleware();
+		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
 		const req = {
@@ -119,7 +119,7 @@ describe('Sanitization and validation middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof req.body.argString).toBe('string');
-		expect(typeof req.body.argNumber).toBe('string');
+		expect(typeof req.body.argNumber).toBe('number');
 		expect(typeof req.body.argObject).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
 	});
