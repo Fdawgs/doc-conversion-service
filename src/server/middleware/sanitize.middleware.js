@@ -2,6 +2,13 @@ const sanitize = require('sanitize-html');
 const validator = require('validator');
 const xss = require('xss');
 
+/**
+ * @author Frazer Smith
+ * 
+ * @param {String} value 
+ * @param {String} type - Expected type of value.
+ * @returns {String} parsed value.
+ */
 function parseValue(value, type) {
 	let result;
 	switch (type) {
@@ -35,6 +42,7 @@ function parseValue(value, type) {
  *
  * @param {Object} args
  * @param {Object} config - Objects containing accepted arguments as properties, and their types as values.
+ * @returns {Error|String}
  */
 function parseValues(args, config) {
 	const values = args;
