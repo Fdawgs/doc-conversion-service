@@ -14,7 +14,10 @@ const poppler = require('../middleware/poppler.middleware');
 const router = new Router();
 
 /**
- * @param {Object=} config
+ * @param {Object} config
+ * @param {Object=} config.htmltidy
+ * @param {Object=} config.poppler
+ * @param {Object} config.accepted_params
  * @returns {Router} express router instance.
  */
 module.exports = function htmlRoute(config) {
