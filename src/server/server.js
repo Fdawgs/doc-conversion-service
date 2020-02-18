@@ -1,14 +1,14 @@
 const compression = require('compression');
 const express = require('express');
+const expressWinston = require('express-winston');
 const fs = require('fs');
 const helmet = require('helmet');
 const http = require('http');
 const https = require('https');
-const expressWinston = require('express-winston');
-const winston = require('winston');
-const WinstonRotate = require('winston-daily-rotate-file');
 const passport = require('passport');
 const { Strategy } = require('passport-http-bearer');
+const winston = require('winston');
+const WinstonRotate = require('winston-daily-rotate-file');
 
 // Import middleware
 const sanitize = require('./middleware/sanitize.middleware');
