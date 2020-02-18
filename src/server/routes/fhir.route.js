@@ -6,6 +6,7 @@ const multer = require('multer');
 const fhirBinary = require('../middleware/fhir-binary-resource.middleware');
 const fhirDocumentReference = require('../middleware/fhir-documentreference-resource.middleware');
 const paramCheck = require('../middleware/param-check.middleware');
+const sanitize = require('../middleware/sanitize.middleware');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -17,10 +18,11 @@ const router = new Router();
  * @returns {Router} express router instance.
  */
 module.exports = function fhirRoute(config) {
+	router.use(passport.authenticate('bearer', { session: false }), sanitize());
+
 	// Binary FHIR resource generation
 	router.post(
 		'/fhir/binary',
-		passport.authenticate('bearer', { session: false }),
 		upload.single('document'),
 		fhirBinary(),
 		(req, res, next) => {
