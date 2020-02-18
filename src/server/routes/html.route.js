@@ -10,6 +10,7 @@ const fixCss = require('../middleware/clean-css.middleware');
 const fixWin1252Artifacts = require('../middleware/fix-win1252-artifacts.middleware');
 const htmltidy = require('../middleware/htmltidy.middleware');
 const poppler = require('../middleware/poppler.middleware');
+const sanitize = require('../middleware/sanitize.middleware');
 
 const router = new Router();
 
@@ -24,6 +25,7 @@ module.exports = function htmlRoute(config) {
 	router.put(
 		'/html',
 		passport.authenticate('bearer', { session: false }),
+		sanitize(config.accepted_params),
 		bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 		poppler(config.poppler),
 		htmltidy(config.htmltidy),
