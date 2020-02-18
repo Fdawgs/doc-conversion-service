@@ -52,6 +52,15 @@ const serverConfig = {
 			 */
 			binPath: '',
 			encoding: 'UTF-8'
+		},
+
+		accepted_params: {
+			fonts: 'string',
+			fontsize: 'number',
+			clean: 'boolean',
+			bare: 'boolean',
+			removeprop: 'boolean',
+			escapecdata: 'boolean'
 		}
 	},
 
