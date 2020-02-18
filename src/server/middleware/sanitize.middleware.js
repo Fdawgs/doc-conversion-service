@@ -58,11 +58,13 @@ function parseValues(args, config) {
  * @author Frazer Smith
  * @description Sanitize and validate query, param and body of requests
  * to protect against cross-site scripting (XSS) and command injection attacks.
+ * 
+ * @param {Object=} config - sanitization configuration values.
  * @return {Function} express middleware.
  */
-module.exports = function sanitizeMiddleware(config) {
+module.exports = function sanitizeMiddleware(config = {}) {
 	return (req, res, next) => {
-		if (config) {
+
 			if (
 				req.query &&
 				req.method === 'GET' &&
@@ -89,7 +91,6 @@ module.exports = function sanitizeMiddleware(config) {
 					res.status(400).send(req.params.message);
 				}
 			}
-		}
 		next();
 	};
 };

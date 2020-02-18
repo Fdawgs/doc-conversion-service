@@ -6,7 +6,7 @@ const { Poppler } = require('node-poppler');
 /**
  * @author Frazer Smith
  * @description Uses Poppler to convert PDF to HTML and places both files in a temporary directory.
- * @param {Object} config - Poppler conversion configuration values.
+ * @param {Object=} config - Poppler conversion configuration values.
  * @param {String=} config.tempDirectory - directory for temporarily storing
  * files during conversion.
  * Defaults to "src/server/temp".
@@ -18,7 +18,7 @@ const { Poppler } = require('node-poppler');
  * for options.
  * @return {Function} express middleware.
  */
-module.exports = function popplerMiddleware(config) {
+module.exports = function popplerMiddleware(config = {}) {
 	return async (req, res, next) => {
 		// Define any default settings the middleware should have to get up and running
 		const defaultConfig = {
