@@ -21,53 +21,43 @@ module.exports = function fhirRoute(config) {
 	router.use(passport.authenticate('bearer', { session: false }), sanitize());
 
 	// Binary FHIR resource generation
-	router.post(
-		'/fhir/binary',
-		upload.single('document'),
-		fhirBinary(),
-		(req, res, next) => {
+	router
+		.route('/fhir/binary')
+		.post(upload.single('document'), fhirBinary(), (req, res, next) => {
 			res.send(req.resource.binary);
 			next();
-		}
-	);
-
-	router.put(
-		'/fhir/binary',
-		upload.single('document'),
-		fhirBinary(),
-		(req, res, next) => {
+		})
+		.put(upload.single('document'), fhirBinary(), (req, res, next) => {
 			res.send(req.resource.binary);
 			next();
-		}
-	);
+		});
 
 	// DocumentReference FHIR resource generation
-	router.post(
-		'/fhir/documentreference',
-		upload.array('document'),
-		// TODO: Add middleware that derives values from document if possible
-		(req, res, next) => {
-			req.body.status = 'current';
-			req.body.type = 'test';
-			next();
-		},
-		paramCheck(config['fhir/documentreference']),
-		fhirDocumentReference(),
-		(req, res, next) => {
-			res.send(req.resource.documentReference);
-			next();
-		}
-	);
-
-	router.put(
-		'/fhir/documentreference',
-		upload.array('document'),
-		paramCheck(config['fhir/documentreference']),
-		fhirDocumentReference(),
-		(req, res, next) => {
-			res.send(req.resource.documentReference);
-			next();
-		}
-	);
+	router
+		.route('/fhir/documentreference')
+		.post(
+			upload.array('document'),
+			// TODO: Add middleware that derives values from document if possible
+			(req, res, next) => {
+				req.body.status = 'current';
+				req.body.type = 'test';
+				next();
+			},
+			paramCheck(config['fhir/documentreference']),
+			fhirDocumentReference(),
+			(req, res, next) => {
+				res.send(req.resource.documentReference);
+				next();
+			}
+		)
+		.put(
+			upload.array('document'),
+			paramCheck(config['fhir/documentreference']),
+			fhirDocumentReference(),
+			(req, res, next) => {
+				res.send(req.resource.documentReference);
+				next();
+			}
+		);
 	return router;
 };

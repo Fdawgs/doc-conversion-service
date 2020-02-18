@@ -22,8 +22,10 @@ const router = new Router();
  * @returns {Router} express router instance.
  */
 module.exports = function htmlRoute(config) {
-
-	router.use(passport.authenticate('bearer', { session: false }), sanitize(config.accepted_params));
+	router.use(
+		passport.authenticate('bearer', { session: false }),
+		sanitize(config.accepted_params)
+	);
 
 	router.put(
 		'/html',
