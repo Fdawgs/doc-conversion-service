@@ -9,7 +9,6 @@ module.exports = function paramCheckMiddleware(requiredParams) {
 	return (req, res, next) => {
 		try {
 			const keys = Object.keys(req.body);
-			// eslint-disable-next-line max-len
 			if (
 				requiredParams.every((element) =>
 					keys
