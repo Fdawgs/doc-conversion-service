@@ -14,8 +14,8 @@ const WinstonRotate = require('winston-daily-rotate-file');
 const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
 
 // Import routes
-const htmlRoute = require('./routes/html.route');
 const fhirRoute = require('./routes/fhir.route');
+const htmlRoute = require('./routes/html.route');
 
 class Server {
 	/**
