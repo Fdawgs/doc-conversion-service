@@ -1,6 +1,6 @@
 const fs = require('fs');
-const path = require('path');
 const { JSDOM } = require('jsdom');
+const path = require('path');
 
 /**
  * @author Frazer Smith

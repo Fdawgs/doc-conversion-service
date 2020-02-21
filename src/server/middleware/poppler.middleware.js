@@ -1,7 +1,7 @@
 const fs = require('fs');
-const uuidv4 = require('uuid/v4');
 const path = require('path');
 const { Poppler } = require('node-poppler');
+const uuidv4 = require('uuid/v4');
 
 /**
  * @author Frazer Smith
