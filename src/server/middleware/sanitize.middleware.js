@@ -68,7 +68,7 @@ function parseValues(args, config) {
 
 	keys.forEach((key) => {
 		// Compare arguments to accepted arguments
-		if (Object.prototype.hasOwnProperty.call(config, key)) {
+		if (Object.prototype.hasOwnProperty.call(config, key) && config[key].type) {
 			values[key] = parseValue(values[key], config[key].type);
 		} else {
 			message = `Invalid option provided '${key}'`;
