@@ -67,7 +67,10 @@ const serverConfig = {
 	required_params: {
 		'fhir/documentreference': {
 			status: { type: 'string', mandatory: true },
-			type: { type: 'string', mandatory: true }
+			type: { type: 'string', mandatory: true },
+			id: { type: 'number', mandatory: false },
+			specialty: { type: 'string', mandatory: false },
+			subject: { type: 'string', mandatory: false }
 		}
 	}
 };
