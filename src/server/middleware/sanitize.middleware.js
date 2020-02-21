@@ -38,21 +38,40 @@ function parseValue(value, type) {
 
 /**
  * @author Frazer Smith
- * @description Attempt to parse and sanitize all arguments passed if they're valid.
+ * @description Check all mandatory arguments are present then
+ * attempt to parse and sanitize all arguments passed if they're valid.
  * @param {Object} args
  * @param {Object} config - Objects containing accepted arguments as properties, and their types as values.
  * @returns {Error|String}
  */
 function parseValues(args, config) {
 	const values = args;
+	const keys = Object.keys(values);
 	let message;
 
-	Object.keys(values).forEach((key) => {
+	// check mandatory values are present
+	const mandatoryArgs = [];
+	Object.keys(config).forEach((configKey) => {
+		if (config[configKey].mandatory && config[configKey].mandatory === true) {
+			mandatoryArgs.push(configKey);
+		}
+	});
+
+	if (
+		mandatoryArgs.every((element) =>
+			keys.map((x) => x.toLowerCase()).includes(element.toLowerCase())
+		) === false
+	) {
+		message = `A mandatory parameter is missing from the list: ${mandatoryArgs.join(', ').toString()}`;
+		return new Error(message);
+	}
+
+	keys.forEach((key) => {
 		// Compare arguments to accepted arguments
-		if (Object.prototype.hasOwnProperty.call(config, key)) {
-			values[key] = parseValue(values[key], config[key]);
+		if (Object.prototype.hasOwnProperty.call(config, key) && config[key].type) {
+			values[key] = parseValue(values[key], config[key].type);
 		} else {
-			message = `Invalid option provided '${key}'`;
+			message = `Invalid option provided: ${key}`;
 		}
 	});
 	if (typeof message !== 'undefined') {
@@ -63,8 +82,9 @@ function parseValues(args, config) {
 
 /**
  * @author Frazer Smith
- * @description Sanitize and validate query, param and body of requests
- * to protect against cross-site scripting (XSS) and command injection attacks.
+ * @description Check all mandatory values are present and then sanitize
+ * and validate query, param and body of requests to protect against
+ * cross-site scripting (XSS) and command injection attacks.
  * @param {Object=} config - Sanitization configuration values.
  * @return {Function} Express middleware.
  */
@@ -77,7 +97,7 @@ module.exports = function sanitizeMiddleware(config = {}) {
 		) {
 			req.query = parseValues(req.query, config);
 			if (req.query instanceof Error) {
-				res.status(400).send(req.query.message);
+				return next(req.query.message);
 			}
 		}
 		if (
@@ -87,15 +107,15 @@ module.exports = function sanitizeMiddleware(config = {}) {
 		) {
 			req.body = parseValues(req.body, config);
 			if (req.body instanceof Error) {
-				res.status(400);
+				return next(req.body.message);
 			}
 		}
 		if (req.params && Object.keys(req.params).length) {
 			req.params = parseValues(req.params, config);
 			if (req.params instanceof Error) {
-				res.status(400);
+				return next(req.params.message);
 			}
 		}
-		next();
+		return next();
 	};
 };
