@@ -1,9 +1,8 @@
 /**
  * @author Frazer Smith
  * @description Retrieve all param keys from form and check all essential ones are present.
- *
  * @param {Array} requiredParams - Array of keys required to proceed.
- * @return {Function} express middleware.
+ * @return {Function} Express middleware.
  */
 module.exports = function paramCheckMiddleware(requiredParams) {
 	return (req, res, next) => {

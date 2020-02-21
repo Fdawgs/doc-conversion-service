@@ -4,7 +4,7 @@ const xss = require('xss');
 
 /**
  * @author Frazer Smith
- *
+ * @description Sanitizes value based on type passed.
  * @param {String} value
  * @param {String} type - Expected type of value.
  * @returns {String} parsed value.
@@ -39,7 +39,6 @@ function parseValue(value, type) {
 /**
  * @author Frazer Smith
  * @description Attempt to parse and sanitize all arguments passed if they're valid.
- *
  * @param {Object} args
  * @param {Object} config - Objects containing accepted arguments as properties, and their types as values.
  * @returns {Error|String}
@@ -66,9 +65,8 @@ function parseValues(args, config) {
  * @author Frazer Smith
  * @description Sanitize and validate query, param and body of requests
  * to protect against cross-site scripting (XSS) and command injection attacks.
- *
- * @param {Object=} config - sanitization configuration values.
- * @return {Function} express middleware.
+ * @param {Object=} config - Sanitization configuration values.
+ * @return {Function} Express middleware.
  */
 module.exports = function sanitizeMiddleware(config = {}) {
 	return (req, res, next) => {
