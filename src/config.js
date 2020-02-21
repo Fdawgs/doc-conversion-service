@@ -55,17 +55,20 @@ const serverConfig = {
 		},
 
 		accepted_params: {
-			fonts: 'string',
-			fontsize: 'number',
-			clean: 'boolean',
-			bare: 'boolean',
-			removeprop: 'boolean',
-			escapecdata: 'boolean'
+			fonts: { type: 'string', mandatory: false },
+			fontsize: { type: 'number', mandatory: false },
+			clean: { type: 'boolean', mandatory: false },
+			bare: { type: 'boolean', mandatory: false },
+			removeprop: { type: 'boolean', mandatory: false },
+			escapecdata: { type: 'boolean', mandatory: false }
 		}
 	},
 
 	required_params: {
-		'fhir/documentreference': ['status', 'type']
+		'fhir/documentreference': {
+			status: { type: 'string', mandatory: true },
+			type: { type: 'string', mandatory: true }
+		}
 	}
 };
 

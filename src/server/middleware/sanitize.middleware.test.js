@@ -12,12 +12,12 @@ const args = {
 };
 
 const requiredArgs = {
-	argString: 'string',
-	argNumber: 'number',
-	argObject: 'object',
-	argBoolean: 'boolean',
-	argJson: 'json',
-	argDefault: 'default'
+	argString: { type: 'string', mandatory: false },
+	argNumber: { type: 'number', mandatory: false },
+	argObject: { type: 'object', mandatory: false },
+	argBoolean: { type: 'boolean', mandatory: false },
+	argJson: { type: 'json', mandatory: false },
+	argDefault: { type: 'default', mandatory: false }
 };
 
 describe('Sanitization and validation middleware', () => {
@@ -136,6 +136,27 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+		expect(res.statusCode).toBe(400);
+	});
+
+	test('Should return 400 client error if mandatory value is missing', () => {
+		const adjustedArgs = {};
+		Object.assign(adjustedArgs, requiredArgs);
+		adjustedArgs.argString.mandatory = true;
+
+		const middleware = sanitizeMiddleware(adjustedArgs);
+
+		const query = {};
+		const req = {
+			method: 'GET',
+			params: Object.assign(query, args)
+		};
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+		delete req.params.argString;
+
+		middleware(req, res, next);
+		expect(res.statusMessage).toBe('A mandatory parameter is missing from the list: argString');
 		expect(res.statusCode).toBe(400);
 	});
 });
