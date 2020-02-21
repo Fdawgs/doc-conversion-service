@@ -56,7 +56,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
-	test('Should return 400 client error if invalid GET query values are provided', () => {
+	test('Should pass an error to next if invalid GET query values are provided', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
@@ -68,7 +68,8 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(res.statusCode).toBe(400);
+		expect(next.mock.calls[0][0]).toBe('Invalid option provided: argInvalid');
+		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should parse params values if all arguments are valid', () => {
@@ -90,7 +91,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
-	test('Should return 400 client error if invalid param values are provided', () => {
+	test('Should pass an error to next if invalid param values are provided', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
@@ -102,7 +103,8 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(res.statusCode).toBe(400);
+		expect(next.mock.calls[0][0]).toBe('Invalid option provided: argInvalid');
+		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should parse PUT body values if all arguments are valid', () => {
@@ -124,7 +126,7 @@ describe('Sanitization and validation middleware', () => {
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
-	test('Should return 400 client error if invalid PUT body values are provided', () => {
+	test('Should pass an error to next if invalid PUT body values are provided', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
@@ -136,10 +138,11 @@ describe('Sanitization and validation middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(res.statusCode).toBe(400);
+		expect(next.mock.calls[0][0]).toBe('Invalid option provided: argInvalid');
+		expect(next).toHaveBeenCalledTimes(1);
 	});
 
-	test('Should return 400 client error if mandatory value is missing', () => {
+	test('Should pass an error to next if mandatory value is missing', () => {
 		const adjustedArgs = {};
 		Object.assign(adjustedArgs, requiredArgs);
 		adjustedArgs.argString.mandatory = true;
@@ -156,7 +159,7 @@ describe('Sanitization and validation middleware', () => {
 		delete req.params.argString;
 
 		middleware(req, res, next);
-		expect(res.statusMessage).toBe('A mandatory parameter is missing from the list: argString');
-		expect(res.statusCode).toBe(400);
+		expect(next.mock.calls[0][0]).toBe('A mandatory parameter is missing from the list: argString');
+		expect(next).toHaveBeenCalledTimes(1);
 	});
 });

@@ -71,7 +71,7 @@ function parseValues(args, config) {
 		if (Object.prototype.hasOwnProperty.call(config, key) && config[key].type) {
 			values[key] = parseValue(values[key], config[key].type);
 		} else {
-			message = `Invalid option provided '${key}'`;
+			message = `Invalid option provided: ${key}`;
 		}
 	});
 	if (typeof message !== 'undefined') {
@@ -97,8 +97,7 @@ module.exports = function sanitizeMiddleware(config = {}) {
 		) {
 			req.query = parseValues(req.query, config);
 			if (req.query instanceof Error) {
-				res.statusMessage = req.query.message;
-				res.status(400);
+				return next(req.query.message);
 			}
 		}
 		if (
@@ -108,17 +107,15 @@ module.exports = function sanitizeMiddleware(config = {}) {
 		) {
 			req.body = parseValues(req.body, config);
 			if (req.body instanceof Error) {
-				res.statusMessage = req.body.message;
-				res.status(400);
+				return next(req.body.message);
 			}
 		}
 		if (req.params && Object.keys(req.params).length) {
 			req.params = parseValues(req.params, config);
 			if (req.params instanceof Error) {
-				res.statusMessage = req.params.message;
-				res.status(400);
+				return next(req.params.message);
 			}
 		}
-		next();
+		return next();
 	};
 };
