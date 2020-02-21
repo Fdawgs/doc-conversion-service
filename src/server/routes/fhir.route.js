@@ -1,5 +1,5 @@
-const { Router } = require('express');
 const passport = require('passport');
+const { Router } = require('express');
 
 // Import middleware
 const multer = require('multer');
@@ -14,6 +14,8 @@ const upload = multer({ storage });
 const router = new Router();
 
 /**
+ * @author Frazer Smith
+ * @description Handles routing for /fhir/ path.
  * @param {Object=} config
  * @returns {Router} express router instance.
  */

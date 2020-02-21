@@ -15,10 +15,12 @@ const sanitize = require('../middleware/sanitize.middleware');
 const router = new Router();
 
 /**
+ * @author Frazer Smith
+ * @description Handles routing for /html/ path.
  * @param {Object} config
- * @param {Object=} config.htmltidy
- * @param {Object=} config.poppler
- * @param {Object} config.accepted_params
+ * @param {Object=} config.htmltidy - HTMLTidy2 configuration values.
+ * @param {Object=} config.poppler - Poppler conversion configuration values.
+ * @param {Object} config.accepted_params - Sanitization configuration values.
  * @returns {Router} express router instance.
  */
 module.exports = function htmlRoute(config) {
