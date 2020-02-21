@@ -1,11 +1,12 @@
-const { Router } = require('express');
 const passport = require('passport');
+const { Router } = require('express');
 
 // Import middleware
 const multer = require('multer');
 const fhirBinary = require('../middleware/fhir-binary-resource.middleware');
 const fhirDocumentReference = require('../middleware/fhir-documentreference-resource.middleware');
 const paramCheck = require('../middleware/param-check.middleware');
+const sanitize = require('../middleware/sanitize.middleware');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -13,59 +14,52 @@ const upload = multer({ storage });
 const router = new Router();
 
 /**
+ * @author Frazer Smith
+ * @description Handles routing for /fhir/ path.
  * @param {Object=} config
  * @returns {Router} express router instance.
  */
 module.exports = function fhirRoute(config) {
-	// Binary FHIR resource generation
-	router.post(
-		'/fhir/binary',
-		passport.authenticate('bearer', { session: false }),
-		upload.single('document'),
-		fhirBinary(),
-		(req, res, next) => {
-			res.send(req.resource.binary);
-			next();
-		}
-	);
+	router.use(passport.authenticate('bearer', { session: false }), sanitize());
 
-	router.put(
-		'/fhir/binary',
-		upload.single('document'),
-		fhirBinary(),
-		(req, res, next) => {
+	// Binary FHIR resource generation
+	router
+		.route('/fhir/binary')
+		.post(upload.single('document'), fhirBinary(), (req, res, next) => {
 			res.send(req.resource.binary);
 			next();
-		}
-	);
+		})
+		.put(upload.single('document'), fhirBinary(), (req, res, next) => {
+			res.send(req.resource.binary);
+			next();
+		});
 
 	// DocumentReference FHIR resource generation
-	router.post(
-		'/fhir/documentreference',
-		upload.array('document'),
-		// TODO: Add middleware that derives values from document if possible
-		(req, res, next) => {
-			req.body.status = 'current';
-			req.body.type = 'test';
-			next();
-		},
-		paramCheck(config['fhir/documentreference']),
-		fhirDocumentReference(),
-		(req, res, next) => {
-			res.send(req.resource.documentReference);
-			next();
-		}
-	);
-
-	router.put(
-		'/fhir/documentreference',
-		upload.array('document'),
-		paramCheck(config['fhir/documentreference']),
-		fhirDocumentReference(),
-		(req, res, next) => {
-			res.send(req.resource.documentReference);
-			next();
-		}
-	);
+	router
+		.route('/fhir/documentreference')
+		.post(
+			upload.array('document'),
+			// TODO: Add middleware that derives values from document if possible
+			(req, res, next) => {
+				req.body.status = 'current';
+				req.body.type = 'test';
+				next();
+			},
+			paramCheck(config['fhir/documentreference']),
+			fhirDocumentReference(),
+			(req, res, next) => {
+				res.send(req.resource.documentReference);
+				next();
+			}
+		)
+		.put(
+			upload.array('document'),
+			paramCheck(config['fhir/documentreference']),
+			fhirDocumentReference(),
+			(req, res, next) => {
+				res.send(req.resource.documentReference);
+				next();
+			}
+		);
 	return router;
 };

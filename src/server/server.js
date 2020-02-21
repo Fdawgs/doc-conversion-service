@@ -1,20 +1,21 @@
 const compression = require('compression');
 const express = require('express');
+const expressWinston = require('express-winston');
 const fs = require('fs');
 const helmet = require('helmet');
 const http = require('http');
 const https = require('https');
-const expressWinston = require('express-winston');
-const winston = require('winston');
-const WinstonRotate = require('winston-daily-rotate-file');
 const passport = require('passport');
 const { Strategy } = require('passport-http-bearer');
+const winston = require('winston');
+const WinstonRotate = require('winston-daily-rotate-file');
 
+// Import utils
 const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
 
 // Import routes
-const htmlRoute = require('./routes/html.route');
 const fhirRoute = require('./routes/fhir.route');
+const htmlRoute = require('./routes/html.route');
 
 class Server {
 	/**

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const httpMocks = require('node-mocks-http');
 const popplerMiddleware = require('./poppler.middleware');
 const { serverConfig } = require('../../config');
 
@@ -17,7 +18,7 @@ describe('Poppler conversion middleware', () => {
 			}),
 			results: {}
 		};
-		const res = {};
+		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -39,7 +40,7 @@ describe('Poppler conversion middleware', () => {
 			}),
 			results: {}
 		};
-		const res = {};
+		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		await middleware(req, res, next);

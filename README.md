@@ -31,6 +31,17 @@ The Express server should now be up and running on the port set in the config. Y
 doc-conversion-service listening for requests at http://127.0.0.1:8204
 ```
 
+## Deploying using PM2
+
+It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a process manager such as [PM2](https://pm2.keymetrics.io/) when deploying Express applications like this into production.
+
+1. Navigate to the repo
+2. Run `yarn install` to install dependencies
+3. Configure the application in `src/config.js`
+4. Run `yarn global add pm2` to install pm2 globally
+5. Launch application with `pm2 start .pm2.yml`
+6. Check the application has been deployed using `pm2 list` or `pm2 monit`
+
 ## Setting up as a Windows Service
 
 Yeovil District Hospital is heavily invested in Microsoft's ecosystem.

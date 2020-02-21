@@ -7,20 +7,30 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const embedHtmlImages = require('../middleware/embed-html-images.middleware');
 const fixCss = require('../middleware/clean-css.middleware');
-const fixWin1252Artifacts = require('../middleware/fix-win1252-artifacts.middleware');
+const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
 const htmltidy = require('../middleware/htmltidy.middleware');
 const poppler = require('../middleware/poppler.middleware');
+const sanitize = require('../middleware/sanitize.middleware');
 
 const router = new Router();
 
 /**
- * @param {Object=} config
+ * @author Frazer Smith
+ * @description Handles routing for /html/ path.
+ * @param {Object} config
+ * @param {Object=} config.htmltidy - HTMLTidy2 configuration values.
+ * @param {Object=} config.poppler - Poppler conversion configuration values.
+ * @param {Object} config.accepted_params - Sanitization configuration values.
  * @returns {Router} express router instance.
  */
 module.exports = function htmlRoute(config) {
+	router.use(
+		passport.authenticate('bearer', { session: false }),
+		sanitize(config.accepted_params)
+	);
+
 	router.put(
 		'/html',
-		passport.authenticate('bearer', { session: false }),
 		bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 		poppler(config.poppler),
 		htmltidy(config.htmltidy),

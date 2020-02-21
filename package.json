@@ -48,6 +48,7 @@
 		"eslint-plugin-json": "^2.1.0",
 		"jest": "^25.1.0",
 		"jsinspect": "^0.12.7",
+		"node-mocks-http": "^1.8.1",
 		"nodemon": "^2.0.2",
 		"prettier": "^1.19.1",
 		"supertest": "^4.0.2",
@@ -60,6 +61,7 @@
 		"cssom": "^0.4.4",
 		"express": "^4.17.1",
 		"express-winston": "^4.0.3",
+		"fix-utf8": "^1.1.1",
 		"glob": "^7.1.6",
 		"helmet": "^3.21.2",
 		"htmltidy2": "^0.3.0",
@@ -68,9 +70,12 @@
 		"node-poppler": "^1.5.0",
 		"passport": "^0.4.1",
 		"passport-http-bearer": "^1.0.1",
+		"sanitize-html": "^1.21.1",
 		"uuid": "^3.4.0",
+		"validator": "^12.2.0",
 		"winser": "^1.0.3",
 		"winston": "^3.2.1",
-		"winston-daily-rotate-file": "^4.4.2"
+		"winston-daily-rotate-file": "^4.4.2",
+		"xss": "^1.0.6"
 	}
 }

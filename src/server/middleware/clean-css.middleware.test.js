@@ -1,4 +1,5 @@
 const fs = require('fs');
+const httpMocks = require('node-mocks-http');
 const cleanCssMiddleware = require('./clean-css.middleware');
 
 describe('Clean CSS middleware', () => {
@@ -16,7 +17,7 @@ describe('Clean CSS middleware', () => {
 			),
 			results: {}
 		};
-		const res = {};
+		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -33,7 +34,7 @@ describe('Clean CSS middleware', () => {
 				{ encoding: 'UTF-8' }
 			)
 		};
-		const res = {};
+		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		await middleware(req, res, next);

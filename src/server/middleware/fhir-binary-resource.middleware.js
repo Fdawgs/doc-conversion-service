@@ -3,7 +3,7 @@ const uuidv4 = require('uuid/v4');
 /**
  * @author Frazer Smith
  * @description Converts multipart request to STU3 FHIR Binary resource.
- * @return {Function} express middleware.
+ * @return {Function} Express middleware.
  */
 module.exports = function fhirBinResourceMiddleware() {
 	return (req, res, next) => {

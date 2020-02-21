@@ -5,13 +5,12 @@ const { JSDOM } = require('jsdom');
  * @author Frazer Smith
  * @description Resolves most common issues with CSS generated during conversion process.
  * Adds no-break to stop pages overrunning each other when text is too big for its' original page.
- *
  * @param {String=} fonts - Comma seperated list of fonts to replace document's original fonts with.
  * Defaults to "arial, sans-serif".
  * @param {Number=} fontSize - Pixel size of text.
  * Will only increase font size of sections with a size less than 10.
  * Defaults to 10.
- * @return {Function} express middleware.
+ * @return {Function} Express middleware.
  */
 module.exports = function cleanCssMiddleware(fonts, fontSize) {
 	return (req, res, next) => {
