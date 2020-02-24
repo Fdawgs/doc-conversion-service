@@ -4291,10 +4291,10 @@ node-notifier@^6.0.0:
     shellwords "^0.1.1"
     which "^1.3.1"
 
-node-poppler@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.5.0.tgz#735a3a9ad763e2a61837a47212f3635e22fe4c61"
-  integrity sha512-RgMJhpODHCpEdE5sO7hVMVEmsda24CvfDt2NtAnA6+NtkvTLqi5H6TgQddGR8FwME7jvZJ46GB+7Lra9I/FMxQ==
+node-poppler@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.5.1.tgz#d672869013abd2b1cd2a6f2c18f2a5a3c4f0de46"
+  integrity sha512-i9OPg54zx/8oWNLwn9EdMpkA+9lhV8HPY7Ghi7RM+1WzoJcVDjOzuroosQkitAVpc14Qvx2uyZZY82LvZv3ecw==
 
 nodemon@^2.0.2:
   version "2.0.2"
