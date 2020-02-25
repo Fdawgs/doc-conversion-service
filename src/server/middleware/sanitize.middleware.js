@@ -91,7 +91,7 @@ function parseValue(value, type) {
 			}
 			break;
 		case 'date':
-			result = moment(value, undefined, true);
+			result = moment(value, undefined, true).toDate();
 			break;
 		case 'json':
 			result = JSON.parse(value);
@@ -106,7 +106,7 @@ function parseValue(value, type) {
 		case 'object':
 			result = JSON.parse(JSON.stringify(value));
 			break;
-			default:
+		default:
 		case 'string':
 			// Strip any HTML tags, non-word characters, and control characters
 			result = validator.stripLow(xss(sanitize(value))).trim();
