@@ -71,6 +71,9 @@ const serverConfig = {
 			id: { type: 'number', mandatory: false },
 			specialty: { type: 'string', mandatory: false },
 			subject: { type: 'string', mandatory: false }
+		},
+		'fhir/binary': {
+			file: { type: 'binary', mandatory: true }
 		}
 	}
 };

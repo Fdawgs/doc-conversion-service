@@ -7,28 +7,27 @@ const uuidv4 = require('uuid/v4');
  */
 module.exports = function fhirBinResourceMiddleware() {
 	return (req, res, next) => {
-		// Create resource object for conversion resource
-		if (typeof req.resource === 'undefined') {
-			req.resource = {};
-		}
+		if (req.file) {
+			const resource = {
+				resourceType: 'Binary',
+				id: uuidv4(),
+				language: 'English (Great Britain)',
+				contentType: req.file.mimetype,
+				content: req.file.buffer.toString('base64')
+			};
+			Object.assign(resource, req.body);
 
-		let id;
-		if (req.body.id) {
-			id = req.body.id;
+			// Create resource object for conversion resource
+			if (typeof req.resource === 'undefined') {
+				req.resource = {};
+			}
+
+			res.set('content-type', 'application/fhir+json');
+			req.resource.binary = resource;
+			next();
 		} else {
-			id = uuidv4();
+			res.status(400);
+			next('File missing from request');
 		}
-
-		const resource = {
-			resourceType: 'Binary',
-			id,
-			language: 'English (Great Britain)',
-			contentType: req.file.mimetype,
-			content: req.file.buffer.toString('base64')
-		};
-
-		res.set('content-type', 'application/fhir+json');
-		req.resource.binary = resource;
-		next();
 	};
 };
