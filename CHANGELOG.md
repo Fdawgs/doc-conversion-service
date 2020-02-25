@@ -1,3 +1,23 @@
+## 1.4.0 (2020-02-25)
+
+-   chore: convert pm2 config file from yml to js ([6ecb8a6](https://github.com/Fdawgs/doc-conversion-service/commit/6ecb8a6))
+-   chore(config): add additional required params for fhir docref endpoint ([2e48337](https://github.com/Fdawgs/doc-conversion-service/commit/2e48337))
+-   chore(deps-dev): bump eslint-plugin-jest from 23.7.0 to 23.8.0 ([beb2d4e](https://github.com/Fdawgs/doc-conversion-service/commit/beb2d4e))
+-   chore(deps): bump helmet from 3.21.2 to 3.21.3 ([7e68b0b](https://github.com/Fdawgs/doc-conversion-service/commit/7e68b0b))
+-   chore(deps): bump node-poppler from 1.5.0 to 1.5.1 ([ada162c](https://github.com/Fdawgs/doc-conversion-service/commit/ada162c))
+-   chore(deps): bump sanitize-html from 1.21.1 to 1.22.0 ([11193f9](https://github.com/Fdawgs/doc-conversion-service/commit/11193f9))
+-   chore(deps): bump uuid from 3.4.0 to 7.0.0 ([3fbd77e](https://github.com/Fdawgs/doc-conversion-service/commit/3fbd77e))
+-   tests(middleware): add basic test for fhir docref middleware ([12094df](https://github.com/Fdawgs/doc-conversion-service/commit/12094df))
+-   tests(middleware): add basic tests for fhir binary middleware ([9fdf338](https://github.com/Fdawgs/doc-conversion-service/commit/9fdf338))
+-   tests(middleware): extend fhir binary middleware tests ([be0e0f4](https://github.com/Fdawgs/doc-conversion-service/commit/be0e0f4))
+-   tests(middleware): update sanitize middleware tests ([3ffed7b](https://github.com/Fdawgs/doc-conversion-service/commit/3ffed7b))
+-   tests(middleware): use http mock requests ([be7d0b4](https://github.com/Fdawgs/doc-conversion-service/commit/be7d0b4))
+-   fix(middleware): convert moment object to native date object ([d8af872](https://github.com/Fdawgs/doc-conversion-service/commit/d8af872))
+-   fix(middleware): resolve err_http_headers_sent output ([1d2b369](https://github.com/Fdawgs/doc-conversion-service/commit/1d2b369))
+-   feat(middleware): add validation and deriving to sanitize middleware ([96d8f3a](https://github.com/Fdawgs/doc-conversion-service/commit/96d8f3a))
+-   refactor(middleware): add check for type value ([36b69a4](https://github.com/Fdawgs/doc-conversion-service/commit/36b69a4))
+-   refactor(middleware): merge sanitize and param-check middleware ([56f5ef5](https://github.com/Fdawgs/doc-conversion-service/commit/56f5ef5))
+
 ## 1.3.0 (2020-02-21)
 
 -   docs(middleware): add JSDoc tags ([1923e2d](https://github.com/Fdawgs/doc-conversion-service/commit/1923e2d))

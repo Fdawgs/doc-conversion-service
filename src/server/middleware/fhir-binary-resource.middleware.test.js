@@ -2,16 +2,13 @@ const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const fhirBinaryMiddleware = require('./fhir-binary-resource.middleware');
 
-const file = {	
-	buffer: fs.readFileSync(
-		'./test_files/tester_bullet_issues-html.html'
-	),
+const file = {
+	buffer: fs.readFileSync('./test_files/tester_bullet_issues-html.html'),
 	mimetype: 'application/html'
 };
 
 const args = {
-	id: '1',
-
+	id: '1'
 };
 
 describe('FHIR Binary resource middleware', () => {
@@ -96,5 +93,4 @@ describe('FHIR Binary resource middleware', () => {
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 	});
-
 });
