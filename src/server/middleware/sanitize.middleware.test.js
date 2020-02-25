@@ -34,10 +34,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware();
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'GET',
 			query: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
@@ -56,10 +56,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'GET',
 			query: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 		delete req.query.argInvalid;
@@ -79,10 +79,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'GET',
 			query: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
@@ -97,10 +97,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'GET',
 			params: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 		delete req.params.argInvalid;
@@ -120,10 +120,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'GET',
 			params: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
@@ -138,10 +138,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'PUT',
 			body: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 		delete req.body.argInvalid;
@@ -161,10 +161,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware(requiredArgs);
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'PUT',
 			body: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
@@ -183,10 +183,10 @@ describe('Sanitization and validation middleware', () => {
 		const middleware = sanitizeMiddleware(adjustedArgs);
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'GET',
 			params: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 		delete req.params.argString;

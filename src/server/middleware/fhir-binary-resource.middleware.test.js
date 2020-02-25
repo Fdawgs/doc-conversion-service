@@ -17,10 +17,10 @@ describe('FHIR Binary resource middleware', () => {
 		const middleware = fhirBinaryMiddleware();
 
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'PUT',
 			body: Object.assign(query, args)
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
