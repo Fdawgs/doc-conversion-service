@@ -1,6 +1,6 @@
 {
 	"name": "doc-conversion-service",
-	"version": "1.4.0",
+	"version": "1.5.0",
 	"description": "RESTful API web service for converting clinical documents/files",
 	"main": "src/index.js",
 	"repository": "git@github.com:Fdawgs/doc-conversion-service.git",

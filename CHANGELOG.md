@@ -1,3 +1,12 @@
+## 1.5.0 (2020-02-26)
+
+-   chore(deps): bump uuid from 7.0.0 to 7.0.1 ([7e66d00](https://github.com/Fdawgs/doc-conversion-service/commit/7e66d00))
+-   chore(deps): remove redundant winser dependency ([3722379](https://github.com/Fdawgs/doc-conversion-service/commit/3722379))
+-   chore(package): remove winser scripts ([39510e5](https://github.com/Fdawgs/doc-conversion-service/commit/39510e5))
+-   docs(readme): add pm2 windows service steps ([6ed6b4e](https://github.com/Fdawgs/doc-conversion-service/commit/6ed6b4e))
+-   refactor(middleware): return entire error rather than just message ([a0db147](https://github.com/Fdawgs/doc-conversion-service/commit/a0db147))
+-   feat(server): add basic error handling ([32c49fa](https://github.com/Fdawgs/doc-conversion-service/commit/32c49fa))
+
 ## 1.4.0 (2020-02-25)
 
 -   chore: convert pm2 config file from yml to js ([6ecb8a6](https://github.com/Fdawgs/doc-conversion-service/commit/6ecb8a6))
