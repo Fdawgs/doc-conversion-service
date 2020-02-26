@@ -15,9 +15,7 @@
 		"start": "node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-coverage",
 		"test-coverage": "cross-env NODE_ENV=test jest --coverage --verbose",
-		"test-only": "cross-env NODE_ENV=test jest --verbose",
-		"install-windows-service": "cross-env NODE_ENV=production winser -i -s -a -n \"Document Conversion Service\"",
-		"uninstall-windows-service": "winser -r -x -s -n \"Document Conversion Service\""
+		"test-only": "cross-env NODE_ENV=test jest --verbose"
 	},
 	"jest": {
 		"clearMocks": true,
