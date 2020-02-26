@@ -16,6 +16,7 @@ describe('Server deployment', () => {
 			.configureHelmet(helmetConfig)
 			.configureWinston(winstonRotateConfig)
 			.configureMiddleware()
+			.configureErrorHandling()
 			.listen();
 
 		expect(server.config.protocol).toBe('http');
@@ -33,6 +34,7 @@ describe('Server deployment', () => {
 				.configureWinston(winstonRotateConfig)
 				.configureMiddleware()
 				.configureRoutes()
+				.configureErrorHandling()
 				.listen();
 
 			expect(server.config.protocol).toBe('https');
