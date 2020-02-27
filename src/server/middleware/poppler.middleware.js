@@ -54,6 +54,11 @@ module.exports = function popplerMiddleware(config = {}) {
 					encoding: this.config.encoding
 				}));
 
+				// Set document language
+				const html = dom.window.document.querySelector('html');
+				html.setAttribute('lang', 'en');
+				html.setAttribute('xml:lang', 'en');
+
 				// Remove excess title and meta tags left behind by Poppler
 				const titles = dom.window.document.querySelectorAll('title');
 				for (let index = 1; index < titles.length; index += 1) {
