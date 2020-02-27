@@ -32,7 +32,12 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 		}
 
 		styles.forEach((element) => {
-			if (element.type === 'text/css') {
+
+				// Remove optional type attribute
+				if (element.hasAttribute('type')) {
+					element.removeAttribute('type');
+				}
+
 				const styleObj = CSSOM.parse(element.innerHTML);
 
 				styleObj.cssRules.forEach((styleRule) => {
@@ -65,8 +70,7 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 				});
 
 				// eslint-disable-next-line no-param-reassign
-				element.innerHTML = styleObj.toString();
-			}
+				element.innerHTML = styleObj.toString().replace(/<!--/ig, '').replace(/;}/ig, '}');
 		});
 
 		if (styles.length > 0) {

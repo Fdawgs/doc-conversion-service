@@ -36,7 +36,7 @@ module.exports = function embedHtmlImagesMiddleware(
 			images.forEach((element) => {
 				const imgForm =
 					imageFormat || path.extname(element.src).substring(1);
-				const imageAsBase64 = `data:image/${imgForm};base64, ${fs.readFileSync(
+				const imageAsBase64 = `data:image/${imgForm};base64,${fs.readFileSync(
 					tempDir + element.src,
 					'base64'
 				)}`;

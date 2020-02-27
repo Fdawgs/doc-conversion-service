@@ -1,7 +1,8 @@
 const fs = require('fs');
+const { JSDOM } = require('jsdom');
 const path = require('path');
 const { Poppler } = require('node-poppler');
-const uuidv4 = require('uuid/v4');
+const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
@@ -38,7 +39,7 @@ module.exports = function popplerMiddleware(config = {}) {
 		}
 
 		// Build temporary files for Poppler and following middleware to read from
-		const id = uuidv4();
+		const id = v4();
 		const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
 		const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
 		fs.writeFileSync(tempPdfFile, req.body);
@@ -48,9 +49,28 @@ module.exports = function popplerMiddleware(config = {}) {
 		await poppler
 			.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile)
 			.then(() => {
-				req.body = fs.readFileSync(tempHtmlFile, {
+
+				const dom = new JSDOM(fs.readFileSync(tempHtmlFile, {
 					encoding: this.config.encoding
-				});
+				}));
+
+				// Set document language
+				const html = dom.window.document.querySelector('html');
+				html.setAttribute('lang', 'en');
+				html.setAttribute('xml:lang', 'en');
+
+				// Remove excess title and meta tags left behind by Poppler
+				const titles = dom.window.document.querySelectorAll('title');
+				for (let index = 1; index < titles.length; index += 1) {
+					titles[index].parentNode.removeChild(titles[index]);
+				}
+				const metas = dom.window.document.querySelectorAll('meta');
+				for (let index = 1; index < metas.length; index += 1) {
+					metas[index].parentNode.removeChild(metas[index]);
+				}
+	
+				req.body = dom.window.document.documentElement.outerHTML;
+
 				req.doclocation = {
 					directory: this.config.tempDirectory,
 					html: tempHtmlFile,

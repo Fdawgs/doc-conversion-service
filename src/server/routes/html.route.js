@@ -49,7 +49,7 @@ module.exports = function htmlRoute(config) {
 					}
 				});
 			});
-			res.send(req.body);
+			res.send(`<!DOCTYPE html>${req.body}`);
 			next();
 		}
 	);
