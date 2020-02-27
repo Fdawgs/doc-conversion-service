@@ -32,7 +32,6 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 		}
 
 		styles.forEach((element) => {
-			if (element.type === 'text/css') {
 				const styleObj = CSSOM.parse(element.innerHTML);
 
 				styleObj.cssRules.forEach((styleRule) => {
@@ -66,7 +65,6 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 
 				// eslint-disable-next-line no-param-reassign
 				element.innerHTML = styleObj.toString();
-			}
 		});
 
 		if (styles.length > 0) {
