@@ -32,6 +32,12 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 		}
 
 		styles.forEach((element) => {
+
+				// Remove optional type attribute
+				if (element.hasAttribute('type')) {
+					element.removeAttribute('type');
+				}
+
 				const styleObj = CSSOM.parse(element.innerHTML);
 
 				styleObj.cssRules.forEach((styleRule) => {
