@@ -49,10 +49,11 @@ module.exports = function popplerMiddleware(config = {}) {
 		await poppler
 			.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile)
 			.then(() => {
-
-				const dom = new JSDOM(fs.readFileSync(tempHtmlFile, {
-					encoding: this.config.encoding
-				}));
+				const dom = new JSDOM(
+					fs.readFileSync(tempHtmlFile, {
+						encoding: this.config.encoding
+					})
+				);
 
 				// Set document language
 				const html = dom.window.document.querySelector('html');
@@ -68,7 +69,7 @@ module.exports = function popplerMiddleware(config = {}) {
 				for (let index = 1; index < metas.length; index += 1) {
 					metas[index].parentNode.removeChild(metas[index]);
 				}
-	
+
 				req.body = dom.window.document.documentElement.outerHTML;
 
 				req.doclocation = {
