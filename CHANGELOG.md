@@ -1,3 +1,15 @@
+## <small>1.5.1 (2020-02-27)</small>
+
+-   fix(middleware): add document language ([69c3a94](https://github.com/Fdawgs/doc-conversion-service/commit/69c3a94))
+-   fix(middleware): add regexp to remove orphaned comment tags ([b0d4977](https://github.com/Fdawgs/doc-conversion-service/commit/b0d4977))
+-   fix(middleware): add step to remove style type ([85f1ae3](https://github.com/Fdawgs/doc-conversion-service/commit/85f1ae3))
+-   fix(middleware): remove check for style type as it is optional attr ([39b502a](https://github.com/Fdawgs/doc-conversion-service/commit/39b502a))
+-   fix(middleware): remove excess meta and title tags genned by poppler ([a4c9f49](https://github.com/Fdawgs/doc-conversion-service/commit/a4c9f49))
+-   fix(middleware): remove illegal space from src element of image ([821a674](https://github.com/Fdawgs/doc-conversion-service/commit/821a674))
+-   fix(middleware): resolve uuid deprecation warning ([e2b4b13](https://github.com/Fdawgs/doc-conversion-service/commit/e2b4b13))
+-   fix(routes): add doctype to outbound html ([7372ba6](https://github.com/Fdawgs/doc-conversion-service/commit/7372ba6))
+-   chore(config): remove redundant config value ([b32a2a4](https://github.com/Fdawgs/doc-conversion-service/commit/b32a2a4))
+
 ## 1.5.0 (2020-02-26)
 
 -   chore(deps): bump uuid from 7.0.0 to 7.0.1 ([7e66d00](https://github.com/Fdawgs/doc-conversion-service/commit/7e66d00))

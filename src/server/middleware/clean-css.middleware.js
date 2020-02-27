@@ -32,45 +32,45 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 		}
 
 		styles.forEach((element) => {
+			// Remove optional type attribute
+			if (element.hasAttribute('type')) {
+				element.removeAttribute('type');
+			}
 
-				// Remove optional type attribute
-				if (element.hasAttribute('type')) {
-					element.removeAttribute('type');
+			const styleObj = CSSOM.parse(element.innerHTML);
+
+			styleObj.cssRules.forEach((styleRule) => {
+				// Replace default font
+				if (styleRule.style['font-family']) {
+					styleRule.style.setProperty('font-family', newFonts);
 				}
 
-				const styleObj = CSSOM.parse(element.innerHTML);
+				// Stop pages overrunning the next, leading to overlapped text
+				if (styleRule.selectorText.substring(0, 3) === 'div') {
+					styleRule.style.setProperty('page-break-inside', 'avoid');
+				}
 
-				styleObj.cssRules.forEach((styleRule) => {
-					// Replace default font
-					if (styleRule.style['font-family']) {
-						styleRule.style.setProperty('font-family', newFonts);
-					}
+				// Increase size of fonts to increase readability
+				if (styleRule.style['font-size']) {
+					const docFontSize = styleRule.style['font-size'].substring(
+						0,
+						styleRule.style['font-size'].length - 2
+					);
 
-					// Stop pages overrunning the next, leading to overlapped text
-					if (styleRule.selectorText.substring(0, 3) === 'div') {
+					if (Number(docFontSize) < newFontSize) {
 						styleRule.style.setProperty(
-							'page-break-inside',
-							'avoid'
+							'font-size',
+							`${newFontSize}px`
 						);
 					}
+				}
+			});
 
-					// Increase size of fonts to increase readability
-					if (styleRule.style['font-size']) {
-						const docFontSize = styleRule.style[
-							'font-size'
-						].substring(0, styleRule.style['font-size'].length - 2);
-
-						if (Number(docFontSize) < newFontSize) {
-							styleRule.style.setProperty(
-								'font-size',
-								`${newFontSize}px`
-							);
-						}
-					}
-				});
-
-				// eslint-disable-next-line no-param-reassign
-				element.innerHTML = styleObj.toString().replace(/<!--/ig, '').replace(/;}/ig, '}');
+			// eslint-disable-next-line no-param-reassign
+			element.innerHTML = styleObj
+				.toString()
+				.replace(/<!--/gi, '')
+				.replace(/;}/gi, '}');
 		});
 
 		if (styles.length > 0) {
