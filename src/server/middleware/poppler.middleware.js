@@ -2,7 +2,7 @@ const fs = require('fs');
 const { JSDOM } = require('jsdom');
 const path = require('path');
 const { Poppler } = require('node-poppler');
-const uuidv4 = require('uuid/v4');
+const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
@@ -39,7 +39,7 @@ module.exports = function popplerMiddleware(config = {}) {
 		}
 
 		// Build temporary files for Poppler and following middleware to read from
-		const id = uuidv4();
+		const id = v4();
 		const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
 		const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
 		fs.writeFileSync(tempPdfFile, req.body);
@@ -54,12 +54,11 @@ module.exports = function popplerMiddleware(config = {}) {
 					encoding: this.config.encoding
 				}));
 
-				// Remove excess title tags
+				// Remove excess title and meta tags left behind by Poppler
 				const titles = dom.window.document.querySelectorAll('title');
 				for (let index = 1; index < titles.length; index += 1) {
 					titles[index].parentNode.removeChild(titles[index]);
 				}
-				// Remove excess meta tags
 				const metas = dom.window.document.querySelectorAll('meta');
 				for (let index = 1; index < metas.length; index += 1) {
 					metas[index].parentNode.removeChild(metas[index]);
