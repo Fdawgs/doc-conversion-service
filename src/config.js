@@ -34,7 +34,6 @@ const serverConfig = {
 		 * - clean (replace legacy HTML tags)
 		 * - dropProprietaryAttributes (remove proprietary attributes, such as Microsoft data binding attributes)
 		 * - escapeCdata (convert <![CDATA[]]> sections to normal text)
-		 * - hideComments
 		 * - sortAttributes (sort attributes in element in ascending alphabetic sort)
 		 */
 		htmltidy: {
@@ -42,7 +41,6 @@ const serverConfig = {
 			clean: 'yes',
 			dropProprietaryAttributes: 'yes',
 			escapeCdata: 'yes',
-			hideComments: 'yes',
 			sortAttributes: 'alpha'
 		},
 		poppler: {
