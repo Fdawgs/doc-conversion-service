@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { JSDOM } = require('jsdom');
 const path = require('path');
 const { Poppler } = require('node-poppler');
 const uuidv4 = require('uuid/v4');
@@ -48,9 +49,24 @@ module.exports = function popplerMiddleware(config = {}) {
 		await poppler
 			.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile)
 			.then(() => {
-				req.body = fs.readFileSync(tempHtmlFile, {
+
+				const dom = new JSDOM(fs.readFileSync(tempHtmlFile, {
 					encoding: this.config.encoding
-				});
+				}));
+
+				// Remove excess title tags
+				const titles = dom.window.document.querySelectorAll('title');
+				for (let index = 1; index < titles.length; index += 1) {
+					titles[index].parentNode.removeChild(titles[index]);
+				}
+				// Remove excess meta tags
+				const metas = dom.window.document.querySelectorAll('meta');
+				for (let index = 1; index < metas.length; index += 1) {
+					metas[index].parentNode.removeChild(metas[index]);
+				}
+	
+				req.body = dom.window.document.documentElement.outerHTML;
+
 				req.doclocation = {
 					directory: this.config.tempDirectory,
 					html: tempHtmlFile,
