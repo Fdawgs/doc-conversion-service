@@ -70,7 +70,7 @@ module.exports = function cleanCssMiddleware(fonts, fontSize) {
 				});
 
 				// eslint-disable-next-line no-param-reassign
-				element.innerHTML = styleObj.toString();
+				element.innerHTML = styleObj.toString().replace(/<!--/ig, '').replace(/;}/ig, '}');
 		});
 
 		if (styles.length > 0) {
