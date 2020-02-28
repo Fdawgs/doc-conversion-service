@@ -54,7 +54,6 @@ const serverConfig = {
 
 		accepted_params: {
 			fonts: { type: 'string', mandatory: false },
-			fontsize: { type: 'number', mandatory: false },
 			clean: { type: 'boolean', mandatory: false },
 			bare: { type: 'boolean', mandatory: false },
 			removeprop: { type: 'boolean', mandatory: false },
