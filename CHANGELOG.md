@@ -1,3 +1,18 @@
+## 2.0.0 (2020-02-28)
+
+-   chore(config): Add `removealt`key to accepted_params object ([f8869fd](https://github.com/Fdawgs/doc-conversion-service/commit/f8869fd))
+-   chore(config): remove redundant `fontsize`key from accepted_params object ([035cc14](https://github.com/Fdawgs/doc-conversion-service/commit/035cc14))
+-   chore(config): Remove unused values ([1383eea](https://github.com/Fdawgs/doc-conversion-service/commit/1383eea))
+-   tests(middleware): update tests for cleanCssMiddleware function ([c12c820](https://github.com/Fdawgs/doc-conversion-service/commit/c12c820))
+-   tests(middleware): update tests for embedHtmlImagesMiddleware function ([7728b8d](https://github.com/Fdawgs/doc-conversion-service/commit/7728b8d))
+-   refactor(middleware): remove `imageFormat` and `removeAltAtt` argument ([fedb2b3](https://github.com/Fdawgs/doc-conversion-service/commit/fedb2b3))
+-   feat(middleware): font of output document defined by `fonts` option ([3ca3e88](https://github.com/Fdawgs/doc-conversion-service/commit/3ca3e88))
+
+### BREAKING CHANGE
+
+-   `fonts` and `fontSize` arguments removed from cleanCssMiddleware function.
+-   `imageFormat` and `removeAltAtt` arguments removed from emedHtmlImagesMiddleware function. Option to remove alt attribute from img tags now toggled by `removealt` query option.
+
 ## <small>1.5.1 (2020-02-27)</small>
 
 -   fix(middleware): add document language ([69c3a94](https://github.com/Fdawgs/doc-conversion-service/commit/69c3a94))

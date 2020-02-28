@@ -33,10 +33,9 @@ describe('Clean CSS middleware', () => {
 	test('Should flag file as passed if no issues found', async () => {
 		const middleware = cleanCssMiddleware();
 		const req = {
-			body: fs.readFileSync(
-				'./test_files/empty-test.html',
-				{ encoding: 'UTF-8' }
-			),
+			body: fs.readFileSync('./test_files/empty-test.html', {
+				encoding: 'UTF-8'
+			}),
 			results: {}
 		};
 		const res = httpMocks.createResponse();

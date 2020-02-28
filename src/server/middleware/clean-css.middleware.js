@@ -33,7 +33,10 @@ module.exports = function cleanCssMiddleware() {
 
 			styleObj.cssRules.forEach((styleRule) => {
 				// Replace default font
-				if (typeof newFonts === 'string' && styleRule.style['font-family']) {
+				if (
+					typeof newFonts === 'string' &&
+					styleRule.style['font-family']
+				) {
 					styleRule.style.setProperty('font-family', newFonts);
 				}
 

@@ -14,8 +14,7 @@ const path = require('path');
  * (i.e. TPP's SystmOne).
  * @return {Function} Express middleware.
  */
-module.exports = function embedHtmlImagesMiddleware(
-	tempDirectory) {
+module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 	return async (req, res, next) => {
 		const tempDir =
 			tempDirectory || `${path.resolve(__dirname, '..')}\\temp\\`;
@@ -48,6 +47,5 @@ module.exports = function embedHtmlImagesMiddleware(
 			req.results.embedded_images = error;
 			next();
 		}
-
 	};
 };
