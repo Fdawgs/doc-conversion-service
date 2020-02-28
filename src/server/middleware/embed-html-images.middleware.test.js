@@ -9,12 +9,15 @@ describe('Embed HTML Images middleware', () => {
 	});
 
 	test('Should embed images into HTML', async () => {
-		const middleware = embedHtmlImagesMiddleware('./test_files/', true);
+		const middleware = embedHtmlImagesMiddleware('./test_files/');
 		const req = {
 			body: fs.readFileSync(
 				'./test_files/tester_bullet_issues-html.html',
 				{ encoding: 'UTF-8' }
 			),
+			query: {
+				removealt: true
+			},
 			results: {}
 		};
 		const res = httpMocks.createResponse();
@@ -22,6 +25,7 @@ describe('Embed HTML Images middleware', () => {
 
 		await middleware(req, res, next);
 		expect(req.results.embedded_images).toBe('Fixed');
+		expect(/alt=""/gm.exec(req.body)).not.toBeNull();
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
