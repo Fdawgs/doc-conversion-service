@@ -56,6 +56,7 @@ const serverConfig = {
 			fonts: { type: 'string', mandatory: false },
 			clean: { type: 'boolean', mandatory: false },
 			bare: { type: 'boolean', mandatory: false },
+			removealt: { type: 'boolean', mandatory: false },
 			removeprop: { type: 'boolean', mandatory: false },
 			escapecdata: { type: 'boolean', mandatory: false }
 		}
