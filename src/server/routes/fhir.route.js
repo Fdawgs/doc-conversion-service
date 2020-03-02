@@ -3,9 +3,9 @@ const { Router } = require('express');
 
 // Import middleware
 const multer = require('multer');
+const sanitize = require('sanitize-middleware');
 const fhirBinary = require('../middleware/fhir-binary-resource.middleware');
 const fhirDocumentReference = require('../middleware/fhir-documentreference-resource.middleware');
-const sanitize = require('../middleware/sanitize.middleware');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
