@@ -1,4 +1,4 @@
-const uuidv4 = require('uuid/v4');
+const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
@@ -57,7 +57,7 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 		if (req.body.id) {
 			resource.id = req.body.id;
 		} else {
-			const generatedId = uuidv4();
+			const generatedId = v4();
 			resource.id = generatedId;
 			resource.identifier = [
 				{

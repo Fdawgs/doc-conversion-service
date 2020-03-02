@@ -5,12 +5,12 @@ const passport = require('passport');
 
 // Import middleware
 const bodyParser = require('body-parser');
+const sanitize = require('sanitize-middleware');
 const embedHtmlImages = require('../middleware/embed-html-images.middleware');
 const fixCss = require('../middleware/clean-css.middleware');
 const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
 const htmltidy = require('../middleware/htmltidy.middleware');
 const poppler = require('../middleware/poppler.middleware');
-const sanitize = require('../middleware/sanitize.middleware');
 
 const router = new Router();
 

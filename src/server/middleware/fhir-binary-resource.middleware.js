@@ -1,4 +1,4 @@
-const uuidv4 = require('uuid/v4');
+const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
@@ -10,7 +10,7 @@ module.exports = function fhirBinResourceMiddleware() {
 		if (req.file) {
 			const resource = {
 				resourceType: 'Binary',
-				id: uuidv4(),
+				id: v4(),
 				language: 'English (Great Britain)',
 				contentType: req.file.mimetype,
 				content: req.file.buffer.toString('base64')
