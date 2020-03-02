@@ -1,3 +1,10 @@
+## <small>2.0.1 (2020-03-02)</small>
+
+-   fix(middleware): resolve uuid deprecation warning ([7452352](https://github.com/Fdawgs/doc-conversion-service/commit/7452352))
+-   refactor(middleware): move sanitization middleware to own module ([eb3e63e](https://github.com/Fdawgs/doc-conversion-service/commit/eb3e63e))
+-   chore(deps-dev): bump eslint-plugin-jest from 23.8.0 to 23.8.1 ([1c15407](https://github.com/Fdawgs/doc-conversion-service/commit/1c15407))
+-   chore(deps-dev): bump typescript from 3.8.2 to 3.8.3 ([a5a7e2a](https://github.com/Fdawgs/doc-conversion-service/commit/a5a7e2a))
+
 ## 2.0.0 (2020-02-28)
 
 -   chore(config): Add `removealt`key to accepted_params object ([f8869fd](https://github.com/Fdawgs/doc-conversion-service/commit/f8869fd))
