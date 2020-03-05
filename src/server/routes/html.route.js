@@ -29,7 +29,7 @@ module.exports = function htmlRoute(config) {
 		sanitize(config.accepted_params)
 	);
 
-	router.put(
+	router.post(
 		'/html',
 		bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 		poppler(config.poppler),
