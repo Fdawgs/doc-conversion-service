@@ -8,6 +8,7 @@
 	"license": "MIT",
 	"scripts": {
 		"changelog": "conventional-changelog -p @commitlint/config-conventional -s -i CHANGELOG.md",
+		"docs": "apidoc -i src/ -o doc/",
 		"dupe-check": "yarn jsinspect ./src",
 		"lint": "eslint src/**/*.js",
 		"nodemon": "cross-env NODE_ENV=development nodemon src/index.js",
@@ -36,6 +37,7 @@
 	},
 	"devDependencies": {
 		"@commitlint/config-conventional": "^8.3.4",
+		"apidoc": "^0.20.0",
 		"conventional-changelog-cli": "^2.0.31",
 		"coveralls": "^3.0.9",
 		"cross-env": "^7.0.2",
