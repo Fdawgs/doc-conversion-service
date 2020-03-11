@@ -23,13 +23,17 @@ The web service was then extended to allow for the conversion of files to [Binar
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
 3. Configure the application in `src/config.js`
-4. Run `yarn start`
+4. Run `yarn docs` to generate api documentation
+5. Run `yarn start`
+
 
 The Express server should now be up and running on the port set in the config. You should see the following output:
 
 ```
 doc-conversion-service listening for requests at http://127.0.0.1:8204
 ```
+
+You can now navigate to http://127.0.0.1:8204/api to view documentation!
 
 ## Deploying using PM2
 
@@ -38,9 +42,10 @@ It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a pr
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
 3. Configure the application in `src/config.js`
-4. Run `yarn global add pm2` to install pm2 globally
-5. Launch application with `pm2 start .pm2.config.js`
-6. Check the application has been deployed using `pm2 list` or `pm2 monit`
+4. Run `yarn docs` to generate api documentation
+5. Run `yarn global add pm2` to install pm2 globally
+6. Launch application with `pm2 start .pm2.config.js`
+7. Check the application has been deployed using `pm2 list` or `pm2 monit`
 
 ### To install as a Windows service:
 
