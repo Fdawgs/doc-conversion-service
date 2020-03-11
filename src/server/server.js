@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const http = require('http');
 const https = require('https');
 const passport = require('passport');
+const path = require('path');
 const { Strategy } = require('passport-http-bearer');
 const winston = require('winston');
 const WinstonRotate = require('winston-daily-rotate-file');
@@ -94,6 +95,11 @@ class Server {
 	 * @description Enable routes for server.
 	 */
 	configureRoutes() {
+		this.app.use(
+			'/api/docs',
+			express.static(path.join(__dirname, '../../docs'))
+		);
+
 		this.app.use('/api/converter', htmlRoute(this.config.html_parsing));
 		this.app.use(
 			'/api/converter',
