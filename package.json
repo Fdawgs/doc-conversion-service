@@ -79,7 +79,7 @@
 		"title": "Document Conversion API",
 		"name": "Document Conversion API",
 		"template": {
-		  "withCompare": false
+			"withCompare": false
 		}
-	  }
+	}
 }

@@ -12,7 +12,7 @@ const upload = multer({ storage });
 const router = new Router();
 
 /**
- * @api {post} /api/converter/fhir/binary POST
+ * @api {post} /api/converter/fhir/binary Binary - POST
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
@@ -23,9 +23,9 @@ const router = new Router();
  * @apiExample {curl} Example usage:
  * curl --request POST \
  *   --url http://localhost:8204/api/converter/fhir/binary \
- *   --header 'content-type: multipart/form-data; boundary=---011000010111000001101001' \
+ *   --header 'content-type: multipart/form-data' \
  *   --form document= \
- * @apiSuccessExample {json} Success Response:
+ * @apiSuccessExample {json} Example Success Response:
  * HTTP/1.1 200 OK
  * 	{
  * 		"resourceType": "Binary",
@@ -37,7 +37,7 @@ const router = new Router();
  */
 
 /**
- * @api {put} /api/converter/fhir/binary PUT
+ * @api {put} /api/converter/fhir/binary Binary - PUT
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
@@ -49,10 +49,10 @@ const router = new Router();
  * @apiExample {curl} Example usage:
  * curl --request PUT \
  *   --url http://localhost:8204/api/converter/fhir/binary \
- *   --header 'content-type: multipart/form-data; boundary=---011000010111000001101001' \
+ *   --header 'content-type: multipart/form-data' \
  *   --form document= \
  *   --form id=12 \
- * @apiSuccessExample {json} Success Response:
+ * @apiSuccessExample {json} Example Success Response:
  * HTTP/1.1 200 OK
  * 	{
  * 		"resourceType": "Binary",

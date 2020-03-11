@@ -31,7 +31,7 @@ const router = new Router();
  * font=Arial,Sans Serif
  * ```
  * @apiParam (Request body) {Binary} data Binary content such as text, image, pdf, zip archive, etc.
- * 
+ *
  * @apiExample {curl} Example usage:
  * curl --request POST \
  * --url 'http://localhost:8204/api/converter/html?removealt=true&fonts=Arial' \
