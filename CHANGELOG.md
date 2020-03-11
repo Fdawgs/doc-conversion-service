@@ -1,3 +1,32 @@
+## 3.0.0 (2020-03-11)
+
+-   docs(readme): add step to generate api docs ([620aa3e](https://github.com/Fdawgs/doc-conversion-service/commit/620aa3e))
+-   docs(readme): clarify pm2 usage ([3bfdf68](https://github.com/Fdawgs/doc-conversion-service/commit/3bfdf68))
+-   docs(readme): correct doc path ([49cc8d9](https://github.com/Fdawgs/doc-conversion-service/commit/49cc8d9))
+-   docs(routes): add apidoc tags to html route ([805992f](https://github.com/Fdawgs/doc-conversion-service/commit/805992f))
+-   docs(routes): add fhir/documentreference route api docs ([8c6e928](https://github.com/Fdawgs/doc-conversion-service/commit/8c6e928))
+-   chore(config): add sanitize config for fhir/binary route ([3c86121](https://github.com/Fdawgs/doc-conversion-service/commit/3c86121))
+-   chore(deps-dev): bump eslint-plugin-jest from 23.8.1 to 23.8.2 ([4e53f7f](https://github.com/Fdawgs/doc-conversion-service/commit/4e53f7f))
+-   chore(deps): bump cross-env from 7.0.0 to 7.0.1 ([70c8584](https://github.com/Fdawgs/doc-conversion-service/commit/70c8584))
+-   chore(deps): bump cross-env from 7.0.1 to 7.0.2 ([1a43905](https://github.com/Fdawgs/doc-conversion-service/commit/1a43905))
+-   chore(deps): bump jsdom from 16.2.0 to 16.2.1 ([3cb8391](https://github.com/Fdawgs/doc-conversion-service/commit/3cb8391))
+-   chore(deps): bump sanitize-middleware from 1.0.0 to 1.0.1 ([c4fc7e2](https://github.com/Fdawgs/doc-conversion-service/commit/c4fc7e2))
+-   chore(deps): bump uuid from 7.0.1 to 7.0.2 ([0853db1](https://github.com/Fdawgs/doc-conversion-service/commit/0853db1))
+-   chore(package): add apidoc config ([4994d04](https://github.com/Fdawgs/doc-conversion-service/commit/4994d04))
+-   chore(package): change documentation route folder ([bed785d](https://github.com/Fdawgs/doc-conversion-service/commit/bed785d))
+-   chore(routes): remove redundant sentence ([557885e](https://github.com/Fdawgs/doc-conversion-service/commit/557885e))
+-   chore(routes): tidy route api docs ([a23ca7d](https://github.com/Fdawgs/doc-conversion-service/commit/a23ca7d))
+-   chore(server): add missing comment ([428b320](https://github.com/Fdawgs/doc-conversion-service/commit/428b320))
+-   feat(server): add docs route ([94ad69d](https://github.com/Fdawgs/doc-conversion-service/commit/94ad69d))
+-   refactor(routes): split fhir route file into two ([f288d72](https://github.com/Fdawgs/doc-conversion-service/commit/f288d72))
+-   build(deps): add apidoc ([1c1a6cf](https://github.com/Fdawgs/doc-conversion-service/commit/1c1a6cf))
+-   build(deps): move cross-env to dev dependencies ([96303d3](https://github.com/Fdawgs/doc-conversion-service/commit/96303d3))
+-   fix(routes): change html conversion route from put to post ([49ce491](https://github.com/Fdawgs/doc-conversion-service/commit/49ce491))
+
+### BREAKING CHANGE
+
+-   HTML conversion route changed to accept POST, not PUT requests as results are not idempotent
+
 ## <small>2.0.1 (2020-03-02)</small>
 
 -   fix(middleware): resolve uuid deprecation warning ([7452352](https://github.com/Fdawgs/doc-conversion-service/commit/7452352))

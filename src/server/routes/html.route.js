@@ -20,6 +20,7 @@ const router = new Router();
  * @apiGroup HTML
  * @apiDescription Convert PDF to HTML.
  *
+ * @apiHeader {String} Authorization Bearer token for authorization.
  * @apiHeader {String=application/pdf} Content-Type
  *
  * @apiParam (Query string) {Boolean=true, false} [removealt] Remove the alt attribute from image tags.
