@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const http = require('http');
 const https = require('https');
 const passport = require('passport');
+const path = require('path');
 const { Strategy } = require('passport-http-bearer');
 const winston = require('winston');
 const WinstonRotate = require('winston-daily-rotate-file');
@@ -14,7 +15,8 @@ const WinstonRotate = require('winston-daily-rotate-file');
 const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
 
 // Import routes
-const fhirRoute = require('./routes/fhir.route');
+const fhirBinaryRoute = require('./routes/fhir-binary.route');
+const fhirDocumentReferenceRoute = require('./routes/fhir-binary.route');
 const htmlRoute = require('./routes/html.route');
 
 class Server {
@@ -70,6 +72,7 @@ class Server {
 			})
 		);
 
+		// return self for chaining
 		return this;
 	}
 
@@ -92,8 +95,20 @@ class Server {
 	 * @description Enable routes for server.
 	 */
 	configureRoutes() {
+		this.app.use(
+			'/api/docs',
+			express.static(path.join(__dirname, '../../docs'))
+		);
+
 		this.app.use('/api/converter', htmlRoute(this.config.html_parsing));
-		this.app.use('/api/converter', fhirRoute(this.config.required_params));
+		this.app.use(
+			'/api/converter',
+			fhirBinaryRoute(this.config.required_params)
+		);
+		this.app.use(
+			'/api/converter',
+			fhirDocumentReferenceRoute(this.config.required_params)
+		);
 
 		// return self for chaining
 		return this;

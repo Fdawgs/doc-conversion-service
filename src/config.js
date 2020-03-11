@@ -67,7 +67,8 @@ const serverConfig = {
 			subject: { type: 'string', mandatory: false }
 		},
 		'fhir/binary': {
-			file: { type: 'binary', mandatory: true }
+			document: { type: 'binary', mandatory: true },
+			id: { type: 'number', mandatory: false }
 		}
 	}
 };
@@ -85,9 +86,14 @@ const serverConfig = {
 const helmetConfig = {
 	contentSecurityPolicy: {
 		directives: {
-			defaultSrc: ["'self'"],
-			scriptSrc: ["'self'", "'unsafe-inline'"],
-			styleSrc: ["'self'", "'unsafe-inline'"]
+			defaultSrc: ["'self'", 'fonts.gstatic.com'],
+			scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+			styleSrc: [
+				"'self'",
+				"'unsafe-inline'",
+				'fonts.googleapis.com',
+				'fonts.gstatic.com'
+			]
 		}
 	},
 	frameguard: {

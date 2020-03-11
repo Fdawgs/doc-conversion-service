@@ -15,6 +15,31 @@ const poppler = require('../middleware/poppler.middleware');
 const router = new Router();
 
 /**
+ * @api {post} /api/converter/html POST
+ * @apiName PostHtml
+ * @apiGroup HTML
+ * @apiDescription Convert PDF to HTML.
+ *
+ * @apiHeader {String=application/pdf} Content-Type
+ *
+ * @apiParam (Query string) {Boolean=true, false} [removealt] Remove the alt attribute from image tags.
+ * @apiParam (Query string) {String} [fonts] Define the font(s) of the text in the returned HTML document. Eg:
+ * ```
+ * font=Arial
+ * ```
+ * ```
+ * font=Arial,Sans Serif
+ * ```
+ * @apiParam (Request body) {Binary} data Binary content such as text, image, pdf, zip archive, etc.
+ *
+ * @apiExample {curl} Example usage:
+ * curl --request POST \
+ * --url 'http://localhost:8204/api/converter/html?removealt=true&fonts=Arial' \
+ * --header 'content-type: application/pdf' \
+ * --data 'JVBERi0xLjMNJeLjz9'
+ */
+
+/**
  * @author Frazer Smith
  * @description Handles routing for /html/ path.
  * @param {Object} config
@@ -29,7 +54,7 @@ module.exports = function htmlRoute(config) {
 		sanitize(config.accepted_params)
 	);
 
-	router.put(
+	router.post(
 		'/html',
 		bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 		poppler(config.poppler),
