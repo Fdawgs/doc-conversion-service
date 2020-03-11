@@ -33,7 +33,7 @@ The Express server should now be up and running on the port set in the config. Y
 doc-conversion-service listening for requests at http://127.0.0.1:8204
 ```
 
-You can now navigate to http://127.0.0.1:8204/api to view documentation!
+You can now navigate to http://127.0.0.1:8204/api/docs to view documentation!
 
 ## Deploying using PM2
 
