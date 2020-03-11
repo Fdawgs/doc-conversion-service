@@ -18,10 +18,10 @@ const router = new Router();
  * @api {post} /api/converter/html POST
  * @apiName PostHtml
  * @apiGroup HTML
- * @apiDescription Convert PDF to HTML. PDF document must be body of request.
- * 
+ * @apiDescription Convert PDF to HTML.
+ *
  * @apiHeader {String=application/pdf} Content-Type
- * 
+ *
  * @apiParam (Query string) {Boolean=true, false} [removealt] Remove the alt attribute from image tags.
  * @apiParam (Query string) {String} [fonts] Define the font(s) of the text in the returned HTML document. Eg:
  * ```
