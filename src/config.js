@@ -67,7 +67,8 @@ const serverConfig = {
 			subject: { type: 'string', mandatory: false }
 		},
 		'fhir/binary': {
-			file: { type: 'binary', mandatory: true }
+			document: { type: 'binary', mandatory: true },
+			id: { type: 'number', mandatory: false }
 		}
 	}
 };
