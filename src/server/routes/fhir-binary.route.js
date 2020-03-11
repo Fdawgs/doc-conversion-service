@@ -16,6 +16,7 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
+ * @apiHeader {String} Authorization Bearer token for authorization.
  * @apiHeader {String=multipart/form-data} Content-Type
  *
  * @apiParam (Request body) {Binary} document Binary content such as text, image, pdf, zip archive, etc.
@@ -41,6 +42,7 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
+ * @apiHeader {String} Authorization Bearer token for authorization.
  * @apiHeader {String=multipart/form-data} Content-Type
  *
  * @apiParam (Request body) {String} id Logical id of the artifact.

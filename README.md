@@ -26,7 +26,6 @@ The web service was then extended to allow for the conversion of files to [Binar
 4. Run `yarn docs` to generate api documentation
 5. Run `yarn start`
 
-
 The Express server should now be up and running on the port set in the config. You should see the following output:
 
 ```

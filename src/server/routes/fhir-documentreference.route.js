@@ -16,8 +16,10 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 DocumentReference Resource that adheres to the Care-Connect profile.
  * Refer to <a>https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1</a> for more info.
+ * 
+ * @apiHeader {String} Authorization Bearer token for authorization.
  * @apiHeader {String=multipart/form-data} Content-Type
- *
+ * 
  * @apiParam (Request body) {Binary} document Binary content such as text, image, pdf, zip archive, etc.
  *
  * @apiExample {curl} Example usage:
@@ -64,6 +66,8 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 DocumentReference Resource that adheres to the Care-Connect profile.
  * Refer to <a>https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1</a> for more info.
+ * 
+ * @apiHeader {String} Authorization Bearer token for authorization.
  * @apiHeader {String=multipart/form-data} Content-Type
  *
  * @apiParam (Request body) {String} [id] Logical id of the artifact.
