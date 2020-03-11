@@ -71,6 +71,7 @@ class Server {
 			})
 		);
 
+		// return self for chaining
 		return this;
 	}
 
