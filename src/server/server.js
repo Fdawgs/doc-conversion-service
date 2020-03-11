@@ -14,7 +14,8 @@ const WinstonRotate = require('winston-daily-rotate-file');
 const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
 
 // Import routes
-const fhirRoute = require('./routes/fhir.route');
+const fhirBinaryRoute = require('./routes/fhir-binary.route');
+const fhirDocumentReferenceRoute = require('./routes/fhir-binary.route');
 const htmlRoute = require('./routes/html.route');
 
 class Server {
@@ -93,7 +94,14 @@ class Server {
 	 */
 	configureRoutes() {
 		this.app.use('/api/converter', htmlRoute(this.config.html_parsing));
-		this.app.use('/api/converter', fhirRoute(this.config.required_params));
+		this.app.use(
+			'/api/converter',
+			fhirBinaryRoute(this.config.required_params)
+		);
+		this.app.use(
+			'/api/converter',
+			fhirDocumentReferenceRoute(this.config.required_params)
+		);
 
 		// return self for chaining
 		return this;
