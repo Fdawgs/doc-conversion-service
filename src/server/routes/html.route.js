@@ -46,13 +46,13 @@ const router = new Router();
  * @param {Object} config
  * @param {Object=} config.htmltidy - HTMLTidy2 configuration values.
  * @param {Object=} config.poppler - Poppler conversion configuration values.
- * @param {Object} config.accepted_params - Sanitization configuration values.
+ * @param {Object} config.accepted_properties - Sanitization configuration values.
  * @returns {Router} express router instance.
  */
 module.exports = function htmlRoute(config) {
 	router.use(
 		passport.authenticate('bearer', { session: false }),
-		sanitize(config.accepted_params)
+		sanitize(config.accepted_properties)
 	);
 
 	router.post(

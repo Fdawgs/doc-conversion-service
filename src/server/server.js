@@ -103,11 +103,11 @@ class Server {
 		this.app.use('/api/converter', htmlRoute(this.config.html_parsing));
 		this.app.use(
 			'/api/converter',
-			fhirBinaryRoute(this.config.required_params)
+			fhirBinaryRoute(this.config.required_properties)
 		);
 		this.app.use(
 			'/api/converter',
-			fhirDocumentReferenceRoute(this.config.required_params)
+			fhirDocumentReferenceRoute(this.config.required_properties)
 		);
 
 		// return self for chaining

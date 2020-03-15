@@ -52,7 +52,7 @@ const serverConfig = {
 			encoding: 'UTF-8'
 		},
 
-		accepted_params: {
+		accepted_properties: {
 			query: {
 				fonts: { type: 'string', mandatory: false },
 				removealt: { type: 'boolean', mandatory: false }
@@ -60,7 +60,7 @@ const serverConfig = {
 		}
 	},
 
-	required_params: {
+	required_properties: {
 		'fhir/documentreference': {
 			body: {
 				status: { type: 'string', mandatory: true },
