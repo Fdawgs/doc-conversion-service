@@ -100,14 +100,14 @@ class Server {
 			express.static(path.join(__dirname, '../../docs'))
 		);
 
-		this.app.use('/api/converter', htmlRoute(this.config.html_parsing));
+		this.app.use('/api/converter', htmlRoute(this.config.htmlParsing));
 		this.app.use(
 			'/api/converter',
-			fhirBinaryRoute(this.config.required_properties)
+			fhirBinaryRoute(this.config.requiredProperties)
 		);
 		this.app.use(
 			'/api/converter',
-			fhirDocumentReferenceRoute(this.config.required_properties)
+			fhirDocumentReferenceRoute(this.config.requiredProperties)
 		);
 
 		// return self for chaining

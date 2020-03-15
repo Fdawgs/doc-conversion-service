@@ -25,7 +25,7 @@ const serverConfig = {
 	},
 
 	// Object containing all config files for HTML/PDF manipulation binaries
-	html_parsing: {
+	htmlParsing: {
 		/**
 		 * Refer to http://api.html-tidy.org/tidy/tidylib_api_5.6.0/tidy_quickref.html for tidy options
 		 *
@@ -52,7 +52,7 @@ const serverConfig = {
 			encoding: 'UTF-8'
 		},
 
-		accepted_properties: {
+		acceptedProperties: {
 			query: {
 				fonts: { type: 'string', mandatory: false },
 				removealt: { type: 'boolean', mandatory: false }
@@ -60,7 +60,7 @@ const serverConfig = {
 		}
 	},
 
-	required_properties: {
+	requiredProperties: {
 		'fhir/documentreference': {
 			body: {
 				status: { type: 'string', mandatory: true },

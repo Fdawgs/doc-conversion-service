@@ -11,7 +11,7 @@ describe('Htmltidy2 conversion middleware', () => {
 
 	test('Should tidy HTML file', async () => {
 		const middleware = htmlTidyMiddleware(
-			serverConfig.html_parsing.htmltidy
+			serverConfig.htmlParsing.htmltidy
 		);
 		const req = {
 			body: fs.readFileSync(
