@@ -25,7 +25,7 @@ const serverConfig = {
 	},
 
 	// Object containing all config files for HTML/PDF manipulation binaries
-	html_parsing: {
+	htmlParsing: {
 		/**
 		 * Refer to http://api.html-tidy.org/tidy/tidylib_api_5.6.0/tidy_quickref.html for tidy options
 		 *
@@ -52,23 +52,29 @@ const serverConfig = {
 			encoding: 'UTF-8'
 		},
 
-		accepted_params: {
-			fonts: { type: 'string', mandatory: false },
-			removealt: { type: 'boolean', mandatory: false }
+		acceptedProperties: {
+			query: {
+				fonts: { type: 'string', mandatory: false },
+				removealt: { type: 'boolean', mandatory: false }
+			}
 		}
 	},
 
-	required_params: {
+	requiredProperties: {
 		'fhir/documentreference': {
-			status: { type: 'string', mandatory: true },
-			type: { type: 'string', mandatory: true },
-			id: { type: 'number', mandatory: false },
-			specialty: { type: 'string', mandatory: false },
-			subject: { type: 'string', mandatory: false }
+			body: {
+				status: { type: 'string', mandatory: true },
+				type: { type: 'string', mandatory: true },
+				id: { type: 'number', mandatory: false },
+				specialty: { type: 'string', mandatory: false },
+				subject: { type: 'string', mandatory: false }
+			}
 		},
 		'fhir/binary': {
-			document: { type: 'binary', mandatory: true },
-			id: { type: 'number', mandatory: false }
+			body: {
+				document: { type: 'binary', mandatory: true },
+				id: { type: 'number', mandatory: false }
+			}
 		}
 	}
 };
