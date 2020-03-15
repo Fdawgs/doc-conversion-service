@@ -53,7 +53,7 @@ const serverConfig = {
 		},
 
 		accepted_params: {
-			params: {
+			query: {
 				fonts: { type: 'string', mandatory: false },
 				removealt: { type: 'boolean', mandatory: false }
 			}
