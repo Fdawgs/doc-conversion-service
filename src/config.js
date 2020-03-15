@@ -53,22 +53,28 @@ const serverConfig = {
 		},
 
 		accepted_params: {
-			fonts: { type: 'string', mandatory: false },
-			removealt: { type: 'boolean', mandatory: false }
+			params: {
+				fonts: { type: 'string', mandatory: false },
+				removealt: { type: 'boolean', mandatory: false }
+			}
 		}
 	},
 
 	required_params: {
 		'fhir/documentreference': {
-			status: { type: 'string', mandatory: true },
-			type: { type: 'string', mandatory: true },
-			id: { type: 'number', mandatory: false },
-			specialty: { type: 'string', mandatory: false },
-			subject: { type: 'string', mandatory: false }
+			body: {
+				status: { type: 'string', mandatory: true },
+				type: { type: 'string', mandatory: true },
+				id: { type: 'number', mandatory: false },
+				specialty: { type: 'string', mandatory: false },
+				subject: { type: 'string', mandatory: false }
+			}
 		},
 		'fhir/binary': {
-			document: { type: 'binary', mandatory: true },
-			id: { type: 'number', mandatory: false }
+			body: {
+				document: { type: 'binary', mandatory: true },
+				id: { type: 'number', mandatory: false }
+			}
 		}
 	}
 };
