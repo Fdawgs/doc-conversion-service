@@ -1,3 +1,14 @@
+## <small>3.0.1 (2020-03-16)</small>
+
+-   chore: update lockfile ([4081025](https://github.com/Fdawgs/doc-conversion-service/commit/4081025))
+-   chore(config): rename config properties to reflect content ([87ab5e0](https://github.com/Fdawgs/doc-conversion-service/commit/87ab5e0))
+-   chore(deps-dev): bump eslint-config-airbnb-base from 14.0.0 to 14.1.0 ([05fb91e](https://github.com/Fdawgs/doc-conversion-service/commit/05fb91e))
+-   chore(deps-dev): bump eslint-plugin-json from 2.1.0 to 2.1.1 ([a2a374d](https://github.com/Fdawgs/doc-conversion-service/commit/a2a374d))
+-   chore(deps): bump sanitize-middleware from 1.0.1 to 2.0.0 ([296778e](https://github.com/Fdawgs/doc-conversion-service/commit/296778e))
+-   style: replace snakecase with camelcase ([8ca5307](https://github.com/Fdawgs/doc-conversion-service/commit/8ca5307))
+-   fix(config): name of property ([b486f9d](https://github.com/Fdawgs/doc-conversion-service/commit/b486f9d))
+-   refactor(config): change to use new sanitize middleware structure ([368ac52](https://github.com/Fdawgs/doc-conversion-service/commit/368ac52))
+
 ## 3.0.0 (2020-03-11)
 
 -   docs(readme): add step to generate api docs ([620aa3e](https://github.com/Fdawgs/doc-conversion-service/commit/620aa3e))
