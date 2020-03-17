@@ -54,13 +54,15 @@ const router = new Router();
 module.exports = function htmlRoute(config) {
 	router.use(
 		passport.authenticate('bearer', { session: false }),
-		sanitize(config.sanitize)
+		sanitize(config.sanitize),
+		cors(config.cors)
 	);
 
 	router
 		.route('/html')
-		.options(cors(config.cors))
+		.options()
 		.post(
+			cors(config.cors),
 			bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 			poppler(config.poppler),
 			htmltidy(config.htmltidy),
@@ -79,9 +81,6 @@ module.exports = function htmlRoute(config) {
 						}
 					});
 				});
-				if(config.cors && config.cors.origin) {
-					res.set('Access-Control-Allow-Origin', config.cors.origin);
-				}
 				res.send(`<!DOCTYPE html>${req.body}`);
 				next();
 			}

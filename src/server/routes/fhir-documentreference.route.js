@@ -135,12 +135,13 @@ const router = new Router();
 module.exports = function fhirRoute(config) {
 	router.use(
 		passport.authenticate('bearer', { session: false }),
-		sanitize(config.sanitize)
+		sanitize(config.sanitize),
+		cors(config.cors)
 	);
 	// DocumentReference FHIR resource generation
 	router
 		.route('/fhir/documentreference')
-		.options(cors(config.cors))
+		.options()
 		.post(
 			upload.array('document'),
 			// TODO: Add middleware that derives values from document if possible
@@ -151,9 +152,6 @@ module.exports = function fhirRoute(config) {
 			},
 			fhirDocumentReference(),
 			(req, res, next) => {
-				if(config.cors && typeof config.cors.origin === 'string') {
-					res.set('Access-Control-Allow-Origin', config.cors.origin);
-				}
 				res.send(req.resource.documentReference);
 				next();
 			}
@@ -162,7 +160,6 @@ module.exports = function fhirRoute(config) {
 			upload.array('document'),
 			fhirDocumentReference(),
 			(req, res, next) => {
-				res.set('Access-Control-Allow-Origin', '*');
 				res.send(req.resource.documentReference);
 				next();
 			}

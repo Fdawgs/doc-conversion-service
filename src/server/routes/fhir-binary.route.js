@@ -75,26 +75,25 @@ const router = new Router();
  * @returns {Router} express router instance.
  */
 module.exports = function fhirRoute(config) {
-	router.use(passport.authenticate('bearer', { session: false }));
+	router.use(
+		passport.authenticate('bearer', { session: false }),
+		cors(config.cors)
+	);
 
 	// Binary FHIR resource generation
 	router
 		.route('/fhir/binary')
-		.options(cors(config.cors))
+		.options()
 		.post(
 			upload.single('document'),
 			sanitize(config.sanitize),
 			fhirBinary(),
 			(req, res, next) => {
-				if(config.cors && typeof config.cors.origin === 'string') {
-					res.set('Access-Control-Allow-Origin', config.cors.origin);
-				}
 				res.send(req.resource.binary);
 				next();
 			}
 		)
 		.put(upload.single('document'), fhirBinary(), (req, res, next) => {
-			res.set('Access-Control-Allow-Origin', '*');
 			res.send(req.resource.binary);
 			next();
 		});
