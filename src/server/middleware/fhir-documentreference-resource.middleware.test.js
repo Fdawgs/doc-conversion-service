@@ -1,4 +1,4 @@
-const fhirDocumentReferenceMiddleware = require('../middleware/fhir-documentreference-resource.middleware');
+const fhirDocumentReferenceMiddleware = require("./fhir-documentreference-resource.middleware");
 // const httpMocks = require('node-mocks-http');
 
 describe('FHIR DocumentReference resource middleware', () => {

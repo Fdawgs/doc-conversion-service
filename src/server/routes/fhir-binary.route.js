@@ -2,6 +2,7 @@ const passport = require('passport');
 const { Router } = require('express');
 
 // Import middleware
+const cors = require('cors');
 const multer = require('multer');
 const sanitize = require('sanitize-middleware');
 const fhirBinary = require('../middleware/fhir-binary-resource.middleware');
@@ -68,18 +69,24 @@ const router = new Router();
 /**
  * @author Frazer Smith
  * @description Handles routing for /fhir/binary path.
- * @param {Object=} config
+ * @param {Object} config
+ * @param {Object} config.cors
+ * @param {Object=} config.sanitize - Sanitization configuration values.
  * @returns {Router} express router instance.
  */
 module.exports = function fhirRoute(config) {
-	router.use(passport.authenticate('bearer', { session: false }));
+	router.use(
+		passport.authenticate('bearer', { session: false }),
+		cors(config.cors)
+	);
 
 	// Binary FHIR resource generation
 	router
 		.route('/fhir/binary')
+		.options()
 		.post(
 			upload.single('document'),
-			sanitize(config['fhir/binary']),
+			sanitize(config.sanitize),
 			fhirBinary(),
 			(req, res, next) => {
 				res.send(req.resource.binary);

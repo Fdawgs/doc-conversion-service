@@ -2,6 +2,7 @@ const passport = require('passport');
 const { Router } = require('express');
 
 // Import middleware
+const cors = require('cors');
 const multer = require('multer');
 const sanitize = require('sanitize-middleware');
 const fhirDocumentReference = require('../middleware/fhir-documentreference-resource.middleware');
@@ -126,15 +127,21 @@ const router = new Router();
 /**
  * @author Frazer Smith
  * @description Handles routing for /fhir/documentreference path.
- * @param {Object=} config
+ * @param {Object} config
+ * @param {Object} config.cors
+ * @param {Object=} config.sanitize - Sanitization configuration values.
  * @returns {Router} express router instance.
  */
 module.exports = function fhirRoute(config) {
-	router.use(passport.authenticate('bearer', { session: false }));
-	router.use(sanitize(config['fhir/documentreference']));
+	router.use(
+		passport.authenticate('bearer', { session: false }),
+		sanitize(config.sanitize),
+		cors(config.cors)
+	);
 	// DocumentReference FHIR resource generation
 	router
 		.route('/fhir/documentreference')
+		.options()
 		.post(
 			upload.array('document'),
 			// TODO: Add middleware that derives values from document if possible
