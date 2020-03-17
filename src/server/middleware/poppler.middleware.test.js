@@ -5,7 +5,7 @@ const { serverConfig } = require('../../config');
 
 describe('Poppler conversion middleware', () => {
 	test('Should return a middleware function', () => {
-		const middleware = popplerMiddleware(serverConfig.htmlParsing.poppler);
+		const middleware = popplerMiddleware(serverConfig.routes.html.poppler);
 		expect(typeof middleware).toBe('function');
 	});
 
