@@ -14,6 +14,7 @@ const router = new Router();
 
 /**
  * @api {post} /api/converter/fhir/binary Binary - POST
+ * @apiName PostBinary
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
@@ -41,6 +42,7 @@ const router = new Router();
 
 /**
  * @api {put} /api/converter/fhir/binary Binary - PUT
+ * @apiName PutBinary
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *

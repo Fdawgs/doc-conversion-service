@@ -14,6 +14,7 @@ const router = new Router();
 
 /**
  * @api {post} /api/converter/fhir/documentreference DocumentReference - POST
+ * @apiName PostDocumentReference
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 DocumentReference Resource that adheres to the Care-Connect profile.
  * Refer to <a>https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1</a> for more info.
@@ -65,6 +66,7 @@ const router = new Router();
 
 /**
  * @api {put} /api/converter/fhir/documentreference DocumentReference - PUT
+ * @apiName PutDocumentReference
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 DocumentReference Resource that adheres to the Care-Connect profile.
  * Refer to <a>https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1</a> for more info.
