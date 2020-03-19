@@ -38,7 +38,7 @@ const router = new Router();
  *     "X-Content-Type-Options": "nosniff",
  *     "X-XSS-Protection": "1; mode=block",
  *     "Access-Control-Allow-Origin": "*",
- *     "Access-Control-Allow-Methods": "PUT",
+ *     "Access-Control-Allow-Methods": "POST,PUT",
  *     "Access-Control-Allow-Headers": "Accept, Authorization, Content-Length, Content-Type, Origin",
  *     "Content-Length": "0",
  *     "Date": "Wed, 18 Mar 2020 12:50:32 GMT",
