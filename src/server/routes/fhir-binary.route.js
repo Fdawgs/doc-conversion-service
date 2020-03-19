@@ -25,8 +25,9 @@ const router = new Router();
  * @apiExample {curl} Example usage:
  * curl --request POST \
  *   --url http://localhost:8204/api/converter/fhir/binary \
+ * 	 --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: multipart/form-data' \
- *   --form document= \
+ *   --form document=
  * @apiSuccessExample {json} Example Success Response:
  * HTTP/1.1 200 OK
  * 	{
@@ -52,9 +53,10 @@ const router = new Router();
  * @apiExample {curl} Example usage:
  * curl --request PUT \
  *   --url http://localhost:8204/api/converter/fhir/binary \
+ *   --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: multipart/form-data' \
  *   --form document= \
- *   --form id=12 \
+ *   --form id=12
  * @apiSuccessExample {json} Example Success Response:
  * HTTP/1.1 200 OK
  * 	{
