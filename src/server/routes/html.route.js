@@ -16,7 +16,7 @@ const poppler = require('../middleware/poppler.middleware');
 const router = new Router();
 
 /**
- * @api {options} /api/converter/html OPTIONS
+ * @api {options} /api/converter/html HTML - OPTIONS
  * @apiName OptionsHtml
  * @apiGroup HTML
  * @apiDescription Support for preflight CORS requests.
@@ -50,7 +50,7 @@ const router = new Router();
  */
 
 /**
- * @api {post} /api/converter/html POST
+ * @api {post} /api/converter/html HTML - POST
  * @apiName PostHtml
  * @apiGroup HTML
  * @apiDescription Convert PDF to HTML.
