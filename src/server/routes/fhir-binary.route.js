@@ -13,7 +13,42 @@ const upload = multer({ storage });
 const router = new Router();
 
 /**
+ * @api {options} /api/converter/fhir/binary Binary - OPTIONS
+ * @apiName OptionsBinary
+ * @apiGroup FHIR
+ * @apiDescription Support for preflight CORS requests.
+ *
+ * @apiHeader {String} Authorization Bearer token for authorization.
+ *
+ * @apiExample {curl} Example usage:
+ * curl --request OPTIONS \
+ * 	 --url https://ydh-watchdog.ydh.nhs.uk:8204/api/converter/fhir/binary \
+ *   --header 'authorization: Bearer Jimmini'
+ *
+ * @apiSuccessExample {json} Example Success Response:
+ * HTTP/1.1 204 No Content
+ * {
+ *     "Content-Security-Policy": "default-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com",
+ *     "X-Content-Security-Policy": "default-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com",
+ *     "X-WebKit-CSP": "default-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com",
+ *     "X-DNS-Prefetch-Control": "off",
+ *     "X-Frame-Options": "DENY",
+ *     "Strict-Transport-Security": "max-age=15552000; includeSubDomains",
+ *     "X-Download-Options": "noopen",
+ *     "X-Content-Type-Options": "nosniff",
+ *     "X-XSS-Protection": "1; mode=block",
+ *     "Access-Control-Allow-Origin": "*",
+ *     "Access-Control-Allow-Methods": "POST,PUT",
+ *     "Access-Control-Allow-Headers": "Accept, Authorization, Content-Length, Content-Type, Origin",
+ *     "Content-Length": "0",
+ *     "Date": "Wed, 18 Mar 2020 12:50:32 GMT",
+ *     "Connection": "keep-alive"
+ * }
+ */
+
+/**
  * @api {post} /api/converter/fhir/binary Binary - POST
+ * @apiName PostBinary
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
@@ -25,8 +60,9 @@ const router = new Router();
  * @apiExample {curl} Example usage:
  * curl --request POST \
  *   --url http://localhost:8204/api/converter/fhir/binary \
+ * 	 --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: multipart/form-data' \
- *   --form document= \
+ *   --form document=
  * @apiSuccessExample {json} Example Success Response:
  * HTTP/1.1 200 OK
  * 	{
@@ -40,6 +76,7 @@ const router = new Router();
 
 /**
  * @api {put} /api/converter/fhir/binary Binary - PUT
+ * @apiName PutBinary
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
@@ -52,9 +89,10 @@ const router = new Router();
  * @apiExample {curl} Example usage:
  * curl --request PUT \
  *   --url http://localhost:8204/api/converter/fhir/binary \
+ *   --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: multipart/form-data' \
  *   --form document= \
- *   --form id=12 \
+ *   --form id=12
  * @apiSuccessExample {json} Example Success Response:
  * HTTP/1.1 200 OK
  * 	{
