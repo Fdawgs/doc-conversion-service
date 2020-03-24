@@ -58,10 +58,9 @@ Yeovil District Hospital is heavily invested in Microsoft's ecosystem, as such t
 6. Run `pm2-service-install` to start as a service
 
 When the service starts or restarts, it will start all the applications saved in the process list.
+To uninstall the service run `pm2-service-uninstall`.
 
-**Note:** When you change any settings in the configuration file, you will need to restart the service for the changes to take effect.
-
-To uninstall the service run `pm2-service-uninstall`
+**Note:** PM2 has been configured to automatically restart the application if modifications are made to `src/config.js`.
 
 # Contributing
 
