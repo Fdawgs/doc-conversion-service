@@ -8,6 +8,7 @@ module.exports = {
         exec_mode: 'cluster',
         instances: 4,
         name: "doc-conv-api",
-        script: './src/index.js'
+        script: './src/index.js',
+        watch: './src/config.js'
     }]
 }
