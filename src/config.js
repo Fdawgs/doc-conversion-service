@@ -27,7 +27,8 @@ const serverConfig = {
 	routes: {
 		'fhir/documentreference': {
 			cors: {
-				allowedHeaders: 'Accept, Authorization, Content-Length, Content-Type, Origin',
+				allowedHeaders:
+					'Accept, Authorization, Content-Length, Content-Type, Origin',
 				methods: ['POST', 'PUT'],
 				origin: '*'
 			},
@@ -44,7 +45,8 @@ const serverConfig = {
 
 		'fhir/binary': {
 			cors: {
-				allowedHeaders: 'Accept, Authorization, Content-Length, Content-Type, Origin',
+				allowedHeaders:
+					'Accept, Authorization, Content-Length, Content-Type, Origin',
 				methods: ['POST', 'PUT'],
 				origin: '*'
 			},
@@ -58,7 +60,8 @@ const serverConfig = {
 
 		html: {
 			cors: {
-				allowedHeaders: 'Accept, Authorization, Content-Length, Content-Type, Origin',
+				allowedHeaders:
+					'Accept, Authorization, Content-Length, Content-Type, Origin',
 				methods: ['POST'],
 				origin: '*'
 			},
@@ -125,8 +128,7 @@ const helmetConfig = {
 	frameguard: {
 		action: 'deny'
 	},
-	hidePoweredBy: true,
-	noCache: true
+	hidePoweredBy: true
 };
 
 // Refer to option documention here: https://github.com/winstonjs/winston-daily-rotate-file/blob/master/README.md#options
