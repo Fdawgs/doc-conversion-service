@@ -1,3 +1,34 @@
+## 4.0.0 (2020-03-25)
+
+-   chore: compress test images ([44ff0d9](https://github.com/Fdawgs/doc-conversion-service/commit/44ff0d9))
+-   chore(config): allow caching of results ([44f8b86](https://github.com/Fdawgs/doc-conversion-service/commit/44f8b86))
+-   chore(deps-dev): bump apidoc from 0.20.0 to 0.20.1 ([c9f03a2](https://github.com/Fdawgs/doc-conversion-service/commit/c9f03a2))
+-   chore(deps-dev): bump coveralls from 3.0.9 to 3.0.11 ([932082b](https://github.com/Fdawgs/doc-conversion-service/commit/932082b))
+-   chore(deps-dev): bump eslint-config-prettier from 6.10.0 to 6.10.1 ([c734405](https://github.com/Fdawgs/doc-conversion-service/commit/c734405))
+-   chore(deps-dev): bump prettier from 1.19.1 to 2.0.1 ([ae87cb3](https://github.com/Fdawgs/doc-conversion-service/commit/ae87cb3))
+-   chore(deps-dev): bump prettier from 2.0.1 to 2.0.2 ([bc3ffc7](https://github.com/Fdawgs/doc-conversion-service/commit/bc3ffc7))
+-   chore(deps): bump helmet from 3.21.3 to 3.22.0 ([2a063eb](https://github.com/Fdawgs/doc-conversion-service/commit/2a063eb))
+-   chore(deps): bump sanitize-middleware from 2.0.1 to 2.0.3 ([3173edc](https://github.com/Fdawgs/doc-conversion-service/commit/3173edc))
+-   chore(deps): bump sanitize-middleware from 2.0.3 to 2.0.4 ([af14054](https://github.com/Fdawgs/doc-conversion-service/commit/af14054))
+-   chore(package): add prettier call to changelog gen script ([244944e](https://github.com/Fdawgs/doc-conversion-service/commit/244944e))
+-   chore(package): use test-only script when testing ([b72bf2b](https://github.com/Fdawgs/doc-conversion-service/commit/b72bf2b))
+-   chore(pm2): remove need to manually restart upon config change ([8092778](https://github.com/Fdawgs/doc-conversion-service/commit/8092778))
+-   ci(travis): add release tags to branch safelist ([22c4614](https://github.com/Fdawgs/doc-conversion-service/commit/22c4614))
+-   ci(travis): specify os for jobs ([2bd5b68](https://github.com/Fdawgs/doc-conversion-service/commit/2bd5b68))
+-   docs(readme): update pm2 section to reflect auto restart changes ([ece951a](https://github.com/Fdawgs/doc-conversion-service/commit/ece951a))
+-   docs(routes): add apidocs for options methods ([ed7a8f7](https://github.com/Fdawgs/doc-conversion-service/commit/ed7a8f7))
+-   docs(routes): add example authorization header to apidoc tags ([c2c96eb](https://github.com/Fdawgs/doc-conversion-service/commit/c2c96eb))
+-   docs(routes): add missing apiname tags ([f6165e3](https://github.com/Fdawgs/doc-conversion-service/commit/f6165e3))
+-   docs(routes): update example options method calls ([234cef7](https://github.com/Fdawgs/doc-conversion-service/commit/234cef7))
+-   docs(routes): update html route name tags ([1fd81a4](https://github.com/Fdawgs/doc-conversion-service/commit/1fd81a4))
+-   style(tests): replace double quotation with single in import ([76d6785](https://github.com/Fdawgs/doc-conversion-service/commit/76d6785))
+-   fix(routes): add cors support for all request methods ([5d2d6f0](https://github.com/Fdawgs/doc-conversion-service/commit/5d2d6f0))
+-   feat(routes): add cors support ([3b3e734](https://github.com/Fdawgs/doc-conversion-service/commit/3b3e734))
+
+### BREAKING CHANGE
+
+-   routing configuration moved into `routes` property object of `serverConfig` variable in `config.js`
+
 ## <small>3.0.1 (2020-03-16)</small>
 
 -   chore: update lockfile ([4081025](https://github.com/Fdawgs/doc-conversion-service/commit/4081025))
