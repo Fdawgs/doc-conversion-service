@@ -125,8 +125,7 @@ const helmetConfig = {
 	frameguard: {
 		action: 'deny'
 	},
-	hidePoweredBy: true,
-	noCache: true
+	hidePoweredBy: true
 };
 
 // Refer to option documention here: https://github.com/winstonjs/winston-daily-rotate-file/blob/master/README.md#options
