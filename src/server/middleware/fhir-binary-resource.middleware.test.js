@@ -24,7 +24,7 @@ describe('FHIR Binary resource middleware', () => {
 			method: 'PUT',
 			body: Object.assign(query, args)
 		});
-		delete req.body.file;
+
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
