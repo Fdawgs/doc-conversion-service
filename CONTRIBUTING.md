@@ -17,7 +17,7 @@ Other processes and specifications that are in use in this repository are:
 
 As mentioned in the prerequisites section of [README.md](https://github.com/Fdawgs/doc-conversion-service/blob/master/README.md#prerequisites) this repository requires that you have [Node.js](https://nodejs.org) and [Yarn](https://yarnpkg.com) installed.
 
-With those in place you can fork the repo and clone it, and then run `yarn install` to install all dependencies.
+With those in place, you can fork the repository, clone it, and then run `yarn install` to install all development dependencies.
 
 ### Development Workflow
 
