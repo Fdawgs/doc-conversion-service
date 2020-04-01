@@ -16,6 +16,7 @@ describe('FHIR Binary resource middleware', () => {
 		const middleware = fhirBinaryMiddleware();
 		expect(typeof middleware).toBe('function');
 	});
+
 	test('Should pass an error to next if mandatory value is missing', () => {
 		const middleware = fhirBinaryMiddleware();
 
@@ -50,7 +51,7 @@ describe('FHIR Binary resource middleware', () => {
 		middleware(req, res, next);
 		expect(typeof req.resource).toBe('object');
 		expect(typeof req.resource.binary).not.toBe('undefined');
-		expect(req.resource.binary.id).toBe('1');
+		expect(req.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 	});
@@ -70,7 +71,7 @@ describe('FHIR Binary resource middleware', () => {
 		middleware(req, res, next);
 		expect(typeof req.resource).toBe('object');
 		expect(typeof req.resource.binary).not.toBe('undefined');
-		expect(req.resource.binary.id).toBe('1');
+		expect(req.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 	});

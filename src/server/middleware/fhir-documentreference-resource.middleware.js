@@ -11,7 +11,6 @@ const { v4 } = require('uuid');
 module.exports = function fhirDocumentReferenceResourceMiddleware() {
 	return (req, res, next) => {
 		if (req.files && Object.keys(req.files).length) {
-
 			// Create resource object for conversion resource
 			if (typeof req.resource === 'undefined') {
 				req.resource = {};

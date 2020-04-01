@@ -4,11 +4,8 @@ const popplerMiddleware = require('./poppler.middleware');
 const { serverConfig } = require('../../config');
 
 describe('Poppler conversion middleware', () => {
-
 	afterAll(async () => {
-		fs.rmdir('./src/server/temp/', { recursive: true}, () => {
-
-		});
+		fs.rmdir('./src/server/temp/', { recursive: true }, () => {});
 	});
 
 	test('Should return a middleware function', () => {

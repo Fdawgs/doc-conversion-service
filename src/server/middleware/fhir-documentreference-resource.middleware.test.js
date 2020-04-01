@@ -60,8 +60,12 @@ describe('FHIR DocumentReference resource middleware', () => {
 		expect(req.resource.documentReference.id).toBe(args.id);
 		expect(req.resource.documentReference.type.text).toBe(args.type);
 		expect(req.resource.documentReference.status).toBe(args.status);
-		expect(req.resource.documentReference.context.practiceSetting.text).toBe(args.specialty);
-		expect(req.resource.documentReference.subject.reference).toBe(`Patient/${args.subject}`);
+		expect(
+			req.resource.documentReference.context.practiceSetting.text
+		).toBe(args.specialty);
+		expect(req.resource.documentReference.subject.reference).toBe(
+			`Patient/${args.subject}`
+		);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 	});
@@ -84,8 +88,12 @@ describe('FHIR DocumentReference resource middleware', () => {
 		expect(req.resource.documentReference.id).toBe(args.id);
 		expect(req.resource.documentReference.type.text).toBe(args.type);
 		expect(req.resource.documentReference.status).toBe(args.status);
-		expect(req.resource.documentReference.context.practiceSetting.text).toBe(args.specialty);
-		expect(req.resource.documentReference.subject.reference).toBe(`Patient/${args.subject}`);
+		expect(
+			req.resource.documentReference.context.practiceSetting.text
+		).toBe(args.specialty);
+		expect(req.resource.documentReference.subject.reference).toBe(
+			`Patient/${args.subject}`
+		);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 	});
