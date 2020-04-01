@@ -8,12 +8,9 @@ const { tidy } = require('htmltidy2');
  */
 module.exports = function htmltidyMiddleware(config = {}) {
 	return async (req, res, next) =>
-		new Promise((resolve, reject) => {
+		new Promise((resolve) => {
 			tidy(req.body, config, (err, tidiedHtml) => {
 				req.body = tidiedHtml;
-				if (err) {
-					reject(new Error(err));
-				}
 				resolve(next());
 			});
 		});
