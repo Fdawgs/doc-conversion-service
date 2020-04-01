@@ -85,7 +85,7 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 			next();
 		} else {
 			res.status(400);
-			next('File missing from request');
+			next(new Error('File missing from request'));
 		}
 	};
 };
