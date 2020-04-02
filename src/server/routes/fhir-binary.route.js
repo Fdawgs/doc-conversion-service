@@ -126,14 +126,12 @@ module.exports = function fhirRoute(config) {
 			upload.single('document'),
 			sanitize(config.sanitize),
 			fhirBinary(),
-			(req, res, next) => {
+			(req, res) => {
 				res.send(req.resource.binary);
-				next();
 			}
 		)
-		.put(upload.single('document'), fhirBinary(), (req, res, next) => {
+		.put(upload.single('document'), sanitize(), fhirBinary(), (req, res) => {
 			res.send(req.resource.binary);
-			next();
 		});
 
 	return router;
