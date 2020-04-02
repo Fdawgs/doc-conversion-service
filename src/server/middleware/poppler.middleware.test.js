@@ -17,9 +17,7 @@ describe('Poppler conversion middleware', () => {
 		const middleware = popplerMiddleware();
 
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf', {
-				encoding: 'UTF-8'
-			}),
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
 			results: {}
 		};
 		const res = httpMocks.createResponse();
@@ -41,9 +39,7 @@ describe('Poppler conversion middleware', () => {
 		const middleware = popplerMiddleware(options);
 
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf', {
-				encoding: 'UTF-8'
-			}),
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
 			results: {}
 		};
 		const res = httpMocks.createResponse();
