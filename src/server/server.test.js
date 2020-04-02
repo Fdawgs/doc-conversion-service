@@ -6,7 +6,7 @@ const {
 const Server = require('./server');
 
 describe('Server deployment', () => {
-	beforeAll(async () => {
+	beforeAll(() => {
 		jest.setTimeout(30000);
 	});
 

@@ -5,7 +5,11 @@ const popplerMiddleware = require('./poppler.middleware');
 const { serverConfig } = require('../../config');
 
 describe('Poppler conversion middleware', () => {
-	afterAll(async () => {
+	beforeAll(() => {
+		jest.setTimeout(30000);
+	});
+
+	afterAll(() => {
 		fs.rmdir('./src/server/temp/', { recursive: true }, () => {});
 	});
 
