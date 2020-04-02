@@ -46,9 +46,8 @@ module.exports = function popplerMiddleware(config = {}) {
 
 		const poppler = new Poppler(this.config.binPath);
 
-		await poppler
-			.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile)
-			.then(() => {
+		await poppler.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile).then(
+			() => {
 				const dom = new JSDOM(
 					fs.readFileSync(tempHtmlFile, {
 						encoding: this.config.encoding
@@ -79,9 +78,11 @@ module.exports = function popplerMiddleware(config = {}) {
 					pdf: tempPdfFile
 				};
 				next();
-			}, () => {
+			},
+			() => {
 				res.status(400);
 				next(new Error('Failed to convert PDF to HTML'));
-			});
+			}
+		);
 	};
 };
