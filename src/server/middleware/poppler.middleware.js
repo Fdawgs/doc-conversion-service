@@ -79,6 +79,9 @@ module.exports = function popplerMiddleware(config = {}) {
 					pdf: tempPdfFile
 				};
 				next();
+			}, () => {
+				res.status(400);
+				next(new Error('Failed to convert PDF to HTML'));
 			});
 	};
 };

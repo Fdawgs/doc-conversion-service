@@ -6,8 +6,8 @@ const {
 const Server = require('./server');
 
 describe('Server deployment', () => {
-	beforeAll(async () => {
-		jest.setTimeout(30000);
+	beforeAll(() => {
+		jest.setTimeout(20000);
 	});
 
 	test('Should assign default values if none provided', async () => {

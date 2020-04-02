@@ -105,7 +105,7 @@ module.exports = function htmlRoute(config) {
 			embedHtmlImages(),
 			fixCss(),
 			// Delete temporary files after it has been converted to HTML
-			(req, res, next) => {
+			(req, res) => {
 				const files = glob.GlobSync(
 					`${req.doclocation.directory}/${req.doclocation.id}*`
 				).found;
@@ -117,7 +117,7 @@ module.exports = function htmlRoute(config) {
 					});
 				});
 				res.send(`<!DOCTYPE html>${req.body}`);
-				next();
+				
 			}
 		);
 

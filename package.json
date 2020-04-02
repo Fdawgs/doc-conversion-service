@@ -15,8 +15,8 @@
 		"prettier": "prettier ** --write",
 		"start": "node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-only",
-		"test-coverage": "cross-env NODE_ENV=test jest --coverage --verbose",
-		"test-only": "cross-env NODE_ENV=test jest --verbose"
+		"test-coverage": "cross-env NODE_ENV=test jest --coverage",
+		"test-only": "cross-env NODE_ENV=test jest --detectOpenHandles"
 	},
 	"jest": {
 		"clearMocks": true,
@@ -47,6 +47,7 @@
 		"eslint-plugin-import": "^2.20.2",
 		"eslint-plugin-jest": "^23.8.2",
 		"eslint-plugin-json": "^2.1.1",
+		"is-html": "^2.0.0",
 		"jest": "^25.2.4",
 		"jsinspect": "^0.12.7",
 		"node-mocks-http": "^1.8.1",

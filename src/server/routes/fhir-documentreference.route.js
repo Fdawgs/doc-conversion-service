@@ -182,23 +182,16 @@ module.exports = function fhirRoute(config) {
 		.post(
 			upload.array('document'),
 			// TODO: Add middleware that derives values from document if possible
-			(req, res, next) => {
-				req.body.status = 'current';
-				req.body.type = 'test';
-				next();
-			},
 			fhirDocumentReference(),
-			(req, res, next) => {
+			(req, res) => {
 				res.send(req.resource.documentReference);
-				next();
 			}
 		)
 		.put(
 			upload.array('document'),
 			fhirDocumentReference(),
-			(req, res, next) => {
+			(req, res) => {
 				res.send(req.resource.documentReference);
-				next();
 			}
 		);
 	return router;
