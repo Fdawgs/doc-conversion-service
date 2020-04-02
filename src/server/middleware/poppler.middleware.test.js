@@ -59,4 +59,20 @@ describe('Poppler conversion middleware', () => {
 		expect(fs.existsSync(options.tempDirectory)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 	});
+
+	test('Should pass an error to next if PDF file missing', async () => {
+		const middleware = popplerMiddleware();
+
+		const req = {
+			body: undefined,
+			results: {}
+		};
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+
+		await middleware(req, res, next);
+		expect(next.mock.calls[0][0].message).toBe('Failed to convert PDF to HTML');
+		expect(res.statusCode).toBe(400);
+		expect(next).toHaveBeenCalledTimes(1);
+	});
 });
