@@ -1,5 +1,6 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
+const isHtml = require('is-html');
 const popplerMiddleware = require('./poppler.middleware');
 const { serverConfig } = require('../../config');
 
@@ -25,6 +26,7 @@ describe('Poppler conversion middleware', () => {
 
 		await middleware(req, res, next);
 		expect(typeof req.body).toBe('string');
+		expect(isHtml(req.body)).toBe(true);
 		expect(typeof req.doclocation).toBe('object');
 		expect(fs.existsSync(req.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -47,6 +49,7 @@ describe('Poppler conversion middleware', () => {
 
 		await middleware(req, res, next);
 		expect(typeof req.body).toBe('string');
+		expect(isHtml(req.body)).toBe(true);
 		expect(typeof req.doclocation).toBe('object');
 		expect(fs.existsSync(req.doclocation.html)).toBe(true);
 		expect(fs.existsSync(options.tempDirectory)).toBe(true);
