@@ -130,9 +130,14 @@ module.exports = function fhirRoute(config) {
 				res.send(req.resource.binary);
 			}
 		)
-		.put(upload.single('document'), sanitize(), fhirBinary(), (req, res) => {
-			res.send(req.resource.binary);
-		});
+		.put(
+			upload.single('document'),
+			sanitize(),
+			fhirBinary(),
+			(req, res) => {
+				res.send(req.resource.binary);
+			}
+		);
 
 	return router;
 };

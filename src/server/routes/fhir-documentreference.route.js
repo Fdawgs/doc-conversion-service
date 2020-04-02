@@ -187,12 +187,8 @@ module.exports = function fhirRoute(config) {
 				res.send(req.resource.documentReference);
 			}
 		)
-		.put(
-			upload.array('document'),
-			fhirDocumentReference(),
-			(req, res) => {
-				res.send(req.resource.documentReference);
-			}
-		);
+		.put(upload.array('document'), fhirDocumentReference(), (req, res) => {
+			res.send(req.resource.documentReference);
+		});
 	return router;
 };
