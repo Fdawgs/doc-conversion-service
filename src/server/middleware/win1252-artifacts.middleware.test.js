@@ -10,7 +10,7 @@ describe('Win 1252 Artifact middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should remove win1252 artifacts', async () => {
+	test('Should remove win1252 artifacts', () => {
 		const middleware = fixWin1252ArtifactsMiddleware();
 		const req = {
 			body: fs.readFileSync(
@@ -22,13 +22,13 @@ describe('Win 1252 Artifact middleware', () => {
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
-		await middleware(req, res, next);
+		middleware(req, res, next);
 		expect(req.results.windows_1252).toBe('Fixed');
 		expect(req.body).not.toEqual(expect.stringMatching(artifacts));
 		expect(next).toHaveBeenCalledTimes(1);
 	});
 
-	test('Should build req.results if not defined', async () => {
+	test('Should build req.results if not defined', () => {
 		const middleware = fixWin1252ArtifactsMiddleware();
 		const req = {
 			body: fs.readFileSync(
@@ -39,7 +39,7 @@ describe('Win 1252 Artifact middleware', () => {
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
-		await middleware(req, res, next);
+		middleware(req, res, next);
 		expect(typeof req.results).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
 	});

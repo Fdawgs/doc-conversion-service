@@ -8,7 +8,7 @@ const fixUtf8 = require('fix-utf8');
  * @return {Function} Express middleware.
  */
 module.exports = function fixWin1252ArtifactsMiddleware() {
-	return async (req, res, next) => {
+	return (req, res, next) => {
 		const html = fixUtf8(req.body);
 
 		// Create results object for conversion results
