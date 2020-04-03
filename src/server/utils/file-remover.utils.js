@@ -9,10 +9,6 @@ const fs = require('fs');
 module.exports = function fileRemoverUtil(pattern) {
 	const files = glob.GlobSync(pattern).found;
 	files.forEach((file) => {
-		fs.unlink(file, (err) => {
-			if (err) {
-				throw new Error(err);
-			}
-		});
+		fs.unlinkSync(file);
 	});
 };
