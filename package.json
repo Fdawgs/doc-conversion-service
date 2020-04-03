@@ -1,6 +1,6 @@
 {
 	"name": "doc-conversion-service",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"description": "RESTful API web service for converting clinical documents/files",
 	"main": "src/index.js",
 	"repository": "git@github.com:Fdawgs/doc-conversion-service.git",
@@ -15,7 +15,7 @@
 		"prettier": "prettier ** --write",
 		"start": "node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-only",
-		"test-coverage": "cross-env NODE_ENV=test jest --coverage",
+		"test-coverage": "cross-env NODE_ENV=test jest --coverage --runInBand",
 		"test-only": "cross-env NODE_ENV=test jest --detectOpenHandles"
 	},
 	"jest": {
@@ -48,7 +48,7 @@
 		"eslint-plugin-jest": "^23.8.2",
 		"eslint-plugin-json": "^2.1.1",
 		"is-html": "^2.0.0",
-		"jest": "^25.2.4",
+		"jest": "^25.2.7",
 		"jsinspect": "^0.12.7",
 		"node-mocks-http": "^1.8.1",
 		"nodemon": "^2.0.2",

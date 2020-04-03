@@ -1,3 +1,15 @@
+## <small>4.0.2 (2020-04-03)</small>
+
+-   chore(deps-dev): bump jest from 25.2.4 to 25.2.7 ([97bfff9](https://github.com/Fdawgs/doc-conversion-service/commit/97bfff9))
+-   chore(package): add runinband option to jest script ([dc93ab7](https://github.com/Fdawgs/doc-conversion-service/commit/dc93ab7))
+-   tests(middleware): remove redundant expect ([a65814f](https://github.com/Fdawgs/doc-conversion-service/commit/a65814f))
+-   tests(utils): add tests for bearer token auth util ([bef452e](https://github.com/Fdawgs/doc-conversion-service/commit/bef452e))
+-   tests(utils): add tests for file removal util ([5caa595](https://github.com/Fdawgs/doc-conversion-service/commit/5caa595))
+-   fix(middleware): make win1252 middleware synchronous ([a717953](https://github.com/Fdawgs/doc-conversion-service/commit/a717953))
+-   refactor(routes): move file removal middleware to own util file ([4dd54fd](https://github.com/Fdawgs/doc-conversion-service/commit/4dd54fd))
+-   refactor(server): move error handler middleware to own util file ([4b672bd](https://github.com/Fdawgs/doc-conversion-service/commit/4b672bd))
+-   refactor(utils): make file removal synchronous ([dea709b](https://github.com/Fdawgs/doc-conversion-service/commit/dea709b))
+
 ## <small>4.0.1 (2020-04-02)</small>
 
 -   tests(middleware): add check for directory creation ([f16e127](https://github.com/Fdawgs/doc-conversion-service/commit/f16e127))
