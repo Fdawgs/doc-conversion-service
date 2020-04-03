@@ -1,6 +1,4 @@
 const { Router } = require('express');
-const glob = require('glob');
-const fs = require('fs');
 const passport = require('passport');
 
 // Import middleware
@@ -12,6 +10,9 @@ const fixCss = require('../middleware/clean-css.middleware');
 const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
 const htmltidy = require('../middleware/htmltidy.middleware');
 const poppler = require('../middleware/poppler.middleware');
+
+// Import utils
+const fileRemover = require('../utils/file-remover.utils');
 
 const router = new Router();
 
@@ -104,18 +105,10 @@ module.exports = function htmlRoute(config) {
 			fixWin1252Artifacts(),
 			embedHtmlImages(),
 			fixCss(),
-			// Delete temporary files after it has been converted to HTML
 			(req, res) => {
-				const files = glob.GlobSync(
+				fileRemover(
 					`${req.doclocation.directory}/${req.doclocation.id}*`
-				).found;
-				files.forEach((file) => {
-					fs.unlink(file, (err) => {
-						if (err) {
-							throw new Error(err);
-						}
-					});
-				});
+				);
 				res.send(`<!DOCTYPE html>${req.body}`);
 			}
 		);
