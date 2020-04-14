@@ -72,7 +72,7 @@
 		"node-poppler": "^1.5.2",
 		"passport": "^0.4.1",
 		"passport-http-bearer": "^1.0.1",
-		"sanitize-middleware": "^2.0.4",
+		"sanitize-middleware": "^2.0.5",
 		"uuid": "^7.0.3",
 		"winston": "^3.2.1",
 		"winston-daily-rotate-file": "^4.4.2"
