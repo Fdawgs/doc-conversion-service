@@ -52,7 +52,7 @@ describe('FHIR Binary resource route', () => {
 			.put(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
-			.field('id', '12')
+			.field('id', 12)
 			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
 			.then((res) => {
 				const responseResource = JSON.parse(res.text);

@@ -56,7 +56,7 @@ describe('FHIR DocumentReference resource route', () => {
 			.put(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
-			.field('id', '12')
+			.field('id', 12)
 			.field('status', 'test')
 			.field('type', 'test')
 			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
@@ -65,7 +65,7 @@ describe('FHIR DocumentReference resource route', () => {
 
 				expect(res.status).toBe(200);
 				expect(responseResource.resourceType).toBe('DocumentReference');
-				expect(responseResource.id).toBe(12);
+				expect(responseResource.id).toBe('12');
 				expect(responseResource.content[0].attachment.contentType).toBe(
 					'application/pdf'
 				);
