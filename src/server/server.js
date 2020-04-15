@@ -17,7 +17,7 @@ const errorHandler = require('./utils/error-handler.utils');
 
 // Import routes
 const fhirBinaryRoute = require('./routes/fhir-binary.route');
-const fhirDocumentReferenceRoute = require('./routes/fhir-binary.route');
+const fhirDocumentReferenceRoute = require('./routes/fhir-documentreference.route');
 const htmlRoute = require('./routes/html.route');
 
 class Server {
@@ -104,7 +104,7 @@ class Server {
 			fhirBinaryRoute(this.config.routes['fhir/binary'])
 		);
 		this.app.use(
-			'/api/converter',
+			'/api/converter/fhir/documentreference',
 			fhirDocumentReferenceRoute(
 				this.config.routes['fhir/documentreference']
 			)
