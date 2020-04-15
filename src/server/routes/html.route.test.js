@@ -5,6 +5,7 @@ const { helmetConfig, serverConfig } = require('../../config');
 const Server = require('../server');
 
 request = request('http://localhost:3000');
+const route = '/api/converter/html';
 
 describe('HTML conversion route', () => {
 	let server;
@@ -25,7 +26,7 @@ describe('HTML conversion route', () => {
 
 	test('Should return 400 error code if file missing', () => {
 		return request
-			.post('/api/converter/html')
+			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
 			.then((res) => {
@@ -35,7 +36,7 @@ describe('HTML conversion route', () => {
     });
     test('Should return converted document', () => {
 		return request
-			.post('/api/converter/html')
+			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
             .set('Accept', '*/*')
             .set('Content-Type', 'application/pdf')
