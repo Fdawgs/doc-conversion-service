@@ -29,10 +29,10 @@ The web service was then extended to allow for the conversion of files to [Binar
 The Express server should now be up and running on the port set in the config. You should see the following output:
 
 ```
-doc-conversion-service listening for requests at http://127.0.0.1:8204
+doc-conversion-service listening for requests at http://127.0.0.1:3000
 ```
 
-You can now navigate to http://127.0.0.1:8204/api/docs to view documentation!
+You can now navigate to http://127.0.0.1:3000/api/docs to view documentation!
 
 ### Deploying using PM2
 
