@@ -3,7 +3,7 @@
  */
 const serverConfig = {
 	https: false,
-	port: 8204,
+	port: 3000,
 	auth: {
 		apiKeys: [
 			{
@@ -34,11 +34,12 @@ const serverConfig = {
 			},
 			sanitize: {
 				body: {
+					document: { type: 'binary', mandatory: true },
 					status: { type: 'string', mandatory: true },
 					type: { type: 'string', mandatory: true },
-					id: { type: 'number', mandatory: false },
-					specialty: { type: 'string', mandatory: false },
-					subject: { type: 'string', mandatory: false }
+					id: { type: 'number' },
+					specialty: { type: 'string' },
+					subject: { type: 'string' }
 				}
 			}
 		},
@@ -53,7 +54,7 @@ const serverConfig = {
 			sanitize: {
 				body: {
 					document: { type: 'binary', mandatory: true },
-					id: { type: 'number', mandatory: false }
+					id: { type: 'number' }
 				}
 			}
 		},
@@ -94,8 +95,8 @@ const serverConfig = {
 
 			sanitize: {
 				query: {
-					fonts: { type: 'string', mandatory: false },
-					removealt: { type: 'boolean', mandatory: false }
+					fonts: { type: 'string' },
+					removealt: { type: 'boolean' }
 				}
 			}
 		}
@@ -117,12 +118,7 @@ const helmetConfig = {
 		directives: {
 			defaultSrc: ["'self'", 'fonts.gstatic.com'],
 			scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-			styleSrc: [
-				"'self'",
-				"'unsafe-inline'",
-				'fonts.googleapis.com',
-				'fonts.gstatic.com'
-			]
+			styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com']
 		}
 	},
 	frameguard: {

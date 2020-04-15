@@ -79,13 +79,13 @@ const router = new Router();
 
 /**
  * @author Frazer Smith
- * @description Handles routing for /html/ path.
+ * @description Handles routing to convert a request with a PDF file as its body into HTML.
  * @param {Object} config
  * @param {Object} config.cors
  * @param {Object=} config.htmltidy - HTMLTidy2 configuration values.
  * @param {Object=} config.poppler - Poppler conversion configuration values.
  * @param {Object=} config.sanitize - Sanitization configuration values.
- * @returns {Router} express router instance.
+ * @returns {Router} Express router instance.
  */
 module.exports = function htmlRoute(config) {
 	router.use(
@@ -95,10 +95,8 @@ module.exports = function htmlRoute(config) {
 	);
 
 	router
-		.route('/html')
-		.options()
+		.route('/')
 		.post(
-			cors(config.cors),
 			bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 			poppler(config.poppler),
 			htmltidy(config.htmltidy),

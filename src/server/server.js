@@ -17,7 +17,7 @@ const errorHandler = require('./utils/error-handler.utils');
 
 // Import routes
 const fhirBinaryRoute = require('./routes/fhir-binary.route');
-const fhirDocumentReferenceRoute = require('./routes/fhir-binary.route');
+const fhirDocumentReferenceRoute = require('./routes/fhir-documentreference.route');
 const htmlRoute = require('./routes/html.route');
 
 class Server {
@@ -98,13 +98,13 @@ class Server {
 			express.static(path.join(__dirname, '../../docs'))
 		);
 
-		this.app.use('/api/converter', htmlRoute(this.config.routes.html));
+		this.app.use('/api/converter/html', htmlRoute(this.config.routes.html));
 		this.app.use(
-			'/api/converter',
+			'/api/converter/fhir/binary',
 			fhirBinaryRoute(this.config.routes['fhir/binary'])
 		);
 		this.app.use(
-			'/api/converter',
+			'/api/converter/fhir/documentreference',
 			fhirDocumentReferenceRoute(
 				this.config.routes['fhir/documentreference']
 			)
@@ -156,7 +156,6 @@ class Server {
 	 */
 	listen() {
 		const server = this.config;
-		const port = process.env.PORT;
 		// Update the express app to be an instance of createServer
 		if (server.https === true) {
 			const options = {};
@@ -177,11 +176,11 @@ class Server {
 		}
 
 		// Start the app
-		this.app.listen(port || server.port);
+		this.app.listen(process.env.PORT || server.port);
 		console.log(
 			`${process.env.npm_package_name} listening for requests at ${
 				this.config.protocol
-			}://127.0.0.1:${port || server.port}`
+			}://127.0.0.1:${process.env.PORT || server.port}`
 		);
 
 		// Return self for chaining

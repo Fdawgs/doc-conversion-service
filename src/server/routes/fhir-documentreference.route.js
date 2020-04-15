@@ -11,6 +11,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 const router = new Router();
+
 /**
  * @api {options} /api/converter/fhir/documentreference DocumentReference - OPTIONS
  * @apiName OptionsHtml
@@ -163,11 +164,11 @@ const router = new Router();
 
 /**
  * @author Frazer Smith
- * @description Handles routing for /fhir/documentreference path.
+ * @description Handles routing to convert a request to a FHIR DocumentReference resource.
  * @param {Object} config
  * @param {Object} config.cors
  * @param {Object=} config.sanitize - Sanitization configuration values.
- * @returns {Router} express router instance.
+ * @returns {Router} Express router instance.
  */
 module.exports = function fhirRoute(config) {
 	router.use(
@@ -175,20 +176,16 @@ module.exports = function fhirRoute(config) {
 		sanitize(config.sanitize),
 		cors(config.cors)
 	);
+
 	// DocumentReference FHIR resource generation
 	router
-		.route('/fhir/documentreference')
-		.options()
-		.post(
-			upload.array('document'),
-			// TODO: Add middleware that derives values from document if possible
-			fhirDocumentReference(),
-			(req, res) => {
-				res.send(req.resource.documentReference);
-			}
-		)
+		.route('/')
+		.post(upload.array('document'), fhirDocumentReference(), (req, res) => {
+			res.send(req.resource.documentReference);
+		})
 		.put(upload.array('document'), fhirDocumentReference(), (req, res) => {
 			res.send(req.resource.documentReference);
 		});
+
 	return router;
 };

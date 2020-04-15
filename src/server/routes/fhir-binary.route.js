@@ -106,11 +106,11 @@ const router = new Router();
 
 /**
  * @author Frazer Smith
- * @description Handles routing for /fhir/binary path.
+ * @description Handles routing to convert a request to a FHIR Binary resource.
  * @param {Object} config
  * @param {Object} config.cors
  * @param {Object=} config.sanitize - Sanitization configuration values.
- * @returns {Router} express router instance.
+ * @returns {Router} Express router instance.
  */
 module.exports = function fhirRoute(config) {
 	router.use(
@@ -120,8 +120,7 @@ module.exports = function fhirRoute(config) {
 
 	// Binary FHIR resource generation
 	router
-		.route('/fhir/binary')
-		.options()
+		.route('/')
 		.post(
 			upload.single('document'),
 			sanitize(config.sanitize),
