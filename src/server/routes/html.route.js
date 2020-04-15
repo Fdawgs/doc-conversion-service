@@ -85,7 +85,7 @@ const router = new Router();
  * @param {Object=} config.htmltidy - HTMLTidy2 configuration values.
  * @param {Object=} config.poppler - Poppler conversion configuration values.
  * @param {Object=} config.sanitize - Sanitization configuration values.
- * @returns {Router} express router instance.
+ * @returns {Router} Express router instance.
  */
 module.exports = function htmlRoute(config) {
 	router.use(

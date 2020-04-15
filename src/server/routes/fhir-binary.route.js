@@ -110,7 +110,7 @@ const router = new Router();
  * @param {Object} config
  * @param {Object} config.cors
  * @param {Object=} config.sanitize - Sanitization configuration values.
- * @returns {Router} express router instance.
+ * @returns {Router} Express router instance.
  */
 module.exports = function fhirRoute(config) {
 	router.use(
