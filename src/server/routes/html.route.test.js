@@ -33,17 +33,17 @@ describe('HTML conversion route', () => {
 				expect(res.status).toBe(400);
 				expect(res.text).toBe('Failed to convert PDF to HTML');
 			});
-    });
-    test('Should return converted document', () => {
+	});
+	test('Should return converted document', () => {
 		return request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
-            .set('Accept', '*/*')
-            .set('Content-Type', 'application/pdf')
-            .send(fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'))
+			.set('Accept', '*/*')
+			.set('Content-Type', 'application/pdf')
+			.send(fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'))
 			.then((res) => {
-                expect(res.status).toBe(200);
+				expect(res.status).toBe(200);
 				expect(isHtml(res.text)).toBe(true);
-			});        
-    })
+			});
+	});
 });

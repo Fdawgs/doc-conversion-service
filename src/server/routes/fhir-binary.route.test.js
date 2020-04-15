@@ -31,36 +31,36 @@ describe('FHIR Binary resource route', () => {
 				expect(res.status).toBe(400);
 				expect(res.text).toBe('File missing from request');
 			});
-    });
-    test('Should return converted document', () => {
+	});
+	test('Should return converted document', () => {
 		return request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
-            .set('Accept', '*/*')
-            .attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
+			.set('Accept', '*/*')
+			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
 			.then((res) => {
-                const responseResource = JSON.parse(res.text);
+				const responseResource = JSON.parse(res.text);
 
-                expect(res.status).toBe(200);
-                expect(responseResource.resourceType).toBe('Binary');
-                expect(responseResource.contentType).toBe('application/pdf');
-			});        
-    });
+				expect(res.status).toBe(200);
+				expect(responseResource.resourceType).toBe('Binary');
+				expect(responseResource.contentType).toBe('application/pdf');
+			});
+	});
 
-    test('Should return converted document with id value set', () => {
+	test('Should return converted document with id value set', () => {
 		return request
 			.put(route)
 			.set('Authorization', 'Bearer Jimmini')
-            .set('Accept', '*/*')
-            .field('id', '12')
-            .attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
+			.set('Accept', '*/*')
+			.field('id', '12')
+			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
 			.then((res) => {
-                const responseResource = JSON.parse(res.text);
+				const responseResource = JSON.parse(res.text);
 
-                expect(res.status).toBe(200);
-                expect(responseResource.resourceType).toBe('Binary');
-                expect(responseResource.id).toBe(12);
-                expect(responseResource.contentType).toBe('application/pdf');
-			});        
-    })
+				expect(res.status).toBe(200);
+				expect(responseResource.resourceType).toBe('Binary');
+				expect(responseResource.id).toBe(12);
+				expect(responseResource.contentType).toBe('application/pdf');
+			});
+	});
 });

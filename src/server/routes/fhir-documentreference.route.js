@@ -180,13 +180,9 @@ module.exports = function fhirRoute(config) {
 	// DocumentReference FHIR resource generation
 	router
 		.route('/')
-		.post(
-			upload.array('document'),
-			fhirDocumentReference(),
-			(req, res) => {
-				res.send(req.resource.documentReference);
-			}
-		)
+		.post(upload.array('document'), fhirDocumentReference(), (req, res) => {
+			res.send(req.resource.documentReference);
+		})
 		.put(upload.array('document'), fhirDocumentReference(), (req, res) => {
 			res.send(req.resource.documentReference);
 		});

@@ -36,9 +36,9 @@ describe('FHIR DocumentReference resource route', () => {
 		return request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
-            .set('Accept', '*/*')
-            .field('status', 'test')
-            .field('type', 'test')
+			.set('Accept', '*/*')
+			.field('status', 'test')
+			.field('type', 'test')
 			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
 			.then((res) => {
 				const responseResource = JSON.parse(res.text);
@@ -55,17 +55,17 @@ describe('FHIR DocumentReference resource route', () => {
 		return request
 			.put(route)
 			.set('Authorization', 'Bearer Jimmini')
-            .set('Accept', '*/*')
-            .field('id', '12')
-            .field('status', 'test')
-            .field('type', 'test')
+			.set('Accept', '*/*')
+			.field('id', '12')
+			.field('status', 'test')
+			.field('type', 'test')
 			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
 			.then((res) => {
 				const responseResource = JSON.parse(res.text);
 
-                expect(res.status).toBe(200);
-                expect(responseResource.resourceType).toBe('DocumentReference');
-                expect(responseResource.id).toBe(12);
+				expect(res.status).toBe(200);
+				expect(responseResource.resourceType).toBe('DocumentReference');
+				expect(responseResource.id).toBe(12);
 				expect(responseResource.content[0].attachment.contentType).toBe(
 					'application/pdf'
 				);
