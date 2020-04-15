@@ -98,7 +98,6 @@ module.exports = function htmlRoute(config) {
 		.route('/html')
 		.options()
 		.post(
-			cors(config.cors),
 			bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 			poppler(config.poppler),
 			htmltidy(config.htmltidy),
