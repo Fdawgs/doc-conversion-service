@@ -1,3 +1,26 @@
+## <small>4.0.3 (2020-04-15)</small>
+
+-   tests(routes): add binary route test ([e63867b](https://github.com/Fdawgs/doc-conversion-service/commit/e63867b))
+-   tests(routes): add documentreference route test ([1c87bed](https://github.com/Fdawgs/doc-conversion-service/commit/1c87bed))
+-   tests(routes): add html route test ([dc649bd](https://github.com/Fdawgs/doc-conversion-service/commit/dc649bd))
+-   tests(routes): change expected id value ([84707f0](https://github.com/Fdawgs/doc-conversion-service/commit/84707f0))
+-   fix(routes): correct cors overwriting each option call ([1f64d27](https://github.com/Fdawgs/doc-conversion-service/commit/1f64d27))
+-   fix(server): correct require path for documentreference route ([d6ba4d1](https://github.com/Fdawgs/doc-conversion-service/commit/d6ba4d1))
+-   style(routes): add whitespace ([6e193b8](https://github.com/Fdawgs/doc-conversion-service/commit/6e193b8))
+-   style(routes): format route tests ([10b97de](https://github.com/Fdawgs/doc-conversion-service/commit/10b97de))
+-   chore(config): remove redundant style source from csp ([f56b0de](https://github.com/Fdawgs/doc-conversion-service/commit/f56b0de))
+-   chore(config): tidy sanitize middleware config ([8850ca2](https://github.com/Fdawgs/doc-conversion-service/commit/8850ca2))
+-   chore(deps-dev): bump jest from 25.2.7 to 25.3.0 ([45c877c](https://github.com/Fdawgs/doc-conversion-service/commit/45c877c))
+-   chore(deps-dev): bump nodemon from 2.0.2 to 2.0.3 ([f2598fc](https://github.com/Fdawgs/doc-conversion-service/commit/f2598fc))
+-   chore(deps-dev): bump prettier from 2.0.2 to 2.0.4 ([159729b](https://github.com/Fdawgs/doc-conversion-service/commit/159729b))
+-   chore(deps): bump node-poppler from 1.5.2 to 1.6.0 ([0580ac1](https://github.com/Fdawgs/doc-conversion-service/commit/0580ac1))
+-   chore(deps): bump sanitize-middleware from 2.0.4 to 2.0.5 ([59724a2](https://github.com/Fdawgs/doc-conversion-service/commit/59724a2))
+-   chore(package): move runinband option to correct jest script ([6c91b4c](https://github.com/Fdawgs/doc-conversion-service/commit/6c91b4c))
+-   refactor(routes): remove redundant cors function call ([5001bd1](https://github.com/Fdawgs/doc-conversion-service/commit/5001bd1))
+-   refactor(server): remove unused variable ([b9a3244](https://github.com/Fdawgs/doc-conversion-service/commit/b9a3244))
+-   ci(travis): remove dupe-check step ([6606f13](https://github.com/Fdawgs/doc-conversion-service/commit/6606f13))
+-   docs(readme): update pm2-windows-service link ([3615c7c](https://github.com/Fdawgs/doc-conversion-service/commit/3615c7c))
+
 ## <small>4.0.2 (2020-04-03)</small>
 
 -   chore(deps-dev): bump jest from 25.2.4 to 25.2.7 ([97bfff9](https://github.com/Fdawgs/doc-conversion-service/commit/97bfff9))
