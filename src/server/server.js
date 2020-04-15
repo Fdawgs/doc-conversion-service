@@ -156,7 +156,6 @@ class Server {
 	 */
 	listen() {
 		const server = this.config;
-		const port = process.env.PORT;
 		// Update the express app to be an instance of createServer
 		if (server.https === true) {
 			const options = {};
@@ -177,11 +176,11 @@ class Server {
 		}
 
 		// Start the app
-		this.app.listen(port || server.port);
+		this.app.listen(process.env.PORT || server.port);
 		console.log(
 			`${process.env.npm_package_name} listening for requests at ${
 				this.config.protocol
-			}://127.0.0.1:${port || server.port}`
+			}://127.0.0.1:${process.env.PORT || server.port}`
 		);
 
 		// Return self for chaining
