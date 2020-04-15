@@ -3,7 +3,7 @@
  */
 const serverConfig = {
 	https: false,
-	port: 8204,
+	port: 3000,
 	auth: {
 		apiKeys: [
 			{
@@ -117,12 +117,7 @@ const helmetConfig = {
 		directives: {
 			defaultSrc: ["'self'", 'fonts.gstatic.com'],
 			scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-			styleSrc: [
-				"'self'",
-				"'unsafe-inline'",
-				'fonts.googleapis.com',
-				'fonts.gstatic.com'
-			]
+			styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com']
 		}
 	},
 	frameguard: {
