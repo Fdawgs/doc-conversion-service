@@ -164,7 +164,7 @@ const router = new Router();
 
 /**
  * @author Frazer Smith
- * @description Handles routing for /fhir/documentreference path.
+ * @description Handles routing to convert a request to a FHIR DocumentReference resource.
  * @param {Object} config
  * @param {Object} config.cors
  * @param {Object=} config.sanitize - Sanitization configuration values.
@@ -176,13 +176,12 @@ module.exports = function fhirRoute(config) {
 		sanitize(config.sanitize),
 		cors(config.cors)
 	);
+
 	// DocumentReference FHIR resource generation
 	router
-		.route('/fhir/documentreference')
-		.options()
+		.route('/')
 		.post(
 			upload.array('document'),
-			// TODO: Add middleware that derives values from document if possible
 			fhirDocumentReference(),
 			(req, res) => {
 				res.send(req.resource.documentReference);

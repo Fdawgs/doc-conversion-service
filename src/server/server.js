@@ -98,9 +98,9 @@ class Server {
 			express.static(path.join(__dirname, '../../docs'))
 		);
 
-		this.app.use('/api/converter', htmlRoute(this.config.routes.html));
+		this.app.use('/api/converter/html', htmlRoute(this.config.routes.html));
 		this.app.use(
-			'/api/converter',
+			'/api/converter/fhir/binary',
 			fhirBinaryRoute(this.config.routes['fhir/binary'])
 		);
 		this.app.use(

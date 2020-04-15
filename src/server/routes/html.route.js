@@ -79,7 +79,7 @@ const router = new Router();
 
 /**
  * @author Frazer Smith
- * @description Handles routing for /html/ path.
+ * @description Handles routing to convert a request with a PDF file as its body into HTML.
  * @param {Object} config
  * @param {Object} config.cors
  * @param {Object=} config.htmltidy - HTMLTidy2 configuration values.
@@ -95,8 +95,7 @@ module.exports = function htmlRoute(config) {
 	);
 
 	router
-		.route('/html')
-		.options()
+		.route('/')
 		.post(
 			bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
 			poppler(config.poppler),
