@@ -29,7 +29,7 @@ class Server {
 		// Setup our express instance
 		this.app = express();
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 
@@ -41,7 +41,7 @@ class Server {
 	configureErrorHandling() {
 		this.app.use(errorHandler());
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 
@@ -54,7 +54,7 @@ class Server {
 		// Add compression
 		this.app.use(compression({ level: 9 }));
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 
@@ -70,7 +70,7 @@ class Server {
 			})
 		);
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 
@@ -84,7 +84,7 @@ class Server {
 		// Use Helmet to set response headers
 		this.app.use(helmet(helmetConfig));
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 
@@ -110,7 +110,7 @@ class Server {
 			)
 		);
 
-		// return self for chaining
+		// Return self for chaining
 		return this;
 	}
 
