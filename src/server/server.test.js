@@ -1,7 +1,7 @@
 const {
 	helmetConfig,
 	serverConfig,
-	winstonRotateConfig
+	loggerConfig
 } = require('../config');
 const Server = require('./server');
 
@@ -14,7 +14,7 @@ describe('Server deployment', () => {
 		const server = new Server()
 			.configurePassport()
 			.configureHelmet(helmetConfig)
-			.configureWinston(winstonRotateConfig)
+			.configureLogging(loggerConfig)
 			.configureMiddleware()
 			.configureErrorHandling()
 			.listen();
@@ -31,7 +31,7 @@ describe('Server deployment', () => {
 			const server = new Server(httpsServerConfig)
 				.configurePassport()
 				.configureHelmet(helmetConfig)
-				.configureWinston(winstonRotateConfig)
+				.configureLogging(loggerConfig)
 				.configureMiddleware()
 				.configureRoutes()
 				.configureErrorHandling()

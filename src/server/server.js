@@ -116,14 +116,12 @@ class Server {
 
 	/**
 	 * @author Frazer Smith
-	 * @description Sets Winston Daily Rotate options for server.
-	 * Useful as the Mirth logs will only show the requests coming from
-	 * localhost.
-	 * @param {Object} winstonRotateConfig - Winston Daily Rotate configuration values.
+	 * @description Sets logging options for server.
+	 * @param {Object} loggerConfig - Logger configuration values.
 	 * @returns {this} self
 	 */
-	configureWinston(winstonRotateConfig) {
-		const transport = new WinstonRotate(winstonRotateConfig);
+	configureLogging(loggerConfig) {
+		const transport = new WinstonRotate(loggerConfig);
 
 		this.app.use(
 			expressWinston.logger({
