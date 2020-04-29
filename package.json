@@ -37,7 +37,7 @@
 	},
 	"devDependencies": {
 		"@commitlint/config-conventional": "^8.3.4",
-		"apidoc": "^0.20.1",
+		"apidoc": "^0.22.0",
 		"conventional-changelog-cli": "^2.0.31",
 		"coveralls": "^3.1.0",
 		"cross-env": "^7.0.2",
