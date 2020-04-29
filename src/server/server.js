@@ -1,15 +1,14 @@
 const compression = require('compression');
 const express = require('express');
-const expressWinston = require('express-winston');
+const expressPino = require('express-pino-logger');
 const fs = require('fs');
 const helmet = require('helmet');
 const http = require('http');
 const https = require('https');
 const passport = require('passport');
 const path = require('path');
+const rotatingLogStream = require('file-stream-rotator');
 const { Strategy } = require('passport-http-bearer');
-const winston = require('winston');
-const WinstonRotate = require('winston-daily-rotate-file');
 
 // Import utils
 const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
@@ -116,33 +115,16 @@ class Server {
 
 	/**
 	 * @author Frazer Smith
-	 * @description Sets Winston Daily Rotate options for server.
-	 * Useful as the Mirth logs will only show the requests coming from
-	 * localhost.
-	 * @param {Object} winstonRotateConfig - Winston Daily Rotate configuration values.
+	 * @description Sets logging options for server.
+	 * @param {Object} loggerConfig - Logger configuration values.
 	 * @returns {this} self
 	 */
-	configureWinston(winstonRotateConfig) {
-		const transport = new WinstonRotate(winstonRotateConfig);
-
+	configureLogging(loggerConfig) {
 		this.app.use(
-			expressWinston.logger({
-				format: winston.format.combine(
-					winston.format.colorize(),
-					winston.format.json()
-				),
-				requestWhitelist: [
-					'url',
-					'headers',
-					'method',
-					'httpVersion',
-					'originalUrl',
-					'query',
-					'ip',
-					'_startTime'
-				],
-				transports: [transport]
-			})
+			expressPino(
+				loggerConfig.options,
+				rotatingLogStream.getStream(loggerConfig.rotation)
+			)
 		);
 
 		// Return self for chaining
