@@ -1,15 +1,14 @@
 const compression = require('compression');
 const express = require('express');
-const expressWinston = require('express-winston');
+const expressPino = require('express-pino-logger');
 const fs = require('fs');
 const helmet = require('helmet');
 const http = require('http');
 const https = require('https');
 const passport = require('passport');
 const path = require('path');
+const rotatingLogStream = require('file-stream-rotator');
 const { Strategy } = require('passport-http-bearer');
-const winston = require('winston');
-const WinstonRotate = require('winston-daily-rotate-file');
 
 // Import utils
 const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
@@ -121,26 +120,11 @@ class Server {
 	 * @returns {this} self
 	 */
 	configureLogging(loggerConfig) {
-		const transport = new WinstonRotate(loggerConfig);
-
 		this.app.use(
-			expressWinston.logger({
-				format: winston.format.combine(
-					winston.format.colorize(),
-					winston.format.json()
-				),
-				requestWhitelist: [
-					'url',
-					'headers',
-					'method',
-					'httpVersion',
-					'originalUrl',
-					'query',
-					'ip',
-					'_startTime'
-				],
-				transports: [transport]
-			})
+			expressPino(
+				loggerConfig.options,
+				rotatingLogStream.getStream(loggerConfig.rotation)
+			)
 		);
 
 		// Return self for chaining

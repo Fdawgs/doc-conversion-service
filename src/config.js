@@ -127,16 +127,33 @@ const helmetConfig = {
 	hidePoweredBy: true
 };
 
-// Refer to option documention here: https://github.com/winstonjs/winston-daily-rotate-file/blob/master/README.md#options
 const loggerConfig = {
-	auditFile: 'logs/logging-audit.json',
-	datePattern: 'YYYY-MM-DD',
-	dirname: 'logs',
-	extension: '.json',
-	filename: 'doc-service-log-%DATE%',
-	maxFiles: '14d',
-	maxSize: '20m',
-	zippedArchive: true
+	// Pino options: https://github.com/pinojs/pino-http#custom-serializers
+	options: {
+		serializers: {
+			req(req) {
+				return {
+					url: req.url,
+					ip: req.raw.ip,
+					headers: req.headers,
+					method: req.method,
+					query: req.raw.query,
+					httpVersion: req.raw.httpVersion
+				};
+			},
+			res(res) {
+				return { statusCode: res.statusCode };
+			}
+		}
+	},
+
+	// Rotation options: https://github.com/rogerc/file-stream-rotator/#options
+	rotation: {
+		filename: `${process.cwd()}/logs/doc-con-service-%DATE%.log`,
+		frequency: 'daily',
+		verbose: false,
+		date_format: 'YYYY-MM-DD'
+	}
 };
 
 module.exports = {
