@@ -42,47 +42,50 @@ module.exports = function popplerMiddleware(config = {}) {
 		const id = v4();
 		const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
 		const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
-		fs.writeFileSync(tempPdfFile, req.body);
+		try {
+			fs.writeFileSync(tempPdfFile, req.body);
 
-		const poppler = new Poppler(this.config.binPath);
+			const poppler = new Poppler(this.config.binPath);
 
-		await poppler.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile).then(
-			() => {
-				const dom = new JSDOM(
-					fs.readFileSync(tempHtmlFile, {
-						encoding: this.config.encoding
-					})
-				);
+			await poppler
+				.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile)
+				.then(() => {
+					const dom = new JSDOM(
+						fs.readFileSync(tempHtmlFile, {
+							encoding: this.config.encoding
+						})
+					);
 
-				// Set document language
-				const html = dom.window.document.querySelector('html');
-				html.setAttribute('lang', 'en');
-				html.setAttribute('xml:lang', 'en');
+					// Set document language
+					const html = dom.window.document.querySelector('html');
+					html.setAttribute('lang', 'en');
+					html.setAttribute('xml:lang', 'en');
 
-				// Remove excess title and meta tags left behind by Poppler
-				const titles = dom.window.document.querySelectorAll('title');
-				for (let index = 1; index < titles.length; index += 1) {
-					titles[index].parentNode.removeChild(titles[index]);
-				}
-				const metas = dom.window.document.querySelectorAll('meta');
-				for (let index = 1; index < metas.length; index += 1) {
-					metas[index].parentNode.removeChild(metas[index]);
-				}
+					// Remove excess title and meta tags left behind by Poppler
+					const titles = dom.window.document.querySelectorAll(
+						'title'
+					);
+					for (let index = 1; index < titles.length; index += 1) {
+						titles[index].parentNode.removeChild(titles[index]);
+					}
+					const metas = dom.window.document.querySelectorAll('meta');
+					for (let index = 1; index < metas.length; index += 1) {
+						metas[index].parentNode.removeChild(metas[index]);
+					}
 
-				req.body = dom.window.document.documentElement.outerHTML;
+					req.body = dom.window.document.documentElement.outerHTML;
 
-				req.doclocation = {
-					directory: this.config.tempDirectory,
-					html: tempHtmlFile,
-					id,
-					pdf: tempPdfFile
-				};
-				next();
-			},
-			() => {
-				res.status(400);
-				next(new Error('Failed to convert PDF to HTML'));
-			}
-		);
+					req.doclocation = {
+						directory: this.config.tempDirectory,
+						html: tempHtmlFile,
+						id,
+						pdf: tempPdfFile
+					};
+					next();
+				});
+		} catch {
+			res.status(400);
+			next(new Error('Failed to convert PDF to HTML'));
+		}
 	};
 };
