@@ -21,9 +21,10 @@
 	"jest": {
 		"clearMocks": true,
 		"collectCoverageFrom": [
-			"src/**/*.js"
+			"src/server/**/*.js"
 		],
-		"testEnvironment": "node"
+		"testEnvironment": "node",
+		"testTimeout": 10000
 	},
 	"prettier": {
 		"arrowParens": "always",
