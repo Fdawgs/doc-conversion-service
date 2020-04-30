@@ -6,10 +6,6 @@ const {
 const Server = require('./server');
 
 describe('Server deployment', () => {
-	beforeAll(() => {
-		jest.setTimeout(20000);
-	});
-
 	test('Should assign default values if none provided', async () => {
 		const server = new Server()
 			.configurePassport()

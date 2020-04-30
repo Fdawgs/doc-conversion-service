@@ -23,7 +23,8 @@
 		"collectCoverageFrom": [
 			"src/**/*.js"
 		],
-		"testEnvironment": "node"
+		"testEnvironment": "node",
+		"testTimeout": 10000
 	},
 	"prettier": {
 		"arrowParens": "always",
