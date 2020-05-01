@@ -1,3 +1,22 @@
+## <small>4.0.4 (2020-05-01)</small>
+
+-   chore(deps-dev): bump apidoc from 0.20.1 to 0.22.0 ([7879b32](https://github.com/Fdawgs/doc-conversion-service/commit/7879b32))
+-   chore(deps-dev): bump coveralls from 3.0.11 to 3.1.0 ([cdf4f93](https://github.com/Fdawgs/doc-conversion-service/commit/cdf4f93))
+-   chore(deps-dev): bump eslint-config-prettier from 6.10.1 to 6.11.0 ([dd7818d](https://github.com/Fdawgs/doc-conversion-service/commit/dd7818d))
+-   chore(deps-dev): bump jest from 25.3.0 to 25.5.1 ([e783209](https://github.com/Fdawgs/doc-conversion-service/commit/e783209))
+-   chore(deps-dev): bump jest from 25.5.1 to 25.5.2 ([0e299df](https://github.com/Fdawgs/doc-conversion-service/commit/0e299df))
+-   chore(deps-dev): bump jest from 25.5.2 to 25.5.3 ([40d8095](https://github.com/Fdawgs/doc-conversion-service/commit/40d8095))
+-   chore(deps-dev): bump prettier from 2.0.4 to 2.0.5 ([995b4c2](https://github.com/Fdawgs/doc-conversion-service/commit/995b4c2))
+-   chore(deps): bump sanitize-middleware from 2.0.5 to 2.0.6 ([53149b9](https://github.com/Fdawgs/doc-conversion-service/commit/53149b9))
+-   chore(deps): bump uuid from 7.0.3 to 8.0.0 ([3aaef48](https://github.com/Fdawgs/doc-conversion-service/commit/3aaef48))
+-   tests: ignore index and config in coverage collection ([6581ad9](https://github.com/Fdawgs/doc-conversion-service/commit/6581ad9))
+-   tests: set jest timeout setting in package.json ([7b497ff](https://github.com/Fdawgs/doc-conversion-service/commit/7b497ff))
+-   fix(middleware): move file write into try...catch ([7dbf716](https://github.com/Fdawgs/doc-conversion-service/commit/7dbf716))
+-   refactor(server): rename configureWinston function to configureLogging ([790ce70](https://github.com/Fdawgs/doc-conversion-service/commit/790ce70))
+-   refactor(server): replace winston logging module with pino ([9c6fb2c](https://github.com/Fdawgs/doc-conversion-service/commit/9c6fb2c))
+-   style(server): capitalise leading character of comments ([fd39d2f](https://github.com/Fdawgs/doc-conversion-service/commit/fd39d2f))
+-   docs(readme): update example server port ([6ac6967](https://github.com/Fdawgs/doc-conversion-service/commit/6ac6967))
+
 ## <small>4.0.3 (2020-04-15)</small>
 
 -   tests(routes): add binary route test ([e63867b](https://github.com/Fdawgs/doc-conversion-service/commit/e63867b))
