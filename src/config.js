@@ -17,10 +17,11 @@ const serverConfig = {
 		]
 	},
 	ssl: {
-		cert: './ssl_certs/ydhclientcert.cer',
-		key: './ssl_certs/ydhclientcert.key',
+		cert: './ssl_certs/ydhclientcert.cer', // Example path
+		key: '',
 		pfx: {
-			pfx: './ssl_certs/ydhwildcard.pfx'
+			passphrase: '',
+			pfx: ''
 		}
 	},
 
