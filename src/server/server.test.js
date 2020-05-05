@@ -20,7 +20,7 @@ describe('Server deployment', () => {
 	});
 
 	test('Should set protocol to https with cert and key files', async () => {
-		const modServerConfig = { ...serverConfig };
+		const modServerConfig = JSON.parse(JSON.stringify(serverConfig));
 		modServerConfig.https = true;
 		modServerConfig.ssl.cert = `${process.cwd()}/test_ssl_cert/server.cert`;
 		modServerConfig.ssl.key = `${process.cwd()}/test_ssl_cert/server.key`;
@@ -43,7 +43,7 @@ describe('Server deployment', () => {
 	});
 
 	test('Should set protocol to https with pfx file and passphrase', async () => {
-		const modServerConfig = { ...serverConfig };
+		const modServerConfig = JSON.parse(JSON.stringify(serverConfig));
 		modServerConfig.https = true;
 		modServerConfig.ssl.pfx.pfx = `${process.cwd()}/test_ssl_cert/server.pfx`;
 		modServerConfig.ssl.pfx.passphrase = 'test';
