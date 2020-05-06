@@ -1,8 +1,4 @@
-const {
-	helmetConfig,
-	serverConfig,
-	loggerConfig
-} = require('../config');
+const { helmetConfig, serverConfig, loggerConfig } = require('../config');
 const Server = require('./server');
 
 describe('Server deployment', () => {

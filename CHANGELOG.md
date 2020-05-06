@@ -1,3 +1,17 @@
+## <small>4.0.5 (2020-05-06)</small>
+
+-   tests(middleware): check style elements still parsed with no type attr ([716edaa](https://github.com/Fdawgs/doc-conversion-service/commit/716edaa))
+-   tests(middleware): reorder expects to follow res, req, next input ([e8917ef](https://github.com/Fdawgs/doc-conversion-service/commit/e8917ef))
+-   tests(server): add test self-signed localhost pfx, key, and cert files ([889855f](https://github.com/Fdawgs/doc-conversion-service/commit/889855f))
+-   tests(server): align modified server config variable name across tests ([ee54684](https://github.com/Fdawgs/doc-conversion-service/commit/ee54684))
+-   tests(server): replace shallow spread with deep copies ([8afa4b2](https://github.com/Fdawgs/doc-conversion-service/commit/8afa4b2))
+-   refactor(middleware): pass error to next on failure to embed images ([14133cd](https://github.com/Fdawgs/doc-conversion-service/commit/14133cd))
+-   fix(config): add missing pfx passphrase key ([33156b2](https://github.com/Fdawgs/doc-conversion-service/commit/33156b2))
+-   fix(middleware): add missing else path ([b98052f](https://github.com/Fdawgs/doc-conversion-service/commit/b98052f))
+-   chore(deps-dev): bump eslint-plugin-jest from 23.8.2 to 23.9.0 ([209f485](https://github.com/Fdawgs/doc-conversion-service/commit/209f485))
+-   chore(deps-dev): bump jest from 25.5.3 to 26.0.1 ([f0982cd](https://github.com/Fdawgs/doc-conversion-service/commit/f0982cd))
+-   chore(deps): bump node-poppler from 1.6.0 to 1.7.0 ([b9aef3a](https://github.com/Fdawgs/doc-conversion-service/commit/b9aef3a))
+
 ## <small>4.0.4 (2020-05-01)</small>
 
 -   chore(deps-dev): bump apidoc from 0.20.1 to 0.22.0 ([7879b32](https://github.com/Fdawgs/doc-conversion-service/commit/7879b32))

@@ -62,7 +62,9 @@ describe('Embed HTML Images middleware', () => {
 		expect(req.results.embedded_images).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
-		expect(next.mock.calls[0][0].message.substring(0, 40)).toBe('Error: ENOENT: no such file or directory');
+		expect(next.mock.calls[0][0].message.substring(0, 40)).toBe(
+			'Error: ENOENT: no such file or directory'
+		);
 	});
 
 	test('Should build req.results if not defined', async () => {
