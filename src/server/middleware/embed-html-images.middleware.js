@@ -40,6 +40,8 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 			});
 			if (images.length > 0) {
 				req.results.embedded_images = 'Fixed';
+			}  else {
+				req.results.embedded_images = 'Passed';
 			}
 			req.body = dom.window.document.documentElement.outerHTML;
 			next();
