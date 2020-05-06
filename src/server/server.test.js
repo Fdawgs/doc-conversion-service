@@ -20,13 +20,13 @@ describe('Server deployment', () => {
 	});
 
 	test('Should set protocol to https with cert and key files', async () => {
-		const httpsServerConfig = { ...serverConfig };
-		httpsServerConfig.https = true;
-		httpsServerConfig.ssl.cert = `${process.cwd()}/test_ssl_cert/server.cert`;
-		httpsServerConfig.ssl.key = `${process.cwd()}/test_ssl_cert/server.key`;
+		const modServerConfig = JSON.parse(JSON.stringify(serverConfig));
+		modServerConfig.https = true;
+		modServerConfig.ssl.cert = `${process.cwd()}/test_ssl_cert/server.cert`;
+		modServerConfig.ssl.key = `${process.cwd()}/test_ssl_cert/server.key`;
 
 		try {
-			const server = new Server(httpsServerConfig)
+			const server = new Server(modServerConfig)
 				.configureHelmet(helmetConfig)
 				.configureLogging(loggerConfig)
 				.configurePassport()
@@ -43,13 +43,13 @@ describe('Server deployment', () => {
 	});
 
 	test('Should set protocol to https with pfx file and passphrase', async () => {
-		const httpsServerConfig = { ...serverConfig };
-		httpsServerConfig.https = true;
-		httpsServerConfig.ssl.pfx.pfx = `${process.cwd()}/test_ssl_cert/server.pfx`;
-		httpsServerConfig.ssl.pfx.passphrase = 'test';
+		const modServerConfig = JSON.parse(JSON.stringify(serverConfig));
+		modServerConfig.https = true;
+		modServerConfig.ssl.pfx.pfx = `${process.cwd()}/test_ssl_cert/server.pfx`;
+		modServerConfig.ssl.pfx.passphrase = 'test';
 
 		try {
-			const server = new Server(httpsServerConfig)
+			const server = new Server(modServerConfig)
 				.configureHelmet(helmetConfig)
 				.configureLogging(loggerConfig)
 				.configurePassport()
