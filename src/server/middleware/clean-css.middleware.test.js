@@ -26,8 +26,8 @@ describe('Clean CSS middleware', () => {
 		await middleware(req, res, next);
 		expect(typeof req.results).toBe('object');
 		expect(req.results.clean_css).toBe('Fixed');
-		expect(next).toHaveBeenCalledTimes(1);
 		expect(/font-family: arial;/gm.exec(req.body)).not.toBeNull();
+		expect(next).toHaveBeenCalledTimes(1);
 	});
 
 	test('Should continue to parse style elements with no type attribute', async () => {
