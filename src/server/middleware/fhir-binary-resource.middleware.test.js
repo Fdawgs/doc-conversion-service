@@ -54,6 +54,7 @@ describe('FHIR Binary resource middleware', () => {
 		expect(req.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should return FHIR resource and create own req.resource object', () => {
@@ -74,6 +75,7 @@ describe('FHIR Binary resource middleware', () => {
 		expect(req.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should return FHIR resource if id argument not present in body', () => {
@@ -93,5 +95,6 @@ describe('FHIR Binary resource middleware', () => {
 		expect(typeof req.resource.binary.id).toBe('string');
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 });

@@ -26,6 +26,7 @@ describe('Win 1252 Artifact middleware', () => {
 		expect(req.results.windows_1252).toBe('Fixed');
 		expect(req.body).not.toEqual(expect.stringMatching(artifacts));
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should build req.results if not defined', () => {
@@ -42,5 +43,6 @@ describe('Win 1252 Artifact middleware', () => {
 		middleware(req, res, next);
 		expect(typeof req.results).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 });

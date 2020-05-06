@@ -28,6 +28,7 @@ describe('Clean CSS middleware', () => {
 		expect(req.results.clean_css).toBe('Fixed');
 		expect(/font-family: arial;/gm.exec(req.body)).not.toBeNull();
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should continue to parse style elements with no type attribute', async () => {
@@ -45,6 +46,7 @@ describe('Clean CSS middleware', () => {
 		expect(typeof req.results).toBe('object');
 		expect(req.results.clean_css).toBe('Fixed');
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should flag file as passed if no issues found', async () => {
@@ -62,6 +64,7 @@ describe('Clean CSS middleware', () => {
 		expect(typeof req.results).toBe('object');
 		expect(req.results.clean_css).toBe('Passed');
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should build req.results if not defined', async () => {
@@ -78,5 +81,6 @@ describe('Clean CSS middleware', () => {
 		await middleware(req, res, next);
 		expect(typeof req.results).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 });

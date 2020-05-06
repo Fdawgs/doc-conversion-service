@@ -68,6 +68,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should return FHIR resource and create own req.resource object', () => {
@@ -96,6 +97,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should return FHIR resource if id argument not present in body', () => {
@@ -115,5 +117,6 @@ describe('FHIR DocumentReference resource middleware', () => {
 		expect(typeof req.resource.documentReference.id).toBe('string');
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 });
