@@ -4600,10 +4600,10 @@ node-notifier@^6.0.0:
     shellwords "^0.1.1"
     which "^1.3.1"
 
-node-poppler@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.6.0.tgz#8bd01a10548f0f70fdad2f7c87af9c4970b52062"
-  integrity sha512-Xoz9qnvfpXekAReVFoS/ctiyEgRN2SbteV/eATImG/ZrCshWE3hAjAG0JMd0BT43+DDfW9tP+lwySG5u/a+mFw==
+node-poppler@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.7.0.tgz#9348412275bc534bf2d883c8540ba8ab79f749f2"
+  integrity sha512-+dBq5in6CkIEwBr2Qe/D80K2Dd9QTiOsWW/wq7i77nNReYo1/yBUajDNDZVD7+a8bimcxNvl65fWmKbmCxS35w==
 
 nodemon@^2.0.3:
   version "2.0.3"
