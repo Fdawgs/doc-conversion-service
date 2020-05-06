@@ -46,8 +46,8 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 			req.body = dom.window.document.documentElement.outerHTML;
 			next();
 		} catch (error) {
-			req.results.embedded_images = error;
-			next();
+			res.status(400);
+			next(new Error(error));
 		}
 	};
 };

@@ -30,9 +30,9 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(next.mock.calls[0][0].message).toBe('File missing from request');
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0].message).toBe('File missing from request');
 	});
 
 	test('Should return FHIR resource if req.resource already present', () => {

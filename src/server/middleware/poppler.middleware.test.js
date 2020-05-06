@@ -67,10 +67,10 @@ describe('Poppler conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+		expect(res.statusCode).toBe(400);
+		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
 			'Failed to convert PDF to HTML'
 		);
-		expect(res.statusCode).toBe(400);
-		expect(next).toHaveBeenCalledTimes(1);
 	});
 });
