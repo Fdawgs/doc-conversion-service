@@ -22,8 +22,8 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 		const images = dom.window.document.querySelectorAll('img');
 
 		// Create results object for conversion results
-		if (typeof req.results === 'undefined') {
-			req.results = {};
+		if (typeof res.locals.results === 'undefined') {
+			res.locals.results = {};
 		}
 
 		try {
@@ -39,9 +39,9 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 				}
 			});
 			if (images.length > 0) {
-				req.results.embedded_images = 'Fixed';
+				res.locals.results.embedded_images = 'Fixed';
 			} else {
-				req.results.embedded_images = 'Passed';
+				res.locals.results.embedded_images = 'Passed';
 			}
 			req.body = dom.window.document.documentElement.outerHTML;
 			next();

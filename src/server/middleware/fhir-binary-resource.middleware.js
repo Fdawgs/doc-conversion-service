@@ -18,12 +18,12 @@ module.exports = function fhirBinResourceMiddleware() {
 			Object.assign(resource, req.body);
 
 			// Create resource object for conversion resource
-			if (typeof req.resource === 'undefined') {
-				req.resource = {};
+			if (typeof res.locals.resource === 'undefined') {
+				res.locals.resource = {};
 			}
 
 			res.set('content-type', 'application/fhir+json');
-			req.resource.binary = resource;
+			res.locals.resource.binary = resource;
 			next();
 		} else {
 			res.status(400);

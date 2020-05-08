@@ -126,7 +126,7 @@ module.exports = function fhirRoute(config) {
 			sanitize(config.sanitize),
 			fhirBinary(),
 			(req, res) => {
-				res.send(req.resource.binary);
+				res.send(res.locals.resource.binary);
 			}
 		)
 		.put(
@@ -134,7 +134,7 @@ module.exports = function fhirRoute(config) {
 			sanitize(),
 			fhirBinary(),
 			(req, res) => {
-				res.send(req.resource.binary);
+				res.send(res.locals.resource.binary);
 			}
 		);
 

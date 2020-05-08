@@ -12,8 +12,8 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 	return (req, res, next) => {
 		if (req.files && Object.keys(req.files).length) {
 			// Create resource object for conversion resource
-			if (typeof req.resource === 'undefined') {
-				req.resource = {};
+			if (typeof res.locals.resource === 'undefined') {
+				res.locals.resource = {};
 			}
 
 			/**
@@ -81,7 +81,7 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 			});
 
 			res.set('content-type', 'application/fhir+json');
-			req.resource.documentReference = resource;
+			res.locals.resource.documentReference = resource;
 			next();
 		} else {
 			res.status(400);
