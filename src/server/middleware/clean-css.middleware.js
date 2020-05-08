@@ -19,8 +19,8 @@ module.exports = function cleanCssMiddleware() {
 		}
 
 		// Create results object for conversion results
-		if (typeof req.results === 'undefined') {
-			req.results = {};
+		if (typeof res.locals.results === 'undefined') {
+			res.locals.results = {};
 		}
 
 		styles.forEach((element) => {
@@ -54,9 +54,9 @@ module.exports = function cleanCssMiddleware() {
 		});
 
 		if (styles.length > 0) {
-			req.results.clean_css = 'Fixed';
+			res.locals.results.clean_css = 'Fixed';
 		} else {
-			req.results.clean_css = 'Passed';
+			res.locals.results.clean_css = 'Passed';
 		}
 
 		req.body = dom.window.document.documentElement.outerHTML;

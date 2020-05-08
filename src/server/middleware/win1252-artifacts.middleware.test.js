@@ -23,13 +23,13 @@ describe('Win 1252 Artifact middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(req.results.windows_1252).toBe('Fixed');
+		expect(res.locals.results.windows_1252).toBe('Fixed');
 		expect(req.body).not.toEqual(expect.stringMatching(artifacts));
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should build req.results if not defined', () => {
+	test('Should build res.locals.results if not defined', () => {
 		const middleware = fixWin1252ArtifactsMiddleware();
 		const req = {
 			body: fs.readFileSync(
@@ -41,7 +41,7 @@ describe('Win 1252 Artifact middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.results).toBe('object');
+		expect(typeof res.locals.results).toBe('object');
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});

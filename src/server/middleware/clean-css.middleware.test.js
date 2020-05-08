@@ -24,8 +24,8 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
-		expect(typeof req.results).toBe('object');
-		expect(req.results.clean_css).toBe('Fixed');
+		expect(typeof res.locals.results).toBe('object');
+		expect(res.locals.results.clean_css).toBe('Fixed');
 		expect(/font-family: arial;/gm.exec(req.body)).not.toBeNull();
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -43,8 +43,8 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
-		expect(typeof req.results).toBe('object');
-		expect(req.results.clean_css).toBe('Fixed');
+		expect(typeof res.locals.results).toBe('object');
+		expect(res.locals.results.clean_css).toBe('Fixed');
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -61,13 +61,13 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
-		expect(typeof req.results).toBe('object');
-		expect(req.results.clean_css).toBe('Passed');
+		expect(typeof res.locals.results).toBe('object');
+		expect(res.locals.results.clean_css).toBe('Passed');
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should build req.results if not defined', async () => {
+	test('Should build res.locals.results if not defined', async () => {
 		const middleware = cleanCssMiddleware();
 		const req = {
 			body: fs.readFileSync(
@@ -79,7 +79,8 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
-		expect(typeof req.results).toBe('object');
+		expect(typeof res.locals.results).toBe('object');
+		expect(res.locals.results.clean_css).toBe('Fixed');
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});

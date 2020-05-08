@@ -41,7 +41,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		expect(next.mock.calls[0][0].message).toBe('File missing from request');
 	});
 
-	test('Should return FHIR resource if req.resource already present', () => {
+	test('Should return FHIR resource if res.locals.resource already present', () => {
 		const middleware = fhirDocumentReferenceMiddleware();
 
 		const query = {};
@@ -55,15 +55,15 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.resource).toBe('object');
-		expect(typeof req.resource.documentReference).not.toBe('undefined');
-		expect(req.resource.documentReference.id).toBe(args.id);
-		expect(req.resource.documentReference.type.text).toBe(args.type);
-		expect(req.resource.documentReference.status).toBe(args.status);
+		expect(typeof res.locals.resource).toBe('object');
+		expect(res.locals.resource.documentReference).not.toBeUndefined();
+		expect(res.locals.resource.documentReference.id).toBe(args.id);
+		expect(res.locals.resource.documentReference.type.text).toBe(args.type);
+		expect(res.locals.resource.documentReference.status).toBe(args.status);
 		expect(
-			req.resource.documentReference.context.practiceSetting.text
+			res.locals.resource.documentReference.context.practiceSetting.text
 		).toBe(args.specialty);
-		expect(req.resource.documentReference.subject.reference).toBe(
+		expect(res.locals.resource.documentReference.subject.reference).toBe(
 			`Patient/${args.subject}`
 		);
 		expect(res.statusCode).toBe(200);
@@ -71,7 +71,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should return FHIR resource and create own req.resource object', () => {
+	test('Should return FHIR resource and create own res.locals.resource object', () => {
 		const middleware = fhirDocumentReferenceMiddleware();
 
 		const query = {};
@@ -84,15 +84,15 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.resource).toBe('object');
-		expect(typeof req.resource.documentReference).not.toBe('undefined');
-		expect(req.resource.documentReference.id).toBe(args.id);
-		expect(req.resource.documentReference.type.text).toBe(args.type);
-		expect(req.resource.documentReference.status).toBe(args.status);
+		expect(typeof res.locals.resource).toBe('object');
+		expect(res.locals.resource.documentReference).not.toBeUndefined();
+		expect(res.locals.resource.documentReference.id).toBe(args.id);
+		expect(res.locals.resource.documentReference.type.text).toBe(args.type);
+		expect(res.locals.resource.documentReference.status).toBe(args.status);
 		expect(
-			req.resource.documentReference.context.practiceSetting.text
+			res.locals.resource.documentReference.context.practiceSetting.text
 		).toBe(args.specialty);
-		expect(req.resource.documentReference.subject.reference).toBe(
+		expect(res.locals.resource.documentReference.subject.reference).toBe(
 			`Patient/${args.subject}`
 		);
 		expect(res.statusCode).toBe(200);
@@ -112,9 +112,9 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.resource).toBe('object');
-		expect(typeof req.resource.documentReference).not.toBe('undefined');
-		expect(typeof req.resource.documentReference.id).toBe('string');
+		expect(typeof res.locals.resource).toBe('object');
+		expect(res.locals.resource.documentReference).not.toBeUndefined();
+		expect(typeof res.locals.resource.documentReference.id).toBe('string');
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();

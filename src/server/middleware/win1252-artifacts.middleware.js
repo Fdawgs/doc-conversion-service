@@ -12,12 +12,12 @@ module.exports = function fixWin1252ArtifactsMiddleware() {
 		const html = fixUtf8(req.body);
 
 		// Create results object for conversion results
-		if (typeof req.results === 'undefined') {
-			req.results = {};
+		if (typeof res.locals.results === 'undefined') {
+			res.locals.results = {};
 		}
 
 		req.body = html;
-		req.results.windows_1252 = 'Fixed';
+		res.locals.results.windows_1252 = 'Fixed';
 		next();
 	};
 };

@@ -35,7 +35,7 @@ describe('FHIR Binary resource middleware', () => {
 		expect(next.mock.calls[0][0].message).toBe('File missing from request');
 	});
 
-	test('Should return FHIR resource if req.resource already present', () => {
+	test('Should return FHIR resource if res.locals.resource already present', () => {
 		const middleware = fhirBinaryMiddleware();
 
 		const query = {};
@@ -49,15 +49,15 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.resource).toBe('object');
-		expect(typeof req.resource.binary).not.toBe('undefined');
-		expect(req.resource.binary.id).toBe(args.id);
+		expect(typeof res.locals.resource).toBe('object');
+		expect(res.locals.resource.binary).not.toBeUndefined();
+		expect(res.locals.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should return FHIR resource and create own req.resource object', () => {
+	test('Should return FHIR resource and create own res.locals.resource object', () => {
 		const middleware = fhirBinaryMiddleware();
 
 		const query = {};
@@ -70,9 +70,9 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.resource).toBe('object');
-		expect(typeof req.resource.binary).not.toBe('undefined');
-		expect(req.resource.binary.id).toBe(args.id);
+		expect(typeof res.locals.resource).toBe('object');
+		expect(res.locals.resource.binary).not.toBeUndefined();
+		expect(res.locals.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -90,9 +90,9 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof req.resource).toBe('object');
-		expect(typeof req.resource.binary).not.toBe('undefined');
-		expect(typeof req.resource.binary.id).toBe('string');
+		expect(typeof res.locals.resource).toBe('object');
+		expect(res.locals.resource.binary).not.toBeUndefined();
+		expect(typeof res.locals.resource.binary.id).toBe('string');
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
