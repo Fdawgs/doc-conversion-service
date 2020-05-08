@@ -42,10 +42,9 @@ describe('FHIR Binary resource middleware', () => {
 		const req = {
 			method: 'PUT',
 			body: Object.assign(query, args),
-			file,
-			resource: {}
+			file
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { resource: {} } });
 		const next = jest.fn();
 
 		middleware(req, res, next);
@@ -83,10 +82,9 @@ describe('FHIR Binary resource middleware', () => {
 
 		const req = {
 			method: 'PUT',
-			file,
-			resource: {}
+			file
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { resource: {} } });
 		const next = jest.fn();
 
 		middleware(req, res, next);

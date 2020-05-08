@@ -17,10 +17,9 @@ describe('Clean CSS middleware', () => {
 			),
 			query: {
 				fonts: 'arial'
-			},
-			results: {}
+			}
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);

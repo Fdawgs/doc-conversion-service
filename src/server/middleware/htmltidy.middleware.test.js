@@ -18,10 +18,9 @@ describe('Htmltidy2 conversion middleware', () => {
 			body: fs.readFileSync(
 				'./test_files/tester_bullet_issues-html.html',
 				{ encoding: 'UTF-8' }
-			),
-			results: {}
+			)
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);

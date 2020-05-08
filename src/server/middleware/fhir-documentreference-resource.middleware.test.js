@@ -48,10 +48,9 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const req = {
 			method: 'PUT',
 			body: Object.assign(query, args),
-			files,
-			resource: {}
+			files
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { resource: {} } });
 		const next = jest.fn();
 
 		middleware(req, res, next);
@@ -105,10 +104,9 @@ describe('FHIR DocumentReference resource middleware', () => {
 
 		const req = {
 			method: 'PUT',
-			files,
-			resource: {}
+			files
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { resource: {} } });
 		const next = jest.fn();
 
 		middleware(req, res, next);

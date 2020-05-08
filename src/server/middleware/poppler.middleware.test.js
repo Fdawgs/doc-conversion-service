@@ -18,16 +18,16 @@ describe('Poppler conversion middleware', () => {
 		const middleware = popplerMiddleware();
 
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
-			results: {}
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof req.doclocation).toBe('object');
+		expect(fs.existsSync('./src/server/temp/')).toBe(true);
 		expect(fs.existsSync(req.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -42,10 +42,9 @@ describe('Poppler conversion middleware', () => {
 		const middleware = popplerMiddleware(options);
 
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
-			results: {}
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -62,10 +61,9 @@ describe('Poppler conversion middleware', () => {
 		const middleware = popplerMiddleware();
 
 		const req = {
-			body: undefined,
-			results: {}
+			body: undefined
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);

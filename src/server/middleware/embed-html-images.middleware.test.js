@@ -17,10 +17,9 @@ describe('Embed HTML Images middleware', () => {
 			),
 			query: {
 				removealt: true
-			},
-			results: {}
+			}
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -35,10 +34,9 @@ describe('Embed HTML Images middleware', () => {
 		const req = {
 			body: fs.readFileSync('./test_files/empty-test.html', {
 				encoding: 'UTF-8'
-			}),
-			results: {}
+			})
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -54,10 +52,9 @@ describe('Embed HTML Images middleware', () => {
 			body: fs.readFileSync(
 				'./test_files/tester_bullet_issues-html.html',
 				{ encoding: 'UTF-8' }
-			),
-			results: {}
+			)
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
