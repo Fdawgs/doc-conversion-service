@@ -1,3 +1,11 @@
+## <small>4.0.6 (2020-05-08)</small>
+
+-   chore(deps-dev): bump apidoc from 0.22.0 to 0.22.1 ([acf9542](https://github.com/Fdawgs/doc-conversion-service/commit/acf9542))
+-   tests(middleware): extend test pass conditions ([31684a3](https://github.com/Fdawgs/doc-conversion-service/commit/31684a3))
+-   tests(middleware): refactor undefined type checks ([0f6dc5f](https://github.com/Fdawgs/doc-conversion-service/commit/0f6dc5f))
+-   tests(middleware): set res.locals object for mock response ([cc3e623](https://github.com/Fdawgs/doc-conversion-service/commit/cc3e623))
+-   refactor(middleware): use res.locals object for req scoped variables ([8fade83](https://github.com/Fdawgs/doc-conversion-service/commit/8fade83))
+
 ## <small>4.0.5 (2020-05-06)</small>
 
 -   tests(middleware): check style elements still parsed with no type attr ([716edaa](https://github.com/Fdawgs/doc-conversion-service/commit/716edaa))
