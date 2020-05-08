@@ -56,7 +56,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof res.locals.resource).toBe('object');
-		expect(typeof res.locals.resource.documentReference).not.toBe('undefined');
+		expect(res.locals.resource.documentReference).not.toBeUndefined();
 		expect(res.locals.resource.documentReference.id).toBe(args.id);
 		expect(res.locals.resource.documentReference.type.text).toBe(args.type);
 		expect(res.locals.resource.documentReference.status).toBe(args.status);
@@ -85,7 +85,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof res.locals.resource).toBe('object');
-		expect(typeof res.locals.resource.documentReference).not.toBe('undefined');
+		expect(res.locals.resource.documentReference).not.toBeUndefined();
 		expect(res.locals.resource.documentReference.id).toBe(args.id);
 		expect(res.locals.resource.documentReference.type.text).toBe(args.type);
 		expect(res.locals.resource.documentReference.status).toBe(args.status);
@@ -113,7 +113,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof res.locals.resource).toBe('object');
-		expect(typeof res.locals.resource.documentReference).not.toBe('undefined');
+		expect(res.locals.resource.documentReference).not.toBeUndefined();
 		expect(typeof res.locals.resource.documentReference.id).toBe('string');
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);

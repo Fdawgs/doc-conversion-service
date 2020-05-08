@@ -50,7 +50,7 @@ describe('FHIR Binary resource middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof res.locals.resource).toBe('object');
-		expect(typeof res.locals.resource.binary).not.toBe('undefined');
+		expect(res.locals.resource.binary).not.toBeUndefined();
 		expect(res.locals.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -71,7 +71,7 @@ describe('FHIR Binary resource middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof res.locals.resource).toBe('object');
-		expect(typeof res.locals.resource.binary).not.toBe('undefined');
+		expect(res.locals.resource.binary).not.toBeUndefined();
 		expect(res.locals.resource.binary.id).toBe(args.id);
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -91,7 +91,7 @@ describe('FHIR Binary resource middleware', () => {
 
 		middleware(req, res, next);
 		expect(typeof res.locals.resource).toBe('object');
-		expect(typeof res.locals.resource.binary).not.toBe('undefined');
+		expect(res.locals.resource.binary).not.toBeUndefined();
 		expect(typeof res.locals.resource.binary.id).toBe('string');
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
