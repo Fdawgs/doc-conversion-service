@@ -35,10 +35,9 @@ describe('Clean CSS middleware', () => {
 		const req = {
 			body: fs.readFileSync('./test_files/empty-test-style.html', {
 				encoding: 'UTF-8'
-			}),
-			results: {}
+			})
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
@@ -53,10 +52,9 @@ describe('Clean CSS middleware', () => {
 		const req = {
 			body: fs.readFileSync('./test_files/empty-test.html', {
 				encoding: 'UTF-8'
-			}),
-			results: {}
+			})
 		};
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
