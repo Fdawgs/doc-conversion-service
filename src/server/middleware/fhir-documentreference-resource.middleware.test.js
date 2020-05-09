@@ -54,17 +54,26 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof res.locals.resource).toBe('object');
-		expect(res.locals.resource.documentReference).not.toBeUndefined();
-		expect(res.locals.resource.documentReference.id).toBe(args.id);
-		expect(res.locals.resource.documentReference.type.text).toBe(args.type);
-		expect(res.locals.resource.documentReference.status).toBe(args.status);
-		expect(
-			res.locals.resource.documentReference.context.practiceSetting.text
-		).toBe(args.specialty);
-		expect(res.locals.resource.documentReference.subject.reference).toBe(
-			`Patient/${args.subject}`
-		);
+
+		expect(res.locals).toMatchObject({
+			resource: {
+				documentReference: {
+					id: args.id,
+					type: {
+						text: args.type
+					},
+					status: args.status,
+					context: {
+						practiceSetting: {
+							text: args.specialty
+						}
+					},
+					subject: {
+						reference: `Patient/${args.subject}`
+					}
+				}
+			}
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -83,17 +92,25 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof res.locals.resource).toBe('object');
-		expect(res.locals.resource.documentReference).not.toBeUndefined();
-		expect(res.locals.resource.documentReference.id).toBe(args.id);
-		expect(res.locals.resource.documentReference.type.text).toBe(args.type);
-		expect(res.locals.resource.documentReference.status).toBe(args.status);
-		expect(
-			res.locals.resource.documentReference.context.practiceSetting.text
-		).toBe(args.specialty);
-		expect(res.locals.resource.documentReference.subject.reference).toBe(
-			`Patient/${args.subject}`
-		);
+		expect(res.locals).toMatchObject({
+			resource: {
+				documentReference: {
+					id: args.id,
+					type: {
+						text: args.type
+					},
+					status: args.status,
+					context: {
+						practiceSetting: {
+							text: args.specialty
+						}
+					},
+					subject: {
+						reference: `Patient/${args.subject}`
+					}
+				}
+			}
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -110,9 +127,13 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof res.locals.resource).toBe('object');
-		expect(res.locals.resource.documentReference).not.toBeUndefined();
-		expect(typeof res.locals.resource.documentReference.id).toBe('string');
+		expect(res.locals).toMatchObject({
+			resource: {
+				documentReference: {
+					id: expect.any(String)
+				}
+			}
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();

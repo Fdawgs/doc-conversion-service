@@ -105,7 +105,7 @@ module.exports = function htmlRoute(config) {
 			fixCss(),
 			(req, res) => {
 				fileRemover(
-					`${req.doclocation.directory}/${req.doclocation.id}*`
+					`${res.locals.doclocation.directory}/${res.locals.doclocation.id}*`
 				);
 				res.send(`<!DOCTYPE html>${req.body}`);
 			}

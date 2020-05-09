@@ -48,9 +48,13 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof res.locals.resource).toBe('object');
-		expect(res.locals.resource.binary).not.toBeUndefined();
-		expect(res.locals.resource.binary.id).toBe(args.id);
+		expect(res.locals).toMatchObject({
+			resource: {
+				binary: {
+					id: args.id
+				}
+			}
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -69,9 +73,13 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof res.locals.resource).toBe('object');
-		expect(res.locals.resource.binary).not.toBeUndefined();
-		expect(res.locals.resource.binary.id).toBe(args.id);
+		expect(res.locals).toMatchObject({
+			resource: {
+				binary: {
+					id: args.id
+				}
+			}
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -88,9 +96,13 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof res.locals.resource).toBe('object');
-		expect(res.locals.resource.binary).not.toBeUndefined();
-		expect(typeof res.locals.resource.binary.id).toBe('string');
+		expect(res.locals).toMatchObject({
+			resource: {
+				binary: {
+					id: expect.any(String)
+				}
+			}
+		});
 		expect(res.statusCode).toBe(200);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();

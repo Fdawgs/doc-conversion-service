@@ -23,7 +23,9 @@ describe('Embed HTML Images middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
-		expect(res.locals.results.embedded_images).toBe('Fixed');
+		expect(res.locals).toMatchObject({
+			results: { embedded_images: 'Fixed' }
+		});
 		expect(/alt=""/gm.exec(req.body)).not.toBeNull();
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -40,8 +42,9 @@ describe('Embed HTML Images middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
-		expect(typeof res.locals.results).toBe('object');
-		expect(res.locals.results.embedded_images).toBe('Passed');
+		expect(res.locals).toMatchObject({
+			results: { embedded_images: 'Passed' }
+		});
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -78,8 +81,9 @@ describe('Embed HTML Images middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
-		expect(typeof res.locals.results).toBe('object');
-		expect(res.locals.results.embedded_images).toBe('Fixed');
+		expect(res.locals).toMatchObject({
+			results: { embedded_images: 'Fixed' }
+		});
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
