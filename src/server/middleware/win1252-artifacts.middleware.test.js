@@ -22,7 +22,9 @@ describe('Win 1252 Artifact middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(res.locals.results.windows_1252).toBe('Fixed');
+		expect(res.locals).toMatchObject({
+			results: { windows_1252: 'Fixed' }
+		});
 		expect(req.body).not.toEqual(expect.stringMatching(artifacts));
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -40,7 +42,9 @@ describe('Win 1252 Artifact middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
-		expect(typeof res.locals.results).toBe('object');
+		expect(res.locals).toMatchObject({
+			results: { windows_1252: 'Fixed' }
+		});
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
