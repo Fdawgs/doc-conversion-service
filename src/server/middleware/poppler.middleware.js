@@ -75,7 +75,7 @@ module.exports = function popplerMiddleware(config = {}) {
 
 					req.body = dom.window.document.documentElement.outerHTML;
 
-					req.doclocation = {
+					res.locals.doclocation = {
 						directory: this.config.tempDirectory,
 						html: tempHtmlFile,
 						id,

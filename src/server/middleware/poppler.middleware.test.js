@@ -26,9 +26,9 @@ describe('Poppler conversion middleware', () => {
 		await middleware(req, res, next);
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
-		expect(typeof req.doclocation).toBe('object');
+		expect(typeof res.locals.doclocation).toBe('object');
 		expect(fs.existsSync('./src/server/temp/')).toBe(true);
-		expect(fs.existsSync(req.doclocation.html)).toBe(true);
+		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -50,8 +50,8 @@ describe('Poppler conversion middleware', () => {
 		await middleware(req, res, next);
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
-		expect(typeof req.doclocation).toBe('object');
-		expect(fs.existsSync(req.doclocation.html)).toBe(true);
+		expect(typeof res.locals.doclocation).toBe('object');
+		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(fs.existsSync(options.tempDirectory)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
