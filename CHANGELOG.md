@@ -1,3 +1,11 @@
+## <small>4.0.7 (2020-05-09)</small>
+
+-   chore(deps-dev): bump conventional-changelog-cli from 2.0.31 to 2.0.34 ([86828b9](https://github.com/Fdawgs/doc-conversion-service/commit/86828b9))
+-   chore(deps-dev): bump eslint-plugin-jest from 23.9.0 to 23.10.0 ([d11eeab](https://github.com/Fdawgs/doc-conversion-service/commit/d11eeab))
+-   refactor(routes): use res.locals object for doc location object ([b758c71](https://github.com/Fdawgs/doc-conversion-service/commit/b758c71))
+-   tests(middleware): consolidate object matchers ([b72b95f](https://github.com/Fdawgs/doc-conversion-service/commit/b72b95f))
+-   tests(middleware): set res.locals object for missed mock responses ([0a76c4f](https://github.com/Fdawgs/doc-conversion-service/commit/0a76c4f))
+
 ## <small>4.0.6 (2020-05-08)</small>
 
 -   chore(deps-dev): bump apidoc from 0.22.0 to 0.22.1 ([acf9542](https://github.com/Fdawgs/doc-conversion-service/commit/acf9542))
