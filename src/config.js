@@ -1,6 +1,5 @@
-/**
- * https: if set to true, server will use the ssl object to provide HTTPS.
- */
+require('custom-env').env();
+
 const serverConfig = {
 	https: false,
 	port: 3000,
@@ -17,14 +16,13 @@ const serverConfig = {
 		]
 	},
 	ssl: {
-		cert: './ssl_certs/ydhclientcert.cer', // Example path
-		key: '',
+		cert: process.env.SSL_CERT_PATH,
+		key: process.env.SSL_KEY_PATH,
 		pfx: {
-			passphrase: '',
-			pfx: ''
+			passphrase: process.env.PFX_PASSPHRASE,
+			pfx: process.env.PFX_FILE_PATH
 		}
 	},
-
 	routes: {
 		'fhir/documentreference': {
 			cors: {
@@ -44,7 +42,6 @@ const serverConfig = {
 				}
 			}
 		},
-
 		'fhir/binary': {
 			cors: {
 				allowedHeaders:
@@ -59,7 +56,6 @@ const serverConfig = {
 				}
 			}
 		},
-
 		html: {
 			cors: {
 				allowedHeaders:
@@ -93,7 +89,6 @@ const serverConfig = {
 				binPath: '',
 				encoding: 'UTF-8'
 			},
-
 			sanitize: {
 				query: {
 					fonts: { type: 'string' },
