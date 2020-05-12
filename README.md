@@ -35,6 +35,14 @@ doc-conversion-service listening for requests at http://127.0.0.1:3000
 
 You can now navigate to http://127.0.0.1:3000/api/docs to view documentation!
 
+### Deploying using Docker
+
+This requires [Docker](https://www.docker.com/products) installed.
+
+1. Make a copy of the `.env.development` file in the root directory and rename to `.env.production`
+2. Configure the application using the global variables in the `.env.production` file
+3. Run `docker-compose up`
+
 ### Deploying using PM2
 
 It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a process manager such as [PM2](https://pm2.keymetrics.io/) when deploying Express applications like this into production.
