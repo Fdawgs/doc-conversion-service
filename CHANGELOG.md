@@ -1,3 +1,14 @@
+## 4.1.0 (2020-05-12)
+
+-   docs(contributing): update conventional commit link to latest version ([3921de6](https://github.com/Fdawgs/doc-conversion-service/commit/3921de6))
+-   docs(readme): add docker deployment section ([0038825](https://github.com/Fdawgs/doc-conversion-service/commit/0038825))
+-   docs(readme): update deployment steps to use env files ([44aa3a3](https://github.com/Fdawgs/doc-conversion-service/commit/44aa3a3))
+-   build(deps): move apidoc from devdependencies ([3f1982c](https://github.com/Fdawgs/doc-conversion-service/commit/3f1982c))
+-   build(docker): add .dockerignore file ([5689d11](https://github.com/Fdawgs/doc-conversion-service/commit/5689d11))
+-   build(docker): add docker and docker-compose files ([9bc4eba](https://github.com/Fdawgs/doc-conversion-service/commit/9bc4eba))
+-   fix(config): use env file for port, https and host ([08715f2](https://github.com/Fdawgs/doc-conversion-service/commit/08715f2))
+-   refactor(server): separate instance and application configuration ([e4eccdc](https://github.com/Fdawgs/doc-conversion-service/commit/e4eccdc))
+
 ## <small>4.0.7 (2020-05-09)</small>
 
 -   chore(deps-dev): bump conventional-changelog-cli from 2.0.31 to 2.0.34 ([86828b9](https://github.com/Fdawgs/doc-conversion-service/commit/86828b9))
