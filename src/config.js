@@ -1,8 +1,9 @@
 require('custom-env').env();
 
 const serverConfig = {
-	https: false,
-	port: 3000,
+	https: process.env.USE_HTTPS || false,
+	port: process.env.PORT || 3000,
+	host: process.env.HOST,
 	auth: {
 		apiKeys: [
 			{
