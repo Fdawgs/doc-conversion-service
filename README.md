@@ -22,9 +22,10 @@ The web service was then extended to allow for the conversion of files to [Binar
 
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
-3. Configure the application in `src/config.js`
-4. Run `yarn docs` to generate api documentation
-5. Run `yarn start`
+3. Make a copy of the `.env.development` file in the root directory and rename to `.env.production`
+4. Configure the application using the global variables in the `.env.production` file
+5. Run `yarn docs` to generate api documentation
+6. Run `yarn start`
 
 The Express server should now be up and running on the port set in the config. You should see the following output:
 
@@ -40,11 +41,12 @@ It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a pr
 
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
-3. Configure the application in `src/config.js`
-4. Run `yarn docs` to generate api documentation
-5. Run `yarn global add pm2` to install pm2 globally
-6. Launch application with `pm2 start .pm2.config.js`
-7. Check the application has been deployed using `pm2 list` or `pm2 monit`
+3. Make a copy of the `.env.development` file in the root directory and rename to `.env.production`
+4. Configure the application using the global variables in the `.env.production` file
+5. Run `yarn docs` to generate api documentation
+6. Run `yarn global add pm2` to install pm2 globally
+7. Launch application with `pm2 start .pm2.config.js`
+8. Check the application has been deployed using `pm2 list` or `pm2 monit`
 
 #### To install as a Windows service:
 

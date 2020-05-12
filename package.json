@@ -65,6 +65,7 @@
 		"compression": "^1.7.4",
 		"cors": "^2.8.5",
 		"cssom": "^0.4.4",
+		"custom-env": "^2.0.1",
 		"express": "^4.17.1",
 		"express-pino-logger": "^5.0.0",
 		"file-stream-rotator": "^0.5.7",
