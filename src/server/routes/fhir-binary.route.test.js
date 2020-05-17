@@ -8,7 +8,7 @@ const route = '/api/converter/fhir/binary';
 describe('FHIR Binary resource route', () => {
 	let server;
 
-	beforeEach(() => {
+	beforeAll(() => {
 		server = new Server(serverConfig)
 			.configureHelmet(helmetConfig)
 			.configurePassport()
@@ -18,8 +18,8 @@ describe('FHIR Binary resource route', () => {
 			.listen();
 	});
 
-	afterEach(async () => {
-		await server.shutdown();
+	afterAll(() => {
+		server.shutdown();
 	});
 
 	test('Should return 400 error code if file missing', () => {

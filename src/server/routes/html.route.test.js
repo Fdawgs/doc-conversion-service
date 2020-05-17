@@ -10,7 +10,7 @@ const route = '/api/converter/html';
 describe('HTML conversion route', () => {
 	let server;
 
-	beforeEach(() => {
+	beforeAll(() => {
 		server = new Server(serverConfig)
 			.configureHelmet(helmetConfig)
 			.configurePassport()
@@ -20,8 +20,8 @@ describe('HTML conversion route', () => {
 			.listen();
 	});
 
-	afterEach(async () => {
-		await server.shutdown();
+	afterAll(() => {
+		server.shutdown();
 	});
 
 	test('Should return 400 error code if file missing', () => {
