@@ -1,9 +1,8 @@
-let request = require('supertest');
+const request = require('superagent');
 const { helmetConfig, serverConfig } = require('../../config');
 const Server = require('../server');
 
-request = request('http://localhost:3000');
-const route = '/api/converter/fhir/binary';
+const route = `http://0.0.0.0:${serverConfig.port}/api/converter/fhir/binary`;
 
 describe('FHIR Binary resource route', () => {
 	let server;
@@ -22,45 +21,42 @@ describe('FHIR Binary resource route', () => {
 		server.shutdown();
 	});
 
-	test('Should return 400 error code if file missing', () => {
-		return request
+	test('Should return 400 error code if file missing', async () => {
+		await request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
-			.then((res) => {
-				expect(res.status).toBe(400);
-				expect(res.text).toBe('File missing from request');
+			.catch((err) => {
+				expect(err.status).toBe(400);
+				expect(err.response.error.text).toMatch(
+					'File missing from request'
+				);
 			});
 	});
-	test('Should return converted document', () => {
-		return request
+
+	test('Should return converted document', async () => {
+		const res = await request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
-			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
-			.then((res) => {
-				const responseResource = JSON.parse(res.text);
+			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf');
 
-				expect(res.status).toBe(200);
-				expect(responseResource.resourceType).toBe('Binary');
-				expect(responseResource.contentType).toBe('application/pdf');
-			});
+		expect(res.status).toBe(200);
+		expect(JSON.parse(res.text).resourceType).toBe('Binary');
+		expect(JSON.parse(res.text).contentType).toBe('application/pdf');
 	});
 
-	test('Should return converted document with id value set', () => {
-		return request
+	test('Should return converted document with id value set', async () => {
+		const res = await request
 			.put(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
 			.field('id', 12)
-			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf')
-			.then((res) => {
-				const responseResource = JSON.parse(res.text);
+			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf');
 
-				expect(res.status).toBe(200);
-				expect(responseResource.resourceType).toBe('Binary');
-				expect(responseResource.id).toBe(12);
-				expect(responseResource.contentType).toBe('application/pdf');
-			});
+		expect(res.status).toBe(200);
+		expect(JSON.parse(res.text).resourceType).toBe('Binary');
+		expect(JSON.parse(res.text).id).toBe(12);
+		expect(JSON.parse(res.text).contentType).toBe('application/pdf');
 	});
 });

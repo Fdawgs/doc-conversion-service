@@ -1,11 +1,10 @@
 const isHtml = require('is-html');
 const fs = require('fs');
-let request = require('supertest');
+const request = require('superagent');
 const { helmetConfig, serverConfig } = require('../../config');
 const Server = require('../server');
 
-request = request('http://localhost:3000');
-const route = '/api/converter/html';
+const route = `http://0.0.0.0:${serverConfig.port}/api/converter/html`;
 
 describe('HTML conversion route', () => {
 	let server;
@@ -24,26 +23,28 @@ describe('HTML conversion route', () => {
 		server.shutdown();
 	});
 
-	test('Should return 400 error code if file missing', () => {
-		return request
+	test('Should return 400 error code if file missing', async () => {
+		await request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
-			.then((res) => {
-				expect(res.status).toBe(400);
-				expect(res.text).toBe('Failed to convert PDF to HTML');
+			.catch((err) => {
+				expect(err.status).toBe(400);
+				expect(err.response.error.text).toMatch(
+					'Failed to convert PDF to HTML'
+				);
 			});
 	});
-	test('Should return converted document', () => {
-		return request
+
+	test('Should return converted document', async () => {
+		const res = await request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
 			.set('Content-Type', 'application/pdf')
-			.send(fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'))
-			.then((res) => {
-				expect(res.status).toBe(200);
-				expect(isHtml(res.text)).toBe(true);
-			});
+			.send(fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'));
+
+		expect(res.status).toBe(200);
+		expect(isHtml(res.text)).toBe(true);
 	});
 });
