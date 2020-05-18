@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-commented-out-tests */
 const cloneDeep = require('lodash/cloneDeep');
 const request = require('superagent');
 const { helmetConfig, serverConfig, loggerConfig } = require('../config');
