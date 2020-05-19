@@ -22,7 +22,7 @@ The web service was then extended to allow for the conversion of files to [Binar
 
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
-3. Make a copy of the `.env.development` file in the root directory and rename to `.env.production`
+3. Make a copy of the `.env.test` file in the root directory and rename to `.env.production`
 4. Configure the application using the global variables in the `.env.production` file
 5. Run `yarn docs` to generate api documentation
 6. Run `yarn start`
@@ -39,7 +39,7 @@ You can now navigate to http://127.0.0.1:3000/api/docs to view documentation!
 
 This requires [Docker](https://www.docker.com/products) installed.
 
-1. Make a copy of the `.env.development` file in the root directory and rename to `.env.production`
+1. Make a copy of the `.env.test` file in the root directory and rename to `.env.production`
 2. Configure the application using the global variables in the `.env.production` file
 3. Run `docker-compose up`
 
@@ -49,7 +49,7 @@ It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a pr
 
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
-3. Make a copy of the `.env.development` file in the root directory and rename to `.env.production`
+3. Make a copy of the `.env.test` file in the root directory and rename to `.env.production`
 4. Configure the application using the global variables in the `.env.production` file
 5. Run `yarn docs` to generate api documentation
 6. Run `yarn global add pm2` to install pm2 globally
