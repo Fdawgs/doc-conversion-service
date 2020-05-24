@@ -45,7 +45,9 @@ describe('FHIR DocumentReference resource route', () => {
 
 		expect(res.status).toBe(200);
 		expect(JSON.parse(res.text).resourceType).toBe('DocumentReference');
-		expect(JSON.parse(res.text).content[0].attachment.contentType).toBe('application/pdf');
+		expect(JSON.parse(res.text).content[0].attachment.contentType).toBe(
+			'application/pdf'
+		);
 	});
 
 	test('Should return converted document with id value set', async () => {
@@ -61,6 +63,8 @@ describe('FHIR DocumentReference resource route', () => {
 		expect(res.status).toBe(200);
 		expect(JSON.parse(res.text).resourceType).toBe('DocumentReference');
 		expect(JSON.parse(res.text).id).toBe(12);
-		expect(JSON.parse(res.text).content[0].attachment.contentType).toBe('application/pdf');
+		expect(JSON.parse(res.text).content[0].attachment.contentType).toBe(
+			'application/pdf'
+		);
 	});
 });
