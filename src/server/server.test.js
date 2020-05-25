@@ -3,80 +3,82 @@ const request = require('superagent');
 const { helmetConfig, serverConfig, loggerConfig } = require('../config');
 const Server = require('./server');
 
-describe('HTTPs connection with cert and key', () => {
-	const modServerConfig = cloneDeep(serverConfig);
-	modServerConfig.https = true;
-	modServerConfig.port = 3001;
-	modServerConfig.ssl.cert = `${process.cwd()}/test_ssl_cert/server.cert`;
-	modServerConfig.ssl.key = `${process.cwd()}/test_ssl_cert/server.key`;
-	let server;
+describe('Server deployment', () => {
+	describe('HTTPs connection with cert and key', () => {
+		const modServerConfig = cloneDeep(serverConfig);
+		modServerConfig.https = true;
+		modServerConfig.port = 3001;
+		modServerConfig.ssl.cert = `${process.cwd()}/test_ssl_cert/server.cert`;
+		modServerConfig.ssl.key = `${process.cwd()}/test_ssl_cert/server.key`;
+		let server;
 
-	const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
+		const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
 
-	beforeEach(() => {
-		// Stand up server
-		server = new Server(modServerConfig)
-			.configureHelmet(helmetConfig)
-			.configureLogging(loggerConfig)
-			.configurePassport()
-			.configureMiddleware()
-			.configureRoutes()
-			.configureErrorHandling()
-			.listen();
+		beforeEach(() => {
+			// Stand up server
+			server = new Server(modServerConfig)
+				.configureHelmet(helmetConfig)
+				.configureLogging(loggerConfig)
+				.configurePassport()
+				.configureMiddleware()
+				.configureRoutes()
+				.configureErrorHandling()
+				.listen();
+		});
+
+		afterEach(() => {
+			server.shutdown();
+		});
+
+		test('OPTIONS - Should make a successful connection', async () => {
+			const res = await request
+				.options(path)
+				.set('Accept', '*/*')
+				.set('Authorization', 'Bearer Jimmini')
+				.disableTLSCerts()
+				.trustLocalhost();
+
+			expect(res.statusCode).toBe(204);
+			expect(server.config.protocol).toBe('https');
+		});
 	});
 
-	afterEach(() => {
-		server.shutdown();
-	});
+	describe('HTTPs connection with PFX file and passphrase', () => {
+		const modServerConfig = cloneDeep(serverConfig);
+		modServerConfig.https = true;
+		modServerConfig.port = 3002;
+		modServerConfig.ssl.pfx.pfx = `${process.cwd()}/test_ssl_cert/server.pfx`;
+		modServerConfig.ssl.pfx.passphrase = 'test';
+		let server;
 
-	test('OPTIONS - Should make a successful connection', async () => {
-		const res = await request
-			.options(path)
-			.set('Accept', '*/*')
-			.set('Authorization', 'Bearer Jimmini')
-			.disableTLSCerts()
-			.trustLocalhost();
+		const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
 
-		expect(res.statusCode).toBe(204);
-		expect(server.config.protocol).toBe('https');
-	});
-});
+		beforeEach(() => {
+			// Stand up server
+			server = new Server(modServerConfig)
+				.configureHelmet(helmetConfig)
+				.configureLogging(loggerConfig)
+				.configurePassport()
+				.configureMiddleware()
+				.configureRoutes()
+				.configureErrorHandling()
+				.listen();
+		});
 
-describe('HTTPs connection with PFX file and passphrase', () => {
-	const modServerConfig = cloneDeep(serverConfig);
-	modServerConfig.https = true;
-	modServerConfig.port = 3002;
-	modServerConfig.ssl.pfx.pfx = `${process.cwd()}/test_ssl_cert/server.pfx`;
-	modServerConfig.ssl.pfx.passphrase = 'test';
-	let server;
+		afterEach(() => {
+			server.shutdown();
+		});
 
-	const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
+		test('OPTIONS - Should make a successful connection', async () => {
+			const res = await request
+				.options(path)
+				.set('Accept', '*/*')
+				.set('Authorization', 'Bearer Jimmini')
+				.disableTLSCerts()
+				.trustLocalhost();
 
-	beforeEach(() => {
-		// Stand up server
-		server = new Server(modServerConfig)
-			.configureHelmet(helmetConfig)
-			.configureLogging(loggerConfig)
-			.configurePassport()
-			.configureMiddleware()
-			.configureRoutes()
-			.configureErrorHandling()
-			.listen();
-	});
-
-	afterEach(() => {
-		server.shutdown();
-	});
-
-	test('OPTIONS - Should make a successful connection', async () => {
-		const res = await request
-			.options(path)
-			.set('Accept', '*/*')
-			.set('Authorization', 'Bearer Jimmini')
-			.disableTLSCerts()
-			.trustLocalhost();
-
-		expect(res.statusCode).toBe(204);
-		expect(server.config.protocol).toBe('https');
+			expect(res.statusCode).toBe(204);
+			expect(server.config.protocol).toBe('https');
+		});
 	});
 });
