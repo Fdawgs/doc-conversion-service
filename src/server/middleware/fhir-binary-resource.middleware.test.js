@@ -37,7 +37,7 @@ describe('FHIR Binary resource middleware', () => {
 		expect(next.mock.calls[0][0].message).toBe('File missing from request');
 	});
 
-	test('Should return FHIR resource if res.locals.resource already present', () => {
+	test('Should return FHIR resource if res.locals.resource object already present', () => {
 		const middleware = fhirBinaryMiddleware();
 
 		const query = {};

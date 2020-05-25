@@ -65,7 +65,7 @@ describe('Clean CSS middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should build res.locals.results if not defined', async () => {
+	test('Should build res.locals.results object if not defined', async () => {
 		const middleware = cleanCssMiddleware();
 		const req = {
 			body: fs.readFileSync(
