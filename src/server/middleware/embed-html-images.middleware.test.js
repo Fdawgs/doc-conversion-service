@@ -5,6 +5,7 @@ const embedHtmlImagesMiddleware = require('./embed-html-images.middleware');
 describe('Embed HTML Images middleware', () => {
 	test('Should return a middleware function', () => {
 		const middleware = embedHtmlImagesMiddleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
@@ -23,6 +24,7 @@ describe('Embed HTML Images middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Fixed' }
 		});
@@ -42,6 +44,7 @@ describe('Embed HTML Images middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Passed' }
 		});
@@ -61,6 +64,7 @@ describe('Embed HTML Images middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals.results.embedded_images).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -81,6 +85,7 @@ describe('Embed HTML Images middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Fixed' }
 		});

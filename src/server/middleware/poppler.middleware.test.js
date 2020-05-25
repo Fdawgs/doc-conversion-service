@@ -11,6 +11,7 @@ describe('Poppler conversion middleware', () => {
 
 	test('Should return a middleware function', () => {
 		const middleware = popplerMiddleware(serverConfig.routes.html.poppler);
+
 		expect(typeof middleware).toBe('function');
 	});
 
@@ -24,6 +25,7 @@ describe('Poppler conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
@@ -48,6 +50,7 @@ describe('Poppler conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
@@ -67,6 +70,7 @@ describe('Poppler conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(

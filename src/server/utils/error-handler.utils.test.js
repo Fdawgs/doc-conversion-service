@@ -9,7 +9,6 @@ describe('Error handler utility', () => {
 
 	test('Should return error in response if error instance passed', () => {
 		const util = errorHandlerUtil();
-
 		const error = new Error('test');
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse();
@@ -22,7 +21,6 @@ describe('Error handler utility', () => {
 
 	test('Should return error in response if string passed', () => {
 		const util = errorHandlerUtil();
-
 		const error = 'test';
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse();

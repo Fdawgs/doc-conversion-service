@@ -7,6 +7,7 @@ const artifacts = /â‚¬|â€š|Æ’|â€ž|â€¦|â€¡|Ë†|â€°|�
 describe('Win 1252 Artifact middleware', () => {
 	test('Should return a middleware function', () => {
 		const middleware = fixWin1252ArtifactsMiddleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
@@ -22,6 +23,7 @@ describe('Win 1252 Artifact middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { windows_1252: 'Fixed' }
 		});
@@ -42,6 +44,7 @@ describe('Win 1252 Artifact middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { windows_1252: 'Fixed' }
 		});

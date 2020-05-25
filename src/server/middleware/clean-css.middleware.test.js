@@ -5,6 +5,7 @@ const cleanCssMiddleware = require('./clean-css.middleware');
 describe('Clean CSS middleware', () => {
 	test('Should return a middleware function', () => {
 		const middleware = cleanCssMiddleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
@@ -23,6 +24,7 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({ results: { clean_css: 'Fixed' } });
 		expect(/font-family: arial;/gm.exec(req.body)).not.toBeNull();
 		expect(next).toHaveBeenCalledTimes(1);
@@ -40,6 +42,7 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({ results: { clean_css: 'Fixed' } });
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -56,6 +59,7 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({ results: { clean_css: 'Passed' } });
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
@@ -73,6 +77,7 @@ describe('Clean CSS middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({ results: { clean_css: 'Fixed' } });
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();

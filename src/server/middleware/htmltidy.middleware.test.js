@@ -7,6 +7,7 @@ const { serverConfig } = require('../../config');
 describe('Htmltidy2 conversion middleware', () => {
 	test('Should return a middleware function', () => {
 		const middleware = htmlTidyMiddleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
@@ -24,6 +25,7 @@ describe('Htmltidy2 conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(typeof req.body).toBe('string');
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();

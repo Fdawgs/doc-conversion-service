@@ -20,6 +20,7 @@ const args = {
 describe('FHIR DocumentReference resource middleware', () => {
 	test('Should return a middleware function', () => {
 		const middleware = fhirDocumentReferenceMiddleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
@@ -36,6 +37,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe('File missing from request');
@@ -92,6 +94,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			resource: {
 				documentReference: {
@@ -127,6 +130,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			resource: {
 				documentReference: {
