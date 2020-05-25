@@ -7,7 +7,7 @@ const route = `http://0.0.0.0:${serverConfig.port}/api/converter/fhir/binary`;
 describe('FHIR Binary resource route', () => {
 	let server;
 
-	beforeAll(() => {
+	beforeEach(() => {
 		server = new Server(serverConfig)
 			.configureHelmet(helmetConfig)
 			.configurePassport()
@@ -17,7 +17,7 @@ describe('FHIR Binary resource route', () => {
 			.listen();
 	});
 
-	afterAll(() => {
+	afterEach(() => {
 		server.shutdown();
 	});
 

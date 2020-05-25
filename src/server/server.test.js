@@ -13,7 +13,7 @@ describe('HTTPs connection with cert and key', () => {
 
 	const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
 
-	beforeAll(() => {
+	beforeEach(() => {
 		// Stand up server
 		server = new Server(modServerConfig)
 			.configureHelmet(helmetConfig)
@@ -25,7 +25,7 @@ describe('HTTPs connection with cert and key', () => {
 			.listen();
 	});
 
-	afterAll(() => {
+	afterEach(() => {
 		server.shutdown();
 	});
 
@@ -52,7 +52,7 @@ describe('HTTPs connection with PFX file and passphrase', () => {
 
 	const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
 
-	beforeAll(() => {
+	beforeEach(() => {
 		// Stand up server
 		server = new Server(modServerConfig)
 			.configureHelmet(helmetConfig)
@@ -64,7 +64,7 @@ describe('HTTPs connection with PFX file and passphrase', () => {
 			.listen();
 	});
 
-	afterAll(() => {
+	afterEach(() => {
 		server.shutdown();
 	});
 
