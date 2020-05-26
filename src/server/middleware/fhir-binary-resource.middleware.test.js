@@ -40,7 +40,6 @@ describe('FHIR Binary resource middleware', () => {
 
 	test('Should return FHIR resource if res.locals.resource object already present', () => {
 		const middleware = Middleware();
-
 		const query = {};
 		const req = {
 			method: 'PUT',
@@ -66,7 +65,6 @@ describe('FHIR Binary resource middleware', () => {
 
 	test('Should return FHIR resource and create own res.locals.resource object', () => {
 		const middleware = Middleware();
-
 		const query = {};
 		const req = {
 			method: 'PUT',
@@ -92,7 +90,6 @@ describe('FHIR Binary resource middleware', () => {
 
 	test('Should return FHIR resource if id argument not present in body', () => {
 		const middleware = Middleware();
-
 		const req = {
 			method: 'PUT',
 			file

@@ -17,7 +17,6 @@ describe('Poppler conversion middleware', () => {
 
 	test('Should convert PDF to HTML', async () => {
 		const middleware = Middleware();
-
 		const req = {
 			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
 		};
@@ -40,9 +39,7 @@ describe('Poppler conversion middleware', () => {
 			tempDirectory: './src/server/temp/',
 			encoding: 'UTF-8'
 		};
-
 		const middleware = Middleware(options);
-
 		const req = {
 			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
 		};
@@ -62,7 +59,6 @@ describe('Poppler conversion middleware', () => {
 
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware();
-
 		const req = {
 			body: undefined
 		};
