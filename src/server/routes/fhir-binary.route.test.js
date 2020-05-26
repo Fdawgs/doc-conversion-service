@@ -1,3 +1,4 @@
+const faker = require('faker');
 const request = require('superagent');
 const { helmetConfig, serverConfig } = require('../../config');
 const Server = require('../server');
@@ -47,16 +48,17 @@ describe('FHIR Binary resource route', () => {
 	});
 
 	test('Should return converted document with id value set', async () => {
+		const randomUuid = faker.random.uuid();
 		const res = await request
 			.put(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
-			.field('id', 12)
+			.field('id', randomUuid)
 			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf');
 
 		expect(res.status).toBe(200);
 		expect(JSON.parse(res.text).resourceType).toBe('Binary');
-		expect(JSON.parse(res.text).id).toBe(12);
+		expect(JSON.parse(res.text).id).toBe(randomUuid);
 		expect(JSON.parse(res.text).contentType).toBe('application/pdf');
 	});
 });

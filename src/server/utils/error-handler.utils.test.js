@@ -1,33 +1,36 @@
+/* eslint-disable no-underscore-dangle */
+const faker = require('faker');
 const httpMocks = require('node-mocks-http');
-const errorHandlerUtil = require('./error-handler.utils');
+const Util = require('./error-handler.utils');
 
 describe('Error handler utility', () => {
 	test('Should return a utility function', () => {
-		const util = errorHandlerUtil();
+		const util = Util();
 		expect(typeof util).toBe('function');
 	});
 
 	test('Should return error in response if error instance passed', () => {
-		const util = errorHandlerUtil();
-		const error = new Error('test');
+		const util = Util();
+		const randomString = faker.lorem.sentence();
+		const error = new Error(randomString);
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		util(error, req, res, next);
-		// eslint-disable-next-line no-underscore-dangle
-		expect(res._getData()).toBe('test');
+
+		expect(res._getData()).toBe(randomString);
 	});
 
 	test('Should return error in response if string passed', () => {
-		const util = errorHandlerUtil();
-		const error = 'test';
+		const util = Util();
+		const error = faker.lorem.sentence();
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
 		util(error, req, res, next);
-		// eslint-disable-next-line no-underscore-dangle
-		expect(res._getData()).toBe('test');
+
+		expect(res._getData()).toBe(error);
 	});
 });
