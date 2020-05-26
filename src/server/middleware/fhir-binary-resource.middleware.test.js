@@ -1,6 +1,7 @@
+const faker = require('faker');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
-const fhirBinaryMiddleware = require('./fhir-binary-resource.middleware');
+const Middleware = require('./fhir-binary-resource.middleware');
 
 const file = {
 	buffer: fs.readFileSync('./test_files/tester_bullet_issues-html.html'),
@@ -8,17 +9,18 @@ const file = {
 };
 
 const args = {
-	id: '1'
+	id: faker.random.uuid()
 };
 
 describe('FHIR Binary resource middleware', () => {
 	test('Should return a middleware function', () => {
-		const middleware = fhirBinaryMiddleware();
+		const middleware = Middleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
 	test('Should pass an error to next if mandatory value is missing', () => {
-		const middleware = fhirBinaryMiddleware();
+		const middleware = Middleware();
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -30,13 +32,14 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe('File missing from request');
 	});
 
-	test('Should return FHIR resource if res.locals.resource already present', () => {
-		const middleware = fhirBinaryMiddleware();
+	test('Should return FHIR resource if res.locals.resource object already present', () => {
+		const middleware = Middleware();
 
 		const query = {};
 		const req = {
@@ -48,6 +51,7 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			resource: {
 				binary: {
@@ -61,7 +65,7 @@ describe('FHIR Binary resource middleware', () => {
 	});
 
 	test('Should return FHIR resource and create own res.locals.resource object', () => {
-		const middleware = fhirBinaryMiddleware();
+		const middleware = Middleware();
 
 		const query = {};
 		const req = {
@@ -73,6 +77,7 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			resource: {
 				binary: {
@@ -86,7 +91,7 @@ describe('FHIR Binary resource middleware', () => {
 	});
 
 	test('Should return FHIR resource if id argument not present in body', () => {
-		const middleware = fhirBinaryMiddleware();
+		const middleware = Middleware();
 
 		const req = {
 			method: 'PUT',
@@ -96,6 +101,7 @@ describe('FHIR Binary resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			resource: {
 				binary: {

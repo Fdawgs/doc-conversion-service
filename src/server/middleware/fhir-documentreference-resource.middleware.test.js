@@ -1,6 +1,7 @@
+const faker = require('faker');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
-const fhirDocumentReferenceMiddleware = require('./fhir-documentreference-resource.middleware');
+const Middleware = require('./fhir-documentreference-resource.middleware');
 
 const files = [
 	{
@@ -10,21 +11,22 @@ const files = [
 ];
 
 const args = {
-	id: '1',
+	id: faker.random.uuid(),
 	subject: '999999',
-	type: 'Discharge Summary',
-	specialty: 'Cardiology',
-	status: 'current'
+	type: faker.lorem.sentence(),
+	specialty: faker.commerce.department(),
+	status: faker.random.word()
 };
 
 describe('FHIR DocumentReference resource middleware', () => {
 	test('Should return a middleware function', () => {
-		const middleware = fhirDocumentReferenceMiddleware();
+		const middleware = Middleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
 	test('Should pass an error to next if mandatory value is missing', () => {
-		const middleware = fhirDocumentReferenceMiddleware();
+		const middleware = Middleware();
 
 		const query = {};
 		const req = httpMocks.createRequest({
@@ -36,13 +38,14 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe('File missing from request');
 	});
 
-	test('Should return FHIR resource if res.locals.resource already present', () => {
-		const middleware = fhirDocumentReferenceMiddleware();
+	test('Should return FHIR resource if res.locals.resource object already present', () => {
+		const middleware = Middleware();
 
 		const query = {};
 		const req = {
@@ -80,7 +83,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 	});
 
 	test('Should return FHIR resource and create own res.locals.resource object', () => {
-		const middleware = fhirDocumentReferenceMiddleware();
+		const middleware = Middleware();
 
 		const query = {};
 		const req = {
@@ -92,6 +95,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			resource: {
 				documentReference: {
@@ -117,7 +121,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 	});
 
 	test('Should return FHIR resource if id argument not present in body', () => {
-		const middleware = fhirDocumentReferenceMiddleware();
+		const middleware = Middleware();
 
 		const req = {
 			method: 'PUT',
@@ -127,6 +131,7 @@ describe('FHIR DocumentReference resource middleware', () => {
 		const next = jest.fn();
 
 		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			resource: {
 				documentReference: {

@@ -47,42 +47,38 @@ module.exports = function popplerMiddleware(config = {}) {
 
 			const poppler = new Poppler(this.config.binPath);
 
-			await poppler
-				.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile)
-				.then(() => {
-					const dom = new JSDOM(
-						fs.readFileSync(tempHtmlFile, {
-							encoding: this.config.encoding
-						})
-					);
+			await poppler.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile);
 
-					// Set document language
-					const html = dom.window.document.querySelector('html');
-					html.setAttribute('lang', 'en');
-					html.setAttribute('xml:lang', 'en');
+			const dom = new JSDOM(
+				fs.readFileSync(tempHtmlFile, {
+					encoding: this.config.encoding
+				})
+			);
 
-					// Remove excess title and meta tags left behind by Poppler
-					const titles = dom.window.document.querySelectorAll(
-						'title'
-					);
-					for (let index = 1; index < titles.length; index += 1) {
-						titles[index].parentNode.removeChild(titles[index]);
-					}
-					const metas = dom.window.document.querySelectorAll('meta');
-					for (let index = 1; index < metas.length; index += 1) {
-						metas[index].parentNode.removeChild(metas[index]);
-					}
+			// Set document language
+			const html = dom.window.document.querySelector('html');
+			html.setAttribute('lang', 'en');
+			html.setAttribute('xml:lang', 'en');
 
-					req.body = dom.window.document.documentElement.outerHTML;
+			// Remove excess title and meta tags left behind by Poppler
+			const titles = dom.window.document.querySelectorAll('title');
+			for (let index = 1; index < titles.length; index += 1) {
+				titles[index].parentNode.removeChild(titles[index]);
+			}
+			const metas = dom.window.document.querySelectorAll('meta');
+			for (let index = 1; index < metas.length; index += 1) {
+				metas[index].parentNode.removeChild(metas[index]);
+			}
 
-					res.locals.doclocation = {
-						directory: this.config.tempDirectory,
-						html: tempHtmlFile,
-						id,
-						pdf: tempPdfFile
-					};
-					next();
-				});
+			req.body = dom.window.document.documentElement.outerHTML;
+
+			res.locals.doclocation = {
+				directory: this.config.tempDirectory,
+				html: tempHtmlFile,
+				id,
+				pdf: tempPdfFile
+			};
+			next();
 		} catch {
 			res.status(400);
 			next(new Error('Failed to convert PDF to HTML'));

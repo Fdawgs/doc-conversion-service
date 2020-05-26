@@ -9,7 +9,7 @@ const route = `http://0.0.0.0:${serverConfig.port}/api/converter/html`;
 describe('HTML conversion route', () => {
 	let server;
 
-	beforeAll(() => {
+	beforeEach(() => {
 		server = new Server(serverConfig)
 			.configureHelmet(helmetConfig)
 			.configurePassport()
@@ -19,7 +19,7 @@ describe('HTML conversion route', () => {
 			.listen();
 	});
 
-	afterAll(() => {
+	afterEach(() => {
 		server.shutdown();
 	});
 

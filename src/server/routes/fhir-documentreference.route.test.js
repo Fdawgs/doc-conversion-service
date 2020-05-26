@@ -1,3 +1,4 @@
+const faker = require('faker');
 const request = require('superagent');
 const { helmetConfig, serverConfig } = require('../../config');
 const Server = require('../server');
@@ -7,7 +8,7 @@ const route = `http://0.0.0.0:${serverConfig.port}/api/converter/fhir/documentre
 describe('FHIR DocumentReference resource route', () => {
 	let server;
 
-	beforeAll(() => {
+	beforeEach(() => {
 		server = new Server(serverConfig)
 			.configureHelmet(helmetConfig)
 			.configurePassport()
@@ -17,7 +18,7 @@ describe('FHIR DocumentReference resource route', () => {
 			.listen();
 	});
 
-	afterAll(() => {
+	afterEach(() => {
 		server.shutdown();
 	});
 
@@ -51,18 +52,19 @@ describe('FHIR DocumentReference resource route', () => {
 	});
 
 	test('Should return converted document with id value set', async () => {
+		const randomUuid = faker.random.uuid();
 		const res = await request
 			.put(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
-			.field('id', 12)
+			.field('id', randomUuid)
 			.field('status', 'test')
 			.field('type', 'test')
 			.attach('document', './test_files/pdf_1.3_NHS_Constitution.pdf');
 
 		expect(res.status).toBe(200);
 		expect(JSON.parse(res.text).resourceType).toBe('DocumentReference');
-		expect(JSON.parse(res.text).id).toBe(12);
+		expect(JSON.parse(res.text).id).toBe(randomUuid);
 		expect(JSON.parse(res.text).content[0].attachment.contentType).toBe(
 			'application/pdf'
 		);
