@@ -1,28 +1,22 @@
+const cloneDeep = require('lodash/cloneDeep');
+const request = require('superagent');
 const { helmetConfig, serverConfig, loggerConfig } = require('../config');
 const Server = require('./server');
 
 describe('Server deployment', () => {
-	test('Should assign default values if none provided', async () => {
-		const server = new Server()
-			.configurePassport()
-			.configureHelmet(helmetConfig)
-			.configureLogging(loggerConfig)
-			.configureMiddleware()
-			.configureErrorHandling()
-			.listen();
-
-		expect(server.config.protocol).toBe('http');
-		await server.shutdown();
-	});
-
-	test('Should set protocol to https with cert and key files', async () => {
-		const modServerConfig = JSON.parse(JSON.stringify(serverConfig));
+	describe('HTTPs connection with cert and key', () => {
+		const modServerConfig = cloneDeep(serverConfig);
 		modServerConfig.https = true;
+		modServerConfig.port = 3001;
 		modServerConfig.ssl.cert = `${process.cwd()}/test_ssl_cert/server.cert`;
 		modServerConfig.ssl.key = `${process.cwd()}/test_ssl_cert/server.key`;
+		let server;
 
-		try {
-			const server = new Server(modServerConfig)
+		const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
+
+		beforeEach(() => {
+			// Stand up server
+			server = new Server(modServerConfig)
 				.configureHelmet(helmetConfig)
 				.configureLogging(loggerConfig)
 				.configurePassport()
@@ -30,22 +24,38 @@ describe('Server deployment', () => {
 				.configureRoutes()
 				.configureErrorHandling()
 				.listen();
+		});
 
+		afterEach(() => {
+			server.shutdown();
+		});
+
+		test('OPTIONS - Should make a successful connection', async () => {
+			const res = await request
+				.options(path)
+				.set('Accept', '*/*')
+				.set('Authorization', 'Bearer Jimmini')
+				.disableTLSCerts()
+				.trustLocalhost();
+
+			expect(res.statusCode).toBe(204);
 			expect(server.config.protocol).toBe('https');
-			await server.shutdown();
-		} catch (error) {
-			// Do nothing
-		}
+		});
 	});
 
-	test('Should set protocol to https with pfx file and passphrase', async () => {
-		const modServerConfig = JSON.parse(JSON.stringify(serverConfig));
+	describe('HTTPs connection with PFX file and passphrase', () => {
+		const modServerConfig = cloneDeep(serverConfig);
 		modServerConfig.https = true;
+		modServerConfig.port = 3002;
 		modServerConfig.ssl.pfx.pfx = `${process.cwd()}/test_ssl_cert/server.pfx`;
 		modServerConfig.ssl.pfx.passphrase = 'test';
+		let server;
 
-		try {
-			const server = new Server(modServerConfig)
+		const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
+
+		beforeEach(() => {
+			// Stand up server
+			server = new Server(modServerConfig)
 				.configureHelmet(helmetConfig)
 				.configureLogging(loggerConfig)
 				.configurePassport()
@@ -53,11 +63,22 @@ describe('Server deployment', () => {
 				.configureRoutes()
 				.configureErrorHandling()
 				.listen();
+		});
 
+		afterEach(() => {
+			server.shutdown();
+		});
+
+		test('OPTIONS - Should make a successful connection', async () => {
+			const res = await request
+				.options(path)
+				.set('Accept', '*/*')
+				.set('Authorization', 'Bearer Jimmini')
+				.disableTLSCerts()
+				.trustLocalhost();
+
+			expect(res.statusCode).toBe(204);
 			expect(server.config.protocol).toBe('https');
-			await server.shutdown();
-		} catch (error) {
-			// Do nothing
-		}
+		});
 	});
 });

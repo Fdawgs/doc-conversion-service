@@ -3,12 +3,17 @@
 		"es6": true,
 		"node": true
 	},
-	"extends": ["airbnb-base", "plugin:jest/recommended", "prettier"],
+	"extends": [
+		"airbnb-base",
+		"plugin:promise/recommended",
+		"plugin:jest/recommended",
+		"prettier"
+	],
 	"parserOptions": {
 		"ecmaVersion": 2020,
 		"sourceType": "module"
 	},
-	"plugins": ["import", "jest", "json"],
+	"plugins": ["import", "jest", "json", "promise"],
 	"rules": {
 		"import/no-extraneous-dependencies": [
 			"error",
@@ -17,6 +22,7 @@
 			}
 		],
 		"lines-between-class-members": "error",
+		"no-console": "off",
 		"no-multiple-empty-lines": [
 			"error",
 			{
@@ -25,9 +31,8 @@
 				"maxEOF": 0
 			}
 		],
-		"no-console": "off",
 		"prefer-destructuring": "off",
-		"prefer-const": "error",
-		"no-var": "error"
+		"promise/prefer-await-to-then": "warn",
+		"promise/prefer-await-to-callbacks": "warn"
 	}
 }

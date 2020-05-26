@@ -15,7 +15,7 @@ const path = require('path');
  * @return {Function} Express middleware.
  */
 module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
-	return async (req, res, next) => {
+	return (req, res, next) => {
 		const tempDir =
 			tempDirectory || `${path.resolve(__dirname, '..')}\\temp\\`;
 		const dom = new JSDOM(req.body);

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const popplerMiddleware = require('./poppler.middleware');
+const Middleware = require('./poppler.middleware');
 const { serverConfig } = require('../../config');
 
 describe('Poppler conversion middleware', () => {
@@ -10,13 +10,13 @@ describe('Poppler conversion middleware', () => {
 	});
 
 	test('Should return a middleware function', () => {
-		const middleware = popplerMiddleware(serverConfig.routes.html.poppler);
+		const middleware = Middleware(serverConfig.routes.html.poppler);
+
 		expect(typeof middleware).toBe('function');
 	});
 
 	test('Should convert PDF to HTML', async () => {
-		const middleware = popplerMiddleware();
-
+		const middleware = Middleware();
 		const req = {
 			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
 		};
@@ -24,6 +24,7 @@ describe('Poppler conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
@@ -38,9 +39,7 @@ describe('Poppler conversion middleware', () => {
 			tempDirectory: './src/server/temp/',
 			encoding: 'UTF-8'
 		};
-
-		const middleware = popplerMiddleware(options);
-
+		const middleware = Middleware(options);
 		const req = {
 			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
 		};
@@ -48,6 +47,7 @@ describe('Poppler conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
@@ -58,8 +58,7 @@ describe('Poppler conversion middleware', () => {
 	});
 
 	test('Should pass an error to next if PDF file missing', async () => {
-		const middleware = popplerMiddleware();
-
+		const middleware = Middleware();
 		const req = {
 			body: undefined
 		};
@@ -67,6 +66,7 @@ describe('Poppler conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(

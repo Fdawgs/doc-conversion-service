@@ -1,19 +1,18 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
-const htmlTidyMiddleware = require('./htmltidy.middleware');
+const Middleware = require('./htmltidy.middleware');
 
 const { serverConfig } = require('../../config');
 
 describe('Htmltidy2 conversion middleware', () => {
 	test('Should return a middleware function', () => {
-		const middleware = htmlTidyMiddleware();
+		const middleware = Middleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
 	test('Should tidy HTML file', async () => {
-		const middleware = htmlTidyMiddleware(
-			serverConfig.routes.html.htmltidy
-		);
+		const middleware = Middleware(serverConfig.routes.html.htmltidy);
 		const req = {
 			body: fs.readFileSync(
 				'./test_files/tester_bullet_issues-html.html',
@@ -24,6 +23,7 @@ describe('Htmltidy2 conversion middleware', () => {
 		const next = jest.fn();
 
 		await middleware(req, res, next);
+
 		expect(typeof req.body).toBe('string');
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();

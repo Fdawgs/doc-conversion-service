@@ -1,15 +1,16 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
-const embedHtmlImagesMiddleware = require('./embed-html-images.middleware');
+const Middleware = require('./embed-html-images.middleware');
 
 describe('Embed HTML Images middleware', () => {
 	test('Should return a middleware function', () => {
-		const middleware = embedHtmlImagesMiddleware();
+		const middleware = Middleware();
+
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should embed images into HTML', async () => {
-		const middleware = embedHtmlImagesMiddleware('./test_files/');
+	test('Should embed images into HTML', () => {
+		const middleware = Middleware('./test_files/');
 		const req = {
 			body: fs.readFileSync(
 				'./test_files/tester_bullet_issues-html.html',
@@ -22,7 +23,8 @@ describe('Embed HTML Images middleware', () => {
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
-		await middleware(req, res, next);
+		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Fixed' }
 		});
@@ -31,8 +33,8 @@ describe('Embed HTML Images middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should flag file as passed if no issues found', async () => {
-		const middleware = embedHtmlImagesMiddleware('./test_files/');
+	test('Should flag file as passed if no issues found', () => {
+		const middleware = Middleware('./test_files/');
 		const req = {
 			body: fs.readFileSync('./test_files/empty-test.html', {
 				encoding: 'UTF-8'
@@ -41,7 +43,8 @@ describe('Embed HTML Images middleware', () => {
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
-		await middleware(req, res, next);
+		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Passed' }
 		});
@@ -49,8 +52,8 @@ describe('Embed HTML Images middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should throw error if temp directory not defined', async () => {
-		const middleware = embedHtmlImagesMiddleware();
+	test('Should throw error if temp directory not defined', () => {
+		const middleware = Middleware();
 		const req = {
 			body: fs.readFileSync(
 				'./test_files/tester_bullet_issues-html.html',
@@ -60,7 +63,8 @@ describe('Embed HTML Images middleware', () => {
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
-		await middleware(req, res, next);
+		middleware(req, res, next);
+
 		expect(res.locals.results.embedded_images).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -69,8 +73,8 @@ describe('Embed HTML Images middleware', () => {
 		);
 	});
 
-	test('Should build res.locals.results if not defined', async () => {
-		const middleware = embedHtmlImagesMiddleware('./test_files/');
+	test('Should build res.locals.results if not defined', () => {
+		const middleware = Middleware('./test_files/');
 		const req = {
 			body: fs.readFileSync(
 				'./test_files/tester_bullet_issues-html.html',
@@ -80,7 +84,8 @@ describe('Embed HTML Images middleware', () => {
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
-		await middleware(req, res, next);
+		middleware(req, res, next);
+
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Fixed' }
 		});

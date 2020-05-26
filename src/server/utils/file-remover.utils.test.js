@@ -1,12 +1,14 @@
+const faker = require('faker');
 const fs = require('fs');
-const fileRemoverUtil = require('./file-remover.utils');
+const Util = require('./file-remover.utils');
 
 describe('Error handler utility', () => {
 	test('Should remove test file from path', () => {
-		const testPath = './message.txt';
+		const testPath = `./${faker.system.fileName('txt')}`;
+		fs.writeFileSync(testPath, faker.lorem.sentences());
 
-		fs.writeFileSync(testPath, 'test');
-		fileRemoverUtil(testPath);
+		Util(testPath);
+
 		expect(fs.existsSync(testPath)).toBe(false);
 	});
 });

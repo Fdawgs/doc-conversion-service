@@ -1,4 +1,4 @@
-const bearerTokenAuthUtil = require('./bearer-token-auth.utils');
+const Util = require('./bearer-token-auth.utils');
 
 const authKeys = [
 	{
@@ -14,7 +14,7 @@ const mockCallback = jest.fn((error, user, options) => {});
 
 describe('Passport bearer token authorization utility function', () => {
 	test('Should populate user arg of callback', () => {
-		bearerTokenAuthUtil('Jimmini', mockCallback, authKeys);
+		Util('Jimmini', mockCallback, authKeys);
 
 		expect(mockCallback.mock.calls.length).toBe(1);
 		expect(mockCallback.mock.calls[0][0]).toBeNull();
@@ -22,7 +22,7 @@ describe('Passport bearer token authorization utility function', () => {
 	});
 
 	test('Should fail to populate user arg of callback', () => {
-		bearerTokenAuthUtil('Pinocchio', mockCallback, authKeys);
+		Util('Pinocchio', mockCallback, authKeys);
 
 		expect(mockCallback.mock.calls.length).toBe(1);
 		expect(mockCallback.mock.calls[0][0]).toBeNull();

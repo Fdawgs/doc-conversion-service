@@ -23,7 +23,7 @@ class Server {
 	/**
 	 * @param {Object} config - Server configuration values.
 	 */
-	constructor(config = {}) {
+	constructor(config) {
 		this.config = config;
 		// Setup our express instance
 		this.app = express();
@@ -170,12 +170,11 @@ class Server {
 	/**
 	 * @author Frazer Smith
 	 * @description Shut down server (non-gracefully).
-	 * @returns {Promise<this>} self
 	 */
 	shutdown() {
-		return new Promise((resolve) => {
-			this.app.close();
-			resolve(this);
+		this.app.close();
+		setImmediate(() => {
+			this.app.emit('close');
 		});
 	}
 }
