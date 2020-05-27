@@ -90,6 +90,7 @@ class Server {
 	/**
 	 * @author Frazer Smith
 	 * @description Enable routes for server.
+	 * @returns {this} self
 	 */
 	configureRoutes() {
 		this.app.use(
