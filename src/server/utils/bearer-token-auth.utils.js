@@ -1,10 +1,10 @@
 /**
  * @author Frazer Smith
  * @description Checks 'authorization' request header value against array of API key objects.
- * @param {String} token - Bearer token.
+ * @param {string} token - Bearer token.
  * @param {Function} callback - PassportJS strategy callback.
- * @param {Array.<{value: String}>} authArray - Array of API key objects.
- * @return {Function} callback.
+ * @param {Array.<{value: string}>} authArray - Array of API key objects.
+ * @returns {Function} callback.
  */
 module.exports = function bearerTokenAuthentication(
 	token,

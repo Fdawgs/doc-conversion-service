@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-tag-names */
 const { Router } = require('express');
 const passport = require('passport');
 
@@ -22,7 +23,7 @@ const router = new Router();
  * @apiGroup HTML
  * @apiDescription Support for preflight CORS requests.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
+ * @apiHeader {string} Authorization Bearer token for authorization.
  *
  * @apiExample {curl} Example usage:
  * curl --request OPTIONS \
@@ -56,11 +57,11 @@ const router = new Router();
  * @apiGroup HTML
  * @apiDescription Convert PDF to HTML.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
- * @apiHeader {String=application/pdf} Content-Type
+ * @apiHeader {string} Authorization Bearer token for authorization.
+ * @apiHeader {string=application/pdf} Content-Type
  *
  * @apiParam (Query string) {Boolean=true, false} [removealt] Remove the alt attribute from image tags.
- * @apiParam (Query string) {String} [fonts] Define the font(s) of the text in the returned HTML document. Eg:
+ * @apiParam (Query string) {string} [fonts] Define the font(s) of the text in the returned HTML document. Eg:
  * ```
  * font=Arial
  * ```
@@ -80,11 +81,11 @@ const router = new Router();
 /**
  * @author Frazer Smith
  * @description Handles routing to convert a request with a PDF file as its body into HTML.
- * @param {Object} config
- * @param {Object} config.cors
- * @param {Object=} config.htmltidy - HTMLTidy2 configuration values.
- * @param {Object=} config.poppler - Poppler conversion configuration values.
- * @param {Object=} config.sanitize - Sanitization configuration values.
+ * @param {object} config - Object containing route config objects.
+ * @param {object} config.cors - CORS configuration values.
+ * @param {object=} config.htmltidy - HTMLTidy2 configuration values.
+ * @param {object=} config.poppler - Poppler conversion configuration values.
+ * @param {object=} config.sanitize - Sanitization configuration values.
  * @returns {Router} Express router instance.
  */
 module.exports = function htmlRoute(config) {
