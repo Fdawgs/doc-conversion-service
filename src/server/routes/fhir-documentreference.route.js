@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-tag-names */
 const passport = require('passport');
 const { Router } = require('express');
 
@@ -165,8 +166,8 @@ const router = new Router();
 /**
  * @author Frazer Smith
  * @description Handles routing to convert a request to a FHIR DocumentReference resource.
- * @param {object} config
- * @param {object} config.cors
+ * @param {object} config - Object containing route config objects.
+ * @param {object} config.cors - CORS configuration values.
  * @param {object=} config.sanitize - Sanitization configuration values.
  * @returns {Router} Express router instance.
  */
