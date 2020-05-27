@@ -15,7 +15,6 @@ module.exports = function cleanCssMiddleware() {
 		const dom = new JSDOM(req.body);
 		const styles = dom.window.document.querySelectorAll('style');
 
-		// /?fonts= 
 		let newFonts;
 		if (req.query && req.query.fonts) {
 			newFonts = String(req.query.fonts);
