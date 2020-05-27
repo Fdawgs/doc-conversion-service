@@ -3,7 +3,7 @@ const { tidy } = require('htmltidy2');
 /**
  * @author Frazer Smith
  * @description Uses HTMLTidy2 to parse and tidy HTML of passed file.
- * @param {Object=} config - HTMLTidy2 configuration values.
+ * @param {object=} config - HTMLTidy2 configuration values.
  * @returns {Function} Express middleware.
  */
 module.exports = function htmltidyMiddleware(config = {}) {

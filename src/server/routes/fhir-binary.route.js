@@ -18,7 +18,7 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Support for preflight CORS requests.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
+ * @apiHeader {string} Authorization Bearer token for authorization.
  *
  * @apiExample {curl} Example usage:
  * curl --request OPTIONS \
@@ -52,8 +52,8 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
- * @apiHeader {String=multipart/form-data} Content-Type
+ * @apiHeader {string} Authorization Bearer token for authorization.
+ * @apiHeader {string=multipart/form-data} Content-Type
  *
  * @apiParam (Request body) {Binary} document Binary content such as text, image, pdf, zip archive, etc.
  *
@@ -80,10 +80,10 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Convert any file passed to FHIR STU3 Binary Resource.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
- * @apiHeader {String=multipart/form-data} Content-Type
+ * @apiHeader {string} Authorization Bearer token for authorization.
+ * @apiHeader {string=multipart/form-data} Content-Type
  *
- * @apiParam (Request body) {String} id Logical id of the artifact.
+ * @apiParam (Request body) {string} id Logical id of the artifact.
  * @apiParam (Request body) {Binary} document Binary content such as text, image, pdf, zip archive, etc.
  *
  * @apiExample {curl} Example usage:
@@ -107,9 +107,9 @@ const router = new Router();
 /**
  * @author Frazer Smith
  * @description Handles routing to convert a request to a FHIR Binary resource.
- * @param {Object} config
- * @param {Object} config.cors
- * @param {Object=} config.sanitize - Sanitization configuration values.
+ * @param {object} config
+ * @param {object} config.cors
+ * @param {object=} config.sanitize - Sanitization configuration values.
  * @returns {Router} Express router instance.
  */
 module.exports = function fhirRoute(config) {

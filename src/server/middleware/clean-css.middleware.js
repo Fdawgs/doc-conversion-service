@@ -5,7 +5,7 @@ const { JSDOM } = require('jsdom');
  * @author Frazer Smith
  * @description Resolves most common issues with CSS generated during conversion process.
  * Adds no-break to stop pages overrunning each other when text is too big for its' original page.
- * @param {String=} req.query.fonts - Comma seperated list of fonts to replace document's original fonts with.
+ * @param {string=} req.query.fonts - Comma seperated list of fonts to replace document's original fonts with.
  * @returns {Function} Express middleware.
  */
 module.exports = function cleanCssMiddleware() {

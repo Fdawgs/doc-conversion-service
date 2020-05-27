@@ -7,14 +7,14 @@ const { v4 } = require('uuid');
 /**
  * @author Frazer Smith
  * @description Uses Poppler to convert PDF to HTML and places both files in a temporary directory.
- * @param {Object=} config - Poppler conversion configuration values.
- * @param {String=} config.tempDirectory - directory for temporarily storing
+ * @param {object=} config - Poppler conversion configuration values.
+ * @param {string=} config.tempDirectory - directory for temporarily storing
  * files during conversion.
  * Defaults to "src/server/temp".
- * @param {String=} config.encoding - Sets the encoding to use for text output.
+ * @param {string=} config.encoding - Sets the encoding to use for text output.
  * Defaults to "UTF-8".
- * @param {String=} config.binPath - Path of poppler-utils binaries.
- * @param {Object=} config.pdftoHtmlOptions - Refer to
+ * @param {string=} config.binPath - Path of poppler-utils binaries.
+ * @param {object=} config.pdftoHtmlOptions - Refer to
  * https://github.com/Fdawgs/node-poppler/blob/master/API.md#popplerpdftohtmloptions-file--promise
  * for options.
  * @returns {Function} Express middleware.

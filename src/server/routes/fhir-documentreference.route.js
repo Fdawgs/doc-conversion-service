@@ -18,7 +18,7 @@ const router = new Router();
  * @apiGroup FHIR
  * @apiDescription Support for preflight CORS requests.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
+ * @apiHeader {string} Authorization Bearer token for authorization.
  *
  * @apiExample {curl} Example usage:
  * curl --request OPTIONS \
@@ -53,8 +53,8 @@ const router = new Router();
  * @apiDescription Convert any file passed to FHIR STU3 DocumentReference Resource that adheres to the Care-Connect profile.
  * Refer to <a>https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1</a> for more info.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
- * @apiHeader {String=multipart/form-data} Content-Type
+ * @apiHeader {string} Authorization Bearer token for authorization.
+ * @apiHeader {string=multipart/form-data} Content-Type
  *
  * @apiParam (Request body) {Binary} document Binary content such as text, image, pdf, zip archive, etc.
  *
@@ -105,15 +105,15 @@ const router = new Router();
  * @apiDescription Convert any file passed to FHIR STU3 DocumentReference Resource that adheres to the Care-Connect profile.
  * Refer to <a>https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1</a> for more info.
  *
- * @apiHeader {String} Authorization Bearer token for authorization.
- * @apiHeader {String=multipart/form-data} Content-Type
+ * @apiHeader {string} Authorization Bearer token for authorization.
+ * @apiHeader {string=multipart/form-data} Content-Type
  *
- * @apiParam (Request body) {String} [id] Logical id of the artifact.
+ * @apiParam (Request body) {string} [id] Logical id of the artifact.
  * @apiParam (Request body) {Binary} document Binary content such as text, image, pdf, zip archive, etc.
- * @apiParam (Request body) {String} [subject] Who/what is the subject of the document
- * @apiParam (Request body) {String} [specialty] Clinical specialty of where the content was created.
- * @apiParam (Request body) {String} type Type of document.
- * @apiParam (Request body) {String=current, superseded, entered-in-error} status The status of the document reference.
+ * @apiParam (Request body) {string} [subject] Who/what is the subject of the document
+ * @apiParam (Request body) {string} [specialty] Clinical specialty of where the content was created.
+ * @apiParam (Request body) {string} type Type of document.
+ * @apiParam (Request body) {string=current, superseded, entered-in-error} status The status of the document reference.
  *
  * @apiExample {curl} Example usage:
  * curl --request PUT \
@@ -165,9 +165,9 @@ const router = new Router();
 /**
  * @author Frazer Smith
  * @description Handles routing to convert a request to a FHIR DocumentReference resource.
- * @param {Object} config
- * @param {Object} config.cors
- * @param {Object=} config.sanitize - Sanitization configuration values.
+ * @param {object} config
+ * @param {object} config.cors
+ * @param {object=} config.sanitize - Sanitization configuration values.
  * @returns {Router} Express router instance.
  */
 module.exports = function fhirRoute(config) {
