@@ -12,7 +12,7 @@ const path = require('path');
  * @param {Boolean=} req.query.removealt - Remove alt attribute from content.
  * Useful for systems where recieved documents are converted to TIFF
  * (i.e. TPP's SystmOne).
- * @return {Function} Express middleware.
+ * @returns {Function} Express middleware.
  */
 module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 	return (req, res, next) => {

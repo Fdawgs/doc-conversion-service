@@ -3,7 +3,7 @@ const { v4 } = require('uuid');
 /**
  * @author Frazer Smith
  * @description Converts multipart request to STU3 FHIR Binary resource.
- * @return {Function} Express middleware.
+ * @returns {Function} Express middleware.
  */
 module.exports = function fhirBinResourceMiddleware() {
 	return (req, res, next) => {

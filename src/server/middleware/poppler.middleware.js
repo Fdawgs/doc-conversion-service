@@ -17,7 +17,7 @@ const { v4 } = require('uuid');
  * @param {Object=} config.pdftoHtmlOptions - Refer to
  * https://github.com/Fdawgs/node-poppler/blob/master/API.md#popplerpdftohtmloptions-file--promise
  * for options.
- * @return {Function} Express middleware.
+ * @returns {Function} Express middleware.
  */
 module.exports = function popplerMiddleware(config = {}) {
 	return async (req, res, next) => {

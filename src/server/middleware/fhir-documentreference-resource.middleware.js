@@ -5,7 +5,7 @@ const { v4 } = require('uuid');
  * @description Converts multipart request to STU3 FHIR DocumentReference resource
  * that adheres to the Care-Connect profile.
  * Refer to https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1 for more info.
- * @return {Function} Express middleware.
+ * @returns {Function} Express middleware.
  * @todo extend resource.type with coding array.
  */
 module.exports = function fhirDocumentReferenceResourceMiddleware() {
