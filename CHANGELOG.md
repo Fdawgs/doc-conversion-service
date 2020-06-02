@@ -1,3 +1,8 @@
+## <small>4.1.2 (2020-06-02)</small>
+
+-   chore(deps-dev): bump eslint-plugin-jsdoc from 26.0.1 to 26.0.2 ([4bd56eb](https://github.com/Fdawgs/doc-conversion-service/commit/4bd56eb))
+-   fix(server): check for string instead of boolean to enable https ([2337673](https://github.com/Fdawgs/doc-conversion-service/commit/2337673))
+
 ## <small>4.1.1 (2020-06-01)</small>
 
 -   chore: add missing @param descriptions ([8582340](https://github.com/Fdawgs/doc-conversion-service/commit/8582340))
