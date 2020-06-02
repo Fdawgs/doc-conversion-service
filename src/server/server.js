@@ -140,7 +140,7 @@ class Server {
 	listen() {
 		const server = this.config;
 		// Update the express app to be an instance of createServer
-		if (server.https === true) {
+		if (server.https === 'true') {
 			const options = {};
 			// Attempt to use PFX file if present
 			if (server.ssl.pfx.pfx) {
