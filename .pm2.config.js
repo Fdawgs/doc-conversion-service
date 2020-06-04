@@ -9,6 +9,6 @@ module.exports = {
         instances: 4,
         name: "doc-conv-api",
         script: './src/index.js',
-        watch: './src/config.js'
+        watch: ['./src/config.js', '.env.production']
     }]
 }
