@@ -1,3 +1,10 @@
+## <small>4.1.3 (2020-06-04)</small>
+
+-   chore: watch .env.production file for pm2 restarts ([417db37](https://github.com/Fdawgs/doc-conversion-service/commit/417db37))
+-   chore(deps-dev): bump eslint-plugin-jsdoc from 26.0.2 to 27.0.3 ([74e76ed](https://github.com/Fdawgs/doc-conversion-service/commit/74e76ed))
+-   chore(deps): bump sanitize-middleware from 2.0.7 to 2.0.8 ([7160f55](https://github.com/Fdawgs/doc-conversion-service/commit/7160f55))
+-   docs(readme): correct spelling; simplify intro section ([0dff681](https://github.com/Fdawgs/doc-conversion-service/commit/0dff681))
+
 ## <small>4.1.2 (2020-06-02)</small>
 
 -   chore(deps-dev): bump eslint-plugin-jsdoc from 26.0.1 to 26.0.2 ([4bd56eb](https://github.com/Fdawgs/doc-conversion-service/commit/4bd56eb))
