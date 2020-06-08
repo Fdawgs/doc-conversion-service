@@ -6,7 +6,7 @@ const path = require('path');
  * @author Frazer Smith
  * @description Embeds images after encoding with Base64 to allow for
  * images to be transmitted via MESH.
- * 
+ *
  * Will remove alt attribute from img tags if optional `removealt` query
  * string param set to `true`.
  * Useful for systems where recieved documents are converted to

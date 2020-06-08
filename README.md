@@ -4,12 +4,12 @@
 [![Build Status](https://travis-ci.org/Fdawgs/doc-conversion-service.svg?branch=master)](https://travis-ci.org/Fdawgs/doc-conversion-service) [![Coverage Status](https://coveralls.io/repos/github/Fdawgs/doc-conversion-service/badge.svg?branch=master)](https://coveralls.io/github/Fdawgs/doc-conversion-service?branch=master) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&identifier=235116799)](https://dependabot.com) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Intro
+
 This RESTful API web service converts files from PDF to HTML format, and allows the conversion of any file to [Binary](https://www.hl7.org/fhir/STU3/binary.html) and [DocumentReference](https://www.hl7.org/fhir/STU3/documentreference.html) STU3 (3.0.1) HL7® FHIR® resources adhering to the [NHS INTEROPen CareConnect profiles](https://nhsconnect.github.io/CareConnectAPI/).
 
 It was created to replace a previously purchased PDF-to-HTML conversion tool at [Yeovil District Hospital NHSFT](https://yeovilhospital.co.uk/). The tool, that was no longer supported, would produce unreadable documents with issues such as text running off the page, paragraphs overlapping each other, and Windows-1252 to UTF-8 character encoding problems.
 
 GP surgeries were receiving these documents through [MESH](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh) and were unable to read a number of them, leading to requests for the original document to be faxed over.
-
 
 ## Prerequisites
 
