@@ -1,3 +1,14 @@
+## <small>4.1.4 (2020-06-08)</small>
+
+-   build(deps-dev): bump eslint-plugin-import from 2.20.2 to 2.21.1 ([b295396](https://github.com/Fdawgs/doc-conversion-service/commit/b295396))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 27.0.3 to 27.0.4 ([f3c7549](https://github.com/Fdawgs/doc-conversion-service/commit/f3c7549))
+-   build(deps-dev): bump typescript from 3.9.3 to 3.9.5 ([0268a51](https://github.com/Fdawgs/doc-conversion-service/commit/0268a51))
+-   build(deps): bump node-poppler from 1.7.1 to 1.7.2 ([f50cb63](https://github.com/Fdawgs/doc-conversion-service/commit/f50cb63))
+-   fix(config): set poppler binary path in environment variables ([d639963](https://github.com/Fdawgs/doc-conversion-service/commit/d639963))
+-   chore: rename .env.test to .env.template; add .env.test to gitignore ([0161089](https://github.com/Fdawgs/doc-conversion-service/commit/0161089))
+-   chore(scripts): expand coverage of eslint and prettier ([edb8f29](https://github.com/Fdawgs/doc-conversion-service/commit/edb8f29))
+-   docs(contributing): add env variable reference ([bb864ae](https://github.com/Fdawgs/doc-conversion-service/commit/bb864ae))
+
 ## <small>4.1.3 (2020-06-04)</small>
 
 -   chore: watch .env.production file for pm2 restarts ([417db37](https://github.com/Fdawgs/doc-conversion-service/commit/417db37))
