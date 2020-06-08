@@ -22,8 +22,8 @@ GP surgeries were receiving these documents through [MESH](https://digital.nhs.u
 
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
-3. Make a copy of the `.env.test` file in the root directory and rename to `.env.production`
-4. Configure the application using the global variables in the `.env.production` file
+3. Make a copy of `.env.template` in the root directory and rename to `.env.production`
+4. Configure the application using the global variables in `.env.production`
 5. Run `yarn docs` to generate api documentation
 6. Run `yarn start`
 
@@ -39,8 +39,8 @@ You can now navigate to http://0.0.0.0:3000/api/docs to view documentation!
 
 This requires [Docker](https://www.docker.com/products) installed.
 
-1. Make a copy of the `.env.test` file in the root directory and rename to `.env.production`
-2. Configure the application using the global variables in the `.env.production` file
+1. Make a copy of `.env.template` in the root directory and rename to `.env.production`
+2. Configure the application using the global variables in `.env.production`
 3. Run `docker-compose up`
 
 ### Deploying using PM2
@@ -49,8 +49,8 @@ It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a pr
 
 1. Navigate to the repo
 2. Run `yarn install` to install dependencies
-3. Make a copy of the `.env.test` file in the root directory and rename to `.env.production`
-4. Configure the application using the global variables in the `.env.production` file
+3. Make a copy of `.env.template` in the root directory and rename to `.env.production`
+4. Configure the application using the global variables in `.env.production`
 5. Run `yarn docs` to generate api documentation
 6. Run `yarn global add pm2` to install pm2 globally
 7. Launch application with `pm2 start .pm2.config.js`
