@@ -6,8 +6,12 @@ const { JSDOM } = require('jsdom');
  * @description Resolves most common issues with CSS generated during conversion process.
  * Adds no-break to stop pages overrunning each other when text is too big for its' original page.
  *
- * Will replace document's original font(s) if single font or comma seperated list of fonts is
- * specified using optional `font` query string param, e.g. `?font=Arial,Sans Serif`
+ * Document's original font(s) can be replaced with single font or comma seperated list of fonts
+ * using optional `font` query string param, e.g. `?font=Arial,Sans Serif`
+ *
+ * Document's original background color can be replaced using optional `backgroundcolor` query
+ * string param, e.g. `?backgroundcolor=white`
+ *
  * @returns {Function} Express middleware.
  */
 module.exports = function cleanCssMiddleware() {
@@ -18,6 +22,11 @@ module.exports = function cleanCssMiddleware() {
 		let newFonts;
 		if (req.query && req.query.fonts) {
 			newFonts = String(req.query.fonts);
+		}
+
+		let newBackgroundColor;
+		if (req.query && req.query.backgroundcolor) {
+			newBackgroundColor = String(req.query.backgroundcolor);
 		}
 
 		// Create results object for conversion results
@@ -35,16 +44,20 @@ module.exports = function cleanCssMiddleware() {
 
 			styleObj.cssRules.forEach((styleRule) => {
 				// Replace default font
-				if (
-					typeof newFonts === 'string' &&
-					styleRule.style['font-family']
-				) {
+				if (newFonts && styleRule.style['font-family']) {
 					styleRule.style.setProperty('font-family', newFonts);
 				}
 
 				// Stop pages overrunning the next, leading to overlapped text
 				if (styleRule.selectorText.substring(0, 3) === 'div') {
 					styleRule.style.setProperty('page-break-inside', 'avoid');
+
+					if (newBackgroundColor) {
+						styleRule.style.setProperty(
+							'background-color',
+							newBackgroundColor
+						);
+					}
 				}
 			});
 

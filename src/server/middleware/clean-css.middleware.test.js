@@ -26,7 +26,29 @@ describe('Clean CSS middleware', () => {
 		middleware(req, res, next);
 
 		expect(res.locals).toMatchObject({ results: { clean_css: 'Fixed' } });
-		expect(/font-family: arial;/gm.exec(req.body)).not.toBeNull();
+		expect(/font-family: arial/gm.exec(req.body)).not.toBeNull();
+		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
+	});
+
+	test('Should clean CSS and change background color', () => {
+		const middleware = Middleware();
+		const req = {
+			body: fs.readFileSync(
+				'./test_files/tester_bullet_issues-html.html',
+				{ encoding: 'UTF-8' }
+			),
+			query: {
+				backgroundcolor: 'white'
+			}
+		};
+		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const next = jest.fn();
+
+		middleware(req, res, next);
+
+		expect(res.locals).toMatchObject({ results: { clean_css: 'Fixed' } });
+		expect(/background-color: white/gm.exec(req.body)).not.toBeNull();
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
