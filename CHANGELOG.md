@@ -1,3 +1,12 @@
+## 4.2.0 (2020-06-12)
+
+-   build(deps-dev): bump eslint from 6.8.0 to 7.2.0 ([953051e](https://github.com/Fdawgs/doc-conversion-service/commit/953051e))
+-   build(deps-dev): bump eslint-config-airbnb-base from 14.1.0 to 14.2.0 ([6c2898b](https://github.com/Fdawgs/doc-conversion-service/commit/6c2898b))
+-   build(deps-dev): bump eslint-plugin-import from 2.21.1 to 2.21.2 ([a82ef2e](https://github.com/Fdawgs/doc-conversion-service/commit/a82ef2e))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 27.0.4 to 27.0.6 ([0acb2d1](https://github.com/Fdawgs/doc-conversion-service/commit/0acb2d1))
+-   build(deps): bump helmet from 3.22.0 to 3.22.1 ([78a709c](https://github.com/Fdawgs/doc-conversion-service/commit/78a709c))
+-   feat(middleware): background color can be defined with query param ([f038607](https://github.com/Fdawgs/doc-conversion-service/commit/f038607))
+
 ## <small>4.1.4 (2020-06-08)</small>
 
 -   build(deps-dev): bump eslint-plugin-import from 2.20.2 to 2.21.1 ([b295396](https://github.com/Fdawgs/doc-conversion-service/commit/b295396))
