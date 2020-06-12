@@ -92,6 +92,7 @@ const serverConfig = {
 			},
 			sanitize: {
 				query: {
+					backgroundcolor: { type: 'string' },
 					fonts: { type: 'string' },
 					removealt: { type: 'boolean' }
 				}
