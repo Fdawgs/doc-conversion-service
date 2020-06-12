@@ -1,3 +1,8 @@
+## <small>4.2.1 (2020-06-12)</small>
+
+-   build(deps): bump sanitize-middleware from 2.0.8 to 2.0.11 ([ed8d308](https://github.com/Fdawgs/doc-conversion-service/commit/ed8d308))
+-   fix(config): add backgroundcolor to accepted query params for sanitize ([a417c4e](https://github.com/Fdawgs/doc-conversion-service/commit/a417c4e))
+
 ## 4.2.0 (2020-06-12)
 
 -   build(deps-dev): bump eslint from 6.8.0 to 7.2.0 ([953051e](https://github.com/Fdawgs/doc-conversion-service/commit/953051e))
