@@ -1,3 +1,23 @@
+## <small>4.2.2 (2020-06-30)</small>
+
+-   chore: create code_of_conduct.md ([70b2a27](https://github.com/Fdawgs/doc-conversion-service/commit/70b2a27))
+-   chore: double pm2 instances ([9a65a53](https://github.com/Fdawgs/doc-conversion-service/commit/9a65a53))
+-   chore(eslint): convert from json to js file format ([84563b4](https://github.com/Fdawgs/doc-conversion-service/commit/84563b4))
+-   chore(scripts): remove prettier ignore-path option ([25a7bba](https://github.com/Fdawgs/doc-conversion-service/commit/25a7bba))
+-   build(deps-dev): bump @commitlint/config-conventional ([8dab0b7](https://github.com/Fdawgs/doc-conversion-service/commit/8dab0b7))
+-   build(deps-dev): bump eslint from 7.2.0 to 7.3.1 ([b16ba93](https://github.com/Fdawgs/doc-conversion-service/commit/b16ba93))
+-   build(deps-dev): bump eslint-plugin-import from 2.21.2 to 2.22.0 ([856e86d](https://github.com/Fdawgs/doc-conversion-service/commit/856e86d))
+-   build(deps-dev): bump eslint-plugin-jest from 23.13.2 to 23.17.1 ([7dd3be8](https://github.com/Fdawgs/doc-conversion-service/commit/7dd3be8))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 27.0.6 to 28.5.1 ([6e1b75f](https://github.com/Fdawgs/doc-conversion-service/commit/6e1b75f))
+-   build(deps-dev): bump jest from 26.0.1 to 26.1.0 ([b1f287b](https://github.com/Fdawgs/doc-conversion-service/commit/b1f287b))
+-   build(deps-dev): bump superagent from 5.2.2 to 5.3.1 ([43be108](https://github.com/Fdawgs/doc-conversion-service/commit/43be108))
+-   build(deps): bump helmet from 3.22.1 to 3.23.3 ([89e2dcf](https://github.com/Fdawgs/doc-conversion-service/commit/89e2dcf))
+-   build(deps): bump node-poppler from 1.7.2 to 1.7.4 ([6c88aa8](https://github.com/Fdawgs/doc-conversion-service/commit/6c88aa8))
+-   build(deps): bump sanitize-middleware from 2.0.11 to 2.0.12 ([efc933f](https://github.com/Fdawgs/doc-conversion-service/commit/efc933f))
+-   build(deps): bump uuid from 8.1.0 to 8.2.0 ([b1d8255](https://github.com/Fdawgs/doc-conversion-service/commit/b1d8255))
+-   build(travis): copy template file ([e981e5b](https://github.com/Fdawgs/doc-conversion-service/commit/e981e5b))
+-   Create Dependabot config file ([fbc6b20](https://github.com/Fdawgs/doc-conversion-service/commit/fbc6b20))
+
 ## <small>4.2.1 (2020-06-12)</small>
 
 -   build(deps): bump sanitize-middleware from 2.0.8 to 2.0.11 ([ed8d308](https://github.com/Fdawgs/doc-conversion-service/commit/ed8d308))
