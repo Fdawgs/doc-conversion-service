@@ -54,7 +54,7 @@
 		"eslint-plugin-promise": "^4.2.1",
 		"faker": "^4.1.0",
 		"is-html": "^2.0.0",
-		"jest": "^26.0.1",
+		"jest": "^26.1.0",
 		"jsinspect": "^0.12.7",
 		"lodash": "^4.17.15",
 		"node-mocks-http": "^1.8.1",
