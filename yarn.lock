@@ -5624,10 +5624,10 @@ sane@^4.0.3:
     minimist "^1.1.1"
     walker "~1.0.5"
 
-sanitize-html@^1.26.0:
-  version "1.26.0"
-  resolved "https://registry.yarnpkg.com/sanitize-html/-/sanitize-html-1.26.0.tgz#ab38d671526b9b7c08aa7af7f9ad5a73fcc1bbe4"
-  integrity sha512-xriDBT2FbfN0ZKCcX6H6svkh1bZpO2e5ny05RQGZY6vFOMAU13La2L5YYf3XpcjXSksCYXzPj7YPvyGp5wbaUA==
+sanitize-html@^1.27.0:
+  version "1.27.0"
+  resolved "https://registry.yarnpkg.com/sanitize-html/-/sanitize-html-1.27.0.tgz#42104a2d59f1a48b616b5165ad5349824861e580"
+  integrity sha512-U1btucGeYVpg0GoK43jPpe/bDCV4cBOGuxzv5NBd0bOjyZdMKY0n98S/vNlO1wVwre0VCj8H3hbzE7gD2+RjKA==
   dependencies:
     chalk "^2.4.1"
     htmlparser2 "^4.1.0"
@@ -5636,12 +5636,12 @@ sanitize-html@^1.26.0:
     srcset "^2.0.1"
     xtend "^4.0.1"
 
-sanitize-middleware@^2.0.11:
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/sanitize-middleware/-/sanitize-middleware-2.0.11.tgz#b53c062f1beacd41a18ab6351d12edd0e1709c42"
-  integrity sha512-A7QdUV42Cz/SFLVRql5ylqrMXCH21PEJGIsmWWg3kBPW+ahoZYNcNofv4q7NYGByKVxO97Ish23PQy/3tVGeWQ==
+sanitize-middleware@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/sanitize-middleware/-/sanitize-middleware-2.0.12.tgz#0c6b4af581994defac84e6dc14e4e8abbeac8750"
+  integrity sha512-LANwp2v8YTy/HdcSMjLBKeBH4wGcj/z8qBW4WTMz0xno2pMoSif4gc+qJgrkfh3fQ5r9+l/Ic7cVUu2Z3iR5PQ==
   dependencies:
-    sanitize-html "^1.26.0"
+    sanitize-html "^1.27.0"
     validator "^13.1.1"
     xss "^1.0.7"
 
