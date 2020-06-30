@@ -83,7 +83,7 @@
 		"passport": "^0.4.1",
 		"passport-http-bearer": "^1.0.1",
 		"sanitize-middleware": "^2.0.12",
-		"uuid": "^8.1.0"
+		"uuid": "^8.2.0"
 	},
 	"apidoc": {
 		"title": "Document Conversion API",
