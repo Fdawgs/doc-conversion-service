@@ -62,7 +62,7 @@ function rtfJs(rtf) {
 
 /**
  * @author Frazer Smith
- * @description Uses rtf.js to convert RTF file to HTML.
+ * @description Uses rtf.js to convert RTF file in `req.body` to HTML.
  * @returns {Function} Express middleware.
  */
 module.exports = function rtfMiddleware() {

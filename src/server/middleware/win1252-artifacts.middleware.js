@@ -3,7 +3,7 @@ const fixUtf8 = require('fix-utf8');
 /**
  * @author Frazer Smith
  * @description Replace most common incorrectly converted Windows-1252
- * to UTF-8 results with HTML equivalents.
+ * to UTF-8 results found in `req.body` with HTML equivalents.
  * Refer to https://www.i18nqa.com/debug/utf8-debug.html for more info.
  * @returns {Function} Express middleware.
  */
