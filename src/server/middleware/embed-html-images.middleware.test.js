@@ -1,5 +1,6 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
+const isHtml = require('is-html');
 const Middleware = require('./embed-html-images.middleware');
 
 describe('Embed HTML Images middleware', () => {
@@ -25,10 +26,11 @@ describe('Embed HTML Images middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(/alt=""/gm.exec(req.body)).not.toBeNull();
+		expect(isHtml(req.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Fixed' }
 		});
-		expect(/alt=""/gm.exec(req.body)).not.toBeNull();
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -45,6 +47,7 @@ describe('Embed HTML Images middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(isHtml(req.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Passed' }
 		});
@@ -52,7 +55,7 @@ describe('Embed HTML Images middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should throw error if temp directory not defined', () => {
+	test('Should pass an error to next if temp directory not defined', () => {
 		const middleware = Middleware();
 		const req = {
 			body: fs.readFileSync(
@@ -65,6 +68,7 @@ describe('Embed HTML Images middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(isHtml(req.body)).toBe(true);
 		expect(res.locals.results.embedded_images).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -86,10 +90,28 @@ describe('Embed HTML Images middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(isHtml(req.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			results: { embedded_images: 'Fixed' }
 		});
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
+	});
+
+	test('Should pass an error to next if HTML missing from req.body', async () => {
+		const middleware = Middleware();
+		const req = {
+			body: undefined
+		};
+		const res = httpMocks.createResponse();
+		const next = jest.fn();
+
+		await middleware(req, res, next);
+
+		expect(res.statusCode).toBe(400);
+		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0].message).toBe(
+			'Invalid HTML passed to embedHtmlImages middleware'
+		);
 	});
 });

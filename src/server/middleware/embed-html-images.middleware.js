@@ -1,4 +1,5 @@
 const fs = require('fs');
+const isHtml = require('is-html');
 const { JSDOM } = require('jsdom');
 const path = require('path');
 
@@ -18,38 +19,45 @@ const path = require('path');
  */
 module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 	return (req, res, next) => {
-		const tempDir =
-			tempDirectory || `${path.resolve(__dirname, '..')}\\temp\\`;
-		const dom = new JSDOM(req.body);
-		const images = dom.window.document.querySelectorAll('img');
+		if (isHtml(req.body)) {
+			const tempDir =
+				tempDirectory || `${path.resolve(__dirname, '..')}\\temp\\`;
+			const dom = new JSDOM(req.body);
+			const images = dom.window.document.querySelectorAll('img');
 
-		// Create results object for conversion results
-		if (typeof res.locals.results === 'undefined') {
-			res.locals.results = {};
-		}
-
-		try {
-			images.forEach((element) => {
-				const imgForm = path.extname(element.src).substring(1);
-				const imageAsBase64 = `data:image/${imgForm};base64,${fs.readFileSync(
-					tempDir + element.src,
-					'base64'
-				)}`;
-				element.setAttribute('src', imageAsBase64);
-				if (req.query && req.query.removealt) {
-					element.setAttribute('alt', '');
-				}
-			});
-			if (images.length > 0) {
-				res.locals.results.embedded_images = 'Fixed';
-			} else {
-				res.locals.results.embedded_images = 'Passed';
+			// Create results object for conversion results
+			if (typeof res.locals.results === 'undefined') {
+				res.locals.results = {};
 			}
-			req.body = dom.window.document.documentElement.outerHTML;
-			next();
-		} catch (error) {
+
+			try {
+				images.forEach((element) => {
+					const imgForm = path.extname(element.src).substring(1);
+					const imageAsBase64 = `data:image/${imgForm};base64,${fs.readFileSync(
+						tempDir + element.src,
+						'base64'
+					)}`;
+					element.setAttribute('src', imageAsBase64);
+					if (req.query && req.query.removealt) {
+						element.setAttribute('alt', '');
+					}
+				});
+				if (images.length > 0) {
+					res.locals.results.embedded_images = 'Fixed';
+				} else {
+					res.locals.results.embedded_images = 'Passed';
+				}
+				req.body = dom.window.document.documentElement.outerHTML;
+				next();
+			} catch (error) {
+				res.status(400);
+				next(new Error(error));
+			}
+		} else {
 			res.status(400);
-			next(new Error(error));
+			next(
+				new Error('Invalid HTML passed to embedHtmlImages middleware')
+			);
 		}
 	};
 };

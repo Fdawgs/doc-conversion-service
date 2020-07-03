@@ -6,6 +6,8 @@ const { JSDOM, VirtualConsole } = require('jsdom');
  * @author Tom Zöhner
  * @author Frazer Smith
  * @description Converts RTF files to HTML.
+ * Will not process passed file if content-type header not set to `application/rtf`.
+ *
  * Adapted from Tom Zöhner's example in rtf.js repo to be asynchronous.
  * @param {ArrayBuffer} rtf - Binary RTF file.
  * @returns {Promise<string|Error>} Promise of html string on resolve, or Error object on rejection.

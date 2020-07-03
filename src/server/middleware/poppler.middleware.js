@@ -7,6 +7,7 @@ const { v4 } = require('uuid');
 /**
  * @author Frazer Smith
  * @description Uses Poppler to convert PDF file in `req.body` to HTML and places both files in a temporary directory.
+ * Will not process passed file if content-type header not set to `application/pdf`.
  * @param {object=} config - Poppler conversion configuration values.
  * @param {string=} config.tempDirectory - directory for temporarily storing
  * files during conversion.
@@ -21,71 +22,74 @@ const { v4 } = require('uuid');
  */
 module.exports = function popplerMiddleware(config = {}) {
 	return async (req, res, next) => {
-		if (req.headers['content-type'] !== 'application/pdf') {
-			next();
-		}
-
-		// Define any default settings the middleware should have to get up and running
-		const defaultConfig = {
-			binPath: undefined,
-			encoding: 'UTF-8',
-			pdftoHtmlOptions: {
-				complexOutput: true,
-				singlePage: true,
-				outputEncoding: 'UTF-8'
-			},
-			tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
-		};
-		this.config = Object.assign(defaultConfig, config);
-
-		if (!fs.existsSync(this.config.tempDirectory)) {
-			fs.mkdirSync(this.config.tempDirectory);
-		}
-
-		// Build temporary files for Poppler and following middleware to read from
-		const id = v4();
-		const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
-		const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
-		try {
-			fs.writeFileSync(tempPdfFile, req.body);
-
-			const poppler = new Poppler(this.config.binPath);
-
-			await poppler.pdfToHtml(this.config.pdftoHtmlOptions, tempPdfFile);
-
-			const dom = new JSDOM(
-				fs.readFileSync(tempHtmlFile, {
-					encoding: this.config.encoding
-				})
-			);
-
-			// Set document language
-			const html = dom.window.document.querySelector('html');
-			html.setAttribute('lang', 'en');
-			html.setAttribute('xml:lang', 'en');
-
-			// Remove excess title and meta tags left behind by Poppler
-			const titles = dom.window.document.querySelectorAll('title');
-			for (let index = 1; index < titles.length; index += 1) {
-				titles[index].parentNode.removeChild(titles[index]);
-			}
-			const metas = dom.window.document.querySelectorAll('meta');
-			for (let index = 1; index < metas.length; index += 1) {
-				metas[index].parentNode.removeChild(metas[index]);
-			}
-
-			req.body = dom.window.document.documentElement.outerHTML;
-
-			res.locals.doclocation = {
-				directory: this.config.tempDirectory,
-				html: tempHtmlFile,
-				id,
-				pdf: tempPdfFile
+		if (req.headers['content-type'] === 'application/pdf') {
+			// Define any default settings the middleware should have to get up and running
+			const defaultConfig = {
+				binPath: undefined,
+				encoding: 'UTF-8',
+				pdftoHtmlOptions: {
+					complexOutput: true,
+					singlePage: true,
+					outputEncoding: 'UTF-8'
+				},
+				tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
 			};
+			this.config = Object.assign(defaultConfig, config);
+
+			if (!fs.existsSync(this.config.tempDirectory)) {
+				fs.mkdirSync(this.config.tempDirectory);
+			}
+
+			// Build temporary files for Poppler and following middleware to read from
+			const id = v4();
+			const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
+			const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
+			try {
+				fs.writeFileSync(tempPdfFile, req.body);
+
+				const poppler = new Poppler(this.config.binPath);
+
+				await poppler.pdfToHtml(
+					this.config.pdftoHtmlOptions,
+					tempPdfFile
+				);
+
+				const dom = new JSDOM(
+					fs.readFileSync(tempHtmlFile, {
+						encoding: this.config.encoding
+					})
+				);
+
+				// Set document language
+				const html = dom.window.document.querySelector('html');
+				html.setAttribute('lang', 'en');
+				html.setAttribute('xml:lang', 'en');
+
+				// Remove excess title and meta tags left behind by Poppler
+				const titles = dom.window.document.querySelectorAll('title');
+				for (let index = 1; index < titles.length; index += 1) {
+					titles[index].parentNode.removeChild(titles[index]);
+				}
+				const metas = dom.window.document.querySelectorAll('meta');
+				for (let index = 1; index < metas.length; index += 1) {
+					metas[index].parentNode.removeChild(metas[index]);
+				}
+
+				req.body = dom.window.document.documentElement.outerHTML;
+
+				res.locals.doclocation = {
+					directory: this.config.tempDirectory,
+					html: tempHtmlFile,
+					id,
+					pdf: tempPdfFile
+				};
+				next();
+			} catch {
+				res.status(400);
+				next(new Error('Failed to convert PDF file to HTML'));
+			}
+		} else {
 			next();
-		} catch {
-			res.status(400);
-			next(new Error('Failed to convert PDF file to HTML'));
 		}
 	};
 };
