@@ -6,7 +6,7 @@ const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
- * @description Uses Poppler to convert PDF to HTML and places both files in a temporary directory.
+ * @description Uses Poppler to convert PDF file to HTML and places both files in a temporary directory.
  * @param {object=} config - Poppler conversion configuration values.
  * @param {string=} config.tempDirectory - directory for temporarily storing
  * files during conversion.
@@ -81,7 +81,7 @@ module.exports = function popplerMiddleware(config = {}) {
 			next();
 		} catch {
 			res.status(400);
-			next(new Error('Failed to convert PDF to HTML'));
+			next(new Error('Failed to convert PDF file to HTML'));
 		}
 	};
 };

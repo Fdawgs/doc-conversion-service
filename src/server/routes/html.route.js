@@ -55,7 +55,7 @@ const router = new Router();
  * @api {post} /api/converter/html HTML - POST
  * @apiName PostHtml
  * @apiGroup HTML
- * @apiDescription Convert PDF to HTML.
+ * @apiDescription Convert PDF file to HTML.
  *
  * @apiHeader {string} Authorization Bearer token for authorization.
  * @apiHeader {string=application/pdf} Content-Type

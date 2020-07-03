@@ -11,7 +11,7 @@ describe('RTF-to-HTML conversion middleware', () => {
 	});
 
 	// eslint-disable-next-line jest/no-commented-out-tests
-	test('Should convert PDF to HTML', async () => {
+	test('Should convert RTF file to HTML', async () => {
 		const middleware = Middleware();
 		const req = {
 			body: fs.readFileSync('./test_files/test-rtf.rtf')
@@ -40,7 +40,7 @@ describe('RTF-to-HTML conversion middleware', () => {
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Failed to convert RTF to HTML'
+			'Failed to convert RTF file to HTML'
 		);
 	});
 });

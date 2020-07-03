@@ -7,7 +7,7 @@ const { JSDOM, VirtualConsole } = require('jsdom');
  * @author Frazer Smith
  * @description Converts RTF files to HTML.
  * Adapted from Tom Zöhner's example in rtf.js repo to be asynchronous.
- * @param {ArrayBuffer} rtf - Binary RTF document.
+ * @param {ArrayBuffer} rtf - Binary RTF file.
  * @returns {Promise<string|Error>} Promise of html string on resolve, or Error object on rejection.
  */
 function rtfJs(rtf) {
@@ -62,7 +62,7 @@ function rtfJs(rtf) {
 
 /**
  * @author Frazer Smith
- * @description Uses rtf.js to convert RTF to HTML.
+ * @description Uses rtf.js to convert RTF file to HTML.
  * @returns {Function} Express middleware.
  */
 module.exports = function rtfMiddleware() {
@@ -72,7 +72,7 @@ module.exports = function rtfMiddleware() {
 			next();
 		} catch {
 			res.status(400);
-			next(new Error('Failed to convert RTF to HTML'));
+			next(new Error('Failed to convert RTF file to HTML'));
 		}
 	};
 };

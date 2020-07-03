@@ -31,12 +31,12 @@ describe('HTML conversion route', () => {
 			.catch((err) => {
 				expect(err.status).toBe(400);
 				expect(err.response.error.text).toMatch(
-					'Failed to convert PDF to HTML'
+					'Failed to convert PDF file to HTML'
 				);
 			});
 	});
 
-	test('Should return converted document', async () => {
+	test('Should return PDF file converted to HTML', async () => {
 		const res = await request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')

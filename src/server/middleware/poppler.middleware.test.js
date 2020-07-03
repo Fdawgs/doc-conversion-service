@@ -15,7 +15,7 @@ describe('Poppler conversion middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should convert PDF to HTML', async () => {
+	test('Should convert PDF file to HTML', async () => {
 		const middleware = Middleware();
 		const req = {
 			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
@@ -34,7 +34,7 @@ describe('Poppler conversion middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should convert PDF to HTML and place in specified directory', async () => {
+	test('Should convert PDF file to HTML and place in specified directory', async () => {
 		const options = {
 			tempDirectory: './src/server/temp/',
 			encoding: 'UTF-8'
@@ -70,7 +70,7 @@ describe('Poppler conversion middleware', () => {
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Failed to convert PDF to HTML'
+			'Failed to convert PDF file to HTML'
 		);
 	});
 });
