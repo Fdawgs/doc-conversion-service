@@ -14,7 +14,10 @@ describe('RTF-to-HTML conversion middleware', () => {
 	test('Should convert RTF file to HTML', async () => {
 		const middleware = Middleware();
 		const req = {
-			body: fs.readFileSync('./test_files/test-rtf.rtf')
+			body: fs.readFileSync('./test_files/test-rtf.rtf'),
+			headers: {
+				'content-type': 'application/rtf'
+			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
@@ -30,7 +33,10 @@ describe('RTF-to-HTML conversion middleware', () => {
 	test('Should pass an error to next if RTF file missing', async () => {
 		const middleware = Middleware();
 		const req = {
-			body: undefined
+			body: undefined,
+			headers: {
+				'content-type': 'application/rtf'
+			}
 		};
 		const res = httpMocks.createResponse();
 		const next = jest.fn();

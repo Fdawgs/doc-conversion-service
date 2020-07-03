@@ -68,7 +68,9 @@ function rtfJs(rtf) {
 module.exports = function rtfMiddleware() {
 	return async (req, res, next) => {
 		try {
-			req.body = await rtfJs(req.body);
+			if (req.headers['content-type'] === 'application/rtf') {
+				req.body = await rtfJs(req.body);
+			}
 			next();
 		} catch {
 			res.status(400);

@@ -21,6 +21,10 @@ const { v4 } = require('uuid');
  */
 module.exports = function popplerMiddleware(config = {}) {
 	return async (req, res, next) => {
+		if (req.headers['content-type'] !== 'application/pdf') {
+			next();
+		}
+
 		// Define any default settings the middleware should have to get up and running
 		const defaultConfig = {
 			binPath: undefined,

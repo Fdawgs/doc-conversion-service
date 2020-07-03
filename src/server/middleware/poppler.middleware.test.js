@@ -18,7 +18,10 @@ describe('Poppler conversion middleware', () => {
 	test('Should convert PDF file to HTML', async () => {
 		const middleware = Middleware();
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
+			headers: {
+				'content-type': 'application/pdf'
+			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
@@ -41,7 +44,10 @@ describe('Poppler conversion middleware', () => {
 		};
 		const middleware = Middleware(options);
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
+			headers: {
+				'content-type': 'application/pdf'
+			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
@@ -60,7 +66,10 @@ describe('Poppler conversion middleware', () => {
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware();
 		const req = {
-			body: undefined
+			body: undefined,
+			headers: {
+				'content-type': 'application/pdf'
+			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
