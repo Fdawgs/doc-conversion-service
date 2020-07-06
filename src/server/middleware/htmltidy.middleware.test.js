@@ -27,6 +27,8 @@ describe('Htmltidy2 conversion middleware', () => {
 		await middleware(req, res, next);
 
 		expect(typeof req.body).toBe('string');
+		console.log(req.body);
+		console.log(isHtml(req.body));
 		expect(isHtml(req.body)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
