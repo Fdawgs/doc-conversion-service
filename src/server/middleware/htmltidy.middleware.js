@@ -9,12 +9,9 @@ const { tidy } = require('htmltidy2');
  * @returns {Promise<string>} Promise of parsed HTML string on resolve, or error string on rejection.
  */
 function tidyHtml(html, config) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		// eslint-disable-next-line promise/prefer-await-to-callbacks
 		tidy(html, config, (err, tidiedHtml) => {
-			if (err) {
-				reject(err);
-			}
 			resolve(tidiedHtml);
 		});
 	});
@@ -29,8 +26,13 @@ function tidyHtml(html, config) {
 module.exports = function htmltidyMiddleware(config = {}) {
 	return async (req, res, next) => {
 		if (typeof req.body === 'string' && isHtml(req.body)) {
-			req.body = await tidyHtml(req.body, config);
-			next();
+			try {
+				req.body = await tidyHtml(req.body, config);
+				next();
+			} catch (err) {
+				res.status(400);
+				next(err);
+			}
 		} else {
 			res.status(400);
 			next(new Error('Invalid HTML passed to htmltidy middleware'));

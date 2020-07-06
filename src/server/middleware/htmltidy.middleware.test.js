@@ -1,3 +1,4 @@
+const cloneDeep = require('lodash/cloneDeep');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
@@ -46,5 +47,25 @@ describe('Htmltidy2 conversion middleware', () => {
 		expect(next.mock.calls[0][0].message).toBe(
 			'Invalid HTML passed to htmltidy middleware'
 		);
+	});
+
+	test('Should pass an error to next if HTMLTidy2 config passed is invalid', async () => {
+		const modServerConfig = cloneDeep(serverConfig);
+		modServerConfig.routes.html.htmltidy.notvalid = 1;
+		const middleware = Middleware(modServerConfig);
+		const req = {
+			body: fs.readFileSync(
+				'./test_files/tester_bullet_issues-html.html',
+				{ encoding: 'UTF-8' }
+			)
+		};
+		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const next = jest.fn();
+
+		await middleware(req, res, next);
+
+		expect(res.statusCode).toBe(400);
+		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0].message).toBe('unknown option type');
 	});
 });
