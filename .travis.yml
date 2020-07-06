@@ -27,8 +27,6 @@ branches:
 script: echo "Running tests against $(node -v)..."
 
 jobs:
-    allow_failures:
-        - os: windows
     include:
         - stage: Produce Coverage
           node_js: node
