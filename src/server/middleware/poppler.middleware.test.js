@@ -31,10 +31,10 @@ describe('Poppler conversion middleware', () => {
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
-		expect(fs.existsSync('./src/server/temp/')).toBe(true);
 		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
+		expect(fs.existsSync(serverConfig.routes.html.poppler.tempDirectory)).toBe(true);
 	});
 
 	test('Should convert PDF file to HTML and place in specified directory', async () => {
@@ -58,9 +58,9 @@ describe('Poppler conversion middleware', () => {
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
 		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
-		expect(fs.existsSync(options.tempDirectory)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
+		expect(fs.existsSync(options.tempDirectory)).toBe(true);
 	});
 
 	test('Should pass an error to next if PDF file missing', async () => {
