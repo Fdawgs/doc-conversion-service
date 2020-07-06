@@ -11,6 +11,7 @@ const fixCss = require('../middleware/clean-css.middleware');
 const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
 const htmltidy = require('../middleware/htmltidy.middleware');
 const poppler = require('../middleware/poppler.middleware');
+const rtf = require('../middleware/rtf.middleware');
 
 // Import utils
 const fileRemover = require('../utils/file-remover.utils');
@@ -55,10 +56,10 @@ const router = new Router();
  * @api {post} /api/converter/html HTML - POST
  * @apiName PostHtml
  * @apiGroup HTML
- * @apiDescription Convert PDF to HTML.
+ * @apiDescription Convert PDF or RTF to HTML.
  *
  * @apiHeader {string} Authorization Bearer token for authorization.
- * @apiHeader {string=application/pdf} Content-Type
+ * @apiHeader {string=application/pdf, application/rtf} Content-Type
  *
  * @apiParam (Query string) {Boolean=true, false} [removealt] Remove the alt attribute from image tags.
  * @apiParam (Query string) {string} [fonts] Define the font(s) of the text in the returned HTML document. Eg:
@@ -95,22 +96,27 @@ module.exports = function htmlRoute(config) {
 		cors(config.cors)
 	);
 
-	router
-		.route('/')
-		.post(
-			bodyParser.raw({ type: ['application/pdf'], limit: '20mb' }),
-			poppler(config.poppler),
-			htmltidy(config.htmltidy),
-			fixWin1252Artifacts(),
-			embedHtmlImages(),
-			fixCss(),
-			(req, res) => {
+	router.route('/').post(
+		bodyParser.raw({
+			type: ['application/pdf', 'application/rtf'],
+			limit: '20mb'
+		}),
+		rtf(),
+		poppler(config.poppler),
+		htmltidy(config.htmltidy),
+		fixWin1252Artifacts(),
+		embedHtmlImages(config.poppler.tempDirectory),
+		fixCss(),
+		(req, res) => {
+			if (req.headers['content-type'] === 'application/pdf') {
 				fileRemover(
 					`${res.locals.doclocation.directory}/${res.locals.doclocation.id}*`
 				);
-				res.send(`<!DOCTYPE html>${req.body}`);
 			}
-		);
+
+			res.send(`<!DOCTYPE html>${req.body}`);
+		}
+	);
 
 	return router;
 };

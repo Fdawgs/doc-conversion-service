@@ -15,10 +15,13 @@ describe('Poppler conversion middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should convert PDF to HTML', async () => {
+	test('Should convert PDF file to HTML', async () => {
 		const middleware = Middleware();
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
+			headers: {
+				'content-type': 'application/pdf'
+			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
@@ -28,20 +31,23 @@ describe('Poppler conversion middleware', () => {
 		expect(typeof req.body).toBe('string');
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
-		expect(fs.existsSync('./src/server/temp/')).toBe(true);
 		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
+		expect(fs.existsSync(serverConfig.routes.html.poppler.tempDirectory)).toBe(true);
 	});
 
-	test('Should convert PDF to HTML and place in specified directory', async () => {
+	test('Should convert PDF file to HTML and place in specified directory', async () => {
 		const options = {
 			tempDirectory: './src/server/temp/',
 			encoding: 'UTF-8'
 		};
 		const middleware = Middleware(options);
 		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf')
+			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
+			headers: {
+				'content-type': 'application/pdf'
+			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
@@ -52,15 +58,18 @@ describe('Poppler conversion middleware', () => {
 		expect(isHtml(req.body)).toBe(true);
 		expect(typeof res.locals.doclocation).toBe('object');
 		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
-		expect(fs.existsSync(options.tempDirectory)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
+		expect(fs.existsSync(options.tempDirectory)).toBe(true);
 	});
 
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware();
 		const req = {
-			body: undefined
+			body: undefined,
+			headers: {
+				'content-type': 'application/pdf'
+			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
@@ -70,7 +79,7 @@ describe('Poppler conversion middleware', () => {
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Failed to convert PDF to HTML'
+			'Failed to convert PDF file to HTML'
 		);
 	});
 });
