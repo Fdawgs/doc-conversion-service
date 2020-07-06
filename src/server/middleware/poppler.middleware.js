@@ -11,7 +11,7 @@ const { v4 } = require('uuid');
  * @param {object=} config - Poppler conversion configuration values.
  * @param {string=} config.tempDirectory - directory for temporarily storing
  * files during conversion.
- * Defaults to "src/server/temp".
+ * Defaults to `src/server/temp` if not set.
  * @param {string=} config.encoding - Sets the encoding to use for text output.
  * Defaults to "UTF-8".
  * @param {string=} config.binPath - Path of poppler-utils binaries.

@@ -10,7 +10,7 @@ const { JSDOM, VirtualConsole } = require('jsdom');
  *
  * Adapted from Tom Zöhner's example in rtf.js repo to be asynchronous.
  * @param {ArrayBuffer} rtf - Binary RTF file.
- * @returns {Promise<string|Error>} Promise of html string on resolve, or Error object on rejection.
+ * @returns {Promise<string|Error>} Promise of HTML string on resolve, or Error object on rejection.
  */
 function rtfJs(rtf) {
 	return new Promise((resolve, reject) => {
