@@ -105,7 +105,7 @@ module.exports = function htmlRoute(config) {
 		poppler(config.poppler),
 		htmltidy(config.htmltidy),
 		fixWin1252Artifacts(),
-		embedHtmlImages(),
+		embedHtmlImages(config.poppler.tempDirectory),
 		fixCss(),
 		(req, res) => {
 			if (req.headers['content-type'] === 'application/pdf') {
