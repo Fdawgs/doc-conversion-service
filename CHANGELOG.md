@@ -1,3 +1,26 @@
+## 4.3.0 (2020-07-06)
+
+-   build(deps-dev): bump development dependencies ([5f83f2b](https://github.com/Fdawgs/doc-conversion-service/commit/5f83f2b))
+-   build(travis): remove windows os from allowed failures ([ba53364](https://github.com/Fdawgs/doc-conversion-service/commit/ba53364))
+-   chore: add test rtf file ([d77fd28](https://github.com/Fdawgs/doc-conversion-service/commit/d77fd28))
+-   chore: clarification of middleware purpose in jsdocs ([7cec4c8](https://github.com/Fdawgs/doc-conversion-service/commit/7cec4c8))
+-   chore: fix jsdoc tags ([ecc1fff](https://github.com/Fdawgs/doc-conversion-service/commit/ecc1fff))
+-   chore: grammatical fixes ([68441f5](https://github.com/Fdawgs/doc-conversion-service/commit/68441f5))
+-   chore(middleware): standardise error variable naming ([cdbc386](https://github.com/Fdawgs/doc-conversion-service/commit/cdbc386))
+-   chore(scripts): use gitignore for eslint ignore-path option ([73782b9](https://github.com/Fdawgs/doc-conversion-service/commit/73782b9))
+-   chore(scripts): use gitignore for prettier ignore-path option ([6a7674e](https://github.com/Fdawgs/doc-conversion-service/commit/6a7674e))
+-   tests(middleware): reorder expects to follow res, req, next input ([ce921e7](https://github.com/Fdawgs/doc-conversion-service/commit/ce921e7))
+-   refactor(middleware): alter indication of whether html passed conversion ([5eb6145](https://github.com/Fdawgs/doc-conversion-service/commit/5eb6145))
+-   refactor(middleware): make tempdirectory param mandatory ([23a6733](https://github.com/Fdawgs/doc-conversion-service/commit/23a6733))
+-   refactor(middleware): remove unreachable promise return ([87b4a3c](https://github.com/Fdawgs/doc-conversion-service/commit/87b4a3c))
+-   refactor(middleware): tidy function structure ([6166a48](https://github.com/Fdawgs/doc-conversion-service/commit/6166a48))
+-   fix: add missing tempdirectory value ([be81bc8](https://github.com/Fdawgs/doc-conversion-service/commit/be81bc8))
+-   fix(middleware): skip over rtf/pdf conversion if content-type invalid ([0af8ddd](https://github.com/Fdawgs/doc-conversion-service/commit/0af8ddd))
+-   feat(middleware): add rtf conversion middleware ([1716b0b](https://github.com/Fdawgs/doc-conversion-service/commit/1716b0b))
+-   feat(middleware): pass next error if invalid type passed ([18665c5](https://github.com/Fdawgs/doc-conversion-service/commit/18665c5))
+-   feat(routes): add rtf support ([176b0cd](https://github.com/Fdawgs/doc-conversion-service/commit/176b0cd))
+-   docs(readme): add missing step to pm2 windows service installation ([18251f5](https://github.com/Fdawgs/doc-conversion-service/commit/18251f5))
+
 ## <small>4.2.2 (2020-06-30)</small>
 
 -   chore: create code_of_conduct.md ([70b2a27](https://github.com/Fdawgs/doc-conversion-service/commit/70b2a27))
