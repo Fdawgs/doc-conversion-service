@@ -27,6 +27,8 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 				res.locals.results = {};
 			}
 
+			let imageParseCount = 0;
+
 			images.forEach((element) => {
 				if (fs.existsSync(tempDirectory + element.src)) {
 					const imgForm = path.extname(element.src).substring(1);
@@ -39,10 +41,12 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 					if (req.query && req.query.removealt) {
 						element.setAttribute('alt', '');
 					}
+
+					imageParseCount += 1;
 				}
 			});
 
-			if (images.length > 0) {
+			if (imageParseCount > 0) {
 				res.locals.results.embedded_images = 'Fixed';
 			} else {
 				res.locals.results.embedded_images = 'Passed';
