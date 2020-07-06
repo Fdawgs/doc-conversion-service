@@ -34,7 +34,9 @@ describe('Poppler conversion middleware', () => {
 		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
-		expect(fs.existsSync(serverConfig.routes.html.poppler.tempDirectory)).toBe(true);
+		expect(
+			fs.existsSync(serverConfig.routes.html.poppler.tempDirectory)
+		).toBe(true);
 	});
 
 	test('Should convert PDF file to HTML and place in specified directory', async () => {
