@@ -37,9 +37,9 @@ function rtfJs(rtf) {
                 div.append(...htmlElements);
 
                 window.done(div.innerHTML);
-            }).catch(error => window.onerror(error))
-        } catch (error){
-            window.onerror(error)
+            }).catch(err => window.onerror(err))
+        } catch (err){
+            window.onerror(err)
         }
     </script>
     `,
