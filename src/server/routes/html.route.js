@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sanitize = require('sanitize-middleware');
 const embedHtmlImages = require('../middleware/embed-html-images.middleware');
-const fixCss = require('../middleware/clean-css.middleware');
+const cleanCss = require('../middleware/clean-css.middleware');
 const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
 const htmltidy = require('../middleware/htmltidy.middleware');
 const poppler = require('../middleware/poppler.middleware');
@@ -106,7 +106,7 @@ module.exports = function htmlRoute(config) {
 		htmltidy(config.htmltidy),
 		fixWin1252Artifacts(),
 		embedHtmlImages(config.poppler.tempDirectory),
-		fixCss(),
+		cleanCss(),
 		(req, res) => {
 			if (req.headers['content-type'] === 'application/pdf') {
 				fileRemover(
