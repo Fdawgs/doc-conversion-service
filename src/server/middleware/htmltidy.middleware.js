@@ -11,12 +11,12 @@ const tidyHtml = util.promisify(tidy);
  */
 module.exports = function htmltidyMiddleware(config = {}) {
 	return async (req, res, next) => {
-			try {
-				req.body = await tidyHtml(req.body, config);
-				next();
-			} catch (err) {
-				res.status(400);
-				next(err);
-			}
+		try {
+			req.body = await tidyHtml(req.body, config);
+			next();
+		} catch (err) {
+			res.status(400);
+			next(err);
+		}
 	};
 };
