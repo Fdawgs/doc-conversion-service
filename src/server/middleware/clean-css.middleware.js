@@ -1,5 +1,4 @@
 const CSSOM = require('cssom');
-const isHtml = require('is-html');
 const { JSDOM } = require('jsdom');
 
 /**
@@ -17,74 +16,69 @@ const { JSDOM } = require('jsdom');
  */
 module.exports = function cleanCssMiddleware() {
 	return (req, res, next) => {
-		if (isHtml(req.body)) {
-			const dom = new JSDOM(req.body);
-			const styles = dom.window.document.querySelectorAll('style');
+		const dom = new JSDOM(req.body);
+		const styles = dom.window.document.querySelectorAll('style');
 
-			let newFonts;
-			if (req.query && req.query.fonts) {
-				newFonts = String(req.query.fonts);
+		let newFonts;
+		if (req.query && req.query.fonts) {
+			newFonts = String(req.query.fonts);
+		}
+
+		let newBackgroundColor;
+		if (req.query && req.query.backgroundcolor) {
+			newBackgroundColor = String(req.query.backgroundcolor);
+		}
+
+		// Create results object for conversion results
+		if (typeof res.locals.results === 'undefined') {
+			res.locals.results = {};
+		}
+
+		let styleParseCount = 0;
+
+		styles.forEach((element) => {
+			// Remove optional type attribute
+			if (element.hasAttribute('type')) {
+				element.removeAttribute('type');
 			}
 
-			let newBackgroundColor;
-			if (req.query && req.query.backgroundcolor) {
-				newBackgroundColor = String(req.query.backgroundcolor);
-			}
+			const styleObj = CSSOM.parse(element.innerHTML);
 
-			// Create results object for conversion results
-			if (typeof res.locals.results === 'undefined') {
-				res.locals.results = {};
-			}
-
-			styles.forEach((element) => {
-				// Remove optional type attribute
-				if (element.hasAttribute('type')) {
-					element.removeAttribute('type');
+			styleObj.cssRules.forEach((styleRule) => {
+				// Replace default font
+				if (newFonts && styleRule.style['font-family']) {
+					styleRule.style.setProperty('font-family', newFonts);
 				}
 
-				const styleObj = CSSOM.parse(element.innerHTML);
+				// Stop pages overrunning the next, leading to overlapped text
+				if (styleRule.selectorText.substring(0, 3) === 'div') {
+					styleRule.style.setProperty('page-break-inside', 'avoid');
 
-				styleObj.cssRules.forEach((styleRule) => {
-					// Replace default font
-					if (newFonts && styleRule.style['font-family']) {
-						styleRule.style.setProperty('font-family', newFonts);
-					}
-
-					// Stop pages overrunning the next, leading to overlapped text
-					if (styleRule.selectorText.substring(0, 3) === 'div') {
+					if (newBackgroundColor) {
 						styleRule.style.setProperty(
-							'page-break-inside',
-							'avoid'
+							'background-color',
+							newBackgroundColor
 						);
-
-						if (newBackgroundColor) {
-							styleRule.style.setProperty(
-								'background-color',
-								newBackgroundColor
-							);
-						}
 					}
-				});
-
-				// eslint-disable-next-line no-param-reassign
-				element.innerHTML = styleObj
-					.toString()
-					.replace(/<!--/gi, '')
-					.replace(/;}/gi, '}');
+				}
 			});
 
-			if (styles.length > 0) {
-				res.locals.results.clean_css = 'Fixed';
-			} else {
-				res.locals.results.clean_css = 'Passed';
-			}
+			// eslint-disable-next-line no-param-reassign
+			element.innerHTML = styleObj
+				.toString()
+				.replace(/<!--/gi, '')
+				.replace(/;}/gi, '}');
 
-			req.body = dom.window.document.documentElement.outerHTML;
+			styleParseCount += 1;
+		});
 
-			next();
+		if (styleParseCount > 0) {
+			res.locals.results.clean_css = 'Fixed';
 		} else {
-			res.status(400);
-			next(new Error('Invalid HTML passed to cleanCss middleware'));
+			res.locals.results.clean_css = 'Passed';
 		}
+
+		req.body = dom.window.document.documentElement.outerHTML;
+		next();
 	};
 };

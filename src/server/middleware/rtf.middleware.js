@@ -69,14 +69,16 @@ function rtfJs(rtf) {
  */
 module.exports = function rtfMiddleware() {
 	return async (req, res, next) => {
-		try {
-			if (req.headers['content-type'] === 'application/rtf') {
+		if (req.headers['content-type'] === 'application/rtf') {
+			try {
 				req.body = await rtfJs(req.body);
+				next();
+			} catch {
+				res.status(400);
+				next(new Error('Failed to convert RTF file to HTML'));
 			}
+		} else {
 			next();
-		} catch {
-			res.status(400);
-			next(new Error('Failed to convert RTF file to HTML'));
 		}
 	};
 };

@@ -2,7 +2,7 @@ language: node_js
 
 cache: yarn
 
-dist: xenial
+dist: bionic
 
 node_js:
     - 'lts/*'
