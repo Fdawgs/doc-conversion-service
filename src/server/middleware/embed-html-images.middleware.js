@@ -1,5 +1,4 @@
 const fs = require('fs');
-const isHtml = require('is-html');
 const { JSDOM } = require('jsdom');
 const path = require('path');
 
@@ -18,7 +17,7 @@ const path = require('path');
  */
 module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 	return (req, res, next) => {
-		if (isHtml(req.body) && fs.existsSync(tempDirectory)) {
+		if (fs.existsSync(tempDirectory)) {
 			const dom = new JSDOM(req.body);
 			const images = dom.window.document.querySelectorAll('img');
 

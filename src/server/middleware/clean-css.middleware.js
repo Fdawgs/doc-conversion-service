@@ -1,5 +1,4 @@
 const CSSOM = require('cssom');
-const isHtml = require('is-html');
 const { JSDOM } = require('jsdom');
 
 /**
@@ -17,7 +16,7 @@ const { JSDOM } = require('jsdom');
  */
 module.exports = function cleanCssMiddleware() {
 	return (req, res, next) => {
-		if (isHtml(req.body)) {
+	
 			const dom = new JSDOM(req.body);
 			const styles = dom.window.document.querySelectorAll('style');
 
@@ -35,6 +34,8 @@ module.exports = function cleanCssMiddleware() {
 			if (typeof res.locals.results === 'undefined') {
 				res.locals.results = {};
 			}
+
+			let styleParseCount = 0;
 
 			styles.forEach((element) => {
 				// Remove optional type attribute
@@ -71,20 +72,17 @@ module.exports = function cleanCssMiddleware() {
 					.toString()
 					.replace(/<!--/gi, '')
 					.replace(/;}/gi, '}');
+
+				styleParseCount += 1;
 			});
 
-			if (styles.length > 0) {
+			if (styleParseCount > 0) {
 				res.locals.results.clean_css = 'Fixed';
 			} else {
 				res.locals.results.clean_css = 'Passed';
 			}
 
 			req.body = dom.window.document.documentElement.outerHTML;
-
 			next();
-		} else {
-			res.status(400);
-			next(new Error('Invalid HTML passed to cleanCss middleware'));
-		}
 	};
 };

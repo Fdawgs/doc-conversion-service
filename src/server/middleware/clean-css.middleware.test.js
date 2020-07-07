@@ -110,21 +110,4 @@ describe('Clean CSS middleware', () => {
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
-
-	test('Should pass an error to next if HTML missing from req.body', async () => {
-		const middleware = Middleware();
-		const req = {
-			body: undefined
-		};
-		const res = httpMocks.createResponse();
-		const next = jest.fn();
-
-		await middleware(req, res, next);
-
-		expect(res.statusCode).toBe(400);
-		expect(next).toHaveBeenCalledTimes(1);
-		expect(next.mock.calls[0][0].message).toBe(
-			'Invalid HTML passed to cleanCss middleware'
-		);
-	});
 });

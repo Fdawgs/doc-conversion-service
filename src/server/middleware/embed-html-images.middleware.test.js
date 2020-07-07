@@ -98,7 +98,7 @@ describe('Embed HTML Images middleware', () => {
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should pass an error to next if HTML missing from req.body', async () => {
+	test('Should pass an error to next if temp directory missing', async () => {
 		const middleware = Middleware();
 		const req = {
 			body: undefined
