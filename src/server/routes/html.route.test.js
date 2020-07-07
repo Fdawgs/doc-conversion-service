@@ -49,17 +49,4 @@ describe('HTML conversion route', () => {
 		expect(res.status).toBe(200);
 		expect(isHtml(res.text)).toBe(true);
 	});
-
-	test('Should return 400 error code if file missing', async () => {
-		await request
-			.post(route)
-			.set('Authorization', 'Bearer Jimmini')
-			.set('Accept', '*/*')
-			.catch((err) => {
-				expect(err.status).toBe(400);
-				expect(err.response.error.text).toMatch(
-					'Invalid HTML passed to htmltidy middleware'
-				);
-			});
-	});
 });

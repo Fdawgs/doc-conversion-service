@@ -1,4 +1,3 @@
-const isHtml = require('is-html');
 const { tidy } = require('htmltidy2');
 const util = require('util');
 
@@ -12,7 +11,6 @@ const tidyHtml = util.promisify(tidy);
  */
 module.exports = function htmltidyMiddleware(config = {}) {
 	return async (req, res, next) => {
-		if (typeof req.body === 'string' && isHtml(req.body)) {
 			try {
 				req.body = await tidyHtml(req.body, config);
 				next();
@@ -20,9 +18,5 @@ module.exports = function htmltidyMiddleware(config = {}) {
 				res.status(400);
 				next(err);
 			}
-		} else {
-			res.status(400);
-			next(new Error('Invalid HTML passed to htmltidy middleware'));
-		}
 	};
 };
