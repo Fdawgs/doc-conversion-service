@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs/promises');
 const { JSDOM } = require('jsdom');
 const path = require('path');
 const { Poppler } = require('node-poppler');
@@ -23,29 +23,32 @@ const { v4 } = require('uuid');
 module.exports = function popplerMiddleware(config = {}) {
 	return async (req, res, next) => {
 		if (req.headers['content-type'] === 'application/pdf') {
-			// Define any default settings the middleware should have to get up and running
-			const defaultConfig = {
-				binPath: undefined,
-				encoding: 'UTF-8',
-				pdftoHtmlOptions: {
-					complexOutput: true,
-					singlePage: true,
-					outputEncoding: 'UTF-8'
-				},
-				tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
-			};
-			this.config = Object.assign(defaultConfig, config);
-
-			if (!fs.existsSync(this.config.tempDirectory)) {
-				fs.mkdirSync(this.config.tempDirectory);
-			}
-
-			// Build temporary files for Poppler and following middleware to read from
-			const id = v4();
-			const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
-			const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
 			try {
-				fs.writeFileSync(tempPdfFile, req.body);
+				// Define any default settings the middleware should have to get up and running
+				const defaultConfig = {
+					binPath: undefined,
+					encoding: 'UTF-8',
+					pdftoHtmlOptions: {
+						complexOutput: true,
+						singlePage: true,
+						outputEncoding: 'UTF-8'
+					},
+					tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
+				};
+				this.config = Object.assign(defaultConfig, config);
+
+				try {
+					await fs.access(this.config.tempDirectory);
+				} catch {
+					await fs.mkdir(this.config.tempDirectory);
+				}
+
+				// Build temporary files for Poppler and following middleware to read from
+				const id = v4();
+				const tempPdfFile = `${this.config.tempDirectory}${id}.pdf`;
+				const tempHtmlFile = `${this.config.tempDirectory}${id}-html.html`;
+
+				await fs.writeFile(tempPdfFile, req.body);
 
 				const poppler = new Poppler(this.config.binPath);
 
@@ -55,7 +58,7 @@ module.exports = function popplerMiddleware(config = {}) {
 				);
 
 				const dom = new JSDOM(
-					fs.readFileSync(tempHtmlFile, {
+					await fs.readFile(tempHtmlFile, {
 						encoding: this.config.encoding
 					})
 				);
