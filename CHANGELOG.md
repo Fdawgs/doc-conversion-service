@@ -1,3 +1,17 @@
+## <small>4.3.1 (2020-07-07)</small>
+
+-   style: parse with prettier ([1dff395](https://github.com/Fdawgs/doc-conversion-service/commit/1dff395))
+-   style(routes): rename variable to better match middleware function ([f2dd543](https://github.com/Fdawgs/doc-conversion-service/commit/f2dd543))
+-   style(tests): rename variable to be in line with other tests ([589025c](https://github.com/Fdawgs/doc-conversion-service/commit/589025c))
+-   tests(routes): add smaller pdf for test ([83c0c2e](https://github.com/Fdawgs/doc-conversion-service/commit/83c0c2e))
+-   tests(routes): define modified server config for each route test ([a51ff39](https://github.com/Fdawgs/doc-conversion-service/commit/a51ff39))
+-   build(travis): update linux dist to latest lts ([e3b06a2](https://github.com/Fdawgs/doc-conversion-service/commit/e3b06a2))
+-   fix(middleware): correct indication of whether images parsed ([792c0c6](https://github.com/Fdawgs/doc-conversion-service/commit/792c0c6))
+-   fix(middleware): use fs module promise api for poppler conversion ([0f33e3c](https://github.com/Fdawgs/doc-conversion-service/commit/0f33e3c))
+-   refactor(middleware): change rtfjs flow to be same as poppler ([8dc0f6c](https://github.com/Fdawgs/doc-conversion-service/commit/8dc0f6c))
+-   refactor(middleware): remove redundant type checks ([b6d7da8](https://github.com/Fdawgs/doc-conversion-service/commit/b6d7da8))
+-   refactor(middleware): use util.promisify for htmltidy2 function ([887ce23](https://github.com/Fdawgs/doc-conversion-service/commit/887ce23))
+
 ## 4.3.0 (2020-07-06)
 
 -   build(deps-dev): bump development dependencies ([5f83f2b](https://github.com/Fdawgs/doc-conversion-service/commit/5f83f2b))
