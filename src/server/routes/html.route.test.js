@@ -32,7 +32,7 @@ describe('HTML conversion route', () => {
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
 			.set('Content-Type', 'application/pdf')
-			.send(fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'));
+			.send(fs.readFileSync('./test_files/pdf_1.5_YDH_FOI_Policy.pdf'))
 
 		expect(res.status).toBe(200);
 		expect(isHtml(res.text)).toBe(true);
