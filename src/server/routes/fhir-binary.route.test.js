@@ -1,15 +1,18 @@
+const cloneDeep = require('lodash/cloneDeep');
 const faker = require('faker');
 const request = require('superagent');
 const { helmetConfig, serverConfig } = require('../../config');
 const Server = require('../server');
 
-const route = `http://0.0.0.0:${serverConfig.port}/api/converter/fhir/binary`;
-
 describe('FHIR Binary resource route', () => {
+	const modServerConfig = cloneDeep(serverConfig);
+	modServerConfig.port = 3003;
 	let server;
 
+	const route = `http://0.0.0.0:${modServerConfig.port}/api/converter/fhir/binary`;
+
 	beforeEach(() => {
-		server = new Server(serverConfig)
+		server = new Server(modServerConfig)
 			.configureHelmet(helmetConfig)
 			.configurePassport()
 			.configureMiddleware()
