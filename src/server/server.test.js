@@ -12,7 +12,7 @@ describe('Server deployment', () => {
 		modServerConfig.ssl.key = `${process.cwd()}/test_ssl_cert/server.key`;
 		let server;
 
-		const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
+		const route = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
 
 		beforeEach(() => {
 			// Stand up server
@@ -32,7 +32,7 @@ describe('Server deployment', () => {
 
 		test('OPTIONS - Should make a successful connection', async () => {
 			const res = await request
-				.options(path)
+				.options(route)
 				.set('Accept', '*/*')
 				.set('Authorization', 'Bearer Jimmini')
 				.disableTLSCerts()
@@ -51,7 +51,7 @@ describe('Server deployment', () => {
 		modServerConfig.ssl.pfx.passphrase = 'test';
 		let server;
 
-		const path = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
+		const route = `https://${process.env.HOST}:${modServerConfig.port}/api/converter/html`;
 
 		beforeEach(() => {
 			// Stand up server
@@ -71,7 +71,7 @@ describe('Server deployment', () => {
 
 		test('OPTIONS - Should make a successful connection', async () => {
 			const res = await request
-				.options(path)
+				.options(route)
 				.set('Accept', '*/*')
 				.set('Authorization', 'Bearer Jimmini')
 				.disableTLSCerts()
