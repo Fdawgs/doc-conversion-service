@@ -1,3 +1,8 @@
+## <small>4.3.3 (2020-07-08)</small>
+
+-   fix(middleware): change import of fs promise module to support lts ([0bcffe6](https://github.com/Fdawgs/doc-conversion-service/commit/0bcffe6))
+-   build(travis): use lts version of node for coverage tests ([7361fc7](https://github.com/Fdawgs/doc-conversion-service/commit/7361fc7))
+
 ## <small>4.3.2 (2020-07-08)</small>
 
 -   build(deps-dev): bump eslint-plugin-jsdoc from 28.6.1 to 29.1.0 ([655be1a](https://github.com/Fdawgs/doc-conversion-service/commit/655be1a))
