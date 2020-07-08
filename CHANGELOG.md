@@ -1,3 +1,8 @@
+## <small>4.3.2 (2020-07-08)</small>
+
+-   build(deps-dev): bump eslint-plugin-jsdoc from 28.6.1 to 29.1.0 ([655be1a](https://github.com/Fdawgs/doc-conversion-service/commit/655be1a))
+-   refactor(middleware): move html tidy elements out of poppler; rename ([b14b4eb](https://github.com/Fdawgs/doc-conversion-service/commit/b14b4eb))
+
 ## <small>4.3.1 (2020-07-07)</small>
 
 -   style: parse with prettier ([1dff395](https://github.com/Fdawgs/doc-conversion-service/commit/1dff395))
