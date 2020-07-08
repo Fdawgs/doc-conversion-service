@@ -14,7 +14,7 @@ const { JSDOM } = require('jsdom');
  *
  * @returns {Function} Express middleware.
  */
-module.exports = function cleanCssMiddleware() {
+module.exports = function tidyCssMiddleware() {
 	return (req, res, next) => {
 		const dom = new JSDOM(req.body);
 		const styles = dom.window.document.querySelectorAll('style');

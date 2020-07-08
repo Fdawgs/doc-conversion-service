@@ -1,3 +1,4 @@
+const { JSDOM } = require('jsdom');
 const { tidy } = require('htmltidy2');
 const util = require('util');
 
@@ -9,10 +10,19 @@ const tidyHtml = util.promisify(tidy);
  * @param {object=} config - HTMLTidy2 configuration values.
  * @returns {Function} Express middleware.
  */
-module.exports = function htmltidyMiddleware(config = {}) {
+module.exports = function tidyHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
 		try {
-			req.body = await tidyHtml(req.body, config);
+			const dom = new JSDOM(req.body);
+			
+			// Set document language
+			const html = dom.window.document.querySelector('html');
+			html.setAttribute('lang', 'en');
+			html.setAttribute('xml:lang', 'en');
+			const parsedHtml = dom.window.document.documentElement.outerHTML;
+
+			req.body = await tidyHtml(parsedHtml, config);
+
 			next();
 		} catch (err) {
 			res.status(400);

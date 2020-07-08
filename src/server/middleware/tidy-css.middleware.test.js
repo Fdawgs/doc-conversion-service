@@ -1,7 +1,7 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const Middleware = require('./clean-css.middleware');
+const Middleware = require('./tidy-css.middleware');
 
 describe('Clean CSS middleware', () => {
 	test('Should return a middleware function', () => {
