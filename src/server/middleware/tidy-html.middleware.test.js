@@ -1,7 +1,7 @@
 const cloneDeep = require('lodash/cloneDeep');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
-const Middleware = require('./htmltidy.middleware');
+const Middleware = require('./tidy-html.middleware');
 
 const { serverConfig } = require('../../config');
 
