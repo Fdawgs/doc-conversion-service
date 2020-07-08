@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+const fs = require('fs').promises;
 const { JSDOM } = require('jsdom');
 const path = require('path');
 const { Poppler } = require('node-poppler');
