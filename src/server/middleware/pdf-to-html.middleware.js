@@ -16,7 +16,7 @@ const { v4 } = require('uuid');
  * Defaults to "UTF-8".
  * @param {string=} config.binPath - Path of poppler-utils binaries.
  * @param {object=} config.pdftoHtmlOptions - Refer to
- * https://github.com/Fdawgs/node-poppler/blob/master/API.md#popplerpdftohtmloptions-file--promise
+ * https://github.com/Fdawgs/node-poppler/blob/master/API.md#Poppler+pdfToHtml
  * for options.
  * @returns {Function} Express middleware.
  */
