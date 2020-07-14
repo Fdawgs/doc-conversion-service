@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/check-tag-names */
-const { Router } = require('express');
 const passport = require('passport');
+const { Router } = require('express');
 
 // Import middleware
 const bodyParser = require('body-parser');
@@ -8,10 +8,10 @@ const cors = require('cors');
 const sanitize = require('sanitize-middleware');
 const embedHtmlImages = require('../middleware/embed-html-images.middleware');
 const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
-const tidyCss = require('../middleware/tidy-css.middleware');
-const tidyHtml = require('../middleware/tidy-html.middleware');
 const pdfToHtml = require('../middleware/pdf-to-html.middleware');
 const rtfToHtml = require('../middleware/rtf-to-html.middleware');
+const tidyCss = require('../middleware/tidy-css.middleware');
+const tidyHtml = require('../middleware/tidy-html.middleware');
 
 // Import utils
 const fileRemover = require('../utils/file-remover.utils');
