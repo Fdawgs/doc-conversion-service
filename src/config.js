@@ -5,16 +5,7 @@ const serverConfig = {
 	port: process.env.PORT || 3000,
 	host: process.env.HOST,
 	auth: {
-		apiKeys: [
-			{
-				service: 'Discharge Summaries',
-				value: 'Jimmini'
-			},
-			{
-				service: 'Bone Density',
-				value: 'Cricket'
-			}
-		]
+		apiKeys: JSON.parse(process.env.API_BEARER_TOKEN_ARRAY)
 	},
 	ssl: {
 		cert: process.env.SSL_CERT_PATH,
