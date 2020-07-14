@@ -1,3 +1,15 @@
+## 5.0.0 (2020-07-14)
+
+-   build(deps-dev): bump @commitlint/config-conventional ([28e7002](https://github.com/Fdawgs/doc-conversion-service/commit/28e7002))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 29.1.0 to 29.2.0 ([605dd83](https://github.com/Fdawgs/doc-conversion-service/commit/605dd83))
+-   build(deps-dev): bump lodash from 4.17.15 to 4.17.19 ([618e1e0](https://github.com/Fdawgs/doc-conversion-service/commit/618e1e0))
+-   build(deps): bump jsdom from 16.2.2 to 16.3.0 ([41381b6](https://github.com/Fdawgs/doc-conversion-service/commit/41381b6))
+-   refactor(config): move api tokens to environment variables ([80327b0](https://github.com/Fdawgs/doc-conversion-service/commit/80327b0))
+
+### BREAKING CHANGE
+
+-   `auth.apiKeys` in `config.js` now uses `api_bearer_token_array` from .env file
+
 ## <small>4.3.3 (2020-07-08)</small>
 
 -   fix(middleware): change import of fs promise module to support lts ([0bcffe6](https://github.com/Fdawgs/doc-conversion-service/commit/0bcffe6))

@@ -14,7 +14,7 @@ module.exports = function tidyHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
 		try {
 			const dom = new JSDOM(req.body);
-			
+
 			// Set document language
 			const html = dom.window.document.querySelector('html');
 			html.setAttribute('lang', 'en');
