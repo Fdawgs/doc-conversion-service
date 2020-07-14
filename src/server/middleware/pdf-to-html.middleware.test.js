@@ -1,7 +1,7 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const Middleware = require('./poppler.middleware');
+const Middleware = require('./pdf-to-html.middleware');
 const { serverConfig } = require('../../config');
 
 describe('Poppler conversion middleware', () => {

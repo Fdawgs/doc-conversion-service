@@ -10,8 +10,8 @@ const embedHtmlImages = require('../middleware/embed-html-images.middleware');
 const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
 const tidyCss = require('../middleware/tidy-css.middleware');
 const tidyHtml = require('../middleware/tidy-html.middleware');
-const poppler = require('../middleware/poppler.middleware');
-const rtf = require('../middleware/rtf.middleware');
+const pdfToHtml = require('../middleware/pdf-to-html.middleware');
+const rtfToHtml = require('../middleware/rtf-to-html.middleware');
 
 // Import utils
 const fileRemover = require('../utils/file-remover.utils');
@@ -101,8 +101,8 @@ module.exports = function htmlRoute(config) {
 			type: ['application/pdf', 'application/rtf'],
 			limit: '20mb'
 		}),
-		rtf(),
-		poppler(config.poppler),
+		rtfToHtml(),
+		pdfToHtml(config.poppler),
 		tidyHtml(config.htmltidy),
 		fixWin1252Artifacts(),
 		embedHtmlImages(config.poppler.tempDirectory),

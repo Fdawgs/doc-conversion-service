@@ -67,7 +67,7 @@ function rtfJs(rtf) {
  * @description Uses rtf.js to convert RTF file in `req.body` to HTML.
  * @returns {Function} Express middleware.
  */
-module.exports = function rtfMiddleware() {
+module.exports = function rtfToHtmlMiddleware() {
 	return async (req, res, next) => {
 		if (req.headers['content-type'] === 'application/rtf') {
 			try {

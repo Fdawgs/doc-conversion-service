@@ -1,7 +1,7 @@
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const Middleware = require('./rtf.middleware');
+const Middleware = require('./rtf-to-html.middleware');
 
 describe('RTF-to-HTML conversion middleware', () => {
 	test('Should return a middleware function', () => {

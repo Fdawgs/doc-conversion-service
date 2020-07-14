@@ -20,7 +20,7 @@ const { v4 } = require('uuid');
  * for options.
  * @returns {Function} Express middleware.
  */
-module.exports = function popplerMiddleware(config = {}) {
+module.exports = function pdfToHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
 		if (req.headers['content-type'] === 'application/pdf') {
 			try {
