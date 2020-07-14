@@ -77,7 +77,7 @@
 		"helmet": "^3.23.3",
 		"htmltidy2": "^0.3.0",
 		"is-html": "^2.0.0",
-		"jsdom": "^16.2.2",
+		"jsdom": "^16.3.0",
 		"multer": "^1.4.2",
 		"node-poppler": "^1.7.4",
 		"passport": "^0.4.1",
