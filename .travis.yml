@@ -4,6 +4,9 @@ cache: yarn
 
 dist: bionic
 
+git:
+    quiet: true
+
 node_js:
     - 'lts/*'
     - 'node'
@@ -28,7 +31,8 @@ script: echo "Running tests against $(node -v)..." && cp .env.template .env.test
 
 jobs:
     include:
-        - stage: Produce Coverage
+        - stage: test
+          name: produce coverage
           node_js: lts/*
           os: windows
           script: cp .env.template .env.test && jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
