@@ -9,18 +9,18 @@ const { v4 } = require('uuid');
  * @description Uses Poppler to convert PDF file in `req.body` to HTML and places both files in a temporary directory.
  * Will not process passed file if content-type header not set to `application/pdf`.
  * @param {object=} config - Poppler conversion configuration values.
+ * @param {string=} config.binPath - Path of poppler-utils binaries.
+ * @param {string=} config.encoding - Sets the encoding to use for text output.
+ * Defaults to "UTF-8".
+ * @param {object=} config.pdftoHtmlOptions - Refer to
+ * https://github.com/Fdawgs/node-poppler/blob/master/API.md#Poppler+pdfToHtml
+ * for options.
  * @param {string=} config.tempDirectory - directory for temporarily storing
  * files during conversion.
  * Defaults to `src/server/temp` if not set.
- * @param {string=} config.encoding - Sets the encoding to use for text output.
- * Defaults to "UTF-8".
- * @param {string=} config.binPath - Path of poppler-utils binaries.
- * @param {object=} config.pdftoHtmlOptions - Refer to
- * https://github.com/Fdawgs/node-poppler/blob/master/API.md#popplerpdftohtmloptions-file--promise
- * for options.
  * @returns {Function} Express middleware.
  */
-module.exports = function popplerMiddleware(config = {}) {
+module.exports = function pdfToHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
 		if (req.headers['content-type'] === 'application/pdf') {
 			try {
@@ -30,8 +30,7 @@ module.exports = function popplerMiddleware(config = {}) {
 					encoding: 'UTF-8',
 					pdftoHtmlOptions: {
 						complexOutput: true,
-						singlePage: true,
-						outputEncoding: 'UTF-8'
+						singlePage: true
 					},
 					tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
 				};

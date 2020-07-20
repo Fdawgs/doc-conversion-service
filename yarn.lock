@@ -2331,7 +2331,7 @@ execa@^1.0.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-execa@^4.0.0, execa@^4.0.2:
+execa@^4.0.0, execa@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/execa/-/execa-4.0.3.tgz#0a34dabbad6d66100bd6f2c576c8669403f317f2"
   integrity sha512-WFDXGHckXPWZX19t1kCsXzOpqX9LWYNqn4C+HqZlk/V0imTkzJZqf87ZBhvpHaftERYknpk0fjSylnXVlVgI0A==
@@ -4582,12 +4582,12 @@ node-notifier@^7.0.0:
     uuid "^7.0.3"
     which "^2.0.2"
 
-node-poppler@^1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.7.4.tgz#d071d585405410a7cfe393c1ef4d92b4b889e240"
-  integrity sha512-BnIK1umqBbWXYNU6yFG65QDWBvjnYzQwbfkIltJJxfllOLVZTvZZBwYvFXt1/pXdmc9VKasevI8EvcLi3LD91A==
+node-poppler@^1.7.6:
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.7.6.tgz#d276347898f70387940f6c8dabf9d5ccf7301d8e"
+  integrity sha512-0vJ54yPxugLrEaJmYQxqkDfHpeaHexbJwpGg2ZTJnEs90YNxEgFR7zsrVX4VucZ+p0TNoIW9NVQvsd4HnyB7/Q==
   dependencies:
-    execa "^4.0.2"
+    execa "^4.0.3"
 
 nodemon@^2.0.3, nodemon@^2.0.4:
   version "2.0.4"

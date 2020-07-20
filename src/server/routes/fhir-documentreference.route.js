@@ -23,7 +23,7 @@ const router = new Router();
  *
  * @apiExample {curl} Example usage:
  * curl --request OPTIONS \
- * 	 --url https://ydh-watchdog.ydh.nhs.uk:8204/api/converter/fhir/documentreference \
+ * 	 --url http://localhost:3000/api/converter/fhir/documentreference \
  *   --header 'authorization: Bearer Jimmini'
  *
  * @apiSuccessExample {json} Example Success Response:
@@ -61,7 +61,7 @@ const router = new Router();
  *
  * @apiExample {curl} Example usage:
  * curl --request POST \
- *   --url http://localhost:8204/api/converter/fhir/documentreference \
+ *   --url http://localhost:3000/api/converter/fhir/documentreference \
  *   --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: multipart/form-data' \
  *   --form document=
@@ -118,7 +118,7 @@ const router = new Router();
  *
  * @apiExample {curl} Example usage:
  * curl --request PUT \
- *   --url http://localhost:8204/api/converter/fhir/documentreference \
+ *   --url http://localhost:3000/api/converter/fhir/documentreference \
  *   --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: multipart/form-data' \
  *   --form document= \

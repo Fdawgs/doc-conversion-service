@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/check-tag-names */
-const { Router } = require('express');
 const passport = require('passport');
+const { Router } = require('express');
 
 // Import middleware
 const bodyParser = require('body-parser');
@@ -8,10 +8,10 @@ const cors = require('cors');
 const sanitize = require('sanitize-middleware');
 const embedHtmlImages = require('../middleware/embed-html-images.middleware');
 const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
+const pdfToHtml = require('../middleware/pdf-to-html.middleware');
+const rtfToHtml = require('../middleware/rtf-to-html.middleware');
 const tidyCss = require('../middleware/tidy-css.middleware');
 const tidyHtml = require('../middleware/tidy-html.middleware');
-const poppler = require('../middleware/poppler.middleware');
-const rtf = require('../middleware/rtf.middleware');
 
 // Import utils
 const fileRemover = require('../utils/file-remover.utils');
@@ -28,7 +28,7 @@ const router = new Router();
  *
  * @apiExample {curl} Example usage:
  * curl --request OPTIONS \
- * 	 --url https://ydh-watchdog.ydh.nhs.uk:8204/api/converter/html \
+ * 	 --url http://localhost:3000/api/converter/html \
  *   --header 'authorization: Bearer Jimmini'
  *
  * @apiSuccessExample {json} Example Success Response:
@@ -73,7 +73,7 @@ const router = new Router();
  *
  * @apiExample {curl} Example usage:
  * curl --request POST \
- *   --url 'http://localhost:8204/api/converter/html?removealt=true&fonts=Arial' \
+ *   --url 'http://localhost:3000/api/converter/html?removealt=true&fonts=Arial' \
  *   --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: application/pdf' \
  *   --data 'JVBERi0xLjMNJeLjz9'
@@ -101,8 +101,8 @@ module.exports = function htmlRoute(config) {
 			type: ['application/pdf', 'application/rtf'],
 			limit: '20mb'
 		}),
-		rtf(),
-		poppler(config.poppler),
+		rtfToHtml(),
+		pdfToHtml(config.poppler),
 		tidyHtml(config.htmltidy),
 		fixWin1252Artifacts(),
 		embedHtmlImages(config.poppler.tempDirectory),
