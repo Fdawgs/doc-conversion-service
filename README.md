@@ -5,11 +5,14 @@
 
 ## Intro
 
-This RESTful API web service converts files from PDF to HTML format, and allows the conversion of any file to [Binary](https://www.hl7.org/fhir/STU3/binary.html) and [DocumentReference](https://www.hl7.org/fhir/STU3/documentreference.html) STU3 (3.0.1) HL7® FHIR® resources adhering to the [NHS INTEROPen CareConnect profiles](https://nhsconnect.github.io/CareConnectAPI/).
+This RESTful API web service converts files from:
 
-It was created to replace a previously purchased PDF-to-HTML conversion tool at [Yeovil District Hospital NHSFT](https://yeovilhospital.co.uk/). The tool, that was no longer supported, would produce unreadable documents with issues such as text running off the page, paragraphs overlapping each other, and Windows-1252 to UTF-8 character encoding problems.
+-   PDF or RTF to HTML
+-   PDF to TXT
+-   Any file format to [Binary](https://www.hl7.org/fhir/STU3/binary.html)STU3 (3.0.1) HL7® FHIR® resource adhering to its [NHS INTEROPen CareConnect profile](https://nhsconnect.github.io/CareConnectAPI/api_documents_binary.html)
+-   Any file format to [DocumentReference](https://www.hl7.org/fhir/STU3/documentreference.html) STU3 (3.0.1) HL7® FHIR® resource adhering to its [NHS INTEROPen CareConnect profile](https://nhsconnect.github.io/CareConnectAPI/api_documents_documentreference.html)
 
-GP surgeries were receiving these documents through [MESH](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh) and were unable to read a number of them, leading to requests for the original document to be faxed over.
+It was initially created to replace a previously purchased PDF-to-HTML conversion tool at [Yeovil District Hospital NHSFT](https://yeovilhospital.co.uk/). The tool, that was no longer supported, would produce unreadable documents with issues such as text running off the page, paragraphs overlapping each other, and Windows-1252 to UTF-8 character encoding problems. GP surgeries were receiving these documents through [MESH](https://digital.nhs.uk/services/message-exchange-for-social-care-and-health-mesh) and were unable to read a number of them, leading to requests for the original document to be faxed over.
 
 ## Prerequisites
 
