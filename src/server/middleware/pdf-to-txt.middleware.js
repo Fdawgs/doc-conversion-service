@@ -37,9 +37,10 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 
 			const poppler = new Poppler(this.config.binPath);
 
-			const text = await poppler.pdfToText(req.query, tempPdfFile);
-
-			req.body = text;
+			req.body = await poppler.pdfToText(req.query, tempPdfFile);
+			if (typeof req.body === 'object') {
+				throw new Error();
+			}
 
 			res.locals.doclocation = {
 				directory: this.config.tempDirectory,
@@ -47,7 +48,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 				pdf: tempPdfFile
 			};
 			next();
-		} catch (err) {
+		} catch {
 			res.status(400);
 			next(new Error('Failed to convert PDF file to TXT'));
 		}
