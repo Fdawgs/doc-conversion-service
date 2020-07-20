@@ -30,8 +30,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 					encoding: 'UTF-8',
 					pdftoHtmlOptions: {
 						complexOutput: true,
-						singlePage: true,
-						outputEncoding: 'UTF-8'
+						singlePage: true
 					},
 					tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
 				};
