@@ -6,7 +6,6 @@ const { v4 } = require('uuid');
 /**
  * @author Frazer Smith
  * @description Uses Poppler to convert PDF file in `req.body` to TXT.
- * Will not process passed file if content-type header not set to `application/pdf`.
  * @param {object=} config - Poppler conversion configuration values.
  * @param {string=} config.binPath - Path of poppler-utils binaries.
  * @param {string=} config.tempDirectory - directory for temporarily storing
