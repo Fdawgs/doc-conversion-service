@@ -18,6 +18,7 @@ const errorHandler = require('./utils/error-handler.utils');
 const fhirBinaryRoute = require('./routes/fhir-binary.route');
 const fhirDocumentReferenceRoute = require('./routes/fhir-documentreference.route');
 const htmlRoute = require('./routes/html.route');
+const txtRoute = require('./routes/txt.route');
 
 class Server {
 	/**
@@ -109,6 +110,8 @@ class Server {
 				this.config.routes['fhir/documentreference']
 			)
 		);
+
+		this.app.use('/api/converter/txt', txtRoute(this.config.routes.txt));
 
 		// Return self for chaining
 		return this;

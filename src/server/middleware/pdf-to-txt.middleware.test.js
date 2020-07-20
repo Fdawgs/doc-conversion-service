@@ -2,17 +2,17 @@ const cloneDeep = require('lodash/cloneDeep');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const Middleware = require('./pdf-to-html.middleware');
+const Middleware = require('./pdf-to-txt.middleware');
 const { serverConfig } = require('../../config');
 
-describe('PDF-to-HTML conversion middleware', () => {
+describe('PDF-to-TXT conversion middleware', () => {
 	const modServerConfig = cloneDeep(serverConfig);
-	modServerConfig.routes.html.poppler.tempDirectory = './src/server/temp1/';
+	modServerConfig.routes.txt.poppler.tempDirectory = './src/server/temp2/';
 
 	afterAll(() => {
 		fs.rmdir('./src/server/temp/', { recursive: true }, () => {});
 		fs.rmdir(
-			modServerConfig.routes.html.poppler.tempDirectory,
+			modServerConfig.routes.txt.poppler.tempDirectory,
 			{ recursive: true },
 			() => {}
 		);
@@ -24,7 +24,7 @@ describe('PDF-to-HTML conversion middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should convert PDF file to HTML', async () => {
+	test('Should convert PDF file to TXT', async () => {
 		const middleware = Middleware();
 		const req = {
 			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
@@ -38,15 +38,14 @@ describe('PDF-to-HTML conversion middleware', () => {
 		await middleware(req, res, next);
 
 		expect(typeof req.body).toBe('string');
-		expect(isHtml(req.body)).toBe(true);
+		expect(isHtml(req.body)).toBe(false);
 		expect(typeof res.locals.doclocation).toBe('object');
-		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should convert PDF file to HTML and place in specified directory', async () => {
-		const middleware = Middleware(modServerConfig.routes.html.poppler);
+	test('Should convert PDF file to TXT and place in specified directory', async () => {
+		const middleware = Middleware(modServerConfig.routes.txt.poppler);
 		const req = {
 			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
 			headers: {
@@ -59,9 +58,8 @@ describe('PDF-to-HTML conversion middleware', () => {
 		await middleware(req, res, next);
 
 		expect(typeof req.body).toBe('string');
-		expect(isHtml(req.body)).toBe(true);
+		expect(isHtml(req.body)).toBe(false);
 		expect(typeof res.locals.doclocation).toBe('object');
-		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 		expect(
@@ -85,7 +83,7 @@ describe('PDF-to-HTML conversion middleware', () => {
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Failed to convert PDF file to HTML'
+			'Failed to convert PDF file to TXT'
 		);
 	});
 });
