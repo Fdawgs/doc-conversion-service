@@ -38,4 +38,18 @@ describe('TXT conversion route', () => {
 		expect(typeof res.text).toBe('string');
 		expect(isHtml(res.text)).toBe(false);
 	});
+
+	test('Should return 400 error code if file missing', async () => {
+		await request
+			.post(route)
+			.set('Authorization', 'Bearer Jimmini')
+			.set('Accept', '*/*')
+			.set('Content-Type', 'application/pdf')
+			.catch((err) => {
+				expect(err.status).toBe(400);
+				expect(err.response.error.text).toMatch(
+					'Failed to convert PDF file to TXT'
+				);
+			});
+	});
 });
