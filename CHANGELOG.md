@@ -1,3 +1,30 @@
+## 5.1.0 (2020-07-20)
+
+Main feature of this release is the addition of a PDF-to-TXT route, found at `api/converter/text`, check the generated API docs for options!
+
+-   build(deps-dev): bump dev dependencies ([1ee980d](https://github.com/Fdawgs/doc-conversion-service/commit/1ee980d))
+-   build(deps-dev): remove typescript ([e382363](https://github.com/Fdawgs/doc-conversion-service/commit/e382363))
+-   build(deps): bump apidoc from 0.23.0 to 0.24.0 ([a12482a](https://github.com/Fdawgs/doc-conversion-service/commit/a12482a))
+-   build(deps): bump node-poppler from 1.7.4 to 1.7.6 ([d8fbbf2](https://github.com/Fdawgs/doc-conversion-service/commit/d8fbbf2))
+-   build(deps): bump sanitize-middleware from 2.0.12 to 2.0.13 ([087aa23](https://github.com/Fdawgs/doc-conversion-service/commit/087aa23))
+-   build(travis): add test step ([1437870](https://github.com/Fdawgs/doc-conversion-service/commit/1437870))
+-   build(travis): suppress git log; structure job stages ([f5aa1e4](https://github.com/Fdawgs/doc-conversion-service/commit/f5aa1e4))
+-   build(travis): temporarily remove linux os from testing ([1a7a01c](https://github.com/Fdawgs/doc-conversion-service/commit/1a7a01c))
+-   docs(readme): expand on supported conversions ([b072765](https://github.com/Fdawgs/doc-conversion-service/commit/b072765))
+-   chore: clarify on poppler binary requirements ([307f9a3](https://github.com/Fdawgs/doc-conversion-service/commit/307f9a3))
+-   chore(middleware): fix options link ([72b1fe8](https://github.com/Fdawgs/doc-conversion-service/commit/72b1fe8))
+-   chore(middleware): remove incorrect text from jsdoc tag ([4f906da](https://github.com/Fdawgs/doc-conversion-service/commit/4f906da))
+-   chore(middleware): sort param jsdoc tags alphabetically ascending order ([550f6e0](https://github.com/Fdawgs/doc-conversion-service/commit/550f6e0))
+-   chore(routes): fix example option requests ([1338f00](https://github.com/Fdawgs/doc-conversion-service/commit/1338f00))
+-   style(middleware): remove whitespace ([46d3508](https://github.com/Fdawgs/doc-conversion-service/commit/46d3508))
+-   style(middleware): rename middleware to reflect function ([cc4ae95](https://github.com/Fdawgs/doc-conversion-service/commit/cc4ae95))
+-   style(route): sort variables alphabetically ascending order ([c8289e6](https://github.com/Fdawgs/doc-conversion-service/commit/c8289e6))
+-   style(tests): reorder tests for error throws to be at end ([98a8603](https://github.com/Fdawgs/doc-conversion-service/commit/98a8603))
+-   tests(routes): test errors thrown on 400 code ([ea3342d](https://github.com/Fdawgs/doc-conversion-service/commit/ea3342d))
+-   fix(middleware): throw error if object returned ([c0fb56e](https://github.com/Fdawgs/doc-conversion-service/commit/c0fb56e))
+-   feat(routes): add pdf-to-txt conversion route ([34f323d](https://github.com/Fdawgs/doc-conversion-service/commit/34f323d))
+-   refactor(middleware): remove outputencoding option, defaults to utf-8 ([f05f900](https://github.com/Fdawgs/doc-conversion-service/commit/f05f900))
+
 ## 5.0.0 (2020-07-14)
 
 -   build(deps-dev): bump @commitlint/config-conventional ([28e7002](https://github.com/Fdawgs/doc-conversion-service/commit/28e7002))
