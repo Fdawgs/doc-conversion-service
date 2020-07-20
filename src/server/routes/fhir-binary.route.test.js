@@ -25,19 +25,6 @@ describe('FHIR Binary resource route', () => {
 		server.shutdown();
 	});
 
-	test('Should return 400 error code if file missing', async () => {
-		await request
-			.post(route)
-			.set('Authorization', 'Bearer Jimmini')
-			.set('Accept', '*/*')
-			.catch((err) => {
-				expect(err.status).toBe(400);
-				expect(err.response.error.text).toMatch(
-					'File missing from request'
-				);
-			});
-	});
-
 	test('Should return converted document', async () => {
 		const res = await request
 			.post(route)
@@ -63,5 +50,18 @@ describe('FHIR Binary resource route', () => {
 		expect(JSON.parse(res.text).resourceType).toBe('Binary');
 		expect(JSON.parse(res.text).id).toBe(randomUuid);
 		expect(JSON.parse(res.text).contentType).toBe('application/pdf');
+	});
+
+	test('Should return 400 error code if file missing', async () => {
+		await request
+			.post(route)
+			.set('Authorization', 'Bearer Jimmini')
+			.set('Accept', '*/*')
+			.catch((err) => {
+				expect(err.status).toBe(400);
+				expect(err.response.error.text).toMatch(
+					'File missing from request'
+				);
+			});
 	});
 });

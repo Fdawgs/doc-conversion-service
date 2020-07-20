@@ -25,19 +25,6 @@ describe('FHIR DocumentReference resource route', () => {
 		server.shutdown();
 	});
 
-	test('Should return 400 error code if file missing', async () => {
-		await request
-			.post(route)
-			.set('Authorization', 'Bearer Jimmini')
-			.set('Accept', '*/*')
-			.catch((err) => {
-				expect(err.status).toBe(400);
-				expect(err.response.error.text).toMatch(
-					'File missing from request'
-				);
-			});
-	});
-
 	test('Should return converted document', async () => {
 		const res = await request
 			.post(route)
@@ -71,5 +58,18 @@ describe('FHIR DocumentReference resource route', () => {
 		expect(JSON.parse(res.text).content[0].attachment.contentType).toBe(
 			'application/pdf'
 		);
+	});
+
+	test('Should return 400 error code if file missing', async () => {
+		await request
+			.post(route)
+			.set('Authorization', 'Bearer Jimmini')
+			.set('Accept', '*/*')
+			.catch((err) => {
+				expect(err.status).toBe(400);
+				expect(err.response.error.text).toMatch(
+					'File missing from request'
+				);
+			});
 	});
 });
