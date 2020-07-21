@@ -6,3 +6,4 @@ services:
             - '127.0.0.1:3000:3000'
         environment:
             NODE_ENV: production
+            POPPLER_BINARY_PATH: '/usr/bin/'
