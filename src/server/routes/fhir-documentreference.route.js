@@ -1,4 +1,6 @@
 /* eslint-disable jsdoc/check-tag-names */
+/* eslint-disable jsdoc/no-undefined-types */
+/* eslint-disable jsdoc/valid-types */
 const passport = require('passport');
 const { Router } = require('express');
 
