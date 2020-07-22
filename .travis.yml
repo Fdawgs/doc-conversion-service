@@ -34,10 +34,18 @@ script:
 jobs:
     include:
         - stage: test
+          name: linux deployment
+          node_js: lts/*
+          os: linux
+          script:
+            - sudo apt-get -y install poppler-data poppler-utils
+            - cp .env.template .env.test
+            - POPPLER_BINARY_PATH='/usr/bin' yarn test
+        - stage: test 
           name: produce coverage
           node_js: lts/*
           os: windows
           script:
-              - cp .env.template .env.test
-              - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js &&
-                rm -rf ./coverage
+            - cp .env.template .env.test
+            - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js &&
+              rm -rf ./coverage
