@@ -18,6 +18,7 @@ It was initially created to replace a previously purchased PDF-to-HTML conversio
 
 -   [Node.js](https://nodejs.org/en/)
 -   [Yarn](https://yarnpkg.com)
+-   Linux only: latest available `poppler-data` and `poppler-utils` binaries
 
 ## Deployment
 

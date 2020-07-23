@@ -1,3 +1,20 @@
+## <small>5.1.1 (2020-07-23)</small>
+
+-   docs(readme): add poppler binary prerequisites for linux users ([57e0c84](https://github.com/Fdawgs/doc-conversion-service/commit/57e0c84))
+-   docs(readme): remove inactive dependabot badge ([eaf7d6b](https://github.com/Fdawgs/doc-conversion-service/commit/eaf7d6b))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 30.0.2 to 30.0.3 ([4bb60c1](https://github.com/Fdawgs/doc-conversion-service/commit/4bb60c1))
+-   build(deps-dev): bump eslint-plugin-json from 2.1.1 to 2.1.2 ([64a59fc](https://github.com/Fdawgs/doc-conversion-service/commit/64a59fc))
+-   build(deps): bump node-poppler from 1.7.6 to 1.8.0 ([1c9eb68](https://github.com/Fdawgs/doc-conversion-service/commit/1c9eb68))
+-   build(travis): add linux test deployment ([3411434](https://github.com/Fdawgs/doc-conversion-service/commit/3411434))
+-   build(travis): add osx image ([c534a01](https://github.com/Fdawgs/doc-conversion-service/commit/c534a01))
+-   build(travis): make scripts multiline ([293409e](https://github.com/Fdawgs/doc-conversion-service/commit/293409e))
+-   build(travis): update linux dist to latest lts ([2baccfa](https://github.com/Fdawgs/doc-conversion-service/commit/2baccfa))
+-   fix(middleware): move error throw to start of module ([ff2bd09](https://github.com/Fdawgs/doc-conversion-service/commit/ff2bd09))
+-   tests(middleware): remove race conditions ([e142060](https://github.com/Fdawgs/doc-conversion-service/commit/e142060))
+-   chore(eslint): ignore rules for apidoc tags ([92b4d9a](https://github.com/Fdawgs/doc-conversion-service/commit/92b4d9a))
+-   refactor(config): change htmltidy config values to boolean from string ([cc292e9](https://github.com/Fdawgs/doc-conversion-service/commit/cc292e9))
+-   style(readme): add whitespace ([18a5a73](https://github.com/Fdawgs/doc-conversion-service/commit/18a5a73))
+
 ## 5.1.0 (2020-07-20)
 
 Main feature of this release is the addition of a PDF-to-TXT route, found at `api/converter/text`, check the generated API docs for options!
