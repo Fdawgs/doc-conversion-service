@@ -15,6 +15,9 @@ const { v4 } = require('uuid');
 module.exports = function pdfToTxtMiddleware(config = {}) {
 	return async (req, res, next) => {
 		try {
+			if (req.body === undefined) {
+				throw new Error();
+			}
 			// Define any default settings the middleware should have to get up and running
 			const defaultConfig = {
 				binPath: undefined,
@@ -37,9 +40,6 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 			const poppler = new Poppler(this.config.binPath);
 
 			req.body = await poppler.pdfToText(req.query, tempPdfFile);
-			if (typeof req.body === 'object') {
-				throw new Error();
-			}
 
 			res.locals.doclocation = {
 				directory: this.config.tempDirectory,
