@@ -67,10 +67,10 @@ const serverConfig = {
 			 * - sortAttributes (sort attributes in element in ascending alphabetic sort)
 			 */
 			htmltidy: {
-				bare: 'yes',
-				clean: 'yes',
-				dropProprietaryAttributes: 'yes',
-				escapeCdata: 'yes',
+				bare: true,
+				clean: true,
+				dropProprietaryAttributes: true,
+				escapeCdata: true,
 				sortAttributes: 'alpha'
 			},
 			poppler: {

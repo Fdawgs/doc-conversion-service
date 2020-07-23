@@ -2,8 +2,6 @@ language: node_js
 
 cache: yarn
 
-dist: bionic
-
 git:
     quiet: true
 
@@ -11,8 +9,14 @@ node_js:
     - 'lts/*'
     - 'node'
 
+# os
+dist: focal
+
 os:
+    - osx
     - windows
+
+osx_image: xcode12
 
 # See https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/288/9
 env:
@@ -26,12 +30,29 @@ branches:
         - /^v\d*\.\d*\.\d*$/
         - /^dependabot/.*$/
 
-script: echo "Running tests against $(node -v)..." && cp .env.template .env.test && yarn test
+script:
+    - echo "Running tests against $(node -v)..."
+    - cp .env.template .env.test
+    - yarn test
 
 jobs:
+    fast_finish: true
+    allow_failures:
+        - os: osx
     include:
+        - stage: test
+          name: linux deployment
+          node_js: lts/*
+          os: linux
+          script:
+              - sudo apt-get -y install poppler-data poppler-utils
+              - cp .env.template .env.test
+              - POPPLER_BINARY_PATH='/usr/bin' yarn test
         - stage: test
           name: produce coverage
           node_js: lts/*
           os: windows
-          script: cp .env.template .env.test && jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+          script:
+              - cp .env.template .env.test
+              - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+              - rm -rf ./coverage
