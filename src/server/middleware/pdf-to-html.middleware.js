@@ -32,7 +32,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 						complexOutput: true,
 						singlePage: true
 					},
-					tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
+					tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
 				};
 				this.config = Object.assign(defaultConfig, config);
 

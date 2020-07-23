@@ -18,7 +18,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 			// Define any default settings the middleware should have to get up and running
 			const defaultConfig = {
 				binPath: undefined,
-				tempDirectory: `${path.resolve(__dirname, '..')}\\temp\\`
+				tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
 			};
 			this.config = Object.assign(defaultConfig, config);
 

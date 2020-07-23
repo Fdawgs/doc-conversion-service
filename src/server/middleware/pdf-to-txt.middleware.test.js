@@ -2,7 +2,10 @@ const cloneDeep = require('lodash/cloneDeep');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
+const os = require('os');
 const Middleware = require('./pdf-to-txt.middleware');
+
+const platform = os.platform();
 const { serverConfig } = require('../../config');
 
 describe('PDF-to-TXT conversion middleware', () => {
@@ -10,7 +13,6 @@ describe('PDF-to-TXT conversion middleware', () => {
 	modServerConfig.routes.txt.poppler.tempDirectory = './src/server/temp2/';
 
 	afterAll(() => {
-		fs.rmdir('./src/server/temp/', { recursive: true }, () => {});
 		fs.rmdir(
 			modServerConfig.routes.txt.poppler.tempDirectory,
 			{ recursive: true },
@@ -24,48 +26,32 @@ describe('PDF-to-TXT conversion middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should convert PDF file to TXT', async () => {
-		const middleware = Middleware();
-		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
-			headers: {
-				'content-type': 'application/pdf'
-			}
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
-		const next = jest.fn();
+	if (platform === 'win32') {
+		test('Should convert PDF file to TXT and place in specified directory', async () => {
+			const middleware = Middleware(modServerConfig.routes.txt.poppler);
+			const req = {
+				body: fs.readFileSync(
+					'./test_files/pdf_1.3_NHS_Constitution.pdf'
+				),
+				headers: {
+					'content-type': 'application/pdf'
+				}
+			};
+			const res = httpMocks.createResponse({ locals: { results: {} } });
+			const next = jest.fn();
 
-		await middleware(req, res, next);
+			await middleware(req, res, next);
 
-		expect(typeof req.body).toBe('string');
-		expect(isHtml(req.body)).toBe(false);
-		expect(typeof res.locals.doclocation).toBe('object');
-		expect(next).toHaveBeenCalledTimes(1);
-		expect(next.mock.calls[0][0]).toBeUndefined();
-	});
-
-	test('Should convert PDF file to TXT and place in specified directory', async () => {
-		const middleware = Middleware(modServerConfig.routes.txt.poppler);
-		const req = {
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
-			headers: {
-				'content-type': 'application/pdf'
-			}
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
-		const next = jest.fn();
-
-		await middleware(req, res, next);
-
-		expect(typeof req.body).toBe('string');
-		expect(isHtml(req.body)).toBe(false);
-		expect(typeof res.locals.doclocation).toBe('object');
-		expect(next).toHaveBeenCalledTimes(1);
-		expect(next.mock.calls[0][0]).toBeUndefined();
-		expect(
-			fs.existsSync(modServerConfig.routes.txt.poppler.tempDirectory)
-		).toBe(true);
-	});
+			expect(typeof req.body).toBe('string');
+			expect(isHtml(req.body)).toBe(false);
+			expect(typeof res.locals.doclocation).toBe('object');
+			expect(next).toHaveBeenCalledTimes(1);
+			expect(next.mock.calls[0][0]).toBeUndefined();
+			expect(
+				fs.existsSync(modServerConfig.routes.txt.poppler.tempDirectory)
+			).toBe(true);
+		});
+	}
 
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware();
