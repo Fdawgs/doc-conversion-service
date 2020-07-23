@@ -2,7 +2,7 @@ language: node_js
 
 cache: yarn
 
-dist: bionic
+dist: focal
 
 git:
     quiet: true
@@ -47,5 +47,5 @@ jobs:
           os: windows
           script:
             - cp .env.template .env.test
-            - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js &&
-              rm -rf ./coverage
+            - jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+            - rm -rf ./coverage
