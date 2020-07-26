@@ -5611,10 +5611,10 @@ sanitize-html@^1.27.1:
     postcss "^7.0.27"
     srcset "^2.0.1"
 
-sanitize-middleware@^2.0.13:
-  version "2.0.13"
-  resolved "https://registry.yarnpkg.com/sanitize-middleware/-/sanitize-middleware-2.0.13.tgz#e41b993468b44743542639a7a23ef7169704170e"
-  integrity sha512-zH7xbq08K2+bMOI4+Uu7GCdGfov88b61t6FcDx37PQFkT00gCI7r7A0Jx5MsHB/k1JOe22UBkg5zkk6crGcW+g==
+sanitize-middleware@^2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/sanitize-middleware/-/sanitize-middleware-2.0.14.tgz#9f21b5423e0c685ae2176764d00407793826076e"
+  integrity sha512-ymsej+fdtV/dcuaAbfJVJCM7vO6xnSkR1r/QGf9Zpc6mNbdYa2zibZbLp2Z6Lm3ltcZZ/czN3+CsLq8Vme/h6w==
   dependencies:
     sanitize-html "^1.27.1"
     validator "^13.1.1"
