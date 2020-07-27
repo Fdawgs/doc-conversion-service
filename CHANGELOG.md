@@ -1,3 +1,11 @@
+## <small>5.1.2 (2020-07-27)</small>
+
+-   build(deps-dev): bump eslint-plugin-jest from 23.18.0 to 23.18.2 ([80717f3](https://github.com/Fdawgs/doc-conversion-service/commit/80717f3))
+-   build(deps): bump node-poppler from 1.8.0 to 1.8.1 ([d2231bc](https://github.com/Fdawgs/doc-conversion-service/commit/d2231bc))
+-   build(deps): bump sanitize-middleware from 2.0.13 to 2.0.14 ([32d82c4](https://github.com/Fdawgs/doc-conversion-service/commit/32d82c4))
+-   build(docker): add poppler packages; move to debian from alpine ([e259054](https://github.com/Fdawgs/doc-conversion-service/commit/e259054))
+-   build(docker): use .env file for config ([5b8463b](https://github.com/Fdawgs/doc-conversion-service/commit/5b8463b))
+
 ## <small>5.1.1 (2020-07-23)</small>
 
 -   docs(readme): add poppler binary prerequisites for linux users ([57e0c84](https://github.com/Fdawgs/doc-conversion-service/commit/57e0c84))
