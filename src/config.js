@@ -122,8 +122,7 @@ const helmetConfig = {
 	},
 	frameguard: {
 		action: 'deny'
-	},
-	hidePoweredBy: true
+	}
 };
 
 const loggerConfig = {
