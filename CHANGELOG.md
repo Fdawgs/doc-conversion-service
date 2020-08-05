@@ -1,3 +1,24 @@
+## 6.0.0 (2020-08-05)
+
+-   fix(config): remove hidepoweredby helmet config option; not supported ([4987c18](https://github.com/Fdawgs/doc-conversion-service/commit/4987c18))
+-   build(deps-dev): bump dev dependencies to resolve security cve ([c8d6da4](https://github.com/Fdawgs/doc-conversion-service/commit/c8d6da4))
+-   build(deps): bump helmet from 3.23.3 to 4.0.0 ([1d9bed6](https://github.com/Fdawgs/doc-conversion-service/commit/1d9bed6))
+-   build(deps): bump sanitize-middleware from 2.0.14 to 2.0.15 ([5e8c431](https://github.com/Fdawgs/doc-conversion-service/commit/5e8c431))
+-   build(deps): bump uuid from 8.2.0 to 8.3.0 ([5cf19dd](https://github.com/Fdawgs/doc-conversion-service/commit/5cf19dd))
+-   build(env): remove quotation marks from api_bearer_token array value ([7285ead](https://github.com/Fdawgs/doc-conversion-service/commit/7285ead))
+-   tests(routes): remove dud test ([4a7574e](https://github.com/Fdawgs/doc-conversion-service/commit/4a7574e))
+-   chore(gitignore): add `src/server/temp1/*` used by pdf-to-txt tests ([fc70aed](https://github.com/Fdawgs/doc-conversion-service/commit/fc70aed))
+-   chore(scripts): build api docs on launch of nodemon ([c00b51a](https://github.com/Fdawgs/doc-conversion-service/commit/c00b51a))
+-   docs(contributing): clarification on env variables ([a604881](https://github.com/Fdawgs/doc-conversion-service/commit/a604881))
+-   docs(readme): add tagline ([b877fc9](https://github.com/Fdawgs/doc-conversion-service/commit/b877fc9))
+-   docs(routes): specify api query string params for pdf-to-txt ([a425faf](https://github.com/Fdawgs/doc-conversion-service/commit/a425faf))
+-   feat(routes): add additional query param options for pdf-to-html ([abdcbd1](https://github.com/Fdawgs/doc-conversion-service/commit/abdcbd1))
+-   style(middleware): correct camelcase of pdftohtmloptions param ([8b8a4a6](https://github.com/Fdawgs/doc-conversion-service/commit/8b8a4a6))
+
+### BREAKING CHANGE
+
+-   `removealt` query string param renamed to `removeAlt`; `backgroundcolor` query string param renamed to `backgroundColor`.
+
 ## <small>5.1.2 (2020-07-27)</small>
 
 -   build(deps-dev): bump eslint-plugin-jest from 23.18.0 to 23.18.2 ([80717f3](https://github.com/Fdawgs/doc-conversion-service/commit/80717f3))
