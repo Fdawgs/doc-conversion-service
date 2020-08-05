@@ -14,7 +14,7 @@
 		"docs": "apidoc -i src/ -o docs/",
 		"dupe-check": "yarn jsinspect ./src",
 		"lint": "eslint . --cache --ext js,jsx,ts,tsx --ignore-path .gitignore",
-		"nodemon": "cross-env NODE_ENV=development nodemon src/index.js",
+		"nodemon": "yarn docs && cross-env NODE_ENV=development nodemon src/index.js",
 		"prettier": "prettier . --write --ignore-path .gitignore",
 		"start": "node src/index.js",
 		"test": "cross-env NODE_ENV=test yarn lint && yarn test-only",
