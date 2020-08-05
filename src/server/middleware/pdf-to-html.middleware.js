@@ -36,6 +36,31 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				};
 				this.config = Object.assign(defaultConfig, config);
 
+				/**
+				 * Remove params used by tidy-css and embed-html-images middleware
+				 * to avoid pdfToHtml function throwing error due to invalid params passed to it,
+				 * as well as pdfToHtml params that will break the route.
+				 */
+				const query = { ...req.query };
+				const tidyCssParams = [
+					'backgroundColor',
+					'complexOutput',
+					'fonts',
+					'removeAlt',
+					'stdout',
+					'singlePage',
+					'quiet'
+				];
+				tidyCssParams.forEach((value) => {
+					if (Object.prototype.hasOwnProperty.call(query, value)) {
+						delete query[value];
+					}
+				});
+				this.config.pdftoHtmlOptions = Object.assign(
+					this.config.pdfToHtmlOptions,
+					query
+				);
+
 				try {
 					await fs.access(this.config.tempDirectory);
 				} catch {

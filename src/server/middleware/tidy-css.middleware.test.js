@@ -41,7 +41,7 @@ describe('Clean CSS middleware', () => {
 				{ encoding: 'UTF-8' }
 			),
 			query: {
-				backgroundcolor: 'white'
+				backgroundColor: 'white'
 			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });
