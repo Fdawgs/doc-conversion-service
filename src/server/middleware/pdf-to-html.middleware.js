@@ -12,7 +12,7 @@ const { v4 } = require('uuid');
  * @param {string=} config.binPath - Path of poppler-utils binaries.
  * @param {string=} config.encoding - Sets the encoding to use for text output.
  * Defaults to "UTF-8".
- * @param {object=} config.pdftoHtmlOptions - Refer to
+ * @param {object=} config.pdfToHtmlOptions - Refer to
  * https://github.com/Fdawgs/node-poppler/blob/master/API.md#Poppler+pdfToHtml
  * for options.
  * @param {string=} config.tempDirectory - directory for temporarily storing
@@ -28,7 +28,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				const defaultConfig = {
 					binPath: undefined,
 					encoding: 'UTF-8',
-					pdftoHtmlOptions: {
+					pdfToHtmlOptions: {
 						complexOutput: true,
 						singlePage: true
 					},
@@ -52,7 +52,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				const poppler = new Poppler(this.config.binPath);
 
 				await poppler.pdfToHtml(
-					this.config.pdftoHtmlOptions,
+					this.config.pdfToHtmlOptions,
 					tempPdfFile
 				);
 
