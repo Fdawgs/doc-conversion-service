@@ -63,7 +63,10 @@ const router = new Router();
  * @apiHeader {string} Authorization Bearer token for authorization.
  * @apiHeader {string=application/pdf, application/rtf} Content-Type
  *
- * @apiParam (Query string) {Boolean=true, false} [removealt] Remove the alt attribute from image tags.
+ * @apiParam (Query string) {string} [backgroundColor] Define HTML document background color.
+ * @apiParam (Query string) {Boolean=true, false} [exchangePdfLinks] Exchange .pdf links with .html. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [extractHidden] Force hidden text extraction. **PDF files only.**
+ * @apiParam (Query string) {number} [firstPageToConvert] First page to print. **PDF files only.**
  * @apiParam (Query string) {string} [fonts] Define the font(s) of the text in the returned HTML document. Eg:
  * ```
  * font=Arial
@@ -71,11 +74,32 @@ const router = new Router();
  * ```
  * font=Arial,Sans Serif
  * ```
+ * @apiParam (Query string) {Boolean=true, false} [fontFullName] Outputs the font name without any substitutions. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [ignoreImages] Ignore images. **PDF files only.**
+ * @apiParam (Query string) {string=JPG, PNG} [imageFormat] Image file format for Splash output (JPG or PNG). **PDF files only.**
+ * @apiParam (Query string) {number} [lastPageToConvert] Last page to print. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [noDrm] Override document DRM settings. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [noFrames] Generate no frames. Not supported in complex output mode. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [noMergeParagraph] Do not merge paragraphs. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [noRoundedCoordinates] Do not round coordinates
+ * (with XML output only). **PDF files only.**
+ * @apiParam (Query string) {string} [outputEncoding] Sets the encoding to use for text output.
+ * This defaults to `UTF-8`. **PDF files only.**
+ * @apiParam (Query string) {string} [ownerPassword] Owner password (for encrypted files). **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [printVersionInfo] Print copyright and version info. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [removeAlt] Remove the alt attribute from image tags. **PDF files only.**
+ * @apiParam (Query string) {string} [userPassword] User password (for encrypted files). **PDF files only.**
+ * @apiParam (Query string) {number} [wordBreakThreshold] Adjust the word break threshold percent.
+ * Default is 10. Word break occurs when distance between two adjacent characters is greater
+ * than this percent of character height. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [xmlOutput] Output for XML post-processing. **PDF files only.**
+ * @apiParam (Query string) {number} [zoom] Zoom the PDF document (default 1.5). **PDF files only.**
+ *
  * @apiParam (Request body) {Binary} data Binary content such as text, image, pdf, zip archive, etc.
  *
  * @apiExample {curl} Example usage:
  * curl --request POST \
- *   --url 'http://localhost:3000/api/converter/html?removealt=true&fonts=Arial' \
+ *   --url 'http://localhost:3000/api/converter/html?removeAlt=true&fonts=Arial' \
  *   --header 'authorization: Bearer Jimmini' \
  *   --header 'content-type: application/pdf' \
  *   --data 'JVBERi0xLjMNJeLjz9'

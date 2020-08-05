@@ -118,4 +118,5 @@ dist
 .pnp.*
 
 src/server/temp/*
+src/server/temp1/*
 docs/

@@ -58,42 +58,42 @@ const router = new Router();
  * @apiHeader {string} Authorization Bearer token for authorization.
  * @apiHeader {string=application/pdf} Content-Type
  *
- * @apiParam {Boolean=true, false} [boundingBoxXhtml] Generate an XHTML file containing bounding
+ * @apiParam (Query string) {Boolean=true, false} [boundingBoxXhtml] Generate an XHTML file containing bounding
  * box information for each word in the file.
- * @apiParam {Boolean=true, false} [boundingBoxXhtmlLayout] Generate an XHTML file containing
+ * @apiParam (Query string) {Boolean=true, false} [boundingBoxXhtmlLayout] Generate an XHTML file containing
  * bounding box information for each block, line, and word in the file.
- * @apiParam {number} [cropHeight] Specifies the height of crop area in pixels
+ * @apiParam (Query string) {number} [cropHeight] Specifies the height of crop area in pixels
  * (image output) or points (vector output).
- * @apiParam {number} [cropWidth] Specifies the width of crop area in pixels
+ * @apiParam (Query string) {number} [cropWidth] Specifies the width of crop area in pixels
  * (image output) or points (vector output).
- * @apiParam {number} [cropXAxis] Specifies the x-coordinate of the crop area top left
+ * @apiParam (Query string) {number} [cropXAxis] Specifies the x-coordinate of the crop area top left
  * corner in pixels (image output) or points (vector output).
- * @apiParam {number} [cropYAxis] Specifies the y-coordinate of the crop area top left
+ * @apiParam (Query string) {number} [cropYAxis] Specifies the y-coordinate of the crop area top left
  * corner in pixels (image output) or points (vector output).
- * @apiParam {string=unix, dos, mac} [eolConvention] Sets the end-of-line convention to use for
+ * @apiParam (Query string) {string=unix, dos, mac} [eolConvention] Sets the end-of-line convention to use for
  * text output: unix; dos; mac.
- * @apiParam {number} [firstPageToConvert] Specifies the first page to convert.
- * @apiParam {number} [fixedWidthLayout] Assume fixed-pitch (or tabular) text, with the
+ * @apiParam (Query string) {number} [firstPageToConvert] Specifies the first page to convert.
+ * @apiParam (Query string) {number} [fixedWidthLayout] Assume fixed-pitch (or tabular) text, with the
  * specified character width (in points). This forces physical layout mode.
- * @apiParam {Boolean=true, false} [generateHtmlMetaFile] Generate simple HTML file, including the
+ * @apiParam (Query string) {Boolean=true, false} [generateHtmlMetaFile] Generate simple HTML file, including the
  * meta information. This simply wraps the text in `<pre>` and `</pre>` and prepends the meta headers.
- * @apiParam {number} [lastPageToConvert] Specifies the last page to convert.
- * @apiParam {Boolean=true, false} [listEncodingOptions] List the available encodings.
- * @apiParam {Boolean=true, false} [maintainLayout] Maintain (as best as possible) the original physical
+ * @apiParam (Query string) {number} [lastPageToConvert] Specifies the last page to convert.
+ * @apiParam (Query string) {Boolean=true, false} [listEncodingOptions] List the available encodings.
+ * @apiParam (Query string) {Boolean=true, false} [maintainLayout] Maintain (as best as possible) the original physical
  * layout of the text. The default is to undo physical layout (columns, hyphenation, etc.) and
  * output the text in reading order.
- * @apiParam {Boolean=true, false} [noDiagonalText] Discard diagonal text.
- * @apiParam {Boolean=true, false} [noPageBreaks] Don't insert page breaks (form feed characters)
+ * @apiParam (Query string) {Boolean=true, false} [noDiagonalText] Discard diagonal text.
+ * @apiParam (Query string) {Boolean=true, false} [noPageBreaks] Don't insert page breaks (form feed characters)
  * between pages.
- * @apiParam {string} [outputEncoding] Sets the encoding to use for text output.
+ * @apiParam (Query string) {string} [outputEncoding] Sets the encoding to use for text output.
  * This defaults to "UTF-8".
- * @apiParam {string} [ownerPassword] Owner password (for encrypted files).
- * @apiParam {Boolean=true, false} [printVersionInfo] Print copyright and version information.
- * @apiParam {Boolean=true, false} [quiet] Don't print any messages or errors.
- * @apiParam {Boolean=true, false} [rawLayout] Keep the text in content stream order. This is a
+ * @apiParam (Query string) {string} [ownerPassword] Owner password (for encrypted files).
+ * @apiParam (Query string) {Boolean=true, false} [printVersionInfo] Print copyright and version information.
+ * @apiParam (Query string) {Boolean=true, false} [quiet] Don't print any messages or errors.
+ * @apiParam (Query string) {Boolean=true, false} [rawLayout] Keep the text in content stream order. This is a
  * hack which often "undoes" column formatting, etc. Use of raw mode is no longer recommended.
- * @apiParam {string} [userPassword] User password (for encrypted files).
- * @apiParam (Request body) {Binary} data Binary content such as text, image, pdf, zip archive, etc.
+ * @apiParam (Query string) {string} [userPassword] User password (for encrypted files).
+ * @apiParam (Query string) (Request body) {Binary} data Binary content such as text, image, pdf, zip archive, etc.
  *
  * @apiExample {curl} Example usage:
  * curl --request POST \

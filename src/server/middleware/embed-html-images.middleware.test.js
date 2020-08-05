@@ -18,7 +18,7 @@ describe('Embed HTML Images middleware', () => {
 				{ encoding: 'UTF-8' }
 			),
 			query: {
-				removealt: true
+				removeAlt: true
 			}
 		};
 		const res = httpMocks.createResponse({ locals: { results: {} } });

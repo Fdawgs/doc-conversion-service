@@ -26,12 +26,13 @@ describe('HTML conversion route', () => {
 		server.shutdown();
 	});
 
-	test('Should return PDF file converted to HTML', async () => {
+	test('Should return PDF file converted to HTML, with alt attributes removed from img tags', async () => {
 		const res = await request
 			.post(route)
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
 			.set('Content-Type', 'application/pdf')
+			.query({ removeAlt: true })
 			.send(fs.readFileSync('./test_files/pdf_1.5_YDH_FOI_Policy.pdf'));
 
 		expect(res.status).toBe(200);

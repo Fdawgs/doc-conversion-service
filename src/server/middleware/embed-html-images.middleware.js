@@ -7,7 +7,7 @@ const path = require('path');
  * @description Embeds images into HTML in `req.body` after encoding with Base64 to allow for
  * images to be transmitted via MESH.
  *
- * Will remove alt attribute from img tags if optional `removealt` query
+ * Will remove alt attribute from img tags if optional `removeAlt` query
  * string param set to `true`.
  * Useful for systems where img tags are stripped from received documents
  * (i.e. TPP's SystmOne).
@@ -37,7 +37,7 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 					)}`;
 					element.setAttribute('src', imageAsBase64);
 
-					if (req.query && req.query.removealt) {
+					if (req.query && req.query.removeAlt) {
 						element.setAttribute('alt', '');
 					}
 

@@ -12,7 +12,7 @@ const { v4 } = require('uuid');
  * @param {string=} config.binPath - Path of poppler-utils binaries.
  * @param {string=} config.encoding - Sets the encoding to use for text output.
  * Defaults to "UTF-8".
- * @param {object=} config.pdftoHtmlOptions - Refer to
+ * @param {object=} config.pdfToHtmlOptions - Refer to
  * https://github.com/Fdawgs/node-poppler/blob/master/API.md#Poppler+pdfToHtml
  * for options.
  * @param {string=} config.tempDirectory - directory for temporarily storing
@@ -28,13 +28,38 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				const defaultConfig = {
 					binPath: undefined,
 					encoding: 'UTF-8',
-					pdftoHtmlOptions: {
+					pdfToHtmlOptions: {
 						complexOutput: true,
 						singlePage: true
 					},
 					tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
 				};
 				this.config = Object.assign(defaultConfig, config);
+
+				/**
+				 * Remove params used by tidy-css and embed-html-images middleware
+				 * to avoid pdfToHtml function throwing error due to invalid params passed to it,
+				 * as well as pdfToHtml params that will break the route.
+				 */
+				const query = { ...req.query };
+				const tidyCssParams = [
+					'backgroundColor',
+					'complexOutput',
+					'fonts',
+					'removeAlt',
+					'stdout',
+					'singlePage',
+					'quiet'
+				];
+				tidyCssParams.forEach((value) => {
+					if (Object.prototype.hasOwnProperty.call(query, value)) {
+						delete query[value];
+					}
+				});
+				this.config.pdftoHtmlOptions = Object.assign(
+					this.config.pdfToHtmlOptions,
+					query
+				);
 
 				try {
 					await fs.access(this.config.tempDirectory);
@@ -52,7 +77,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				const poppler = new Poppler(this.config.binPath);
 
 				await poppler.pdfToHtml(
-					this.config.pdftoHtmlOptions,
+					this.config.pdfToHtmlOptions,
 					tempPdfFile
 				);
 

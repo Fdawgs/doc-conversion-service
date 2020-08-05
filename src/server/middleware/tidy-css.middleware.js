@@ -9,8 +9,8 @@ const { JSDOM } = require('jsdom');
  * Document's original font(s) can be replaced with single font or comma seperated list of fonts
  * using optional `font` query string param, e.g. `?font=Arial,Sans Serif`
  *
- * Document's original background color can be replaced using optional `backgroundcolor` query
- * string param, e.g. `?backgroundcolor=white`
+ * Document's original background color can be replaced using optional `backgroundColor` query
+ * string param, e.g. `?backgroundColor=white`
  *
  * @returns {Function} Express middleware.
  */
@@ -25,8 +25,8 @@ module.exports = function tidyCssMiddleware() {
 		}
 
 		let newBackgroundColor;
-		if (req.query && req.query.backgroundcolor) {
-			newBackgroundColor = String(req.query.backgroundcolor);
+		if (req.query && req.query.backgroundColor) {
+			newBackgroundColor = String(req.query.backgroundColor);
 		}
 
 		// Create results object for conversion results
