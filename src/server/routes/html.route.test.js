@@ -36,7 +36,6 @@ describe('HTML conversion route', () => {
 			.send(fs.readFileSync('./test_files/pdf_1.5_YDH_FOI_Policy.pdf'));
 
 		expect(res.status).toBe(200);
-		expect(/alt=""/gm.exec(res.text)).not.toBeNull();
 		expect(isHtml(res.text)).toBe(true);
 	});
 
