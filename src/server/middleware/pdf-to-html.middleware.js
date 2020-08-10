@@ -42,7 +42,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				 * as well as pdfToHtml params that will break the route.
 				 */
 				const query = { ...req.query };
-				const tidyCssParams = [
+				const pdfToHtmlUnwantedParams = [
 					'backgroundColor',
 					'complexOutput',
 					'fonts',
@@ -55,7 +55,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 					'quiet',
 					'xmlOutput'
 				];
-				tidyCssParams.forEach((value) => {
+				pdfToHtmlUnwantedParams.forEach((value) => {
 					if (Object.prototype.hasOwnProperty.call(query, value)) {
 						delete query[value];
 					}
