@@ -25,6 +25,17 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 			};
 			this.config = Object.assign(defaultConfig, config);
 
+			/**
+			 * Remove pdfToTxt params that will break the route.
+			 */
+			const query = { ...req.query };
+			const pdfToTxtUnwantedParams = ['printVersionInfo', 'quiet'];
+			pdfToTxtUnwantedParams.forEach((value) => {
+				if (Object.prototype.hasOwnProperty.call(query, value)) {
+					delete query[value];
+				}
+			});
+
 			try {
 				await fs.access(this.config.tempDirectory);
 			} catch {
@@ -39,7 +50,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 
 			const poppler = new Poppler(this.config.binPath);
 
-			req.body = await poppler.pdfToText(req.query, tempPdfFile);
+			req.body = await poppler.pdfToText(query, tempPdfFile);
 
 			res.locals.doclocation = {
 				directory: this.config.tempDirectory,

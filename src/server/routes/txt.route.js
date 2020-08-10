@@ -88,8 +88,6 @@ const router = new Router();
  * @apiParam (Query string) {string} [outputEncoding] Sets the encoding to use for text output.
  * This defaults to "UTF-8".
  * @apiParam (Query string) {string} [ownerPassword] Owner password (for encrypted files).
- * @apiParam (Query string) {Boolean=true, false} [printVersionInfo] Print copyright and version information.
- * @apiParam (Query string) {Boolean=true, false} [quiet] Don't print any messages or errors.
  * @apiParam (Query string) {Boolean=true, false} [rawLayout] Keep the text in content stream order. This is a
  * hack which often "undoes" column formatting, etc. Use of raw mode is no longer recommended.
  * @apiParam (Query string) {string} [userPassword] User password (for encrypted files).
