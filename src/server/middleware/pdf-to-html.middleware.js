@@ -46,10 +46,14 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 					'backgroundColor',
 					'complexOutput',
 					'fonts',
+					'noFrames',
+					'noRoundedCoordinates',
+					'printVersionInfo',
 					'removeAlt',
 					'stdout',
 					'singlePage',
-					'quiet'
+					'quiet',
+					'xmlOutput'
 				];
 				tidyCssParams.forEach((value) => {
 					if (Object.prototype.hasOwnProperty.call(query, value)) {
