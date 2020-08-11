@@ -1,3 +1,12 @@
+## <small>6.0.1 (2020-08-11)</small>
+
+-   docs(readme): replace convoluted pm2 windows service deploy steps ([4bc2109](https://github.com/Fdawgs/doc-conversion-service/commit/4bc2109))
+-   build(deps-dev): bump jest from 26.2.2 to 26.3.0 ([daa59fb](https://github.com/Fdawgs/doc-conversion-service/commit/daa59fb))
+-   build(deps-dev): bump superagent from 5.3.1 to 6.0.0 ([c4b47b8](https://github.com/Fdawgs/doc-conversion-service/commit/c4b47b8))
+-   build(deps): bump jsdom from 16.3.0 to 16.4.0 ([782788a](https://github.com/Fdawgs/doc-conversion-service/commit/782788a))
+-   fix(routes): remove redundant query string params for pdf-to-txt ([84c9bc1](https://github.com/Fdawgs/doc-conversion-service/commit/84c9bc1))
+-   fix(routes): remove xml output params for pdf-to-html: not supported ([b9082bb](https://github.com/Fdawgs/doc-conversion-service/commit/b9082bb))
+
 ## 6.0.0 (2020-08-05)
 
 -   fix(config): remove hidepoweredby helmet config option; not supported ([4987c18](https://github.com/Fdawgs/doc-conversion-service/commit/4987c18))
