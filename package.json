@@ -82,7 +82,7 @@
 		"passport": "^0.4.1",
 		"passport-http-bearer": "^1.0.1",
 		"rtf.js": "^3.0.1",
-		"sanitize-middleware": "^2.0.15",
+		"sanitize-middleware": "^2.0.16",
 		"uuid": "^8.3.0"
 	},
 	"apidoc": {
