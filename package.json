@@ -73,7 +73,7 @@
 		"file-stream-rotator": "^0.5.7",
 		"fix-utf8": "^1.1.1",
 		"glob": "^7.1.6",
-		"helmet": "^4.0.0",
+		"helmet": "^4.1.0",
 		"htmltidy2": "^0.3.0",
 		"is-html": "^2.0.0",
 		"jsdom": "^16.4.0",
