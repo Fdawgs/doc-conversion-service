@@ -4539,10 +4539,10 @@ node-notifier@^8.0.0:
     uuid "^8.3.0"
     which "^2.0.2"
 
-node-poppler@^1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.8.2.tgz#aba22efe401e2126776143bf58f518feb5738c2e"
-  integrity sha512-2NPwMFXtRQwy9B6TPYAwGjlU9RWWxcTVrZKkzC4Rwk4X1R21AGpbLjyp2tptwzaJfTi68uGzSdXJtJrKhTyDZQ==
+node-poppler@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.8.3.tgz#24a3974de2cd72ce3abd9e0cd07e430d17e7a4fd"
+  integrity sha512-cVvazFKi+rTZ2XUv4VMs5vn/eVsgC9DQNm5u0dr7dll34xqpYP03tXND8rgiY3kjgiOWWCogXS3zhWf9rikDyw==
   dependencies:
     execa "^4.0.3"
 
