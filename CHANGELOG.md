@@ -1,3 +1,16 @@
+## <small>6.0.2 (2020-08-28)</small>
+
+-   build(deps-dev): add eslint-plugin-security dev dependency ([262a9b0](https://github.com/Fdawgs/doc-conversion-service/commit/262a9b0))
+-   build(deps-dev): bump dev dependencies ([63cb778](https://github.com/Fdawgs/doc-conversion-service/commit/63cb778))
+-   build(deps): bump apidoc from 0.24.0 to 0.25.0 ([27d8e87](https://github.com/Fdawgs/doc-conversion-service/commit/27d8e87))
+-   build(deps): bump helmet from 4.0.0 to 4.1.0 ([bbfd9d6](https://github.com/Fdawgs/doc-conversion-service/commit/bbfd9d6))
+-   build(deps): bump node-poppler from 1.8.2 to 1.8.3 ([86a02c9](https://github.com/Fdawgs/doc-conversion-service/commit/86a02c9))
+-   build(deps): bump sanitize-middleware from 2.0.16 to 2.0.17 ([f000e62](https://github.com/Fdawgs/doc-conversion-service/commit/f000e62))
+-   refactor(server): use address() for host and port logging ([b9827c4](https://github.com/Fdawgs/doc-conversion-service/commit/b9827c4))
+-   chore: reduce minimum nodejs engine version from 12.x to 10.x ([d3c3568](https://github.com/Fdawgs/doc-conversion-service/commit/d3c3568))
+-   chore(github): add issue templates ([7ce7389](https://github.com/Fdawgs/doc-conversion-service/commit/7ce7389))
+-   chore(tests): correct file remover utility test description ([77449f0](https://github.com/Fdawgs/doc-conversion-service/commit/77449f0))
+
 ## <small>6.0.1 (2020-08-11)</small>
 
 -   docs(readme): replace convoluted pm2 windows service deploy steps ([4bc2109](https://github.com/Fdawgs/doc-conversion-service/commit/4bc2109))
