@@ -1,3 +1,8 @@
+## <small>6.0.3 (2020-08-31)</small>
+
+-   build(deps-dev): bump dev dependencies ([ee23e4f](https://github.com/Fdawgs/doc-conversion-service/commit/ee23e4f))
+-   Revert "refactor(server): use address() for host and port logging" ([54874c7](https://github.com/Fdawgs/doc-conversion-service/commit/54874c7))
+
 ## <small>6.0.2 (2020-08-28)</small>
 
 -   build(deps-dev): add eslint-plugin-security dev dependency ([262a9b0](https://github.com/Fdawgs/doc-conversion-service/commit/262a9b0))
