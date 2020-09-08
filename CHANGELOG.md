@@ -1,3 +1,9 @@
+## <small>6.0.4 (2020-09-08)</small>
+
+-   build(deps-dev): bump dev dependencies ([e26aeff](https://github.com/Fdawgs/doc-conversion-service/commit/e26aeff))
+-   fix(server): add hpp middleware to protect against hpp attacks ([16cbd34](https://github.com/Fdawgs/doc-conversion-service/commit/16cbd34))
+-   chore(pm2): increase instances from 8 to 16 ([dd49dc0](https://github.com/Fdawgs/doc-conversion-service/commit/dd49dc0))
+
 ## <small>6.0.3 (2020-08-31)</small>
 
 -   build(deps-dev): bump dev dependencies ([ee23e4f](https://github.com/Fdawgs/doc-conversion-service/commit/ee23e4f))
