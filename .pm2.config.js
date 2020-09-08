@@ -7,7 +7,7 @@ module.exports = {
 				NODE_ENV: 'production'
 			},
 			exec_mode: 'cluster',
-			instances: 8,
+			instances: 16,
 			name: 'doc-conv-api',
 			script: './src/index.js',
 			watch: ['./src/config.js', '.env.production']
