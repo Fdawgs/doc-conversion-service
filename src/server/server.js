@@ -3,6 +3,7 @@ const express = require('express');
 const expressPino = require('express-pino-logger');
 const fs = require('fs');
 const helmet = require('helmet');
+const hpp = require('hpp');
 const http = require('http');
 const https = require('https');
 const passport = require('passport');
@@ -53,6 +54,8 @@ class Server {
 	configureMiddleware() {
 		// Add compression
 		this.app.use(compression({ level: 9 }));
+		// Protect against HTTP Parameter Pollution attacks
+		this.app.use(hpp());
 
 		// Return self for chaining
 		return this;
