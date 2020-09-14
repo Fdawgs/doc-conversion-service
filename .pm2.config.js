@@ -13,7 +13,7 @@ module.exports = {
 			instances: 16,
 			name: 'doc-conv-api',
 			script: './src/index.js',
-			watch: ['./src/config.js', '.env.production']
+			watch: ['.env.development', '.env.production']
 		}
 	]
 };
