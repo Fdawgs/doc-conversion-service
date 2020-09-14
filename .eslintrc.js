@@ -1,6 +1,6 @@
 module.exports = {
 	env: {
-		es6: true,
+		es2021: true,
 		node: true
 	},
 	extends: [
@@ -12,7 +12,6 @@ module.exports = {
 		'prettier'
 	],
 	parserOptions: {
-		ecmaVersion: 2020,
 		sourceType: 'module'
 	},
 	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise', 'security'],
