@@ -12,7 +12,10 @@ module.exports = {
 		'prettier'
 	],
 	parserOptions: {
-		sourceType: 'module'
+		sourceType: 'module',
+		ecmaFeatures: {
+			impliedStrict: true
+		}
 	},
 	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise', 'security'],
 	root: true,
