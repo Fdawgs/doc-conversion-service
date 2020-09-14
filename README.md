@@ -59,7 +59,7 @@ It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a pr
 4. Configure the application using the global variables in `.env.production`
 5. Run `yarn docs` to generate api documentation
 6. Run `yarn global add pm2` to install pm2 globally
-7. Launch application with `pm2 start .pm2.config.js`
+7. Launch application with `pm2 start .pm2.config.js --env production`
 8. Check the application has been deployed using `pm2 list` or `pm2 monit`
 
 #### To install as a Windows service:
