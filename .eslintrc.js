@@ -15,6 +15,7 @@ module.exports = {
 		sourceType: 'module'
 	},
 	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise', 'security'],
+	root: true,
 	rules: {
 		'import/no-extraneous-dependencies': 'error',
 		'no-console': 'off',
