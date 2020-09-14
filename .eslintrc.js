@@ -16,13 +16,7 @@ module.exports = {
 	},
 	plugins: ['import', 'jest', 'jsdoc', 'json', 'promise', 'security'],
 	rules: {
-		'import/no-extraneous-dependencies': [
-			'error',
-			{
-				devDependencies: true
-			}
-		],
-		'lines-between-class-members': 'error',
+		'import/no-extraneous-dependencies': 'error',
 		'no-console': 'off',
 		'no-multiple-empty-lines': [
 			'error',
