@@ -1,4 +1,4 @@
-// Used by PM2 for deployment
+// PM2 ecosystem config
 module.exports = {
 	apps: [
 		{
@@ -10,7 +10,7 @@ module.exports = {
 				NODE_ENV: 'production'
 			},
 			exec_mode: 'cluster',
-			instances: 16,
+			instances: 'max',
 			name: 'doc-conv-api',
 			script: './src/index.js',
 			watch: ['.env.development', '.env.production']
