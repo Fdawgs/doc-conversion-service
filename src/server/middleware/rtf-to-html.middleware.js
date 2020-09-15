@@ -72,7 +72,7 @@ module.exports = function rtfToHtmlMiddleware() {
 			try {
 				req.body = await rtfJs(req.body);
 				next();
-			} catch {
+			} catch (err) {
 				res.status(400);
 				next(new Error('Failed to convert RTF file to HTML'));
 			}

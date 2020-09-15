@@ -38,7 +38,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 
 			try {
 				await fs.access(this.config.tempDirectory);
-			} catch {
+			} catch (err) {
 				await fs.mkdir(this.config.tempDirectory);
 			}
 
@@ -58,7 +58,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 				pdf: tempPdfFile
 			};
 			next();
-		} catch {
+		} catch (err) {
 			res.status(400);
 			next(new Error('Failed to convert PDF file to TXT'));
 		}
