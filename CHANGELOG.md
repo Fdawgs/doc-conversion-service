@@ -1,3 +1,18 @@
+## <small>6.0.5 (2020-09-15)</small>
+
+-   build(deps-dev): bump dev dependencies ([e27835f](https://github.com/Fdawgs/doc-conversion-service/commit/e27835f))
+-   build(deps): bump helmet from 4.1.0 to 4.1.1 ([bf096e3](https://github.com/Fdawgs/doc-conversion-service/commit/bf096e3))
+-   refactor(middleware): add err var for try...catch statements ([4beee77](https://github.com/Fdawgs/doc-conversion-service/commit/4beee77))
+-   chore(eslint): enable impliedstrict ([c63e8de](https://github.com/Fdawgs/doc-conversion-service/commit/c63e8de))
+-   chore(eslint): remove rules already set by default ([7d2010f](https://github.com/Fdawgs/doc-conversion-service/commit/7d2010f))
+-   chore(eslint): remove unnecessary eof/bof empty line rule ([e8511a2](https://github.com/Fdawgs/doc-conversion-service/commit/e8511a2))
+-   chore(eslint): stop eslint searching parent directories for config ([166bafb](https://github.com/Fdawgs/doc-conversion-service/commit/166bafb))
+-   chore(eslint): update ecmascript parser to 2021 (12) ([537e0ab](https://github.com/Fdawgs/doc-conversion-service/commit/537e0ab))
+-   chore(nodemon): configure nodemon to watch dev .env file ([9962bc4](https://github.com/Fdawgs/doc-conversion-service/commit/9962bc4))
+-   chore(pm2): declare separate environment configs ([13c7078](https://github.com/Fdawgs/doc-conversion-service/commit/13c7078))
+-   chore(pm2): set no of instances to max rather than defined number ([8bc0500](https://github.com/Fdawgs/doc-conversion-service/commit/8bc0500))
+-   chore(pm2): watch .env files for config changes ([d03fe93](https://github.com/Fdawgs/doc-conversion-service/commit/d03fe93))
+
 ## <small>6.0.4 (2020-09-08)</small>
 
 -   build(deps-dev): bump dev dependencies ([e26aeff](https://github.com/Fdawgs/doc-conversion-service/commit/e26aeff))
