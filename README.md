@@ -1,7 +1,7 @@
 # doc-conversion-service
 
 [![GitHub Release](https://img.shields.io/github/release/Fdawgs/doc-conversion-service.svg)](https://github.com/Fdawgs/doc-conversion-service/releases/latest/)
-[![Build Status](https://travis-ci.com/Fdawgs/doc-conversion-service.svg?branch=master)](https://travis-ci.com/Fdawgs/doc-conversion-service) [![Coverage Status](https://coveralls.io/repos/github/Fdawgs/doc-conversion-service/badge.svg?branch=master)](https://coveralls.io/github/Fdawgs/doc-conversion-service?branch=master) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Build Status](https://travis-ci.com/Fdawgs/doc-conversion-service.svg?branch=master)](https://travis-ci.com/Fdawgs/doc-conversion-service) [![Coverage Status](https://coveralls.io/repos/github/Fdawgs/doc-conversion-service/badge.svg?branch=master)](https://coveralls.io/github/Fdawgs/doc-conversion-service?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/Fdawgs/doc-conversion-service/badge.svg)](https://snyk.io/test/github/Fdawgs/doc-conversion-service) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 > RESTful API web service for converting clinical documents/files
 
