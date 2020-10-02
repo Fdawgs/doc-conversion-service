@@ -1,3 +1,15 @@
+## <small>6.0.6 (2020-10-02)</small>
+
+-   build(dependabot): remove assignment of pull requests to user ([d421123](https://github.com/Fdawgs/doc-conversion-service/commit/d421123))
+-   build(deps-dev): bump dev dependencies ([073f0ce](https://github.com/Fdawgs/doc-conversion-service/commit/073f0ce))
+-   build(deps): bump node-poppler from 1.8.3 to 1.8.4 ([cce17a0](https://github.com/Fdawgs/doc-conversion-service/commit/cce17a0))
+-   build(deps): bump sanitize-middleware from 2.0.17 to 2.0.19 ([3450ece](https://github.com/Fdawgs/doc-conversion-service/commit/3450ece))
+-   build(docker): reduce image size; restrict user privileges ([a293367](https://github.com/Fdawgs/doc-conversion-service/commit/a293367))
+-   docs(contributing): correct release step order ([f3f4c34](https://github.com/Fdawgs/doc-conversion-service/commit/f3f4c34))
+-   docs(readme): add snyk badge ([07e2491](https://github.com/Fdawgs/doc-conversion-service/commit/07e2491))
+-   docs(readme): correct pm2 statement ([e74b1b0](https://github.com/Fdawgs/doc-conversion-service/commit/e74b1b0))
+-   docs(readme): repoint travis-ci badge from .org to .com ([3d3d52f](https://github.com/Fdawgs/doc-conversion-service/commit/3d3d52f))
+
 ## <small>6.0.5 (2020-09-15)</small>
 
 -   build(deps-dev): bump dev dependencies ([e27835f](https://github.com/Fdawgs/doc-conversion-service/commit/e27835f))
