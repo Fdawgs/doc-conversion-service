@@ -54,6 +54,7 @@ module.exports = function tidyCssMiddleware() {
 				if (styleRule.selectorText.substring(0, 3) === 'div') {
 					styleRule.style.setProperty('page-break-inside', 'avoid');
 
+					// Replace default color
 					if (newBackgroundColor) {
 						styleRule.style.setProperty(
 							'background-color',
@@ -63,11 +64,13 @@ module.exports = function tidyCssMiddleware() {
 				}
 			});
 
+			// Remove HTML comment tags wrapping CSS, and redundant semi-colons
 			// eslint-disable-next-line no-param-reassign
 			element.innerHTML = styleObj
 				.toString()
-				.replace(/<!--/gi, '')
-				.replace(/;}/gi, '}');
+				.replace('<!--', '')
+				.replace('-->', '')
+				.replace(';}', '}');
 
 			styleParseCount += 1;
 		});
