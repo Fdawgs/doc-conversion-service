@@ -9,4 +9,4 @@ services:
         environment:
             POPPLER_BINARY_PATH: '/usr/bin/'
         ports:
-            - ${PORT:-3000}:${PORT:-3000}
+            - 127.0.0.1:${PORT:-3000}:${PORT:-3000}
