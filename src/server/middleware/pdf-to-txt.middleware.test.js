@@ -29,21 +29,21 @@ describe('PDF-to-TXT conversion middleware', () => {
 	if (platform === 'win32') {
 		test('Should convert PDF file to TXT and place in specified directory', async () => {
 			const middleware = Middleware(modServerConfig.routes.txt.poppler);
-			const req = {
+			const req = httpMocks.createRequest({
 				body: fs.readFileSync(
 					'./test_files/pdf_1.3_NHS_Constitution.pdf'
 				),
 				headers: {
 					'content-type': 'application/pdf'
 				}
-			};
+			});
 			const res = httpMocks.createResponse({ locals: { results: {} } });
 			const next = jest.fn();
 
 			await middleware(req, res, next);
 
-			expect(typeof req.body).toBe('string');
-			expect(isHtml(req.body)).toBe(false);
+			expect(typeof res.locals.body).toBe('string');
+			expect(isHtml(res.locals.body)).toBe(false);
 			expect(typeof res.locals.doclocation).toBe('object');
 			expect(next).toHaveBeenCalledTimes(1);
 			expect(next.mock.calls[0][0]).toBeUndefined();
@@ -55,17 +55,17 @@ describe('PDF-to-TXT conversion middleware', () => {
 
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware();
-		const req = {
-			body: undefined,
+		const req = httpMocks.createRequest({
 			headers: {
 				'content-type': 'application/pdf'
 			}
-		};
+		});
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
 
+		expect(res.locals.body).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(

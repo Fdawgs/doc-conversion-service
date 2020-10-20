@@ -15,7 +15,9 @@ const { v4 } = require('uuid');
 module.exports = function pdfToTxtMiddleware(config = {}) {
 	return async (req, res, next) => {
 		try {
-			if (req.body === undefined) {
+			// `pdfToText` Poppler function still attempts to parse empty bodies/input and produces results
+			// so catch them here
+			if (req.body === undefined || Object.keys(req.body).length === 0) {
 				throw new Error();
 			}
 			// Define any default settings the middleware should have to get up and running
@@ -50,7 +52,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 
 			const poppler = new Poppler(this.config.binPath);
 
-			req.body = await poppler.pdfToText(query, tempPdfFile);
+			res.locals.body = await poppler.pdfToText(query, tempPdfFile);
 
 			res.locals.doclocation = {
 				directory: this.config.tempDirectory,

@@ -128,7 +128,7 @@ module.exports = function txtRoute(config) {
 				`${res.locals.doclocation.directory}/${res.locals.doclocation.id}*`
 			);
 
-			res.send(req.body);
+			res.send(res.locals.body);
 		}
 	);
 

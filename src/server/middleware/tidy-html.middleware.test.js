@@ -14,18 +14,21 @@ describe('Htmltidy2 conversion middleware', () => {
 
 	test('Should tidy HTML file', async () => {
 		const middleware = Middleware(serverConfig.routes.html.htmltidy);
-		const req = {
-			body: fs.readFileSync(
-				'./test_files/tester_bullet_issues-html.html',
-				{ encoding: 'UTF-8' }
-			)
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const req = httpMocks.createRequest();
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync(
+					'./test_files/tester_bullet_issues-html.html',
+					{ encoding: 'UTF-8' }
+				),
+				results: {}
+			}
+		});
 		const next = jest.fn();
 
 		await middleware(req, res, next);
 
-		expect(typeof req.body).toBe('string');
+		expect(typeof res.locals.body).toBe('string');
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
@@ -34,13 +37,16 @@ describe('Htmltidy2 conversion middleware', () => {
 		const modServerConfig = cloneDeep(serverConfig);
 		modServerConfig.routes.html.htmltidy.notvalid = 1;
 		const middleware = Middleware(modServerConfig);
-		const req = {
-			body: fs.readFileSync(
-				'./test_files/tester_bullet_issues-html.html',
-				{ encoding: 'UTF-8' }
-			)
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const req = httpMocks.createRequest();
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync(
+					'./test_files/tester_bullet_issues-html.html',
+					{ encoding: 'UTF-8' }
+				),
+				results: {}
+			}
+		});
 		const next = jest.fn();
 
 		await middleware(req, res, next);

@@ -70,7 +70,7 @@ module.exports = function rtfToHtmlMiddleware() {
 	return async (req, res, next) => {
 		if (req.headers['content-type'] === 'application/rtf') {
 			try {
-				req.body = await rtfJs(req.body);
+				res.locals.body = await rtfJs(req.body);
 				next();
 			} catch (err) {
 				res.status(400);

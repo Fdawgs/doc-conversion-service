@@ -12,23 +12,28 @@ describe('Embed HTML Images middleware', () => {
 
 	test('Should embed images into HTML', () => {
 		const middleware = Middleware('./test_files/');
-		const req = {
-			body: fs.readFileSync(
-				'./test_files/tester_bullet_issues-html.html',
-				{ encoding: 'UTF-8' }
-			),
+		const req = httpMocks.createRequest({
 			query: {
 				removeAlt: true
 			}
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
+		});
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync(
+					'./test_files/tester_bullet_issues-html.html',
+					{ encoding: 'UTF-8' }
+				),
+				results: {}
+			}
+		});
 		const next = jest.fn();
 
 		middleware(req, res, next);
 
-		expect(/alt=""/gm.exec(req.body)).not.toBeNull();
-		expect(isHtml(req.body)).toBe(true);
+		expect(/alt=""/gm.exec(res.locals.body)).not.toBeNull();
+		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
+			body: expect.any(String),
 			results: { embedded_images: 'Fixed' }
 		});
 		expect(next).toHaveBeenCalledTimes(1);
@@ -37,18 +42,22 @@ describe('Embed HTML Images middleware', () => {
 
 	test('Should flag file as passed if no issues found', () => {
 		const middleware = Middleware('./test_files/');
-		const req = {
-			body: fs.readFileSync('./test_files/empty-test.html', {
-				encoding: 'UTF-8'
-			})
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const req = httpMocks.createRequest();
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync('./test_files/empty-test.html', {
+					encoding: 'UTF-8'
+				}),
+				results: {}
+			}
+		});
 		const next = jest.fn();
 
 		middleware(req, res, next);
 
-		expect(isHtml(req.body)).toBe(true);
+		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
+			body: expect.any(String),
 			results: { embedded_images: 'Passed' }
 		});
 		expect(next).toHaveBeenCalledTimes(1);
@@ -57,19 +66,22 @@ describe('Embed HTML Images middleware', () => {
 
 	test('Should build res.locals.results if not defined', () => {
 		const middleware = Middleware('./test_files/');
-		const req = {
-			body: fs.readFileSync(
-				'./test_files/tester_bullet_issues-html.html',
-				{ encoding: 'UTF-8' }
-			)
-		};
-		const res = httpMocks.createResponse();
+		const req = httpMocks.createRequest();
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync(
+					'./test_files/tester_bullet_issues-html.html',
+					{ encoding: 'UTF-8' }
+				)
+			}
+		});
 		const next = jest.fn();
 
 		middleware(req, res, next);
 
-		expect(isHtml(req.body)).toBe(true);
+		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
+			body: expect.any(String),
 			results: { embedded_images: 'Fixed' }
 		});
 		expect(next).toHaveBeenCalledTimes(1);
@@ -78,18 +90,21 @@ describe('Embed HTML Images middleware', () => {
 
 	test('Should pass an error to next if temp directory not defined', () => {
 		const middleware = Middleware();
-		const req = {
-			body: fs.readFileSync(
-				'./test_files/tester_bullet_issues-html.html',
-				{ encoding: 'UTF-8' }
-			)
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const req = httpMocks.createRequest();
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync(
+					'./test_files/tester_bullet_issues-html.html',
+					{ encoding: 'UTF-8' }
+				),
+				results: {}
+			}
+		});
 		const next = jest.fn();
 
 		middleware(req, res, next);
 
-		expect(isHtml(req.body)).toBe(true);
+		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals.results.embedded_images).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
@@ -100,9 +115,7 @@ describe('Embed HTML Images middleware', () => {
 
 	test('Should pass an error to next if temp directory missing', async () => {
 		const middleware = Middleware();
-		const req = {
-			body: undefined
-		};
+		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 

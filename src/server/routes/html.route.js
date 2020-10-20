@@ -135,7 +135,7 @@ module.exports = function htmlRoute(config) {
 				);
 			}
 
-			res.send(`<!DOCTYPE html>${req.body}`);
+			res.send(`<!DOCTYPE html>${res.locals.body}`);
 		}
 	);
 
