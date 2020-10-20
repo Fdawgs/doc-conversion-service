@@ -13,12 +13,12 @@ describe('RTF-to-HTML conversion middleware', () => {
 	// eslint-disable-next-line jest/no-commented-out-tests
 	test('Should convert RTF file to HTML', async () => {
 		const middleware = Middleware();
-		const req = {
+		const req = httpMocks.createRequest({
 			body: fs.readFileSync('./test_files/test-rtf.rtf'),
 			headers: {
 				'content-type': 'application/rtf'
 			}
-		};
+		});
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
@@ -32,12 +32,12 @@ describe('RTF-to-HTML conversion middleware', () => {
 
 	test('Should pass an error to next if RTF file missing', async () => {
 		const middleware = Middleware();
-		const req = {
+		const req = httpMocks.createRequest({
 			body: undefined,
 			headers: {
 				'content-type': 'application/rtf'
 			}
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 

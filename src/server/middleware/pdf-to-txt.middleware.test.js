@@ -29,14 +29,14 @@ describe('PDF-to-TXT conversion middleware', () => {
 	if (platform === 'win32') {
 		test('Should convert PDF file to TXT and place in specified directory', async () => {
 			const middleware = Middleware(modServerConfig.routes.txt.poppler);
-			const req = {
+			const req = httpMocks.createRequest({
 				body: fs.readFileSync(
 					'./test_files/pdf_1.3_NHS_Constitution.pdf'
 				),
 				headers: {
 					'content-type': 'application/pdf'
 				}
-			};
+			});
 			const res = httpMocks.createResponse({ locals: { results: {} } });
 			const next = jest.fn();
 
@@ -55,12 +55,12 @@ describe('PDF-to-TXT conversion middleware', () => {
 
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware();
-		const req = {
+		const req = httpMocks.createRequest({
 			body: undefined,
 			headers: {
 				'content-type': 'application/pdf'
 			}
-		};
+		});
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 

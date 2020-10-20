@@ -12,11 +12,11 @@ describe('Embed HTML Images middleware', () => {
 
 	test('Should embed images into HTML', () => {
 		const middleware = Middleware('./test_files/');
-		const req = {
+		const req = httpMocks.createRequest({
 			query: {
 				removeAlt: true
 			}
-		};
+		});
 		const res = httpMocks.createResponse({
 			locals: {
 				body: fs.readFileSync(
@@ -45,10 +45,9 @@ describe('Embed HTML Images middleware', () => {
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse({
 			locals: {
-				body: fs.readFileSync(
-					'./test_files/empty-test.html',
-					{ encoding: 'UTF-8' }
-				),
+				body: fs.readFileSync('./test_files/empty-test.html', {
+					encoding: 'UTF-8'
+				}),
 				results: {}
 			}
 		});

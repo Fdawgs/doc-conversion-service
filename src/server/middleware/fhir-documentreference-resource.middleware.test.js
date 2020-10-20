@@ -28,11 +28,11 @@ describe('FHIR DocumentReference resource middleware', () => {
 	test('Should return FHIR resource if res.locals.resource object already present', () => {
 		const middleware = Middleware();
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'PUT',
 			body: Object.assign(query, args),
 			files
-		};
+		});
 		const res = httpMocks.createResponse({ locals: { resource: {} } });
 		const next = jest.fn();
 
@@ -65,11 +65,11 @@ describe('FHIR DocumentReference resource middleware', () => {
 	test('Should return FHIR resource and create own res.locals.resource object', () => {
 		const middleware = Middleware();
 		const query = {};
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'PUT',
 			body: Object.assign(query, args),
 			files
-		};
+		});
 		const res = httpMocks.createResponse();
 		const next = jest.fn();
 
@@ -101,10 +101,10 @@ describe('FHIR DocumentReference resource middleware', () => {
 
 	test('Should return FHIR resource if id argument not present in body', () => {
 		const middleware = Middleware();
-		const req = {
+		const req = httpMocks.createRequest({
 			method: 'PUT',
 			files
-		};
+		});
 		const res = httpMocks.createResponse({ locals: { resource: {} } });
 		const next = jest.fn();
 
