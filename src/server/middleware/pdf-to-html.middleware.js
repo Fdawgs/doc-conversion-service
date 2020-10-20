@@ -101,7 +101,7 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 					metas[index].parentNode.removeChild(metas[index]);
 				}
 
-				req.body = dom.window.document.documentElement.outerHTML;
+				res.locals.body = dom.window.document.documentElement.outerHTML;
 
 				res.locals.doclocation = {
 					directory: this.config.tempDirectory,

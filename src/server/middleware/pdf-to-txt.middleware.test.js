@@ -42,8 +42,8 @@ describe('PDF-to-TXT conversion middleware', () => {
 
 			await middleware(req, res, next);
 
-			expect(typeof req.body).toBe('string');
-			expect(isHtml(req.body)).toBe(false);
+			expect(typeof res.locals.body).toBe('string');
+			expect(isHtml(res.locals.body)).toBe(false);
 			expect(typeof res.locals.doclocation).toBe('object');
 			expect(next).toHaveBeenCalledTimes(1);
 			expect(next.mock.calls[0][0]).toBeUndefined();

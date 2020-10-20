@@ -16,7 +16,7 @@ const { JSDOM } = require('jsdom');
  */
 module.exports = function tidyCssMiddleware() {
 	return (req, res, next) => {
-		const dom = new JSDOM(req.body);
+		const dom = new JSDOM(res.locals.body);
 		const styles = dom.window.document.querySelectorAll('style');
 
 		let newFonts;
@@ -81,7 +81,7 @@ module.exports = function tidyCssMiddleware() {
 			res.locals.results.clean_css = 'Passed';
 		}
 
-		req.body = dom.window.document.documentElement.outerHTML;
+		res.locals.body = dom.window.document.documentElement.outerHTML;
 		next();
 	};
 };

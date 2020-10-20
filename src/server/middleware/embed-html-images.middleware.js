@@ -4,7 +4,7 @@ const path = require('path');
 
 /**
  * @author Frazer Smith
- * @description Embeds images into HTML in `req.body` after encoding with Base64 to allow for
+ * @description Embeds images into HTML in `res.locals.body` after encoding with Base64 to allow for
  * images to be transmitted via MESH.
  *
  * Will remove alt attribute from img tags if optional `removeAlt` query
@@ -18,7 +18,7 @@ const path = require('path');
 module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 	return (req, res, next) => {
 		if (fs.existsSync(tempDirectory)) {
-			const dom = new JSDOM(req.body);
+			const dom = new JSDOM(res.locals.body);
 			const images = dom.window.document.querySelectorAll('img');
 
 			// Create results object for conversion results
@@ -50,7 +50,7 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 			} else {
 				res.locals.results.embedded_images = 'Passed';
 			}
-			req.body = dom.window.document.documentElement.outerHTML;
+			res.locals.body = dom.window.document.documentElement.outerHTML;
 			next();
 		} else {
 			res.status(400);

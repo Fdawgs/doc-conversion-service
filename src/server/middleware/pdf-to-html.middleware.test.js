@@ -43,8 +43,8 @@ describe('PDF-to-HTML conversion middleware', () => {
 
 			await middleware(req, res, next);
 
-			expect(typeof req.body).toBe('string');
-			expect(isHtml(req.body)).toBe(true);
+			expect(typeof res.locals.body).toBe('string');
+			expect(isHtml(res.locals.body)).toBe(true);
 			expect(typeof res.locals.doclocation).toBe('object');
 			expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 			expect(next).toHaveBeenCalledTimes(1);
@@ -66,8 +66,8 @@ describe('PDF-to-HTML conversion middleware', () => {
 
 			await middleware(req, res, next);
 
-			expect(typeof req.body).toBe('string');
-			expect(isHtml(req.body)).toBe(true);
+			expect(typeof res.locals.body).toBe('string');
+			expect(isHtml(res.locals.body)).toBe(true);
 			expect(typeof res.locals.doclocation).toBe('object');
 			expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 			expect(next).toHaveBeenCalledTimes(1);

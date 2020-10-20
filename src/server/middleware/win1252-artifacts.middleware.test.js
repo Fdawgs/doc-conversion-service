@@ -13,39 +13,46 @@ describe('Win 1252 Artifact middleware', () => {
 
 	test('Should remove win1252 artifacts', () => {
 		const middleware = Middleware();
-		const req = {
-			body: fs.readFileSync(
-				'./test_files/tester_bullet_issues-html.html',
-				{ encoding: 'UTF-8' }
-			)
-		};
-		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const req = httpMocks.createRequest();
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync(
+					'./test_files/tester_bullet_issues-html.html',
+					{ encoding: 'UTF-8' }
+				),
+				results: {}
+			}
+		});
 		const next = jest.fn();
 
 		middleware(req, res, next);
 
 		expect(res.locals).toMatchObject({
+			body: expect.any(String),
 			results: { windows_1252: 'Fixed' }
 		});
-		expect(req.body).not.toEqual(expect.stringMatching(artifacts));
+		expect(res.locals.body).not.toEqual(expect.stringMatching(artifacts));
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
 	test('Should build res.locals.results if not defined', () => {
 		const middleware = Middleware();
-		const req = {
-			body: fs.readFileSync(
-				'./test_files/tester_bullet_issues-html.html',
-				{ encoding: 'UTF-8' }
-			)
-		};
-		const res = httpMocks.createResponse();
+		const req = httpMocks.createRequest();
+		const res = httpMocks.createResponse({
+			locals: {
+				body: fs.readFileSync(
+					'./test_files/tester_bullet_issues-html.html',
+					{ encoding: 'UTF-8' }
+				)
+			}
+		});
 		const next = jest.fn();
 
 		middleware(req, res, next);
 
 		expect(res.locals).toMatchObject({
+			body: expect.any(String),
 			results: { windows_1252: 'Fixed' }
 		});
 		expect(next).toHaveBeenCalledTimes(1);
