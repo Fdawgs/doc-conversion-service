@@ -106,6 +106,7 @@ describe('FHIR Binary resource middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(res.locals.resource).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe('File missing from request');

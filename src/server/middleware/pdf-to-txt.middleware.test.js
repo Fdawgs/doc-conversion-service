@@ -56,7 +56,6 @@ describe('PDF-to-TXT conversion middleware', () => {
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware();
 		const req = httpMocks.createRequest({
-			body: undefined,
 			headers: {
 				'content-type': 'application/pdf'
 			}
@@ -66,6 +65,7 @@ describe('PDF-to-TXT conversion middleware', () => {
 
 		await middleware(req, res, next);
 
+		expect(res.locals.body).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
