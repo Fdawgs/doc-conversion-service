@@ -9,10 +9,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sanitize = require('sanitize-middleware');
 const pdfToTxt = require('../middleware/pdf-to-txt.middleware');
+const validateFile = require('../middleware/validate-file-type.middleware');
 
 // Import utils
 const fileRemover = require('../utils/file-remover.utils');
 
+const acceptedTypes = ['application/pdf'];
 const router = new Router();
 
 /**
@@ -119,9 +121,10 @@ module.exports = function txtRoute(config) {
 
 	router.route('/').post(
 		bodyParser.raw({
-			type: ['application/pdf'],
+			type: acceptedTypes,
 			limit: '20mb'
 		}),
+		validateFile(acceptedTypes),
 		pdfToTxt(config.poppler),
 		(req, res) => {
 			fileRemover(
