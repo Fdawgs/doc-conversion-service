@@ -14,10 +14,12 @@ const pdfToHtml = require('../middleware/pdf-to-html.middleware');
 const rtfToHtml = require('../middleware/rtf-to-html.middleware');
 const tidyCss = require('../middleware/tidy-css.middleware');
 const tidyHtml = require('../middleware/tidy-html.middleware');
+const validateFile = require('../middleware/validate-file-type.middleware');
 
 // Import utils
 const fileRemover = require('../utils/file-remover.utils');
 
+const acceptedTypes = ['application/pdf', 'application/rtf'];
 const router = new Router();
 
 /**
@@ -119,9 +121,10 @@ module.exports = function htmlRoute(config) {
 
 	router.route('/').post(
 		bodyParser.raw({
-			type: ['application/pdf', 'application/rtf'],
+			type: acceptedTypes,
 			limit: '20mb'
 		}),
+		validateFile(acceptedTypes),
 		rtfToHtml(),
 		pdfToHtml(config.poppler),
 		tidyHtml(config.htmltidy),

@@ -33,7 +33,6 @@ describe('RTF-to-HTML conversion middleware', () => {
 	test('Should pass an error to next if RTF file missing', async () => {
 		const middleware = Middleware();
 		const req = httpMocks.createRequest({
-			body: undefined,
 			headers: {
 				'content-type': 'application/rtf'
 			}

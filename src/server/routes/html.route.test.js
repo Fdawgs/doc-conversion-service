@@ -59,9 +59,7 @@ describe('HTML conversion route', () => {
 			.set('Content-Type', 'application/pdf')
 			.catch((err) => {
 				expect(err.status).toBe(400);
-				expect(err.response.error.text).toMatch(
-					'Failed to convert PDF file to HTML'
-				);
+				expect(err.response.error.text).toMatch('File type not accepted');
 			});
 	});
 });
