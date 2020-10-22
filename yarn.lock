@@ -1354,14 +1354,6 @@ co@^4.6.0:
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   integrity sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=
 
-codepage@^1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/codepage/-/codepage-1.14.0.tgz#8cbe25481323559d7d307571b0fff91e7a1d2f99"
-  integrity sha1-jL4lSBMjVZ19MHVxsP/5HnodL5k=
-  dependencies:
-    commander "~2.14.1"
-    exit-on-epipe "~1.0.1"
-
 collect-v8-coverage@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/collect-v8-coverage/-/collect-v8-coverage-1.0.1.tgz#cc2c8e94fc18bbdffe64d6534570c8a673b27f59"
@@ -1444,11 +1436,6 @@ commander@^2.11.0, commander@^2.20.0, commander@^2.20.3:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
-
-commander@~2.14.1:
-  version "2.14.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
-  integrity sha512-+YR16o3rK53SmWHU3rEM3tPAh2rwb1yPcQX5irVn7mb0gXbwuCCrnkbV5+PBfETdfg1vui07nM6PCG1zndcjQw==
 
 comment-parser@^0.7.6:
   version "0.7.6"
@@ -2441,11 +2428,6 @@ execa@^4.0.0:
     onetime "^5.1.0"
     signal-exit "^3.0.2"
     strip-final-newline "^2.0.0"
-
-exit-on-epipe@~1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/exit-on-epipe/-/exit-on-epipe-1.0.1.tgz#0bdd92e87d5285d267daa8171d0eb06159689692"
-  integrity sha512-h2z5mrROTxce56S+pnvAV890uu7ls7f1kEvVGJbw1OlFH3/mlJ5bkXu0KRyW94v37zzHPiUd55iLn3DA7TjWpw==
 
 exit@^0.1.2:
   version "0.1.2"
@@ -4737,6 +4719,11 @@ node-poppler@^1.8.4:
   resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.8.4.tgz#a8cf046d7e331e69b6ffcf1bf41f8be4fd2a20a0"
   integrity sha512-iWfA+H7XbswQKJCpperncDG23mFdxo+51jDXykD1IH6yDHG39d7t4qZt5DZE/oHJis210xCrm1E9Ix/NzlpeNA==
 
+node-unrtf@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/node-unrtf/-/node-unrtf-0.0.2.tgz#d8717bfe55f6f01981a79b5f2160d3b6b7d90b89"
+  integrity sha512-N/VsH98ONzU3OLSX9Nz/FOKgPEuHiFK4NiLOX2Yuft7G0PbkMh1QhWZR8hfXo5y5VqhOiMS1gYq/iMQmPg/G1w==
+
 nodemon@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-2.0.4.tgz#55b09319eb488d6394aa9818148c0c2d1c04c416"
@@ -5725,13 +5712,6 @@ rsvp@^4.8.4:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
-
-rtf.js@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/rtf.js/-/rtf.js-3.0.1.tgz#2b05de7acf40ec07074244a41c00c9b994b3bcb9"
-  integrity sha512-o6zCoDGDI7+6kM1QQAzLbnIn48Mfquzpxe+K0FFDpuGGwYl4gW/PiQh1Ehqql5kChKXfNODr+fv39X416YIZvw==
-  dependencies:
-    codepage "^1.14.0"
 
 run-parallel@^1.1.9:
   version "1.1.9"

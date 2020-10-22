@@ -7,7 +7,7 @@ ENV NODE_ENV=${NODE_ENV}
 RUN apt-get -q update && \
     apt-get -qy dist-upgrade && \
     apt-get clean && \
-    apt-get install poppler-data poppler-utils -y
+    apt-get install poppler-data poppler-utils unrtf -y
 
 # Create unprivileged user to run app and prevent
 # privilege escalation attacks
