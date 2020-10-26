@@ -33,7 +33,7 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 					await fs.mkdir(this.config.tempDirectory);
 				}
 
-				// Build temporary files for Poppler and following middleware to read from
+				// Build temporary files for UnRTF and following middleware to read from
 				const id = v4();
 				const tempRtfFile = `${this.config.tempDirectory}${id}.rtf`;
 
