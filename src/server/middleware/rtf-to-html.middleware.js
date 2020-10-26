@@ -1,76 +1,58 @@
-/* eslint-disable no-param-reassign */
-const { JSDOM, VirtualConsole } = require('jsdom');
-
-/**
- * @author Tom Zöhner
- * @author Frazer Smith
- * @description Converts RTF files to HTML.
- * Will not process passed file if content-type header not set to `application/rtf`.
- *
- * Adapted from Tom Zöhner's example in rtf.js repo to be asynchronous.
- * @param {ArrayBuffer} rtf - Binary RTF file.
- * @returns {Promise<string|Error>} Promise of HTML string on resolve, or Error object on rejection.
- */
-function rtfJs(rtf) {
-	return new Promise((resolve, reject) => {
-		const virtualConsole = new VirtualConsole();
-		virtualConsole.sendTo(console);
-
-		// eslint-disable-next-line no-new
-		new JSDOM(
-			`
-    <script src="../../../node_modules/rtf.js/dist/WMFJS.bundle.js"></script>
-    <script src="../../../node_modules/rtf.js/dist/EMFJS.bundle.js"></script>
-    <script src="../../../node_modules/rtf.js/dist/RTFJS.bundle.js"></script>
-
-	<script>
-        RTFJS.loggingEnabled(false);
-        WMFJS.loggingEnabled(false);
-        EMFJS.loggingEnabled(false);
-
-        try {
-            const doc = new RTFJS.Document(rtfFile);
-
-            doc.render().then(function(htmlElements) {
-                const div = document.createElement("div");
-                div.append(...htmlElements);
-
-                window.done(div.innerHTML);
-            }).catch(err => window.onerror(err))
-        } catch (err){
-            window.onerror(err)
-        }
-    </script>
-    `,
-			{
-				resources: 'usable',
-				runScripts: 'dangerously',
-				url: `file://${__dirname}/`,
-				virtualConsole,
-				beforeParse(window) {
-					window.rtfFile = rtf;
-					window.done = (html) => {
-						resolve(html);
-					};
-					window.onerror = (error) => {
-						reject(new Error(error));
-					};
-				}
-			}
-		);
-	});
-}
+const fs = require('fs').promises;
+const path = require('path');
+const { UnRTF } = require('node-unrtf');
+const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
- * @description Uses rtf.js to convert RTF file in `req.body` to HTML.
+ * @description Uses UnRTF to convert PDF file in `req.body` to TXT.
+ * @param {object=} config - UnRTF conversion configuration values.
+ * @param {string=} config.binPath - Path of UnRTF binary.
+ * @param {string=} config.tempDirectory - directory for temporarily storing
+ * files during conversion.
  * @returns {Function} Express middleware.
  */
-module.exports = function rtfToHtmlMiddleware() {
+module.exports = function rtfToHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
 		if (req.headers['content-type'] === 'application/rtf') {
 			try {
-				res.locals.body = await rtfJs(req.body);
+				// Define any default settings the middleware should have to get up and running
+				const defaultConfig = {
+					binPath: undefined,
+					unRtfOptions: {
+						noPictures: true,
+						outputHtml: true
+					},
+					tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
+				};
+				this.config = Object.assign(defaultConfig, config);
+
+				try {
+					await fs.access(this.config.tempDirectory);
+				} catch (err) {
+					await fs.mkdir(this.config.tempDirectory);
+				}
+
+				// Build temporary files for UnRTF and following middleware to read from
+				const id = v4();
+				const tempRtfFile = `${this.config.tempDirectory}${id}.rtf`;
+
+				await fs.writeFile(tempRtfFile, req.body);
+
+				const unrtf = new UnRTF(this.config.binPath);
+
+				const html = await unrtf.convert(
+					tempRtfFile,
+					this.config.pdfToHtmlOptions
+				);
+
+				res.locals.body = html;
+
+				res.locals.doclocation = {
+					directory: this.config.tempDirectory,
+					id,
+					rtf: tempRtfFile
+				};
 				next();
 			} catch (err) {
 				res.status(400);

@@ -125,18 +125,16 @@ module.exports = function htmlRoute(config) {
 			limit: '20mb'
 		}),
 		validateFile(acceptedTypes),
-		rtfToHtml(),
+		rtfToHtml(config.unrtf),
 		pdfToHtml(config.poppler),
 		tidyHtml(config.htmltidy),
 		fixWin1252Artifacts(),
 		embedHtmlImages(config.poppler.tempDirectory),
 		tidyCss(),
 		(req, res) => {
-			if (req.headers['content-type'] === 'application/pdf') {
-				fileRemover(
-					`${res.locals.doclocation.directory}/${res.locals.doclocation.id}*`
-				);
-			}
+			fileRemover(
+				`${res.locals.doclocation.directory}/${res.locals.doclocation.id}*`
+			);
 
 			res.send(`<!DOCTYPE html>${res.locals.body}`);
 		}
