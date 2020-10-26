@@ -42,8 +42,8 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 				const unrtf = new UnRTF(this.config.binPath);
 
 				const html = await unrtf.convert(
-					this.config.pdfToHtmlOptions,
-					tempRtfFile
+					tempRtfFile,
+					this.config.pdfToHtmlOptions
 				);
 
 				res.locals.body = html;
