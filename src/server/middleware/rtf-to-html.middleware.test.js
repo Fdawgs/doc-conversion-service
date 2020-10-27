@@ -37,7 +37,7 @@ describe('RTF-to-HTML conversion middleware', () => {
 				'content-type': 'application/rtf'
 			}
 		});
-		const res = httpMocks.createResponse();
+		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
 
 		await middleware(req, res, next);
