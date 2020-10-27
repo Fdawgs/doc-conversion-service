@@ -51,7 +51,7 @@ jobs:
           node_js: lts/*
           os: osx
           script:
-              - brew install poppler unrtf
+              - brew install unrtf
               - cp .env.template .env.test
               - POPPLER_BINARY_PATH='/usr/local/bin' UNRTF_BINARY_PATH='/usr/local/bin' yarn test
         - stage: test
