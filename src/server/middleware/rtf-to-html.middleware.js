@@ -16,6 +16,14 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
 		if (req.headers['content-type'] === 'application/rtf') {
 			try {
+				// `convert` node-unrtf function still attempts to parse empty bodies/input and produces results
+				// so catch them here
+				if (
+					req.body === undefined ||
+					Object.keys(req.body).length === 0
+				) {
+					throw new Error();
+				}
 				// Define any default settings the middleware should have to get up and running
 				const defaultConfig = {
 					binPath: undefined,

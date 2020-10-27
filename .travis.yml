@@ -14,10 +14,9 @@ node_js:
 dist: focal
 
 os:
-    - osx
     - windows
 
-osx_image: xcode12
+osx_image: xcode12.2
 
 # See https://travis-ci.community/t/build-doesnt-finish-after-completing-tests/288/9
 env:
@@ -38,17 +37,23 @@ script:
 
 jobs:
     fast_finish: true
-    allow_failures:
-        - os: osx
     include:
         - stage: test
           name: linux deployment
           node_js: lts/*
           os: linux
           script:
-              - sudo apt-get -y install poppler-data poppler-utils
+              - sudo apt-get -y install poppler-data poppler-utils unrtf
               - cp .env.template .env.test
-              - POPPLER_BINARY_PATH='/usr/bin' yarn test
+              - POPPLER_BINARY_PATH='/usr/bin' UNRTF_BINARY_PATH='/usr/bin' yarn test
+        - stage: test
+          name: macos deployment
+          node_js: lts/*
+          os: osx
+          script:
+              - brew install unrtf
+              - cp .env.template .env.test
+              - POPPLER_BINARY_PATH='/usr/local/bin' UNRTF_BINARY_PATH='/usr/local/bin' yarn test
         - stage: test
           name: produce coverage
           node_js: lts/*
