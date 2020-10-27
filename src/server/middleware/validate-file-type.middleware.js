@@ -2,10 +2,10 @@ const fileType = require('file-type');
 
 /**
  * @author Frazer Smith
- * @param {Array=} acceptedMimeTypes - Array of accepted MIME types 
+ * @param {Array=} acceptedMimeTypes - Array of accepted MIME types
  * i.e. `['application/pdf', 'application/rtf']`.
- * @description Validate file type in `req.body`. 
- * The Content-Type header can be spoofed so is not trusted implicitly, 
+ * @description Validate file type in `req.body`.
+ * The Content-Type header can be spoofed so is not trusted implicitly,
  * this middleware provides an extra level of validation.
  * @returns {Function} Express middleware.
  */
