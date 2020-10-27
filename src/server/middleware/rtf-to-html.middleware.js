@@ -49,12 +49,10 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 
 				const unrtf = new UnRTF(this.config.binPath);
 
-				const html = await unrtf.convert(
+				res.locals.body = await unrtf.convert(
 					tempRtfFile,
-					this.config.pdfToHtmlOptions
+					this.config.unRtfOptions
 				);
-
-				res.locals.body = html;
 
 				res.locals.doclocation = {
 					directory: this.config.tempDirectory,
