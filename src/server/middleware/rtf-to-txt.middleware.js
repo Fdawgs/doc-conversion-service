@@ -5,7 +5,7 @@ const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
- * @description Uses UnRTF to convert PDF file in `req.body` to TXT.
+ * @description Uses UnRTF to convert RTF file in `req.body` to TXT.
  * @param {object=} config - UnRTF conversion configuration values.
  * @param {string=} config.binPath - Path of UnRTF binary.
  * @param {string=} config.tempDirectory - directory for temporarily storing
