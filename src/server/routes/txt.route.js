@@ -105,7 +105,7 @@ const router = new Router();
 
 /**
  * @author Frazer Smith
- * @description Handles routing to convert a request with a PDF file as its body into TXT.
+ * @description Handles routing to convert a request with a PDF or RTFs file as its body into TXT.
  * @param {object} config - Object containing route config objects.
  * @param {object} config.cors - CORS configuration values.
  * @param {object=} config.poppler - Poppler conversion configuration values.
