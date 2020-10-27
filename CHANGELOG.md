@@ -1,3 +1,15 @@
+## 6.2.0 (2020-10-27)
+
+-   build(deps-dev): bump dev dependencies ([37194d1](https://github.com/Fdawgs/doc-conversion-service/commit/37194d1))
+-   fix(middleware): catch empty bodies before unrtf parses them ([171cfd7](https://github.com/Fdawgs/doc-conversion-service/commit/171cfd7))
+-   test(middleware): increase coverage ([e9c4f42](https://github.com/Fdawgs/doc-conversion-service/commit/e9c4f42))
+-   test(middleware): remove unused variables ([42266be](https://github.com/Fdawgs/doc-conversion-service/commit/42266be))
+-   test(routes): remove temp directory after all tests ran ([a072ffa](https://github.com/Fdawgs/doc-conversion-service/commit/a072ffa))
+-   docs: correct even more jsdoc tags to reference rtf use ([cd2a92c](https://github.com/Fdawgs/doc-conversion-service/commit/cd2a92c))
+-   docs: correct jsdoc tags to reference rtf use ([2e29317](https://github.com/Fdawgs/doc-conversion-service/commit/2e29317))
+-   refactor(middleware): assign result of conversion to locals var directly ([bc59367](https://github.com/Fdawgs/doc-conversion-service/commit/bc59367))
+-   feat(routes): add rtf-to-txt functionality to txt route ([9d94d52](https://github.com/Fdawgs/doc-conversion-service/commit/9d94d52))
+
 ## 6.1.0 (2020-10-27)
 
 -   build: create codeql-analysis.yml workflow file ([58cfd6d](https://github.com/Fdawgs/doc-conversion-service/commit/58cfd6d))
