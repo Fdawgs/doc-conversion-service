@@ -2,17 +2,17 @@ const cloneDeep = require('lodash/cloneDeep');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const Middleware = require('./rtf-to-html.middleware');
+const Middleware = require('./rtf-to-txt.middleware');
 
 const { serverConfig } = require('../../config');
 
-describe('RTF-to-HTML conversion middleware', () => {
+describe('RTF-to-TXT conversion middleware', () => {
 	const modServerConfig = cloneDeep(serverConfig);
-	modServerConfig.routes.html.unrtf.tempDirectory = './src/server/temp3/';
+	modServerConfig.routes.txt.unrtf.tempDirectory = './src/server/temp4/';
 
 	afterAll(() => {
 		fs.rmdir(
-			modServerConfig.routes.html.unrtf.tempDirectory,
+			modServerConfig.routes.txt.unrtf.tempDirectory,
 			{ recursive: true },
 			() => {}
 		);
@@ -24,8 +24,8 @@ describe('RTF-to-HTML conversion middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should convert RTF file to HTML and place in specified directory', async () => {
-		const middleware = Middleware(modServerConfig.routes.html.unrtf);
+	test('Should convert PDF file to TXT and place in specified directory', async () => {
+		const middleware = Middleware(modServerConfig.routes.txt.unrtf);
 		const req = httpMocks.createRequest({
 			body: fs.readFileSync('./test_files/test-rtf.rtf'),
 			headers: {
@@ -38,18 +38,17 @@ describe('RTF-to-HTML conversion middleware', () => {
 		await middleware(req, res, next);
 
 		expect(typeof res.locals.body).toBe('string');
-		expect(isHtml(res.locals.body)).toBe(true);
+		expect(isHtml(res.locals.body)).toBe(false);
 		expect(typeof res.locals.doclocation).toBe('object');
-		expect(fs.existsSync(res.locals.doclocation.rtf)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 		expect(
-			fs.existsSync(modServerConfig.routes.html.unrtf.tempDirectory)
+			fs.existsSync(modServerConfig.routes.txt.unrtf.tempDirectory)
 		).toBe(true);
 	});
 
 	test('Should pass an error to next if RTF file missing', async () => {
-		const middleware = Middleware(modServerConfig.routes.html.unrtf);
+		const middleware = Middleware(modServerConfig.routes.txt.unrtf);
 		const req = httpMocks.createRequest({
 			headers: {
 				'content-type': 'application/rtf'
@@ -63,7 +62,7 @@ describe('RTF-to-HTML conversion middleware', () => {
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Failed to convert RTF file to HTML'
+			'Failed to convert RTF file to TXT'
 		);
 	});
 });

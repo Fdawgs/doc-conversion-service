@@ -104,7 +104,7 @@ const router = new Router();
 
 /**
  * @author Frazer Smith
- * @description Handles routing to convert a request with a PDF file as its body into HTML.
+ * @description Handles routing to convert a request with a PDF or RTF file as its body into HTML.
  * @param {object} config - Object containing route config objects.
  * @param {object} config.cors - CORS configuration values.
  * @param {object=} config.htmltidy - HTMLTidy2 configuration values.

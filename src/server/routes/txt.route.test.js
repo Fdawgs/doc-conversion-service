@@ -26,6 +26,14 @@ describe('TXT conversion route', () => {
 		server.shutdown();
 	});
 
+	afterAll(() => {
+		fs.rmdir(
+			modServerConfig.routes.txt.poppler.tempDirectory,
+			{ recursive: true },
+			() => {}
+		);
+	});
+
 	test('Should return PDF file converted to TXT', async () => {
 		const res = await request
 			.post(route)
@@ -33,6 +41,19 @@ describe('TXT conversion route', () => {
 			.set('Accept', '*/*')
 			.set('Content-Type', 'application/pdf')
 			.send(fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'));
+
+		expect(res.status).toBe(200);
+		expect(typeof res.text).toBe('string');
+		expect(isHtml(res.text)).toBe(false);
+	});
+
+	test('Should return RTF file converted to TXT', async () => {
+		const res = await request
+			.post(route)
+			.set('Authorization', 'Bearer Jimmini')
+			.set('Accept', '*/*')
+			.set('Content-Type', 'application/rtf')
+			.send(fs.readFileSync('./test_files/test-rtf.rtf'));
 
 		expect(res.status).toBe(200);
 		expect(typeof res.text).toBe('string');

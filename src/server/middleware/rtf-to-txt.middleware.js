@@ -5,7 +5,7 @@ const { v4 } = require('uuid');
 
 /**
  * @author Frazer Smith
- * @description Uses UnRTF to convert RTF file in `req.body` to HTML.
+ * @description Uses UnRTF to convert RTF file in `req.body` to TXT.
  * @param {object=} config - UnRTF conversion configuration values.
  * @param {string=} config.binPath - Path of UnRTF binary.
  * @param {string=} config.tempDirectory - directory for temporarily storing
@@ -29,7 +29,7 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 					binPath: undefined,
 					unRtfOptions: {
 						noPictures: true,
-						outputHtml: true
+						outputText: true
 					},
 					tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
 				};
@@ -62,7 +62,7 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 				next();
 			} catch (err) {
 				res.status(400);
-				next(new Error('Failed to convert RTF file to HTML'));
+				next(new Error('Failed to convert RTF file to TXT'));
 			}
 		} else {
 			next();
