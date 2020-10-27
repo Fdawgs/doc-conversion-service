@@ -37,16 +37,15 @@ script:
 
 jobs:
     fast_finish: true
-    allow_failures:
-        - os: osx
     include:
         - stage: test
           name: linux deployment
           node_js: lts/*
           os: linux
           script:
-              - sudo apt-get -y install poppler-data poppler-utils
+              - sudo apt-get -y install poppler-data poppler-utils unrtf
               - cp .env.template .env.test
+              - POPPLER_BINARY_PATH='/usr/bin' UNRTF_BINARY_PATH='/usr/bin' yarn test
         - stage: test
         name: macos deployment
         node_js: lts/*
