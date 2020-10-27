@@ -2,10 +2,8 @@ const cloneDeep = require('lodash/cloneDeep');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const os = require('os');
 const Middleware = require('./pdf-to-html.middleware');
 
-const platform = os.platform();
 const { serverConfig } = require('../../config');
 
 describe('PDF-to-HTML conversion middleware', () => {
