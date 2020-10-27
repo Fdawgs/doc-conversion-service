@@ -8,6 +8,15 @@ const { serverConfig } = require('../../config');
 
 describe('RTF-to-HTML conversion middleware', () => {
 	const modServerConfig = cloneDeep(serverConfig);
+	modServerConfig.routes.html.unrtf.tempDirectory = './src/server/temp3/';
+
+	afterAll(() => {
+		fs.rmdir(
+			modServerConfig.routes.html.unrtf.tempDirectory,
+			{ recursive: true },
+			() => {}
+		);
+	});
 
 	test('Should return a middleware function', () => {
 		const middleware = Middleware();
@@ -15,7 +24,7 @@ describe('RTF-to-HTML conversion middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should convert RTF file to HTML', async () => {
+	test('Should convert RTF file to HTML and place in specified directory', async () => {
 		const middleware = Middleware(modServerConfig.routes.html.unrtf);
 		const req = httpMocks.createRequest({
 			body: fs.readFileSync('./test_files/test-rtf.rtf'),
@@ -30,8 +39,13 @@ describe('RTF-to-HTML conversion middleware', () => {
 
 		expect(typeof res.locals.body).toBe('string');
 		expect(isHtml(res.locals.body)).toBe(true);
+		expect(typeof res.locals.doclocation).toBe('object');
+		expect(fs.existsSync(res.locals.doclocation.rtf)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
+		expect(
+			fs.existsSync(modServerConfig.routes.html.unrtf.tempDirectory)
+		).toBe(true);
 	});
 
 	test('Should pass an error to next if RTF file missing', async () => {
