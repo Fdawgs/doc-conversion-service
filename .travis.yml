@@ -47,13 +47,13 @@ jobs:
               - cp .env.template .env.test
               - POPPLER_BINARY_PATH='/usr/bin' UNRTF_BINARY_PATH='/usr/bin' yarn test
         - stage: test
-        name: macos deployment
-        node_js: lts/*
-        os: osx
-        script:
-            - brew install poppler unrtf
-            - cp .env.template .env.test
-            - POPPLER_BINARY_PATH='/usr/local/bin' UNRTF_BINARY_PATH='/usr/local/bin' yarn test
+          name: macos deployment
+          node_js: lts/*
+          os: osx
+          script:
+              - brew install poppler unrtf
+              - cp .env.template .env.test
+              - POPPLER_BINARY_PATH='/usr/local/bin' UNRTF_BINARY_PATH='/usr/local/bin' yarn test
         - stage: test
           name: produce coverage
           node_js: lts/*
