@@ -9,12 +9,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const sanitize = require('sanitize-middleware');
 const pdfToTxt = require('../middleware/pdf-to-txt.middleware');
+const rtfToTxt = require('../middleware/rtf-to-txt.middleware');
 const validateFile = require('../middleware/validate-file-type.middleware');
 
 // Import utils
 const fileRemover = require('../utils/file-remover.utils');
 
-const acceptedTypes = ['application/pdf'];
+const acceptedTypes = ['application/pdf', 'application/rtf'];
 const router = new Router();
 
 /**
@@ -58,41 +59,41 @@ const router = new Router();
  * @apiDescription Convert PDF to TXT.
  *
  * @apiHeader {string} Authorization Bearer token for authorization.
- * @apiHeader {string=application/pdf} Content-Type
+ * @apiHeader {string=application/pdf, application/rtf} Content-Type
  *
  * @apiParam (Query string) {Boolean=true, false} [boundingBoxXhtml] Generate an XHTML file containing bounding
- * box information for each word in the file.
+ * box information for each word in the file. **PDF files only.**
  * @apiParam (Query string) {Boolean=true, false} [boundingBoxXhtmlLayout] Generate an XHTML file containing
- * bounding box information for each block, line, and word in the file.
+ * bounding box information for each block, line, and word in the file. **PDF files only.**
  * @apiParam (Query string) {number} [cropHeight] Specifies the height of crop area in pixels
- * (image output) or points (vector output).
+ * (image output) or points (vector output). **PDF files only.**
  * @apiParam (Query string) {number} [cropWidth] Specifies the width of crop area in pixels
- * (image output) or points (vector output).
+ * (image output) or points (vector output). **PDF files only.**
  * @apiParam (Query string) {number} [cropXAxis] Specifies the x-coordinate of the crop area top left
- * corner in pixels (image output) or points (vector output).
+ * corner in pixels (image output) or points (vector output). **PDF files only.**
  * @apiParam (Query string) {number} [cropYAxis] Specifies the y-coordinate of the crop area top left
- * corner in pixels (image output) or points (vector output).
+ * corner in pixels (image output) or points (vector output). **PDF files only.**
  * @apiParam (Query string) {string=unix, dos, mac} [eolConvention] Sets the end-of-line convention to use for
- * text output: unix; dos; mac.
- * @apiParam (Query string) {number} [firstPageToConvert] Specifies the first page to convert.
+ * text output: unix; dos; mac. **PDF files only.**
+ * @apiParam (Query string) {number} [firstPageToConvert] Specifies the first page to convert. **PDF files only.**
  * @apiParam (Query string) {number} [fixedWidthLayout] Assume fixed-pitch (or tabular) text, with the
- * specified character width (in points). This forces physical layout mode.
+ * specified character width (in points). This forces physical layout mode. **PDF files only.**
  * @apiParam (Query string) {Boolean=true, false} [generateHtmlMetaFile] Generate simple HTML file, including the
- * meta information. This simply wraps the text in `<pre>` and `</pre>` and prepends the meta headers.
+ * meta information. This simply wraps the text in `<pre>` and `</pre>` and prepends the meta headers. **PDF files only.**
  * @apiParam (Query string) {number} [lastPageToConvert] Specifies the last page to convert.
  * @apiParam (Query string) {Boolean=true, false} [listEncodingOptions] List the available encodings.
  * @apiParam (Query string) {Boolean=true, false} [maintainLayout] Maintain (as best as possible) the original physical
  * layout of the text. The default is to undo physical layout (columns, hyphenation, etc.) and
- * output the text in reading order.
- * @apiParam (Query string) {Boolean=true, false} [noDiagonalText] Discard diagonal text.
+ * output the text in reading order. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [noDiagonalText] Discard diagonal text. **PDF files only.**
  * @apiParam (Query string) {Boolean=true, false} [noPageBreaks] Don't insert page breaks (form feed characters)
- * between pages.
+ * between pages. **PDF files only.**
  * @apiParam (Query string) {string} [outputEncoding] Sets the encoding to use for text output.
- * This defaults to "UTF-8".
- * @apiParam (Query string) {string} [ownerPassword] Owner password (for encrypted files).
+ * This defaults to "UTF-8". **PDF files only.**
+ * @apiParam (Query string) {string} [ownerPassword] Owner password (for encrypted files). **PDF files only.**
  * @apiParam (Query string) {Boolean=true, false} [rawLayout] Keep the text in content stream order. This is a
- * hack which often "undoes" column formatting, etc. Use of raw mode is no longer recommended.
- * @apiParam (Query string) {string} [userPassword] User password (for encrypted files).
+ * hack which often "undoes" column formatting, etc. Use of raw mode is no longer recommended. **PDF files only.**
+ * @apiParam (Query string) {string} [userPassword] User password (for encrypted files). **PDF files only.**
  * @apiParam (Query string) (Request body) {Binary} data Binary content such as text, image, pdf, zip archive, etc.
  *
  * @apiExample {curl} Example usage:
@@ -125,6 +126,7 @@ module.exports = function txtRoute(config) {
 			limit: '20mb'
 		}),
 		validateFile(acceptedTypes),
+		rtfToTxt(config.unrtf),
 		pdfToTxt(config.poppler),
 		(req, res) => {
 			fileRemover(

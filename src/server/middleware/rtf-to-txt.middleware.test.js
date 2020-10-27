@@ -2,20 +2,17 @@ const cloneDeep = require('lodash/cloneDeep');
 const fs = require('fs');
 const httpMocks = require('node-mocks-http');
 const isHtml = require('is-html');
-const os = require('os');
-const Middleware = require('./pdf-to-html.middleware');
+const Middleware = require('./rtf-to-txt.middleware');
 
-const platform = os.platform();
 const { serverConfig } = require('../../config');
 
-describe('PDF-to-HTML conversion middleware', () => {
+describe('RTF-to-TXT conversion middleware', () => {
 	const modServerConfig = cloneDeep(serverConfig);
-	modServerConfig.routes.html.poppler.tempDirectory = './src/server/temp1/';
+	modServerConfig.routes.txt.unrtf.tempDirectory = './src/server/temp4/';
 
 	afterAll(() => {
-		fs.rmdir('./src/server/temp/', { recursive: true }, () => {});
 		fs.rmdir(
-			modServerConfig.routes.html.poppler.tempDirectory,
+			modServerConfig.routes.txt.unrtf.tempDirectory,
 			{ recursive: true },
 			() => {}
 		);
@@ -27,12 +24,12 @@ describe('PDF-to-HTML conversion middleware', () => {
 		expect(typeof middleware).toBe('function');
 	});
 
-	test('Should convert PDF file to HTML and place in specified directory', async () => {
-		const middleware = Middleware(modServerConfig.routes.html.poppler);
+	test('Should convert PDF file to TXT and place in specified directory', async () => {
+		const middleware = Middleware(modServerConfig.routes.txt.unrtf);
 		const req = httpMocks.createRequest({
-			body: fs.readFileSync('./test_files/pdf_1.3_NHS_Constitution.pdf'),
+			body: fs.readFileSync('./test_files/test-rtf.rtf'),
 			headers: {
-				'content-type': 'application/pdf'
+				'content-type': 'application/rtf'
 			}
 		});
 		const res = httpMocks.createResponse({ locals: { results: {} } });
@@ -41,21 +38,20 @@ describe('PDF-to-HTML conversion middleware', () => {
 		await middleware(req, res, next);
 
 		expect(typeof res.locals.body).toBe('string');
-		expect(isHtml(res.locals.body)).toBe(true);
+		expect(isHtml(res.locals.body)).toBe(false);
 		expect(typeof res.locals.doclocation).toBe('object');
-		expect(fs.existsSync(res.locals.doclocation.html)).toBe(true);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 		expect(
-			fs.existsSync(modServerConfig.routes.html.poppler.tempDirectory)
+			fs.existsSync(modServerConfig.routes.txt.unrtf.tempDirectory)
 		).toBe(true);
 	});
 
-	test('Should pass an error to next if PDF file missing', async () => {
-		const middleware = Middleware();
+	test('Should pass an error to next if RTF file missing', async () => {
+		const middleware = Middleware(modServerConfig.routes.txt.unrtf);
 		const req = httpMocks.createRequest({
 			headers: {
-				'content-type': 'application/pdf'
+				'content-type': 'application/rtf'
 			}
 		});
 		const res = httpMocks.createResponse({ locals: { results: {} } });
@@ -63,11 +59,10 @@ describe('PDF-to-HTML conversion middleware', () => {
 
 		await middleware(req, res, next);
 
-		expect(res.locals.body).toBeUndefined();
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Failed to convert PDF file to HTML'
+			'Failed to convert RTF file to TXT'
 		);
 	});
 });

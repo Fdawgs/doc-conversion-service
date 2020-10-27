@@ -47,6 +47,19 @@ describe('TXT conversion route', () => {
 		expect(isHtml(res.text)).toBe(false);
 	});
 
+	test('Should return RTF file converted to TXT', async () => {
+		const res = await request
+			.post(route)
+			.set('Authorization', 'Bearer Jimmini')
+			.set('Accept', '*/*')
+			.set('Content-Type', 'application/rtf')
+			.send(fs.readFileSync('./test_files/test-rtf.rtf'));
+
+		expect(res.status).toBe(200);
+		expect(typeof res.text).toBe('string');
+		expect(isHtml(res.text)).toBe(false);
+	});
+
 	test('Should return 400 error code if file missing', async () => {
 		await request
 			.post(route)
