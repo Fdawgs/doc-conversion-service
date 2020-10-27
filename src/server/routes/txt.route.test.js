@@ -26,6 +26,14 @@ describe('TXT conversion route', () => {
 		server.shutdown();
 	});
 
+	afterAll(() => {
+		fs.rmdir(
+			modServerConfig.routes.txt.poppler.tempDirectory,
+			{ recursive: true },
+			() => {}
+		);
+	});
+
 	test('Should return PDF file converted to TXT', async () => {
 		const res = await request
 			.post(route)

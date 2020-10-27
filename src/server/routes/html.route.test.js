@@ -26,6 +26,14 @@ describe('HTML conversion route', () => {
 		server.shutdown();
 	});
 
+	afterAll(() => {
+		fs.rmdir(
+			modServerConfig.routes.html.poppler.tempDirectory,
+			{ recursive: true },
+			() => {}
+		);
+	});
+
 	test('Should return PDF file converted to HTML, with alt attributes removed from img tags', async () => {
 		const res = await request
 			.post(route)
