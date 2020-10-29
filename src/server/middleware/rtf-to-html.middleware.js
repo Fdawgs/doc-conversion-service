@@ -24,6 +24,7 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 				) {
 					throw new Error();
 				}
+
 				// Define any default settings the middleware should have to get up and running
 				const defaultConfig = {
 					binPath: undefined,
