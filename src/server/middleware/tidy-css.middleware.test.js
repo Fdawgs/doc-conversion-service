@@ -31,6 +31,7 @@ describe('Clean CSS middleware', () => {
 		middleware(req, res, next);
 
 		expect(/font-family: arial/gm.exec(res.locals.body)).not.toBeNull();
+		expect(/;}|<!--|-->/gm.exec(res.locals.body)).toBeNull();
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({ results: { clean_css: 'Fixed' } });
 		expect(next).toHaveBeenCalledTimes(1);
@@ -60,6 +61,7 @@ describe('Clean CSS middleware', () => {
 		expect(
 			/background-color: white/gm.exec(res.locals.body)
 		).not.toBeNull();
+		expect(/;}|<!--|-->/gm.exec(res.locals.body)).toBeNull();
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			body: expect.any(String),
@@ -84,6 +86,7 @@ describe('Clean CSS middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(/;}|<!--|-->/gm.exec(res.locals.body)).toBeNull();
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			body: expect.any(String),
@@ -108,6 +111,7 @@ describe('Clean CSS middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(/;}|<!--|-->/gm.exec(res.locals.body)).toBeNull();
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			body: expect.any(String),
@@ -132,6 +136,7 @@ describe('Clean CSS middleware', () => {
 
 		middleware(req, res, next);
 
+		expect(/;}|<!--|-->/gm.exec(res.locals.body)).toBeNull();
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			body: expect.any(String),
