@@ -19,6 +19,7 @@ module.exports = async function imageToTxtUtil(image, languages) {
 		await worker.load();
 		await worker.loadLanguage(languages);
 		await worker.initialize(languages);
+		await worker.setParameters({tessjs_create_hocr: '0', tessjs_create_tsv: '0'});
 
 		const results = await worker.recognize(image);
 
