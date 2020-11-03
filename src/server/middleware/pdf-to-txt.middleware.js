@@ -100,13 +100,12 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 					await Promise.all(
 						files.map((file) => imageToTxt(file, 'eng'))
 					).then(
-						// eslint-disable-next-line promise/always-return
 						(results) => {
 							res.locals.body = results.toString();
-							next();
+							return next();
 						},
 						(err) => {
-							next(err);
+							return next(err);
 						}
 					);
 				} else {
