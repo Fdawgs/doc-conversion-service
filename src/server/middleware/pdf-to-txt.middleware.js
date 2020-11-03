@@ -56,7 +56,11 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 
 				const poppler = new Poppler(this.config.binPath);
 
-				res.locals.body = await poppler.pdfToText(query, tempPdfFile);
+				res.locals.body = await poppler.pdfToText(
+					tempPdfFile,
+					undefined,
+					query
+				);
 
 				res.locals.doclocation = {
 					directory: this.config.tempDirectory,

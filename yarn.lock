@@ -4658,10 +4658,10 @@ node-notifier@^8.0.0:
     uuid "^8.3.0"
     which "^2.0.2"
 
-node-poppler@^1.8.5:
-  version "1.8.5"
-  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-1.8.5.tgz#a1f61cd2422a1ff25eef59a9c933147fe2c1c7b4"
-  integrity sha512-dIYQBogGWR60PRbRhrTSumbqQuqGu1dBqcDJYIoEODrl8zDOdzKhoVC/QYrrvy1w2vTTndhZUmeswVwUoVOofg==
+node-poppler@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-2.0.0.tgz#931ad3b3d457b6ee98c33fb98f881e297d755774"
+  integrity sha512-wWecEYNx535MMPRQ/UtByYmATZiW3fFHDkQPHMmR9xHQzfI8gZSBaH6IU78tIvJEyxla+4dPbLg7Zb3oslrR+A==
 
 node-unrtf@^1.0.2:
   version "1.0.2"

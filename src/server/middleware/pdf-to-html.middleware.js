@@ -81,8 +81,8 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				const poppler = new Poppler(this.config.binPath);
 
 				await poppler.pdfToHtml(
-					this.config.pdfToHtmlOptions,
-					tempPdfFile
+					tempPdfFile,
+					this.config.pdfToHtmlOptions
 				);
 
 				const dom = new JSDOM(
