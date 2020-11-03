@@ -101,8 +101,8 @@
 		"node-unrtf": "^1.0.2",
 		"passport": "^0.4.1",
 		"passport-http-bearer": "^1.0.1",
-		"tesseract.js": "^2.1.4",
 		"sanitize-middleware": "^4.0.0",
+		"tesseract.js": "^2.1.4",
 		"uuid": "^8.3.1"
 	},
 	"apidoc": {

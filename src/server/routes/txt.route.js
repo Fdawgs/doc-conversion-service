@@ -88,6 +88,9 @@ const router = new Router();
  * @apiParam (Query string) {Boolean=true, false} [noDiagonalText] Discard diagonal text. **PDF files only.**
  * @apiParam (Query string) {Boolean=true, false} [noPageBreaks] Don't insert page breaks (form feed characters)
  * between pages. **PDF files only.**
+ * @apiParam (Query string) {Boolean=true, false} [ocr] Use Tesseract optical character recognition (OCR) engine 
+ * to attempt to read text from files that are composed of images or scans of documents.
+ * **Please note this is quite slow** **PDF files only.**
  * @apiParam (Query string) {string} [outputEncoding] Sets the encoding to use for text output.
  * This defaults to "UTF-8". **PDF files only.**
  * @apiParam (Query string) {string} [ownerPassword] Owner password (for encrypted files). **PDF files only.**

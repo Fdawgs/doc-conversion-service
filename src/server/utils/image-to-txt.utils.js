@@ -20,12 +20,10 @@ module.exports = async function imageToTxtUtil(image, languages) {
 		await worker.loadLanguage(languages);
 		await worker.initialize(languages);
 
-		const {
-			data: { text }
-		} = await worker.recognize(image);
+		const results = await worker.recognize(image);
 
 		await worker.terminate();
-		return text;
+		return results.data.text;
 	} catch (err) {
 		return err;
 	}

@@ -47,6 +47,30 @@ describe('PDF-to-TXT conversion middleware', () => {
 		).toBe(true);
 	});
 
+	test('Should convert PDF file to TXT using OCR and place in specified directory', async () => {
+		const middleware = Middleware(modServerConfig.routes.txt.poppler);
+		const req = httpMocks.createRequest({
+			body: fs.readFileSync('./test_files/pdf_1.5_YDH_FOI_Policy.pdf'),
+			headers: {
+				'content-type': 'application/pdf'
+			},
+			query: { cropHeight: 500, cropWidth: 1000, lastPageToConvert: 1, ocr: true }
+		});
+		const res = httpMocks.createResponse({ locals: { results: {} } });
+		const next = jest.fn();
+
+		await middleware(req, res, next);
+
+		expect(typeof res.locals.body).toBe('string');
+		expect(isHtml(res.locals.body)).toBe(false);
+		expect(typeof res.locals.doclocation).toBe('object');
+		expect(next).toHaveBeenCalledTimes(1);
+		expect(next.mock.calls[0][0]).toBeUndefined();
+		expect(
+			fs.existsSync(modServerConfig.routes.txt.poppler.tempDirectory)
+		).toBe(true);
+	});
+
 	test('Should pass an error to next if PDF file missing', async () => {
 		const middleware = Middleware(modServerConfig.routes.txt.poppler);
 		const req = httpMocks.createRequest({
