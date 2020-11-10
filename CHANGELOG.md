@@ -1,3 +1,12 @@
+## <small>6.2.1 (2020-11-03)</small>
+
+-   build(deps-dev): bump dev dependencies ([1d0a99e](https://github.com/Fdawgs/doc-conversion-service/commit/1d0a99e))
+-   build(deps): bump file-type from 16.0.0 to 16.0.1 ([40f6f4f](https://github.com/Fdawgs/doc-conversion-service/commit/40f6f4f))
+-   build(deps): bump helmet from 4.1.1 to 4.2.0 ([aa0c2c5](https://github.com/Fdawgs/doc-conversion-service/commit/aa0c2c5))
+-   build(deps): bump node-poppler from 1.8.5 to 2.0.0 ([8d6b49f](https://github.com/Fdawgs/doc-conversion-service/commit/8d6b49f))
+-   build(deps): bump node-unrtf from 1.0.1 to 1.0.2 ([e6af7b8](https://github.com/Fdawgs/doc-conversion-service/commit/e6af7b8))
+-   build(deps): bump sanitize-middleware from 3.0.0 to 4.0.0 ([e915894](https://github.com/Fdawgs/doc-conversion-service/commit/e915894))
+
 ## 6.2.0 (2020-10-27)
 
 -   build(deps-dev): bump dev dependencies ([37194d1](https://github.com/Fdawgs/doc-conversion-service/commit/37194d1))
