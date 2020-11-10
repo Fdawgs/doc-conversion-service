@@ -1,7 +1,5 @@
 const { createWorker } = require('tesseract.js');
 
-const worker = createWorker();
-
 /**
  * @author Frazer Smith
  * @description Utility to convert images of text to text strings,
@@ -15,17 +13,28 @@ const worker = createWorker();
  * from image as string on resolve, or Error object on rejection.
  */
 module.exports = async function imageToTxtUtil(image, languages) {
+	const worker = createWorker();
 	try {
+		if (image === undefined || Object.keys(image).length === 0) {
+			throw new Error();
+		}
 		await worker.load();
 		await worker.loadLanguage(languages);
 		await worker.initialize(languages);
-		await worker.setParameters({tessjs_create_hocr: '0', tessjs_create_tsv: '0'});
+		await worker.setParameters({
+			tessjs_create_hocr: '0',
+			tessjs_create_tsv: '0'
+		});
 
-		const results = await worker.recognize(image);
-
+		const {
+			data: { text }
+		} = await worker.recognize(image).catch((err) => {
+			throw err;
+		});
 		await worker.terminate();
-		return results.data.text;
+		return text;
 	} catch (err) {
-		return err;
+		await worker.terminate();
+		return new Error('Cannot convert image');
 	}
 };

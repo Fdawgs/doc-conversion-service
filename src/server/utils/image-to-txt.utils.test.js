@@ -13,7 +13,8 @@ describe('Image-to-TXT utility', () => {
 
 	test('Should return error if file missing', async () => {
 		await Util().catch((err) => {
-			expect(typeof err.message).toBe('string');
+			expect(typeof err).toBe('object');
+			expect(err.message).toMatch('Cannot convert image');
 		});
 	});
 });
