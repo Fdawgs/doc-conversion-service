@@ -7,7 +7,7 @@ const fs = require('fs');
  * @param {string=} pattern - glob pattern.
  */
 module.exports = function fileRemoverUtil(pattern) {
-	const files = glob.GlobSync(pattern).found;
+	const files = glob.sync(pattern);
 	files.forEach((file) => {
 		fs.unlinkSync(file);
 	});

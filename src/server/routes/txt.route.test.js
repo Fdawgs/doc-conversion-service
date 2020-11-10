@@ -47,6 +47,20 @@ describe('TXT conversion route', () => {
 		expect(isHtml(res.text)).toBe(false);
 	});
 
+	test('Should return PDF file converted to TXT using OCR', async () => {
+		const res = await request
+			.post(route)
+			.set('Authorization', 'Bearer Jimmini')
+			.set('Accept', '*/*')
+			.set('Content-Type', 'application/pdf')
+			.query({ cropHeight: 500, cropWidth: 1000, lastPageToConvert: 1, ocr: true })
+			.send(fs.readFileSync('./test_files/pdf_1.5_YDH_FOI_Policy.pdf'));
+
+		expect(res.status).toBe(200);
+		expect(typeof res.text).toBe('string');
+		expect(isHtml(res.text)).toBe(false);
+	});
+
 	test('Should return RTF file converted to TXT', async () => {
 		const res = await request
 			.post(route)

@@ -120,3 +120,6 @@ dist
 src/server/temp/*
 src/server/temp1/*
 docs/
+
+# Tesseract trained data
+*.traineddata

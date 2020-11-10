@@ -6,7 +6,7 @@ const { v4 } = require('uuid');
  * that adheres to the Care-Connect profile.
  * Refer to https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1 for more info.
  * @returns {Function} Express middleware.
- * @todo extend resource.type with coding array.
+ * @todo Extend resource.type with coding array.
  */
 module.exports = function fhirDocumentReferenceResourceMiddleware() {
 	return (req, res, next) => {

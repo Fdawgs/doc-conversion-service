@@ -68,9 +68,8 @@ module.exports = function tidyCssMiddleware() {
 			// eslint-disable-next-line no-param-reassign
 			element.innerHTML = styleObj
 				.toString()
-				.replace('<!--', '')
-				.replace('-->', '')
-				.replace(';}', '}');
+				.replace(/<!--|-->/gm, '')
+				.replace(/;}/gm, '}');
 
 			styleParseCount += 1;
 		});
