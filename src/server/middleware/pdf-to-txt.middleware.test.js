@@ -54,7 +54,12 @@ describe('PDF-to-TXT conversion middleware', () => {
 			headers: {
 				'content-type': 'application/pdf'
 			},
-			query: { cropHeight: 500, cropWidth: 1000, lastPageToConvert: 1, ocr: true }
+			query: {
+				cropHeight: 500,
+				cropWidth: 1000,
+				lastPageToConvert: 1,
+				ocr: true
+			}
 		});
 		const res = httpMocks.createResponse({ locals: { results: {} } });
 		const next = jest.fn();
