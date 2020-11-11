@@ -53,7 +53,12 @@ describe('TXT conversion route', () => {
 			.set('Authorization', 'Bearer Jimmini')
 			.set('Accept', '*/*')
 			.set('Content-Type', 'application/pdf')
-			.query({ cropHeight: 500, cropWidth: 1000, lastPageToConvert: 1, ocr: true })
+			.query({
+				cropHeight: 500,
+				cropWidth: 1000,
+				lastPageToConvert: 1,
+				ocr: true
+			})
 			.send(fs.readFileSync('./test_files/pdf_1.5_YDH_FOI_Policy.pdf'));
 
 		expect(res.status).toBe(200);

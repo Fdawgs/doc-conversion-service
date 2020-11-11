@@ -1,3 +1,21 @@
+## 6.3.0 (2020-11-11)
+
+-   build(deps-dev): bump dev dependencies ([6125589](https://github.com/Fdawgs/doc-conversion-service/commit/6125589))
+-   build(deps): bump node-poppler from 2.0.0 to 2.0.1 ([e01580c](https://github.com/Fdawgs/doc-conversion-service/commit/e01580c))
+-   build(deps): bump node-unrtf from 1.0.2 to 1.0.3 ([008dc4b](https://github.com/Fdawgs/doc-conversion-service/commit/008dc4b))
+-   fix(middleware): replace all occurrences of comment tags, not only first ([ffacc5c](https://github.com/Fdawgs/doc-conversion-service/commit/ffacc5c))
+-   fix(utils): create new worker for each request ([18533d2](https://github.com/Fdawgs/doc-conversion-service/commit/18533d2))
+-   docs: correct jsdoc tags ([d9c8893](https://github.com/Fdawgs/doc-conversion-service/commit/d9c8893))
+-   docs: correctly reference macos ([9073e78](https://github.com/Fdawgs/doc-conversion-service/commit/9073e78))
+-   docs(config): add back ticks to html element ([a041d85](https://github.com/Fdawgs/doc-conversion-service/commit/a041d85))
+-   refactor(middleware): return next function ([531ea5f](https://github.com/Fdawgs/doc-conversion-service/commit/531ea5f))
+-   refactor(utils): use new glob sync function syntax ([7f55a1a](https://github.com/Fdawgs/doc-conversion-service/commit/7f55a1a))
+-   perf(utils): don't build hocr or tsv data ([96f305c](https://github.com/Fdawgs/doc-conversion-service/commit/96f305c))
+-   chore: ignore downloaded tesseract trained data ([94bcc82](https://github.com/Fdawgs/doc-conversion-service/commit/94bcc82))
+-   feat(middleware): integrate ocr util into pdf-to-txt ([8ce47d7](https://github.com/Fdawgs/doc-conversion-service/commit/8ce47d7))
+-   feat(utils): add util to provide ocr via tesseract engine ([7acf488](https://github.com/Fdawgs/doc-conversion-service/commit/7acf488))
+-   style(middleware): add whitespace ([a2cd294](https://github.com/Fdawgs/doc-conversion-service/commit/a2cd294))
+
 ## <small>6.2.1 (2020-11-03)</small>
 
 -   build(deps-dev): bump dev dependencies ([1d0a99e](https://github.com/Fdawgs/doc-conversion-service/commit/1d0a99e))
