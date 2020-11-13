@@ -1,4 +1,4 @@
-name: Generate Coveralls test coverage
+name: Coveralls
 
 on:
     push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
     build:
-        name: Build
+        name: Generate test coverage
         runs-on: windows-latest
         steps:
             - uses: actions/checkout@v1
