@@ -1,4 +1,4 @@
-name: Node.js CI
+name: CI
 
 on:
     push:
@@ -15,6 +15,7 @@ on:
 
 jobs:
     macos:
+        name: macOS build
         strategy:
             matrix:
                 node-version: [10.x, 12.x, 14.x]
@@ -35,9 +36,15 @@ jobs:
               run: |
                   brew install unrtf poppler
                   cp .env.template .env.test
-                  yarn test
+                  yarn test-coverage
+            - name: Coveralls parallel
+              uses: coverallsapp/github-action@master
+              with:
+                  github-token: ${{ secrets.github_token }}
+                  parallel: true
 
     ubuntu:
+        name: Ubuntu build
         strategy:
             matrix:
                 node-version: [10.x, 12.x, 14.x]
@@ -58,9 +65,15 @@ jobs:
               run: |
                   sudo apt-get -y install poppler-data poppler-utils unrtf
                   cp .env.template .env.test
-                  yarn test
+                  yarn test-coverage
+            - name: Coveralls parallel
+              uses: coverallsapp/github-action@master
+              with:
+                  github-token: ${{ secrets.github_token }}
+                  parallel: true
 
     windows:
+        name: Windows build
         strategy:
             matrix:
                 node-version: [10.x, 12.x, 14.x]
@@ -77,4 +90,20 @@ jobs:
             - name: Run tests
               run: |
                   cp .env.template .env.test
-                  yarn test
+                  yarn test-coverage
+            - name: Coveralls parallel
+              uses: coverallsapp/github-action@master
+              with:
+                  github-token: ${{ secrets.github_token }}
+                  parallel: true
+
+    coverage:
+        name: Aggregate coverage calculations
+        needs: [macos, ubuntu, windows]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Coveralls Finished
+              uses: coverallsapp/github-action@master
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  parallel-finished: true
