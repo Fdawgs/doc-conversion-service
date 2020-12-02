@@ -1,5 +1,7 @@
 require('custom-env').env();
 
+const pino = require('pino');
+
 const serverConfig = {
 	https: process.env.USE_HTTPS || false,
 	port: process.env.PORT || 3000,
@@ -144,29 +146,36 @@ const helmetConfig = {
 const loggerConfig = {
 	// Pino options: https://github.com/pinojs/pino-http#custom-serializers
 	options: {
+		formatters: {
+			level(label) {
+				return { level: label };
+			}
+		},
+		// Defaults to `info` if not set in env
+		level: process.env.LOGGER_LEVEL || 'info',
 		serializers: {
 			req(req) {
-				return {
-					url: req.url,
-					ip: req.raw.ip,
-					headers: req.headers,
-					method: req.method,
-					query: req.raw.query,
-					httpVersion: req.raw.httpVersion
-				};
+				return pino.stdSerializers.req(req);
 			},
 			res(res) {
 				return { statusCode: res.statusCode };
 			}
+		},
+		timestamp: () => {
+			return pino.stdTimeFunctions.isoTime();
 		}
 	},
 
 	// Rotation options: https://github.com/rogerc/file-stream-rotator/#options
 	rotation: {
-		filename: `${process.cwd()}/logs/doc-con-service-%DATE%.log`,
-		frequency: 'daily',
-		verbose: false,
-		date_format: 'YYYY-MM-DD'
+		date_format: process.env.LOGGER_ROTATION_DATE_FORMAT || 'YYYY-MM-DD',
+		filename:
+			process.env.LOGGER_ROTATION_FILENAME ||
+			`${process.cwd()}/logs/doc-con-service-%DATE%.log`,
+		frequency: process.env.LOGGER_ROTATION_FREQUENCY || 'daily',
+		max_logs: process.env.LOGGER_ROTATION_MAX_LOG,
+		size: process.env.LOGGER_ROTATION_MAX_SIZE,
+		verbose: false
 	}
 };
 
