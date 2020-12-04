@@ -32,7 +32,7 @@ It was initially created to replace a previously purchased PDF-to-HTML conversio
 3. Make a copy of `.env.template` in the root directory and rename to `.env.production`
 4. Configure the application using the global variables in `.env.production`
 5. Run `yarn docs` to generate api documentation
-6. Run `yarn start`
+6. Run `NODE_ENV=production yarn start`
 
 The Express server should now be up and running on the port set in the config. You should see the following output:
 
