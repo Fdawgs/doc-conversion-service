@@ -28,7 +28,7 @@ It was initially created to replace a previously purchased PDF-to-HTML conversio
 ### Standard deployment
 
 1. Navigate to the repo
-2. Run `yarn install` to install dependencies
+2. Run `yarn install --production` to install dependencies
 3. Make a copy of `.env.template` in the root directory and rename to `.env.production`
 4. Configure the application using the global variables in `.env.production`
 5. Run `yarn docs` to generate api documentation
@@ -55,7 +55,7 @@ This requires [Docker](https://www.docker.com/products) installed.
 It is [recommended](https://expressjs.com/en/advanced/pm.html) that you use a process manager such as [PM2](https://pm2.keymetrics.io/) when deploying Express applications like this into production.
 
 1. Navigate to the repo
-2. Run `yarn install` to install dependencies
+2. Run `yarn install --production` to install dependencies
 3. Make a copy of `.env.template` in the root directory and rename to `.env.production`
 4. Configure the application using the global variables in `.env.production`
 5. Run `yarn docs` to generate api documentation
