@@ -161,9 +161,7 @@ const loggerConfig = {
 				return { statusCode: res.statusCode };
 			}
 		},
-		timestamp: () => {
-			return pino.stdTimeFunctions.isoTime();
-		}
+		timestamp: () => pino.stdTimeFunctions.isoTime()
 	},
 
 	// Rotation options: https://github.com/rogerc/file-stream-rotator/#options

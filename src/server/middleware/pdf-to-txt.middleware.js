@@ -104,9 +104,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 							res.locals.body = results.toString();
 							return next();
 						},
-						(err) => {
-							return next(err);
-						}
+						(err) => next(err)
 					);
 				} else {
 					res.locals.body = await poppler.pdfToText(
