@@ -4746,10 +4746,10 @@ node-poppler@^2.1.1:
   resolved "https://registry.yarnpkg.com/node-poppler/-/node-poppler-2.1.1.tgz#b4dd2c87e80673c1ad03292d9d8f2bce5f177a9d"
   integrity sha512-n+WA80VCxNQmerSJYDbSfemO8d+haECwMsFDU8gz5Qrjo8CrnJy1atLZch3RmMLNdva6ln9NIRsb10k2/sAqUA==
 
-node-unrtf@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/node-unrtf/-/node-unrtf-1.0.4.tgz#bc2329f148d55ee902729846c085e329cd664d2f"
-  integrity sha512-ShEUIL6GmhyO5dOYUuQcFX4L4sZq8ecCp2hBcFpyiTkKxCCfh3AKboUZ5N6rIHtO8NmahKCuiB0v+oeadfGVWw==
+node-unrtf@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/node-unrtf/-/node-unrtf-1.0.5.tgz#559b153d6c1507d498765e22f09ea7949e072e47"
+  integrity sha512-JXjWhkscFfHT5bZ7To/eWRgbc26dm30yrk480wbQF3mevZS5NEc2dNvwSfSfuwUmc2HyKL4aTor4W1ahf3r+bQ==
 
 nodemon@^2.0.4, nodemon@^2.0.6:
   version "2.0.6"
