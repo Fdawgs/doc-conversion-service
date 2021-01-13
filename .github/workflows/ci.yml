@@ -12,93 +12,65 @@ on:
 
 jobs:
     lint:
-        name: Lint
+        name: Lint Code
+        if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v2
               with:
                   node-version: 14.x
+            - name: Get Yarn Cache Directory Path
+              id: yarn-cache-dir-path
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+            - uses: actions/cache@v2
+              id: yarn-cache
+              with:
+                  path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+                  key: yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      -yarn-
             - name: Install
-              run: yarn --immutable
+              run: yarn --frozen-lockfile
             - name: Run ESLint
               run: yarn lint
             - name: Run Prettier
               run: yarn lint:prettier:ci
+            - name: Compile TypeScript Definition File
+              run: yarn tsc
 
-    macos:
-        name: macOS Build
+    unit-tests:
+        name: Unit Tests
+        if: github.event.pull_request.draft == false
         strategy:
             matrix:
                 node-version: [10.x, 12.x, 14.x]
-
-        runs-on: macos-latest
+                os: [macos-latest, ubuntu-20.04, windows-latest]
+        runs-on: ${{ matrix.os }}
         steps:
             - uses: actions/checkout@v2
             - name: Use Node.js ${{ matrix.node-version }}
               uses: actions/setup-node@v2
               with:
                   node-version: ${{ matrix.node-version }}
+            - name: Get Yarn Cache Directory Path
+              id: yarn-cache-dir-path
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+            - uses: actions/cache@v2
+              id: yarn-cache
+              with:
+                  path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+                  key: yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      -yarn-
             - name: Install
-              run: yarn --immutable
-            - name: Run Tests
-              env:
-                  POPPLER_BINARY_PATH: /usr/local/bin
-                  UNRTF_BINARY_PATH: /usr/local/bin
-              run: |
-                  brew install unrtf poppler
-                  cp .env.template .env.test
-                  yarn jest-coverage
-            - name: Coveralls Parallel
-              uses: coverallsapp/github-action@master
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  parallel: true
-
-    ubuntu:
-        name: Ubuntu Build
-        strategy:
-            matrix:
-                node-version: [10.x, 12.x, 14.x]
-
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v2
-              with:
-                  node-version: ${{ matrix.node-version }}
-            - name: Install
-              run: yarn --immutable
-            - name: Run Tests
-              env:
-                  POPPLER_BINARY_PATH: /usr/bin
-                  UNRTF_BINARY_PATH: /usr/bin
-              run: |
-                  sudo apt-get -y install poppler-data poppler-utils unrtf
-                  cp .env.template .env.test
-                  yarn jest-coverage
-            - name: Coveralls Parallel
-              uses: coverallsapp/github-action@master
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  parallel: true
-
-    windows:
-        name: Windows Build
-        strategy:
-            matrix:
-                node-version: [10.x, 12.x, 14.x]
-
-        runs-on: windows-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v2
-              with:
-                  node-version: ${{ matrix.node-version }}
-            - name: Install
-              run: yarn --immutable
+              run: yarn --frozen-lockfile
+            - name: Install macOS dependencies
+              if: matrix.os == 'macos-latest'
+              run: brew install poppler
+            - name: Install Ubuntu dependencies
+              if: matrix.os == 'ubuntu-20.04'
+              run: sudo apt-get -y install poppler-data poppler-utils
             - name: Run Tests
               run: |
                   cp .env.template .env.test
@@ -111,7 +83,8 @@ jobs:
 
     coverage:
         name: Aggregate Coverage Calculations
-        needs: [macos, ubuntu, windows]
+        if: github.event.pull_request.draft == false
+        needs: unit-tests
         runs-on: ubuntu-latest
         steps:
             - name: Coveralls Finished
@@ -122,10 +95,11 @@ jobs:
 
     automerge:
         name: Automatically merge Dependabot pull requests
-        needs: [lint, macos, ubuntu, windows]
+        if: github.event.pull_request.draft == false
+        needs: [lint, unit-tests]
         runs-on: ubuntu-latest
         steps:
-            - uses: fastify/github-action-merge-dependabot@v1
+            - uses: fastify/github-action-merge-dependabot@v1.1.1
               if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
