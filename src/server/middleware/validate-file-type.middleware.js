@@ -1,4 +1,4 @@
-const fileType = require('file-type');
+const fileType = require("file-type");
 
 /**
  * @author Frazer Smith
@@ -16,13 +16,13 @@ module.exports = function validateFileTypeMiddleware(acceptedMimeTypes) {
 			const { mime } = await fileType.fromBuffer(req.body);
 			if (!acceptedMimeTypes.includes(mime)) {
 				res.status(400);
-				next(new Error('File type not accepted'));
+				next(new Error("File type not accepted"));
 			} else {
 				next();
 			}
 		} catch (err) {
 			res.status(400);
-			next(new Error('File type not accepted'));
+			next(new Error("File type not accepted"));
 		}
 	};
 };

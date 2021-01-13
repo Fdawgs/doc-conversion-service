@@ -1,30 +1,30 @@
-const fs = require('fs');
-const httpMocks = require('node-mocks-http');
-const isHtml = require('is-html');
-const Middleware = require('./embed-html-images.middleware');
+const fs = require("fs");
+const httpMocks = require("node-mocks-http");
+const isHtml = require("is-html");
+const Middleware = require("./embed-html-images.middleware");
 
-describe('Embed HTML Images middleware', () => {
-	test('Should return a middleware function', () => {
+describe("Embed HTML Images middleware", () => {
+	test("Should return a middleware function", () => {
 		const middleware = Middleware();
 
-		expect(typeof middleware).toBe('function');
+		expect(typeof middleware).toBe("function");
 	});
 
-	test('Should embed images into HTML', () => {
-		const middleware = Middleware('./test_files/');
+	test("Should embed images into HTML", () => {
+		const middleware = Middleware("./test_files/");
 		const req = httpMocks.createRequest({
 			query: {
-				removeAlt: true
-			}
+				removeAlt: true,
+			},
 		});
 		const res = httpMocks.createResponse({
 			locals: {
 				body: fs.readFileSync(
-					'./test_files/tester_bullet_issues-html.html',
-					{ encoding: 'UTF-8' }
+					"./test_files/tester_bullet_issues-html.html",
+					{ encoding: "UTF-8" }
 				),
-				results: {}
-			}
+				results: {},
+			},
 		});
 		const next = jest.fn();
 
@@ -34,22 +34,22 @@ describe('Embed HTML Images middleware', () => {
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			body: expect.any(String),
-			results: { embedded_images: 'Fixed' }
+			results: { embedded_images: "Fixed" },
 		});
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should flag file as passed if no issues found', () => {
-		const middleware = Middleware('./test_files/');
+	test("Should flag file as passed if no issues found", () => {
+		const middleware = Middleware("./test_files/");
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse({
 			locals: {
-				body: fs.readFileSync('./test_files/empty-test.html', {
-					encoding: 'UTF-8'
+				body: fs.readFileSync("./test_files/empty-test.html", {
+					encoding: "UTF-8",
 				}),
-				results: {}
-			}
+				results: {},
+			},
 		});
 		const next = jest.fn();
 
@@ -58,22 +58,22 @@ describe('Embed HTML Images middleware', () => {
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			body: expect.any(String),
-			results: { embedded_images: 'Passed' }
+			results: { embedded_images: "Passed" },
 		});
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should build res.locals.results if not defined', () => {
-		const middleware = Middleware('./test_files/');
+	test("Should build res.locals.results if not defined", () => {
+		const middleware = Middleware("./test_files/");
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse({
 			locals: {
 				body: fs.readFileSync(
-					'./test_files/tester_bullet_issues-html.html',
-					{ encoding: 'UTF-8' }
-				)
-			}
+					"./test_files/tester_bullet_issues-html.html",
+					{ encoding: "UTF-8" }
+				),
+			},
 		});
 		const next = jest.fn();
 
@@ -82,23 +82,23 @@ describe('Embed HTML Images middleware', () => {
 		expect(isHtml(res.locals.body)).toBe(true);
 		expect(res.locals).toMatchObject({
 			body: expect.any(String),
-			results: { embedded_images: 'Fixed' }
+			results: { embedded_images: "Fixed" },
 		});
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0]).toBeUndefined();
 	});
 
-	test('Should pass an error to next if temp directory not defined', () => {
+	test("Should pass an error to next if temp directory not defined", () => {
 		const middleware = Middleware();
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse({
 			locals: {
 				body: fs.readFileSync(
-					'./test_files/tester_bullet_issues-html.html',
-					{ encoding: 'UTF-8' }
+					"./test_files/tester_bullet_issues-html.html",
+					{ encoding: "UTF-8" }
 				),
-				results: {}
-			}
+				results: {},
+			},
 		});
 		const next = jest.fn();
 
@@ -109,11 +109,11 @@ describe('Embed HTML Images middleware', () => {
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Invalid HTML passed to embedHtmlImages middleware'
+			"Invalid HTML passed to embedHtmlImages middleware"
 		);
 	});
 
-	test('Should pass an error to next if temp directory missing', async () => {
+	test("Should pass an error to next if temp directory missing", async () => {
 		const middleware = Middleware();
 		const req = httpMocks.createRequest();
 		const res = httpMocks.createResponse();
@@ -124,7 +124,7 @@ describe('Embed HTML Images middleware', () => {
 		expect(res.statusCode).toBe(400);
 		expect(next).toHaveBeenCalledTimes(1);
 		expect(next.mock.calls[0][0].message).toBe(
-			'Invalid HTML passed to embedHtmlImages middleware'
+			"Invalid HTML passed to embedHtmlImages middleware"
 		);
 	});
 });

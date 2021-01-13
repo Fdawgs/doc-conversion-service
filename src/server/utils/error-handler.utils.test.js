@@ -1,15 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-const faker = require('faker');
-const httpMocks = require('node-mocks-http');
-const Util = require('./error-handler.utils');
+const faker = require("faker");
+const httpMocks = require("node-mocks-http");
+const Util = require("./error-handler.utils");
 
-describe('Error handler utility', () => {
-	test('Should return a utility function', () => {
+describe("Error handler utility", () => {
+	test("Should return a utility function", () => {
 		const util = Util();
-		expect(typeof util).toBe('function');
+		expect(typeof util).toBe("function");
 	});
 
-	test('Should return error in response if error instance passed', () => {
+	test("Should return error in response if error instance passed", () => {
 		const util = Util();
 		const randomString = faker.lorem.sentence();
 		const error = new Error(randomString);
@@ -22,7 +22,7 @@ describe('Error handler utility', () => {
 		expect(res._getData()).toBe(randomString);
 	});
 
-	test('Should return error in response if string passed', () => {
+	test("Should return error in response if string passed", () => {
 		const util = Util();
 		const error = faker.lorem.sentence();
 		const req = httpMocks.createRequest();

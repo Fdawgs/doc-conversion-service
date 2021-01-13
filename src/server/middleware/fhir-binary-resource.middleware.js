@@ -1,4 +1,4 @@
-const { v4 } = require('uuid');
+const { v4 } = require("uuid");
 
 /**
  * @author Frazer Smith
@@ -9,25 +9,25 @@ module.exports = function fhirBinResourceMiddleware() {
 	return (req, res, next) => {
 		if (req.file) {
 			const resource = {
-				resourceType: 'Binary',
+				resourceType: "Binary",
 				id: v4(),
-				language: 'English (Great Britain)',
+				language: "English (Great Britain)",
 				contentType: req.file.mimetype,
-				content: req.file.buffer.toString('base64')
+				content: req.file.buffer.toString("base64"),
 			};
 			Object.assign(resource, req.body);
 
 			// Create resource object for conversion resource
-			if (typeof res.locals.resource === 'undefined') {
+			if (typeof res.locals.resource === "undefined") {
 				res.locals.resource = {};
 			}
 
-			res.set('content-type', 'application/fhir+json');
+			res.set("content-type", "application/fhir+json");
 			res.locals.resource.binary = resource;
 			next();
 		} else {
 			res.status(400);
-			next(new Error('File missing from request'));
+			next(new Error("File missing from request"));
 		}
 	};
 };

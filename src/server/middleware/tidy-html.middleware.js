@@ -1,6 +1,6 @@
-const { JSDOM } = require('jsdom');
-const { tidy } = require('htmltidy2');
-const util = require('util');
+const { JSDOM } = require("jsdom");
+const { tidy } = require("htmltidy2");
+const util = require("util");
 
 const tidyHtml = util.promisify(tidy);
 
@@ -16,9 +16,9 @@ module.exports = function tidyHtmlMiddleware(config = {}) {
 			const dom = new JSDOM(res.locals.body);
 
 			// Set document language
-			const html = dom.window.document.querySelector('html');
-			html.setAttribute('lang', 'en');
-			html.setAttribute('xml:lang', 'en');
+			const html = dom.window.document.querySelector("html");
+			html.setAttribute("lang", "en");
+			html.setAttribute("xml:lang", "en");
 			const parsedHtml = dom.window.document.documentElement.outerHTML;
 
 			res.locals.body = await tidyHtml(parsedHtml, config);

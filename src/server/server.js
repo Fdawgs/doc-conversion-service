@@ -1,25 +1,25 @@
-const compression = require('compression');
-const express = require('express');
-const expressPino = require('express-pino-logger');
-const fs = require('fs');
-const helmet = require('helmet');
-const hpp = require('hpp');
-const http = require('http');
-const https = require('https');
-const passport = require('passport');
-const path = require('path');
-const rotatingLogStream = require('file-stream-rotator');
-const { Strategy } = require('passport-http-bearer');
+const compression = require("compression");
+const express = require("express");
+const expressPino = require("express-pino-logger");
+const fs = require("fs");
+const helmet = require("helmet");
+const hpp = require("hpp");
+const http = require("http");
+const https = require("https");
+const passport = require("passport");
+const path = require("path");
+const rotatingLogStream = require("file-stream-rotator");
+const { Strategy } = require("passport-http-bearer");
 
 // Import utils
-const bearerTokenAuth = require('./utils/bearer-token-auth.utils');
-const errorHandler = require('./utils/error-handler.utils');
+const bearerTokenAuth = require("./utils/bearer-token-auth.utils");
+const errorHandler = require("./utils/error-handler.utils");
 
 // Import routes
-const fhirBinaryRoute = require('./routes/fhir-binary.route');
-const fhirDocumentReferenceRoute = require('./routes/fhir-documentreference.route');
-const htmlRoute = require('./routes/html.route');
-const txtRoute = require('./routes/txt.route');
+const fhirBinaryRoute = require("./routes/fhir-binary.route");
+const fhirDocumentReferenceRoute = require("./routes/fhir-documentreference.route");
+const htmlRoute = require("./routes/html.route");
+const txtRoute = require("./routes/txt.route");
 
 class Server {
 	/**
@@ -98,23 +98,23 @@ class Server {
 	 */
 	configureRoutes() {
 		this.app.use(
-			'/api/docs',
-			express.static(path.join(__dirname, '../../docs'))
+			"/api/docs",
+			express.static(path.join(__dirname, "../../docs"))
 		);
 
-		this.app.use('/api/converter/html', htmlRoute(this.config.routes.html));
+		this.app.use("/api/converter/html", htmlRoute(this.config.routes.html));
 		this.app.use(
-			'/api/converter/fhir/binary',
-			fhirBinaryRoute(this.config.routes['fhir/binary'])
+			"/api/converter/fhir/binary",
+			fhirBinaryRoute(this.config.routes["fhir/binary"])
 		);
 		this.app.use(
-			'/api/converter/fhir/documentreference',
+			"/api/converter/fhir/documentreference",
 			fhirDocumentReferenceRoute(
-				this.config.routes['fhir/documentreference']
+				this.config.routes["fhir/documentreference"]
 			)
 		);
 
-		this.app.use('/api/converter/txt', txtRoute(this.config.routes.txt));
+		this.app.use("/api/converter/txt", txtRoute(this.config.routes.txt));
 
 		// Return self for chaining
 		return this;
@@ -146,7 +146,7 @@ class Server {
 	listen() {
 		const server = this.config;
 		// Update the express app to be an instance of createServer
-		if (server.https === 'true') {
+		if (server.https === "true") {
 			const options = {};
 			// Attempt to use PFX file if present
 			if (server.ssl.pfx.pfx) {
@@ -158,9 +158,9 @@ class Server {
 			}
 
 			this.app = https.createServer(options, this.app);
-			this.config.protocol = 'https';
+			this.config.protocol = "https";
 		} else {
-			this.config.protocol = 'http';
+			this.config.protocol = "http";
 			this.app = http.createServer(this.app);
 		}
 
@@ -181,7 +181,7 @@ class Server {
 	shutdown() {
 		this.app.close();
 		setImmediate(() => {
-			this.app.emit('close');
+			this.app.emit("close");
 		});
 	}
 }

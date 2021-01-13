@@ -1,5 +1,5 @@
-const CSSOM = require('cssom');
-const { JSDOM } = require('jsdom');
+const CSSOM = require("cssom");
+const { JSDOM } = require("jsdom");
 
 /**
  * @author Frazer Smith
@@ -17,7 +17,7 @@ const { JSDOM } = require('jsdom');
 module.exports = function tidyCssMiddleware() {
 	return (req, res, next) => {
 		const dom = new JSDOM(res.locals.body);
-		const styles = dom.window.document.querySelectorAll('style');
+		const styles = dom.window.document.querySelectorAll("style");
 
 		let newFonts;
 		if (req.query && req.query.fonts) {
@@ -30,7 +30,7 @@ module.exports = function tidyCssMiddleware() {
 		}
 
 		// Create results object for conversion results
-		if (typeof res.locals.results === 'undefined') {
+		if (typeof res.locals.results === "undefined") {
 			res.locals.results = {};
 		}
 
@@ -38,26 +38,26 @@ module.exports = function tidyCssMiddleware() {
 
 		styles.forEach((element) => {
 			// Remove optional type attribute
-			if (element.hasAttribute('type')) {
-				element.removeAttribute('type');
+			if (element.hasAttribute("type")) {
+				element.removeAttribute("type");
 			}
 
 			const styleObj = CSSOM.parse(element.innerHTML);
 
 			styleObj.cssRules.forEach((styleRule) => {
 				// Replace default font
-				if (newFonts && styleRule.style['font-family']) {
-					styleRule.style.setProperty('font-family', newFonts);
+				if (newFonts && styleRule.style["font-family"]) {
+					styleRule.style.setProperty("font-family", newFonts);
 				}
 
 				// Stop pages overrunning the next, leading to overlapped text
-				if (styleRule.selectorText.substring(0, 3) === 'div') {
-					styleRule.style.setProperty('page-break-inside', 'avoid');
+				if (styleRule.selectorText.substring(0, 3) === "div") {
+					styleRule.style.setProperty("page-break-inside", "avoid");
 
 					// Replace default color
 					if (newBackgroundColor) {
 						styleRule.style.setProperty(
-							'background-color',
+							"background-color",
 							newBackgroundColor
 						);
 					}
@@ -68,16 +68,16 @@ module.exports = function tidyCssMiddleware() {
 			// eslint-disable-next-line no-param-reassign
 			element.innerHTML = styleObj
 				.toString()
-				.replace(/<!--|-->/gm, '')
-				.replace(/;}/gm, '}');
+				.replace(/<!--|-->/gm, "")
+				.replace(/;}/gm, "}");
 
 			styleParseCount += 1;
 		});
 
 		if (styleParseCount > 0) {
-			res.locals.results.clean_css = 'Fixed';
+			res.locals.results.clean_css = "Fixed";
 		} else {
-			res.locals.results.clean_css = 'Passed';
+			res.locals.results.clean_css = "Passed";
 		}
 
 		res.locals.body = dom.window.document.documentElement.outerHTML;
