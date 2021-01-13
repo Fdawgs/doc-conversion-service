@@ -3083,10 +3083,10 @@ html-encoding-sniffer@^2.0.1:
   dependencies:
     whatwg-encoding "^1.0.5"
 
-html-entities@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.4.0.tgz#cfbd1b01d2afaf9adca1b10ae7dffab98c71d2dc"
-  integrity sha512-8nxjcBcd8wovbeKx7h3wTji4e6+rhaVuPNpMqwWgnHh+N9ToqsCs6XztWRBPQ+UtzsoMAdKZtUENoVzU/EMtZA==
+html-entities@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-2.0.2.tgz#3e0cda2387515b2dc6a947163fd51f6b48d80186"
+  integrity sha512-4IHIARvqG6F1gACykQUXc24KuAM8vbmKHq738CIVsPNBIp/xqmYFbIEEeA51SdjF+mxk/I52reZMNVK8Kzq9Ig==
 
 html-escaper@^2.0.0:
   version "2.0.2"
@@ -5802,12 +5802,12 @@ sane@^4.0.3:
     minimist "^1.1.1"
     walker "~1.0.5"
 
-sanitize-middleware@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/sanitize-middleware/-/sanitize-middleware-4.0.2.tgz#230ec061be9cf37c7d5245db502d393533acb4e4"
-  integrity sha512-R6Z83cebUdTiOidLwRUxEGUdOFpWgd86n/Z4c6Zgy05MD9XA/Sy9MOc+ni5bZBGRB+CkQBuXzH0IbbysdtJvWg==
+sanitize-middleware@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/sanitize-middleware/-/sanitize-middleware-4.0.3.tgz#074b5f6fc1548b0b57de1c327b8f8fc7a8f72cab"
+  integrity sha512-8DOqUeUw0QL3fZaktSYp1wVOAZzjFntT1WwdIZKx/N4a9+ITYIMyH2fhgeKezyr2ZWtgZEDkuqBhFyepAOv50w==
   dependencies:
-    html-entities "^1.4.0"
+    html-entities "^2.0.2"
     serialize-javascript "^5.0.1"
     validator "^13.5.2"
 
