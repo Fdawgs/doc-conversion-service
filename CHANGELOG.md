@@ -1,3 +1,26 @@
+## <small>6.4.1 (2021-01-14)</small>
+
+-   ci: fix jobs ([bac5790](https://github.com/Fdawgs/doc-conversion-service/commit/bac5790))
+-   ci: refactor workflows ([a3154ef](https://github.com/Fdawgs/doc-conversion-service/commit/a3154ef))
+-   build(deps-dev): bump eslint from 7.16.0 to 7.17.0 ([c9dda6d](https://github.com/Fdawgs/doc-conversion-service/commit/c9dda6d))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 30.7.9 to 31.0.3 ([a44654f](https://github.com/Fdawgs/doc-conversion-service/commit/a44654f))
+-   build(deps-dev): bump node-mocks-http from 1.9.0 to 1.10.0 ([bec3372](https://github.com/Fdawgs/doc-conversion-service/commit/bec3372))
+-   build(deps-dev): bump nodemon from 2.0.6 to 2.0.7 ([13c5739](https://github.com/Fdawgs/doc-conversion-service/commit/13c5739))
+-   build(deps-dev): remove eslint-plugin-json ([41cc9ec](https://github.com/Fdawgs/doc-conversion-service/commit/41cc9ec))
+-   build(deps): bump apidoc from 0.25.0 to 0.26.0 ([6be1d6d](https://github.com/Fdawgs/doc-conversion-service/commit/6be1d6d))
+-   build(deps): bump file-type from 16.1.0 to 16.2.0 ([abbb39c](https://github.com/Fdawgs/doc-conversion-service/commit/abbb39c))
+-   build(deps): bump helmet from 4.2.0 to 4.3.1 ([53dd12e](https://github.com/Fdawgs/doc-conversion-service/commit/53dd12e))
+-   build(deps): bump node-poppler from 2.1.1 to 2.1.2 ([6286366](https://github.com/Fdawgs/doc-conversion-service/commit/6286366))
+-   build(deps): bump node-unrtf from 1.0.4 to 1.0.5 ([0e2af4e](https://github.com/Fdawgs/doc-conversion-service/commit/0e2af4e))
+-   build(deps): bump node-unrtf from 1.0.5 to 1.0.6 ([ba0e478](https://github.com/Fdawgs/doc-conversion-service/commit/ba0e478))
+-   build(deps): bump pino from 6.8.0 to 6.9.0 ([48835b0](https://github.com/Fdawgs/doc-conversion-service/commit/48835b0))
+-   build(deps): bump pino from 6.9.0 to 6.10.0 ([b8dfb7e](https://github.com/Fdawgs/doc-conversion-service/commit/b8dfb7e))
+-   build(deps): bump sanitize-middleware from 4.0.1 to 4.0.2 ([98a0b29](https://github.com/Fdawgs/doc-conversion-service/commit/98a0b29))
+-   build(deps): bump sanitize-middleware from 4.0.2 to 4.0.3 ([df5f775](https://github.com/Fdawgs/doc-conversion-service/commit/df5f775))
+-   style: use default prettier options for trailing commas and quotes ([aafaf12](https://github.com/Fdawgs/doc-conversion-service/commit/aafaf12))
+-   chore: tidy package ([b80dbab](https://github.com/Fdawgs/doc-conversion-service/commit/b80dbab))
+-   docs: update yarn link ([6a6a6e5](https://github.com/Fdawgs/doc-conversion-service/commit/6a6a6e5))
+
 ## 6.4.0 (2020-12-21)
 
 -   build(deps-dev): bump dev dependencies ([6c04272](https://github.com/Fdawgs/doc-conversion-service/commit/6c04272))
