@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
     app:
         build:
@@ -7,7 +7,7 @@ services:
             context: .
         env_file: .env.production
         environment:
-            POPPLER_BINARY_PATH: '/usr/bin/'
-            UNRTF_BINARY_PATH: '/usr/bin/'
+            POPPLER_BINARY_PATH: "/usr/bin/"
+            UNRTF_BINARY_PATH: "/usr/bin/"
         ports:
             - 127.0.0.1:${PORT:-3000}:${PORT:-3000}

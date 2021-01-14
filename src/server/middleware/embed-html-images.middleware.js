@@ -1,6 +1,6 @@
-const fs = require('fs');
-const { JSDOM } = require('jsdom');
-const path = require('path');
+const fs = require("fs");
+const { JSDOM } = require("jsdom");
+const path = require("path");
 
 /**
  * @author Frazer Smith
@@ -19,10 +19,10 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 	return (req, res, next) => {
 		if (fs.existsSync(tempDirectory)) {
 			const dom = new JSDOM(res.locals.body);
-			const images = dom.window.document.querySelectorAll('img');
+			const images = dom.window.document.querySelectorAll("img");
 
 			// Create results object for conversion results
-			if (typeof res.locals.results === 'undefined') {
+			if (typeof res.locals.results === "undefined") {
 				res.locals.results = {};
 			}
 
@@ -33,12 +33,12 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 					const imgForm = path.extname(element.src).substring(1);
 					const imageAsBase64 = `data:image/${imgForm};base64,${fs.readFileSync(
 						tempDirectory + element.src,
-						'base64'
+						"base64"
 					)}`;
-					element.setAttribute('src', imageAsBase64);
+					element.setAttribute("src", imageAsBase64);
 
 					if (req.query && req.query.removeAlt) {
-						element.setAttribute('alt', '');
+						element.setAttribute("alt", "");
 					}
 
 					imageParseCount += 1;
@@ -46,16 +46,16 @@ module.exports = function embedHtmlImagesMiddleware(tempDirectory) {
 			});
 
 			if (imageParseCount > 0) {
-				res.locals.results.embedded_images = 'Fixed';
+				res.locals.results.embedded_images = "Fixed";
 			} else {
-				res.locals.results.embedded_images = 'Passed';
+				res.locals.results.embedded_images = "Passed";
 			}
 			res.locals.body = dom.window.document.documentElement.outerHTML;
 			next();
 		} else {
 			res.status(400);
 			next(
-				new Error('Invalid HTML passed to embedHtmlImages middleware')
+				new Error("Invalid HTML passed to embedHtmlImages middleware")
 			);
 		}
 	};

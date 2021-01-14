@@ -1,4 +1,4 @@
-const { createWorker } = require('tesseract.js');
+const { createWorker } = require("tesseract.js");
 
 /**
  * @author Frazer Smith
@@ -22,12 +22,12 @@ module.exports = async function imageToTxtUtil(image, languages) {
 		await worker.loadLanguage(languages);
 		await worker.initialize(languages);
 		await worker.setParameters({
-			tessjs_create_hocr: '0',
-			tessjs_create_tsv: '0'
+			tessjs_create_hocr: "0",
+			tessjs_create_tsv: "0",
 		});
 
 		const {
-			data: { text }
+			data: { text },
 		} = await worker.recognize(image).catch((err) => {
 			throw err;
 		});
@@ -35,6 +35,6 @@ module.exports = async function imageToTxtUtil(image, languages) {
 		return text;
 	} catch (err) {
 		await worker.terminate();
-		return new Error('Cannot convert image');
+		return new Error("Cannot convert image");
 	}
 };

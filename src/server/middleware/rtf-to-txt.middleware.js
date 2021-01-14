@@ -1,7 +1,7 @@
-const fs = require('fs').promises;
-const path = require('path');
-const { UnRTF } = require('node-unrtf');
-const { v4 } = require('uuid');
+const fs = require("fs").promises;
+const path = require("path");
+const { UnRTF } = require("node-unrtf");
+const { v4 } = require("uuid");
 
 /**
  * @author Frazer Smith
@@ -14,7 +14,7 @@ const { v4 } = require('uuid');
  */
 module.exports = function rtfToHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
-		if (req.headers['content-type'] === 'application/rtf') {
+		if (req.headers["content-type"] === "application/rtf") {
 			try {
 				// `convert` node-unrtf function still attempts to parse empty bodies/input and produces results
 				// so catch them here
@@ -30,9 +30,9 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 					binPath: undefined,
 					unRtfOptions: {
 						noPictures: true,
-						outputText: true
+						outputText: true,
 					},
-					tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
+					tempDirectory: `${path.resolve(__dirname, "..")}/temp/`,
 				};
 				this.config = Object.assign(defaultConfig, config);
 
@@ -58,12 +58,12 @@ module.exports = function rtfToHtmlMiddleware(config = {}) {
 				res.locals.doclocation = {
 					directory: this.config.tempDirectory,
 					id,
-					rtf: tempRtfFile
+					rtf: tempRtfFile,
 				};
 				next();
 			} catch (err) {
 				res.status(400);
-				next(new Error('Failed to convert RTF file to TXT'));
+				next(new Error("Failed to convert RTF file to TXT"));
 			}
 		} else {
 			next();

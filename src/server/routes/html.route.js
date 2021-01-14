@@ -1,25 +1,25 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/no-undefined-types */
 /* eslint-disable jsdoc/valid-types */
-const passport = require('passport');
-const { Router } = require('express');
+const passport = require("passport");
+const { Router } = require("express");
 
 // Import middleware
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const sanitize = require('sanitize-middleware');
-const embedHtmlImages = require('../middleware/embed-html-images.middleware');
-const fixWin1252Artifacts = require('../middleware/win1252-artifacts.middleware');
-const pdfToHtml = require('../middleware/pdf-to-html.middleware');
-const rtfToHtml = require('../middleware/rtf-to-html.middleware');
-const tidyCss = require('../middleware/tidy-css.middleware');
-const tidyHtml = require('../middleware/tidy-html.middleware');
-const validateFile = require('../middleware/validate-file-type.middleware');
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const sanitize = require("sanitize-middleware");
+const embedHtmlImages = require("../middleware/embed-html-images.middleware");
+const fixWin1252Artifacts = require("../middleware/win1252-artifacts.middleware");
+const pdfToHtml = require("../middleware/pdf-to-html.middleware");
+const rtfToHtml = require("../middleware/rtf-to-html.middleware");
+const tidyCss = require("../middleware/tidy-css.middleware");
+const tidyHtml = require("../middleware/tidy-html.middleware");
+const validateFile = require("../middleware/validate-file-type.middleware");
 
 // Import utils
-const fileRemover = require('../utils/file-remover.utils');
+const fileRemover = require("../utils/file-remover.utils");
 
-const acceptedTypes = ['application/pdf', 'application/rtf'];
+const acceptedTypes = ["application/pdf", "application/rtf"];
 const router = new Router();
 
 /**
@@ -114,15 +114,15 @@ const router = new Router();
  */
 module.exports = function htmlRoute(config) {
 	router.use(
-		passport.authenticate('bearer', { session: false }),
+		passport.authenticate("bearer", { session: false }),
 		sanitize(config.sanitize),
 		cors(config.cors)
 	);
 
-	router.route('/').post(
+	router.route("/").post(
 		bodyParser.raw({
 			type: acceptedTypes,
-			limit: '20mb'
+			limit: "20mb",
 		}),
 		validateFile(acceptedTypes),
 		rtfToHtml(config.unrtf),

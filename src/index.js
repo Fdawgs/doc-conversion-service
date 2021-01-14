@@ -1,5 +1,5 @@
-const { helmetConfig, serverConfig, loggerConfig } = require('./config');
-const Server = require('./server/server');
+const { helmetConfig, serverConfig, loggerConfig } = require("./config");
+const Server = require("./server/server");
 
 new Server(serverConfig)
 	.configureHelmet(helmetConfig)

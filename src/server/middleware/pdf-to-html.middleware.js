@@ -1,8 +1,8 @@
-const fs = require('fs').promises;
-const { JSDOM } = require('jsdom');
-const path = require('path');
-const { Poppler } = require('node-poppler');
-const { v4 } = require('uuid');
+const fs = require("fs").promises;
+const { JSDOM } = require("jsdom");
+const path = require("path");
+const { Poppler } = require("node-poppler");
+const { v4 } = require("uuid");
 
 /**
  * @author Frazer Smith
@@ -22,17 +22,17 @@ const { v4 } = require('uuid');
  */
 module.exports = function pdfToHtmlMiddleware(config = {}) {
 	return async (req, res, next) => {
-		if (req.headers['content-type'] === 'application/pdf') {
+		if (req.headers["content-type"] === "application/pdf") {
 			try {
 				// Define any default settings the middleware should have to get up and running
 				const defaultConfig = {
 					binPath: undefined,
-					encoding: 'UTF-8',
+					encoding: "UTF-8",
 					pdfToHtmlOptions: {
 						complexOutput: true,
-						singlePage: true
+						singlePage: true,
 					},
-					tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
+					tempDirectory: `${path.resolve(__dirname, "..")}/temp/`,
 				};
 				this.config = Object.assign(defaultConfig, config);
 
@@ -43,17 +43,17 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 				 */
 				const query = { ...req.query };
 				const pdfToHtmlUnwantedParams = [
-					'backgroundColor',
-					'complexOutput',
-					'fonts',
-					'noFrames',
-					'noRoundedCoordinates',
-					'printVersionInfo',
-					'removeAlt',
-					'stdout',
-					'singlePage',
-					'quiet',
-					'xmlOutput'
+					"backgroundColor",
+					"complexOutput",
+					"fonts",
+					"noFrames",
+					"noRoundedCoordinates",
+					"printVersionInfo",
+					"removeAlt",
+					"stdout",
+					"singlePage",
+					"quiet",
+					"xmlOutput",
 				];
 				pdfToHtmlUnwantedParams.forEach((value) => {
 					if (Object.prototype.hasOwnProperty.call(query, value)) {
@@ -87,16 +87,16 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 
 				const dom = new JSDOM(
 					await fs.readFile(tempHtmlFile, {
-						encoding: this.config.encoding
+						encoding: this.config.encoding,
 					})
 				);
 
 				// Remove excess title and meta tags left behind by Poppler
-				const titles = dom.window.document.querySelectorAll('title');
+				const titles = dom.window.document.querySelectorAll("title");
 				for (let index = 1; index < titles.length; index += 1) {
 					titles[index].parentNode.removeChild(titles[index]);
 				}
-				const metas = dom.window.document.querySelectorAll('meta');
+				const metas = dom.window.document.querySelectorAll("meta");
 				for (let index = 1; index < metas.length; index += 1) {
 					metas[index].parentNode.removeChild(metas[index]);
 				}
@@ -107,12 +107,12 @@ module.exports = function pdfToHtmlMiddleware(config = {}) {
 					directory: this.config.tempDirectory,
 					html: tempHtmlFile,
 					id,
-					pdf: tempPdfFile
+					pdf: tempPdfFile,
 				};
 				next();
 			} catch (err) {
 				res.status(400);
-				next(new Error('Failed to convert PDF file to HTML'));
+				next(new Error("Failed to convert PDF file to HTML"));
 			}
 		} else {
 			next();

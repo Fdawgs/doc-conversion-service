@@ -1,4 +1,4 @@
-const fixUtf8 = require('fix-utf8');
+const fixUtf8 = require("fix-utf8");
 
 /**
  * @author Frazer Smith
@@ -12,12 +12,12 @@ module.exports = function fixWin1252ArtifactsMiddleware() {
 		const html = fixUtf8(res.locals.body);
 
 		// Create results object for conversion results
-		if (typeof res.locals.results === 'undefined') {
+		if (typeof res.locals.results === "undefined") {
 			res.locals.results = {};
 		}
 
 		res.locals.body = html;
-		res.locals.results.windows_1252 = 'Fixed';
+		res.locals.results.windows_1252 = "Fixed";
 		next();
 	};
 };

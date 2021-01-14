@@ -1,14 +1,14 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable jsdoc/no-undefined-types */
 /* eslint-disable jsdoc/valid-types */
-const passport = require('passport');
-const { Router } = require('express');
+const passport = require("passport");
+const { Router } = require("express");
 
 // Import middleware
-const cors = require('cors');
-const multer = require('multer');
-const sanitize = require('sanitize-middleware');
-const fhirDocumentReference = require('../middleware/fhir-documentreference-resource.middleware');
+const cors = require("cors");
+const multer = require("multer");
+const sanitize = require("sanitize-middleware");
+const fhirDocumentReference = require("../middleware/fhir-documentreference-resource.middleware");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -175,18 +175,18 @@ const router = new Router();
  */
 module.exports = function fhirRoute(config) {
 	router.use(
-		passport.authenticate('bearer', { session: false }),
+		passport.authenticate("bearer", { session: false }),
 		sanitize(config.sanitize),
 		cors(config.cors)
 	);
 
 	// DocumentReference FHIR resource generation
 	router
-		.route('/')
-		.post(upload.array('document'), fhirDocumentReference(), (req, res) => {
+		.route("/")
+		.post(upload.array("document"), fhirDocumentReference(), (req, res) => {
 			res.send(res.locals.resource.documentReference);
 		})
-		.put(upload.array('document'), fhirDocumentReference(), (req, res) => {
+		.put(upload.array("document"), fhirDocumentReference(), (req, res) => {
 			res.send(res.locals.resource.documentReference);
 		});
 

@@ -1,9 +1,9 @@
-const fs = require('fs').promises;
-const glob = require('glob');
-const path = require('path');
-const { Poppler } = require('node-poppler');
-const { v4 } = require('uuid');
-const imageToTxt = require('../utils/image-to-txt.utils');
+const fs = require("fs").promises;
+const glob = require("glob");
+const path = require("path");
+const { Poppler } = require("node-poppler");
+const { v4 } = require("uuid");
+const imageToTxt = require("../utils/image-to-txt.utils");
 
 /**
  * @author Frazer Smith
@@ -16,7 +16,7 @@ const imageToTxt = require('../utils/image-to-txt.utils');
  */
 module.exports = function pdfToTxtMiddleware(config = {}) {
 	return async (req, res, next) => {
-		if (req.headers['content-type'] === 'application/pdf') {
+		if (req.headers["content-type"] === "application/pdf") {
 			try {
 				// `pdfToText` Poppler function still attempts to parse empty bodies/input and produces results
 				// so catch them here
@@ -30,7 +30,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 				// Define any default settings the middleware should have to get up and running
 				const defaultConfig = {
 					binPath: undefined,
-					tempDirectory: `${path.resolve(__dirname, '..')}/temp/`
+					tempDirectory: `${path.resolve(__dirname, "..")}/temp/`,
 				};
 				this.config = Object.assign(defaultConfig, config);
 
@@ -38,7 +38,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 				 * Remove pdfToTxt and pdfToCairo params that will break the route.
 				 */
 				const query = { ...req.query };
-				const pdfToTxtUnwantedParams = ['printVersionInfo', 'quiet'];
+				const pdfToTxtUnwantedParams = ["printVersionInfo", "quiet"];
 				pdfToTxtUnwantedParams.forEach((value) => {
 					if (Object.prototype.hasOwnProperty.call(query, value)) {
 						delete query[value];
@@ -62,22 +62,22 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 				res.locals.doclocation = {
 					directory: this.config.tempDirectory,
 					id,
-					pdf: tempPdfFile
+					pdf: tempPdfFile,
 				};
 
 				if (query && query.ocr === true) {
-					res.locals.body = '';
+					res.locals.body = "";
 
 					/**
 					 * Remove pdfToTxt params that will cause pdfToCairo to throw error.
 					 */
 					const pdfToCairoAcceptedParams = [
-						'cropHeight',
-						'cropWidth',
-						'cropXAxis',
-						'cropYAxis',
-						'firstPageToConvert',
-						'lastPageToConvert'
+						"cropHeight",
+						"cropWidth",
+						"cropXAxis",
+						"cropYAxis",
+						"firstPageToConvert",
+						"lastPageToConvert",
 					];
 					Object.keys(query).forEach((value) => {
 						if (
@@ -98,7 +98,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 					);
 
 					await Promise.all(
-						files.map((file) => imageToTxt(file, 'eng'))
+						files.map((file) => imageToTxt(file, "eng"))
 					).then(
 						(results) => {
 							res.locals.body = results.toString();
@@ -116,7 +116,7 @@ module.exports = function pdfToTxtMiddleware(config = {}) {
 				}
 			} catch (err) {
 				res.status(400);
-				next(new Error('Failed to convert PDF file to TXT'));
+				next(new Error("Failed to convert PDF file to TXT"));
 			}
 		} else {
 			next();

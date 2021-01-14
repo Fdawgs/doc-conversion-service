@@ -1,4 +1,4 @@
-const { v4 } = require('uuid');
+const { v4 } = require("uuid");
 
 /**
  * @author Frazer Smith
@@ -12,7 +12,7 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 	return (req, res, next) => {
 		if (req.files && Object.keys(req.files).length) {
 			// Create resource object for conversion resource
-			if (typeof res.locals.resource === 'undefined') {
+			if (typeof res.locals.resource === "undefined") {
 				res.locals.resource = {};
 			}
 
@@ -23,31 +23,31 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 			const resource = {
 				meta: {
 					profile: [
-						'https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1'
-					]
+						"https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-DocumentReference-1",
+					],
 				},
-				resourceType: 'DocumentReference',
-				language: 'English (Great Britain)',
+				resourceType: "DocumentReference",
+				language: "English (Great Britain)",
 				indexed: new Date().toISOString(),
-				content: []
+				content: [],
 			};
 
 			// Push params into their respective objects
 			if (req.body && req.body.subject) {
 				resource.subject = {
-					reference: `Patient/${req.body.subject}`
+					reference: `Patient/${req.body.subject}`,
 				};
 			}
 			if (req.body && req.body.type) {
 				resource.type = {
-					text: req.body.type
+					text: req.body.type,
 				};
 			}
 			if (req.body && req.body.specialty) {
 				resource.context = {
 					practiceSetting: {
-						text: req.body.specialty
-					}
+						text: req.body.specialty,
+					},
 				};
 			}
 			if (req.body && req.body.status) {
@@ -62,9 +62,9 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 				resource.id = generatedId;
 				resource.identifier = [
 					{
-						system: 'https://tools.ietf.org/html/rfc4122',
-						value: generatedId
-					}
+						system: "https://tools.ietf.org/html/rfc4122",
+						value: generatedId,
+					},
 				];
 			}
 
@@ -73,19 +73,19 @@ module.exports = function fhirDocumentReferenceResourceMiddleware() {
 				const contentObject = {
 					attachment: {
 						contentType: element.mimetype,
-						data: element.buffer.toString('base64'),
-						size: element.size
-					}
+						data: element.buffer.toString("base64"),
+						size: element.size,
+					},
 				};
 				resource.content.push(contentObject);
 			});
 
-			res.set('content-type', 'application/fhir+json');
+			res.set("content-type", "application/fhir+json");
 			res.locals.resource.documentReference = resource;
 			next();
 		} else {
 			res.status(400);
-			next(new Error('File missing from request'));
+			next(new Error("File missing from request"));
 		}
 	};
 };
