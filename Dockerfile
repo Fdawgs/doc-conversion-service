@@ -16,12 +16,12 @@ RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 WORKDIR /usr/app
 RUN mkdir logs && chown -R appuser:appgroup logs
 COPY package.json .
-COPY yarn.lock .
+COPY package-lock.json .
 COPY .env.${NODE_ENV} .
 COPY ./src ./src
 RUN mkdir ./src/server/temp/ && chown -R appuser:appgroup ./src/server/temp/
 
-RUN if [ "${NODE_ENV}" = "production" ] ; then yarn install --production ; else yarn install ; fi && yarn cache clean
-RUN yarn docs
+RUN npm install && npm cache clean --force
+RUN npm run docs
 USER appuser
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
