@@ -1,3 +1,19 @@
+## <small>6.4.2 (2021-01-25)</small>
+
+-   build: remove `yarn` as package manager, revert to `npm` ([e5e6073](https://github.com/Fdawgs/doc-conversion-service/commit/e5e6073))
+-   build(deps-dev): bump eslint-config-prettier from 7.1.0 to 7.2.0 ([4a333aa](https://github.com/Fdawgs/doc-conversion-service/commit/4a333aa))
+-   build(deps-dev): bump eslint-plugin-jsdoc from 31.0.6 to 31.3.3 ([1f9ebbc](https://github.com/Fdawgs/doc-conversion-service/commit/1f9ebbc))
+-   build(deps-dev): bump node-mocks-http from 1.10.0 to 1.10.1 ([d5305d5](https://github.com/Fdawgs/doc-conversion-service/commit/d5305d5))
+-   build(deps): bump helmet from 4.3.1 to 4.4.1 ([f9224a2](https://github.com/Fdawgs/doc-conversion-service/commit/f9224a2))
+-   build(deps): bump node-poppler from 2.1.2 to 2.2.0 ([22e7611](https://github.com/Fdawgs/doc-conversion-service/commit/22e7611))
+-   build(deps): bump node-unrtf from 1.0.6 to 1.0.7 ([82db559](https://github.com/Fdawgs/doc-conversion-service/commit/82db559))
+-   build(deps): bump sanitize-middleware from 4.0.3 to 4.0.4 ([7baa2fd](https://github.com/Fdawgs/doc-conversion-service/commit/7baa2fd))
+-   ci(github-actions): set `flag-name` for parallel coverage tests ([88e1388](https://github.com/Fdawgs/doc-conversion-service/commit/88e1388))
+-   ci(github-actions): set semver for coverallsapp ([e56ab2d](https://github.com/Fdawgs/doc-conversion-service/commit/e56ab2d))
+-   fix(package): script calls ([0d698ce](https://github.com/Fdawgs/doc-conversion-service/commit/0d698ce))
+-   chore(package): add homepage and bug urls ([2d29cef](https://github.com/Fdawgs/doc-conversion-service/commit/2d29cef))
+-   docs: update contact email ([c0b4c11](https://github.com/Fdawgs/doc-conversion-service/commit/c0b4c11))
+
 ## <small>6.4.1 (2021-01-14)</small>
 
 -   ci: fix jobs ([bac5790](https://github.com/Fdawgs/doc-conversion-service/commit/bac5790))
