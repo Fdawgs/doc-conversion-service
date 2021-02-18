@@ -1,3 +1,5 @@
+> **NOTE: Development of this repository has been discontinued as of 2021-02-01. Please use https://github.com/Fdawgs/doccon**
+
 # doc-conversion-service
 
 [![GitHub Release](https://img.shields.io/github/release/Fdawgs/doc-conversion-service.svg)](https://github.com/Fdawgs/doc-conversion-service/releases/latest/)
